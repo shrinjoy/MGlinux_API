@@ -1,0 +1,72 @@
+//FOR REST API WE ARE USING FASTIFY
+//FOR SQL QUERIES WE ARE USING MSSQL DRIVER 
+//PLEASE RUN   ----> 'npm install'<----- in the root directory of package.json  TO GET ALL THE PACKAGES NEEDED INSTALLED 
+var fastifyserver = require('fastify');
+var app = fastifyserver({});
+const sql = require('mssql');
+var login = require('./login')
+var getalluserdata = require('./getalluserdata')
+const sqlConfig = {
+    user: 'playjeeto',
+    password: 'Playjeeto@2023',
+    database: 'playjeeto',
+    server: '103.162.120.114',
+    pool: {
+        max: 10,
+        min: 0,
+        idleTimeoutMillis: 30000
+    },
+    options: {
+        encrypt: true, // for azure
+        trustServerCertificate: true // change to true for local dev / self-signed certs
+    }
+}
+console.log("connecting to database...");
+try {
+    sql.connect(sqlConfig);
+} catch (err) {
+    console.log(err);
+}
+
+console.log("connected to database ");
+
+app.post('/canlogin', function (req, res) {
+    login.canlogin(sql, req.body).then((data) => {
+
+        res.status(200).send({data})
+    })
+        .catch((err) => {
+            res.status(400).send({err})
+        })
+});
+app.post('/getalluserdata', function (req, res) {
+    getalluserdata.getdata(sql, req.body).then((data) => {
+
+        res.status(200).send({data})
+    })
+        .catch((err) => {
+            res.status(400).send({err})
+        })
+});
+app.post('/placebet',function (req,res){
+
+})
+app.get('/', function (req, res) {
+    res.status(200).send({"message": "welcome to the root of magic deluxe api"})
+})
+app.get('/timeleft', async function (req, res) {
+    try {
+        var data = await sql.query(`SELECT NEXTDRAW,DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
+
+        console.log(data.recordset[0].timer);
+        res.status(200).send({"time": data.recordset[0].timer})
+
+    } catch (err) {
+        res.status(400).send({"message": "failed to get time because -" + err})
+    }
+})
+app.listen({port: 3000}, (err) => {
+    if (err) {
+        console.log("error occured:" + err);
+    }
+})
