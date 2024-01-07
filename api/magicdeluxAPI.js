@@ -30,6 +30,10 @@ try {
 
 console.log("connected to database ");
 
+
+
+
+
 app.post('/canlogin', function (req, res) {
     login.canlogin(sql, req.body).then((data) => {
 
@@ -56,10 +60,10 @@ app.get('/', function (req, res) {
 })
 app.get('/timeleft', async function (req, res) {
     try {
-        var data = await sql.query(`SELECT NEXTDRAW,DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
+        var data = await sql.query(`SELECT GAMEID,NEXTDRAW,DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
 
         console.log(data.recordset[0].timer);
-        res.status(200).send({"time": data.recordset[0].timer})
+        res.status(200).send({"time": data.recordset[0].timer,"gameid":data.recordset[0].GAMEID})
 
     } catch (err) {
         res.status(400).send({"message": "failed to get time because -" + err})
