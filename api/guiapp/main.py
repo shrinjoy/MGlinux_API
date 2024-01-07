@@ -15,7 +15,7 @@ text.place(x=0, y=0, width=200, height=30)
 
 countdowntimer = 0
 countdowntext = Label(root,text=countdowntimer, background="yellow", font=("Arial", 8,"bold"))
-gifteventcode = Label(root,text="Gift Event Code \n L03", background="yellow", font=("Arial", 8,"bold"))
+gifteventcode = Label(root,text="Gift Event Code \n", background="yellow", font=("Arial", 8,"bold"))
 gifteventcode.place(x=0, y=50)
 
 countdowntext.place(x=250, y=50)
@@ -99,6 +99,7 @@ def update():
     jsontimerdata  = response.json()
 
     countdowntext.config(text=" countdown \n "+str(format_timer(jsontimerdata['time'])))
+    gifteventcode.config(text="Gift Event Code \n"+str(jsontimerdata["gameid"]));
     root.after(1000, update)
 
 
