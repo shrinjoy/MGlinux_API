@@ -10,14 +10,17 @@ root.geometry('1024x768+100+100')
 root.minsize(1024, 768)
 root.maxsize(1024, 768)
 root.configure(background="yellow")
+balancetext = Label(root, text="0000",font=("Aerial",10,"bold"),background="yellow").place(x=650,y = 10)
+playerterminalid = Label(root, text="P.No. 1234567890",font=("Aerial",10,"bold"),background="yellow").place(x=650,y = 40)
 
-text = Label(root, text="Magic Deluxe", background="yellow", font=("Arial", 20, "bold"), fg="red")
 
-text.place(x=0, y=0, width=200, height=30)
+text = Label(root, text="Magic Deluxe", background="yellow", font=("Arial", 25, "bold"), fg="red")
+
+text.place(x=70, y=0, width=250, height=40)
 
 countdowntimer = 0
-countdowntext = Label(root,text=countdowntimer, background="yellow", font=("Arial", 8,"bold"))
-gifteventcode = Label(root,text="Gift Event Code \n", background="yellow", font=("Arial", 8,"bold"))
+countdowntext = Label(root,text=countdowntimer, background="yellow", font=("Arial", 10,"bold"))
+gifteventcode = Label(root,text="Gift Event Code \n", background="yellow", font=("Arial", 10,"bold"))
 gifteventcode.place(x=0, y=50)
 
 countdowntext.place(x=250, y=50)
@@ -26,7 +29,7 @@ betentries = []
 
 oldposx = 450
 spacingx = 45
-oldposy = 50
+oldposy = 90
 spacingy = 50
 
 for y in range(10):
@@ -47,6 +50,9 @@ backgroundimage_height=300
 resized_image = background_image.resize((backgroundimage_width, backgroundimage_height))
 # Convert the resized image to a PhotoImage
 background_image = ImageTk.PhotoImage(resized_image)
+
+
+
 # Create a label to display the resized background image
 image_label = Label(root, image=background_image)
 image_label.place(x=10, y=100, width=backgroundimage_width, height=backgroundimage_height)
@@ -61,7 +67,6 @@ card_image = ImageTk.PhotoImage(cardresized_image)
 # Create a label to display the resized background image
 card_label = Label(root, image=card_image)
 card_label.place(x=55, y=120, width=cardimage_width, height=cardimage_height)
-
 
 def buyticket():
     betstring = ""
@@ -91,18 +96,42 @@ clearbutton = Button(root,text="F5-Clear",background="skyblue",foreground="black
 cancelticketbutton = Button(root,text="F5-Cancel",background="skyblue",foreground="black",font=("Aerial",15,"bold")).place(x=250,y=700)
 lastreceiptbutton = Button(root,text="Last Reciept",background="skyblue",foreground="black",font=("Aerial",15,"bold")).place(x=380,y=700)
 exitbutton = Button(root,text="Exit(X)",background="red",foreground="black",font=("Aerial",15,"bold")).place(x=680,y=700)
-#luckystonebutton = Button(root,text="F2 Lucky Stone",background="white",foreground="black",command=buyticket,font=("Aerial",15,"bold")).place(x=150,y=650)
-
+purchasedetails = Button(root,text="Purchase Details",background="white",foreground="black",font=("Aerial",10,"bold")).place(x=780,y=700)
+stonesdetails = Button(root,text="F7 Stones",background="white",foreground="black",font=("Aerial",10,"bold")).place(x=920,y=700)
+balanceone = Entry(root,font=("Aerial",15,"bold"))
+balanceone.insert(0,"0.00")
+balanceone.place(x=680,y=660,width=80)
+balancetwo = Entry(root,font=("Aerial",15,"bold"),background="green")
+balancetwo.insert(0,"0.00")
+balancetwo.place(x=780,y=660,width=80)
+barcodelabeltext = Label(root, text="F8- \n barcode",font=("Aerial",10,"bold"),foreground="black",background="yellow").place(x=810,y= 660)
+barcodeentry = Entry(root,font=("Aerial",10,"bold")).place(x=850,y=660,width=100)
+luckystonebutton = Button(root,text="F2 Lucky Stone",background="white",foreground="black",command=buyticket,font=("Aerial",15,"bold")).place(x=150,y=650)
 
 
 resultlistbox  = Listbox(root,font=("Aerial",20,"bold"),background="Red")
 
 
-import requests
+
+internetimage = Image.open("on.jpg")
+internetimage_width=100
+internetimage_height=100
+# Resize the image to fit within the desired dimensions (e.g., 200x200)
+resized_internetimage = internetimage.resize((internetimage_width, internetimage_height))
+# Convert the resized image to a PhotoImage
+internet_image = ImageTk.PhotoImage(resized_internetimage)
+
+
+
+# Create a label to display the resized background image
+internetimage_label = Label(root, image=internet_image)
+internetimage_label.place(x=920, y=0, width=internetimage_width, height=internetimage_height)
+
+
+
 
 def get_all_result():
     response = requests.get("http://localhost:3000/getallresult")
-
     # Check if the request was successful (status code 200)
     if response.status_code == 200:
         json_data = response.json()
@@ -118,21 +147,18 @@ def get_all_result():
 
 
 resultlistbox.place(x=0,y=400,width=350,height=200)
-
 get_all_result()
 def format_timer(seconds):
     hours, remainder = divmod(seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
-
     return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+
 def update():
     global countdowntimer
     response = requests.get("http://localhost:3000/timeleft")
-
     jsontimerdata  = response.json()
     if(jsontimerdata['time'] <1):
         get_all_result()
-
     countdowntext.config(text=" countdown \n "+str(format_timer(jsontimerdata['time'])))
     gifteventcode.config(text="Gift Event Code \n"+str(jsontimerdata["gameid"]));
     root.after(1000, update)
