@@ -5,6 +5,7 @@ var fastifyserver = require('fastify');
 var app = fastifyserver({});
 const sql = require('mssql');
 var login = require('./login')
+var getallresult = require('./getalllastresults')
 var getalluserdata = require('./getalluserdata')
 const sqlConfig = {
     user: 'playjeeto',
@@ -31,7 +32,17 @@ try {
 console.log("connected to database ");
 
 
+app.get('/getallresult',async function(req,res){
+await    getallresult.getlastresults_all(sql).then((data)=>{
+        res.status(200).send(data);
 
+    })
+    .catch((err)=>{
+        res.status(400).send({err});
+
+    })
+
+})
 
 
 app.post('/canlogin', function (req, res) {
@@ -44,6 +55,8 @@ app.post('/canlogin', function (req, res) {
         })
 });
 app.post('/getalluserdata', function (req, res) {
+
+    try{
     getalluserdata.getdata(sql, req.body).then((data) => {
 
         res.status(200).send({data})
@@ -51,6 +64,10 @@ app.post('/getalluserdata', function (req, res) {
         .catch((err) => {
             res.status(400).send({err})
         })
+    }
+    catch(err){
+        res.status(400).send({err})
+    }
 });
 app.post('/placebet',function (req,res){
 
