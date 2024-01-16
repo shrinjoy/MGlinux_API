@@ -7,6 +7,7 @@ const sql = require('mssql');
 var login = require('./login')
 var getallresult = require('./getalllastresults')
 var getalluserdata = require('./getalluserdata')
+var getresultbyid = require('./getgameresultbyID')
 const sqlConfig = {
     user: 'playjeeto',
     password: 'Playjeeto@2023',
@@ -32,15 +33,26 @@ try {
 console.log("connected to database ");
 
 
-app.get('/getallresult',async function(req,res){
-await    getallresult.getlastresults_all(sql).then((data)=>{
+app.post('/getresultbyid', async function (req, res) {
+   await getresultbyid.getresultbyidofanygame(sql,req.body)
+    .then((data)=>{
+        res.status(200).send(data);
+    })
+    .catch((err)=>{
+        res.status(404).send(err);
+    })
+})
+
+
+app.get('/getallresult', async function (req, res) {
+    await getallresult.getlastresults_all(sql).then((data) => {
         res.status(200).send(data);
 
     })
-    .catch((err)=>{
-        res.status(400).send({err});
+        .catch((err) => {
+            res.status(400).send({ err });
 
-    })
+        })
 
 })
 
@@ -48,45 +60,45 @@ await    getallresult.getlastresults_all(sql).then((data)=>{
 app.post('/canlogin', function (req, res) {
     login.canlogin(sql, req.body).then((data) => {
 
-        res.status(200).send({data})
+        res.status(200).send({ data })
     })
         .catch((err) => {
-            res.status(400).send({err})
+            res.status(400).send({ err })
         })
 });
 app.post('/getalluserdata', function (req, res) {
 
-    try{
-    getalluserdata.getdata(sql, req.body).then((data) => {
+    try {
+        getalluserdata.getdata(sql, req.body).then((data) => {
 
-        res.status(200).send({data})
-    })
-        .catch((err) => {
-            res.status(400).send({err})
+            res.status(200).send({ data })
         })
+            .catch((err) => {
+                res.status(400).send({ err })
+            })
     }
-    catch(err){
-        res.status(400).send({err})
+    catch (err) {
+        res.status(400).send({ err })
     }
 });
-app.post('/placebet',function (req,res){
+app.post('/placebet', function (req, res) {
 
 })
 app.get('/', function (req, res) {
-    res.status(200).send({"message": "welcome to the root of magic deluxe api"})
+    res.status(200).send({ "message": "welcome to the root of magic deluxe api" })
 })
 app.get('/timeleft', async function (req, res) {
     try {
         var data = await sql.query(`SELECT GAMEID,NEXTDRAW,DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
 
         console.log(data.recordset[0].timer);
-        res.status(200).send({"time": data.recordset[0].timer,"gameid":data.recordset[0].GAMEID})
+        res.status(200).send({ "time": data.recordset[0].timer, "gameid": data.recordset[0].GAMEID })
 
     } catch (err) {
-        res.status(400).send({"message": "failed to get time because -" + err})
+        res.status(400).send({ "message": "failed to get time because -" + err })
     }
 })
-app.listen({port: 3000}, (err) => {
+app.listen({ port: 3000 }, (err) => {
     if (err) {
         console.log("error occured:" + err);
     }
