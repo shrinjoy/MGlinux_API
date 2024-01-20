@@ -8,6 +8,7 @@ var login = require('./login')
 var getallresult = require('./getalllastresults')
 var getalluserdata = require('./getalluserdata')
 var getresultbyid = require('./getgameresultbyID')
+var placebet = require('./placebet')
 const sqlConfig = {
     user: 'playjeeto',
     password: 'Playjeeto@2023',
@@ -81,8 +82,15 @@ app.post('/getalluserdata', function (req, res) {
         res.status(400).send({ err })
     }
 });
-app.post('/placebet', function (req, res) {
+app.post('/placebet',async function (req, res) {
+  await  placebet.placebet(sql,req.body).then((data)=>{
+        res.status(200).send({data})
+    })
+    .catch((error)=>{
 
+        res.status(404).send({error})
+
+    })
 })
 app.get('/', function (req, res) {
     res.status(200).send({ "message": "welcome to the root of magic deluxe api" })
