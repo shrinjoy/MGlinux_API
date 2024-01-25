@@ -13,11 +13,12 @@ module.exports = {
                             `UPDATE [playjeeto].[dbo].[CLIENTLOGIN]  set CLIENTBALANCE  = CLIENTBALANCE -${req["totalbet"]}`
                         )
                             .then((data) => {
-                                db.query("SELECT FORMAT(GETDATE(), 'yyyyMMddHHmmssfff') as barcode")
+                                
+                                 db.query("SELECT FORMAT(GETDATE(), 'yyyyMMddHHmmssfff') as barcode")
                                 .then((data) => {
                                     var barcodedata =  data.recordset[0]["barcode"];
                                     var querystring = `INSERT INTO [playjeeto].[dbo].[TICKET99] (TICKETNUMBER,TICKETDETAILS,TICKETTOTALRS,GAMEDATE,GAMETIME,TARMINALID,GAMEID) 
-                                    VALUES ('${barcodedata}','${req["tickets"]}',${req["totalbet"]},FORMAT(GETDATE(), 'yyyy-MM-dd'),FORMAT(GETDATE(), 'HH:mm:ss'),'${req["username"]}','${req["gameid"]}');`;
+                                    VALUES ('${barcodedata}','${req["tickets"]}',${req["totalbet"]},FORMAT(GETDATE(), 'yyyy-MM-dd'),FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss'),'${req["username"]}','${req["gameid"]}');`;
                                     db.query(querystring)
                                         .then((data) => {
                                             resolve({ "barcode": barcodedata,"message":"placed bet "});

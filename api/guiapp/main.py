@@ -12,7 +12,8 @@ root.maxsize(1024, 768)
 root.configure(background="yellow")
 balancetext = Label(root, text="0000",font=("Aerial",10,"bold"),background="yellow").place(x=650,y = 10)
 playerterminalid = Label(root, text="P.No. 1234567890",font=("Aerial",10,"bold"),background="yellow").place(x=650,y = 40)
-
+global timer
+timer= 0
 
 text = Label(root, text="Magic Deluxe", background="yellow", font=("Arial", 25, "bold"), fg="red")
 
@@ -25,6 +26,14 @@ gifteventcode.place(x=0, y=50)
 
 countdowntext.place(x=250, y=50)
 
+balanceone = Entry(root,font=("Aerial",15,"bold"))
+balanceone.insert(0,"0.00")
+balanceone.place(x=680,y=660,width=80)
+balancetwo = Entry(root,font=("Aerial",15,"bold"),background="green")
+balancetwo.insert(0,"0.00")
+balancetwo.place(x=780,y=660,width=80)
+
+
 betentries = []
 
 oldposx = 450
@@ -32,13 +41,22 @@ spacingx = 45
 oldposy = 90
 spacingy = 50
 
+
+
+def only_number(char):
+    return char.isdigit()
+    END
+
+entryvalidatenumber = root.register(only_number)
+
+
 for y in range(10):
     oldposx = 450
     oldposy = oldposy + spacingy
     for x in range(10):
         label_text = "MG" + str(y) + str(x)
         Label(root,background="green", anchor="nw",text=label_text).place(x=oldposx, y=oldposy - 30, width=60, height=60)
-        entry_widget = Entry(root, justify=CENTER)
+        entry_widget = Entry(root, justify=CENTER,validate="key",validatecommand=(entryvalidatenumber,'%S'))
         entry_widget.place(x=oldposx, y=oldposy, width=40, height=20)
         betentries.append(entry_widget)
         oldposx = oldposx + spacingx
@@ -67,15 +85,23 @@ card_image = ImageTk.PhotoImage(cardresized_image)
 # Create a label to display the resized background image
 card_label = Label(root, image=card_image)
 card_label.place(x=55, y=120, width=cardimage_width, height=cardimage_height)
+def updatetime():
+    global timer
+    response = requests.get("http://localhost:3000/timeleft")
+    jsontimerdata  = response.json()
+    timer=(jsontimerdata['time'])
+    gifteventcode.config(text="Gift Event Code \n"+str(jsontimerdata["gameid"]));
+    
+    END
 
 def buyticket():
     betstring = ""
     betindex = 0
-    totalbet=0;
+    totalbet=0
     for bet in betentries:
         # Assuming bet.get() returns a string, you might want to convert it to an integer for comparison
         if bet.get().strip():
-            if betindex > 0:
+            if betindex > 2:
                 betstring += ","
             END
             betstring += str(betindex) + "RS" + str(bet.get())
@@ -83,8 +109,19 @@ def buyticket():
         END
         betindex += 1
     END
-    print("betentries:"+betstring)
-    print("totalbet:"+str(totalbet))
+    response = requests.get("http://localhost:3000/timeleft")
+    jsontimerdata  = response.json()
+    if(jsontimerdata['time'] >10):
+            jsonobject = {"username":"ADMIN","password":"12345","tickets":str(betstring),"totalbet":totalbet,"gameid":jsontimerdata['gameid']}
+            print(jsonobject)
+            r=requests.post("http://localhost:3000/placebet",json=jsonobject)
+            print(r)
+            print("betentries:"+betstring)
+            print("totalbet:"+str(totalbet))
+            print("bet placed")
+            END
+    updatetime();
+
 END
 
 
@@ -98,12 +135,7 @@ lastreceiptbutton = Button(root,text="Last Reciept",background="skyblue",foregro
 exitbutton = Button(root,text="Exit(X)",background="red",foreground="black",font=("Aerial",15,"bold")).place(x=680,y=700)
 purchasedetails = Button(root,text="Purchase Details",background="white",foreground="black",font=("Aerial",10,"bold")).place(x=780,y=700)
 stonesdetails = Button(root,text="F7 Stones",background="white",foreground="black",font=("Aerial",10,"bold")).place(x=920,y=700)
-balanceone = Entry(root,font=("Aerial",15,"bold"))
-balanceone.insert(0,"0.00")
-balanceone.place(x=680,y=660,width=80)
-balancetwo = Entry(root,font=("Aerial",15,"bold"),background="green")
-balancetwo.insert(0,"0.00")
-balancetwo.place(x=780,y=660,width=80)
+
 barcodelabeltext = Label(root, text="F8- \n barcode",font=("Aerial",10,"bold"),foreground="black",background="yellow").place(x=810,y= 660)
 barcodeentry = Entry(root,font=("Aerial",10,"bold")).place(x=850,y=660,width=100)
 luckystonebutton = Button(root,text="F2 Lucky Stone",background="white",foreground="black",command=buyticket,font=("Aerial",15,"bold")).place(x=150,y=650)
@@ -135,11 +167,12 @@ def get_all_result():
     # Check if the request was successful (status code 200)
     if response.status_code == 200:
         json_data = response.json()
-
         # Create an iterator for the items
         items_iter = iter(json_data.items())
-
         # Iterate over pairs of keys and values, printing two entries per line
+
+        resultlistbox.delete(0, tkinter.END)
+
         for (key1, value1), (key2, value2) in zip(items_iter, items_iter):
             resultlistbox.insert(tkinter.END,f"{key1}: {value1}     {key2}: {value2}")
     else:
@@ -148,21 +181,56 @@ def get_all_result():
 
 resultlistbox.place(x=0,y=400,width=350,height=200)
 get_all_result()
+
+
+
+
+
 def format_timer(seconds):
     hours, remainder = divmod(seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
     return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
 
-def update():
-    global countdowntimer
+
+def updatetime():
+    global timer
     response = requests.get("http://localhost:3000/timeleft")
     jsontimerdata  = response.json()
-    if(jsontimerdata['time'] <1):
-        get_all_result()
-    countdowntext.config(text=" countdown \n "+str(format_timer(jsontimerdata['time'])))
+    timer=(jsontimerdata['time'])
     gifteventcode.config(text="Gift Event Code \n"+str(jsontimerdata["gameid"]));
+    END
+
+updatetime()
+def update():
+    global timer
+    
+    timer -=1
+    
+    if(timer < 1):
+        get_all_result()
+        updatetime()
+    
+
+
+   
+    countdowntext.config(text=" countdown \n "+str(timer))
+    
     root.after(1000, update)
 
+def keypressupdate(event):
+    totalbetamount = 0
+    for bet in betentries:
+        # Assuming bet.get() returns a string, you might want to convert it to an integer for comparison
+        if bet.get().strip():
+            totalbetamount+=int(bet.get())
+        END
+    balanceone.delete(0,tkinter.END)
+    balancetwo.delete(0,tkinter.END)
+    balanceone.insert(0,totalbetamount)
+    balancetwo.insert(0,totalbetamount)
+    END
+    
 
+root.bind("<KeyPress>",keypressupdate)
 root.after(0, update)
 root.mainloop()
