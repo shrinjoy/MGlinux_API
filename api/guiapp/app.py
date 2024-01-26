@@ -1,9 +1,24 @@
 import asyncio
 import json
+import sys
 import tkinter
 from tkinter import *
 import requests
 from PIL import Image, ImageTk
+
+
+
+
+
+
+
+
+username=str(sys.argv[1])
+password=str(sys.argv[2])
+
+print("username"+username);
+print("pass"+password);
+
 root = Tk()
 root.title("magic deluxe")
 root.geometry('1024x768+100+100')
