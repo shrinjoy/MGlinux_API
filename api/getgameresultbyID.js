@@ -1,6 +1,9 @@
 module.exports = {
     getresultbyidofanygame: function (db, jsondata) {
         return new Promise((resolve, reject) => {
+
+           
+            console.log(`SELECT ${jsondata["gameid"]} as result FROM [playjeeto].[dbo].[RESULT] WHERE GAMEDATE = FORMAT(GETDATE(), 'yyyy-MM-dd')`)
             db.query(`SELECT ${jsondata["gameid"]} as result FROM [playjeeto].[dbo].[RESULT] WHERE GAMEDATE = FORMAT(GETDATE(), 'yyyy-MM-dd')`)
                 .then((data) => {
                     if(data.recordset[0]["result"]===null||data.recordset[0].length <1 ||data.recordset[0]["result"]==="null"||data.recordset[0]["result"]==='null')

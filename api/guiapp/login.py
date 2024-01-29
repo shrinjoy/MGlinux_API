@@ -10,7 +10,7 @@ root.geometry('1024x768+100+100')
 root.minsize(1024, 768)
 root.maxsize(1024, 768)
 root.configure(background="yellow")
-
+#root.overrideredirect(True)
 isconnected = False
 
 import requests
@@ -41,7 +41,8 @@ def checkifcanlogin():
 
     if res.status_code == 200:
         subprocess.run(["python", "./app.py", usernameentry.get(), passwordentry.get()])
-        sys.exit()
+        root.iconify();
+        root.destroy()
         
         
     if res.status_code == 400:

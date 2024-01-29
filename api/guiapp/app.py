@@ -6,7 +6,7 @@ from tkinter import *
 import requests
 from PIL import Image, ImageTk
 
-
+import subprocess
 
 
 
@@ -15,6 +15,14 @@ from PIL import Image, ImageTk
 
 username=str(sys.argv[1])
 password=str(sys.argv[2])
+
+
+nextgamedate="";
+nextgametime="";
+nextgameid="";
+
+
+
 
 print("username"+username);
 print("pass"+password);
@@ -25,6 +33,7 @@ root.geometry('1024x768+100+100')
 root.minsize(1024, 768)
 root.maxsize(1024, 768)
 root.configure(background="yellow")
+#root.overrideredirect(True)
 balancetext = Label(root, text="0000",font=("Aerial",10,"bold"),background="yellow").place(x=650,y = 10)
 playerterminalid = Label(root, text="P.No. 1234567890",font=("Aerial",10,"bold"),background="yellow").place(x=650,y = 40)
 global timer
@@ -64,6 +73,15 @@ def only_number(char):
 
 entryvalidatenumber = root.register(only_number)
 
+
+
+
+
+
+
+
+  
+    
 
 for y in range(10):
     oldposx = 450
@@ -185,9 +203,7 @@ def get_all_result():
         # Create an iterator for the items
         items_iter = iter(json_data.items())
         # Iterate over pairs of keys and values, printing two entries per line
-
         resultlistbox.delete(0, tkinter.END)
-
         for (key1, value1), (key2, value2) in zip(items_iter, items_iter):
             resultlistbox.insert(tkinter.END,f"{key1}: {value1}     {key2}: {value2}")
     else:
@@ -211,6 +227,14 @@ def updatetime():
     global timer
     response = requests.get("http://localhost:3000/timeleft")
     jsontimerdata  = response.json()
+
+    global nextgameid;
+    global nextgamedate;
+    global nextgametime;
+    nextgamedate = str(jsontimerdata['nextgamedate']);
+    nextgametime = str(jsontimerdata['nextgametime']);
+    nextgameid = str(jsontimerdata['gameid'])
+
     timer=(jsontimerdata['time'])
     gifteventcode.config(text="Gift Event Code \n"+str(jsontimerdata["gameid"]));
     END
@@ -218,18 +242,22 @@ def updatetime():
 updatetime()
 def update():
     global timer
-    
+
+    global nextgamedate;
+    global nextgametime;
+    global nextgameid;
+
     timer -=1
-    
     if(timer < 1):
+
+
+        subprocess.run(["python", "./result.py",str(nextgamedate),str(nextgametime),str(nextgameid)])
+
+
+
         get_all_result()
         updatetime()
-    
-
-
-   
-    countdowntext.config(text=" countdown \n "+str(timer))
-    
+    countdowntext.config(text=" countdown \n "+str(format_timer(timer)))
     root.after(1000, update)
 
 def keypressupdate(event):
@@ -248,4 +276,5 @@ def keypressupdate(event):
 
 root.bind("<KeyPress>",keypressupdate)
 root.after(0, update)
+
 root.mainloop()
