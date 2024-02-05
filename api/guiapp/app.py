@@ -5,7 +5,7 @@ import tkinter
 from tkinter import *
 import requests
 from PIL import Image, ImageTk
-
+import keyboard
 import subprocess
 
 
@@ -27,6 +27,21 @@ nextgameid="";
 print("username"+username);
 print("pass"+password);
 
+
+def on_key_event(e):
+    print(f"Key Event: {e.event_type}, Key Name: {e.name}")
+    if e.event_type == keyboard.KEY_DOWN:
+        print(f"Barcode scanned: {e.name}")
+    
+    root.after(0,lambda: keyboard.hook(on_key_event))
+
+    END
+
+
+
+keyboard.hook(on_key_event)
+    
+
 root = Tk()
 root.title("magic deluxe")
 root.geometry('1024x768+100+100')
@@ -34,8 +49,9 @@ root.minsize(1024, 768)
 root.maxsize(1024, 768)
 root.configure(background="yellow")
 #root.overrideredirect(True)
-balancetext = Label(root, text="0000",font=("Aerial",10,"bold"),background="yellow").place(x=650,y = 10)
-playerterminalid = Label(root, text="P.No. 1234567890",font=("Aerial",10,"bold"),background="yellow").place(x=650,y = 40)
+balancetext = Label(root, text="0000",font=("Aerial",10,"bold"),background="yellow")
+playerterminalid = Label(root, text="P.No. "+str(username),font=("Aerial",10,"bold"),background="yellow")
+playerterminalid.place(x=650,y = 40)
 global timer
 timer= 0
 
@@ -52,10 +68,10 @@ countdowntext.place(x=250, y=50)
 
 balanceone = Entry(root,font=("Aerial",15,"bold"))
 balanceone.insert(0,"0.00")
-balanceone.place(x=680,y=660,width=80)
+balanceone.place(x=600,y=660,width=80)
 balancetwo = Entry(root,font=("Aerial",15,"bold"),background="green")
 balancetwo.insert(0,"0.00")
-balancetwo.place(x=780,y=660,width=80)
+balancetwo.place(x=690,y=660,width=80)
 
 
 betentries = []
@@ -67,21 +83,27 @@ spacingy = 50
 
 
 
+def updateuserdata():
+    jsonobject = {"username":str(username),"password":str(password)}
+    userdata = requests.post("http://localhost:3000/getalluserdata",json=jsonobject)
+    print(userdata);
+    jsondecrypt = userdata.json()
+    if  userdata.status_code == 200:
+        balancetext.config(text=str(jsondecrypt["balance"]));
+        END
+    if userdata.status_code == 404:
+        balancetext.config(text="0000")
+        END
+
+    END
+updateuserdata();
+
+
 def only_number(char):
     return char.isdigit()
     END
 
 entryvalidatenumber = root.register(only_number)
-
-
-
-
-
-
-
-
-  
-    
 
 for y in range(10):
     oldposx = 450
@@ -128,17 +150,26 @@ def updatetime():
     END
 
 def buyticket():
+    updateuserdata();
     betstring = ""
     betindex = 0
     totalbet=0
     for bet in betentries:
         # Assuming bet.get() returns a string, you might want to convert it to an integer for comparison
         if bet.get().strip():
-            if betindex > 2:
+            if betindex > 0:
                 betstring += ","
             END
-            betstring += str(betindex) + "RS" + str(bet.get())
+
+
+            if betindex <10:
+                betstring += "0"+str(betindex) + "Q" + str(bet.get())
+                END
+            if betindex >9:
+                betstring += str(betindex) + "Q" + str(bet.get())
+                END
             totalbet+=int(bet.get())
+            bet.delete(0,tkinter.END)
         END
         betindex += 1
     END
@@ -154,7 +185,23 @@ def buyticket():
             print("bet placed")
             END
     updatetime();
+    updateuserdata();
+    balanceone.delete(0,tkinter.END);
+    balancetwo.delete(0,tkinter.END);
+    balanceone.insert(0,"0.00");
+    balancetwo.insert(0,"0.00");
+END
 
+
+def clearbets():
+
+    for bet in betentries:
+         bet.delete(0,tkinter.END)
+         END
+    balanceone.delete(0,tkinter.END);
+    balancetwo.delete(0,tkinter.END);
+    balanceone.insert(0,"0.00");
+    balancetwo.insert(0,"0.00");
 END
 
 
@@ -162,7 +209,7 @@ stonebutton = Button(root,text="Stones",background="white",foreground="black",co
 luckystonebutton = Button(root,text="F2 Lucky Stone",background="white",foreground="black",command=buyticket,font=("Aerial",15,"bold")).place(x=150,y=650)
 
 buybutton = Button(root,text="F6-Buy",background="red",foreground="black",command=buyticket,font=("Aerial",15,"bold")).place(x=50,y=700)
-clearbutton = Button(root,text="F5-Clear",background="skyblue",foreground="black",font=("Aerial",15,"bold")).place(x=150,y=700)
+clearbutton = Button(root,text="F5-Clear",background="skyblue",command=clearbets,foreground="black",font=("Aerial",15,"bold")).place(x=150,y=700)
 cancelticketbutton = Button(root,text="F5-Cancel",background="skyblue",foreground="black",font=("Aerial",15,"bold")).place(x=250,y=700)
 lastreceiptbutton = Button(root,text="Last Reciept",background="skyblue",foreground="black",font=("Aerial",15,"bold")).place(x=380,y=700)
 exitbutton = Button(root,text="Exit(X)",background="red",foreground="black",font=("Aerial",15,"bold")).place(x=680,y=700)
@@ -170,7 +217,7 @@ purchasedetails = Button(root,text="Purchase Details",background="white",foregro
 stonesdetails = Button(root,text="F7 Stones",background="white",foreground="black",font=("Aerial",10,"bold")).place(x=920,y=700)
 
 barcodelabeltext = Label(root, text="F8- \n barcode",font=("Aerial",10,"bold"),foreground="black",background="yellow").place(x=810,y= 660)
-barcodeentry = Entry(root,font=("Aerial",10,"bold")).place(x=850,y=660,width=100)
+barcodeentry = Entry(root,font=("Aerial",10,"bold"))
 luckystonebutton = Button(root,text="F2 Lucky Stone",background="white",foreground="black",command=buyticket,font=("Aerial",15,"bold")).place(x=150,y=650)
 
 
@@ -194,6 +241,11 @@ internetimage_label.place(x=920, y=0, width=internetimage_width, height=internet
 
 
 
+def set_focus(event):
+    barcodeentry.focus_set()
+    
+
+
 
 def get_all_result():
     response = requests.get("http://localhost:3000/getallresult")
@@ -209,7 +261,8 @@ def get_all_result():
     else:
         print(f"Failed to fetch data. Status code: {response.status_code}")
 
-
+root.bind("F",set_focus);
+barcodeentry.place(x=850,y=660,width=100)
 resultlistbox.place(x=0,y=400,width=350,height=200)
 get_all_result()
 
@@ -242,7 +295,7 @@ def updatetime():
 updatetime()
 def update():
     global timer
-
+   
     global nextgamedate;
     global nextgametime;
     global nextgameid;
@@ -254,7 +307,7 @@ def update():
         subprocess.run(["python", "./result.py",str(nextgamedate),str(nextgametime),str(nextgameid)])
 
 
-
+        updateuserdata();
         get_all_result()
         updatetime()
     countdowntext.config(text=" countdown \n "+str(format_timer(timer)))
@@ -277,4 +330,6 @@ def keypressupdate(event):
 root.bind("<KeyPress>",keypressupdate)
 root.after(0, update)
 
+
+balancetext.place(x=650,y = 10)
 root.mainloop()

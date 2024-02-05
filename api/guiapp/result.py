@@ -55,6 +55,12 @@ def update():
         END
     if(respo.status_code == 200):
        
+        for x in range(40):
+            result.config(text=str(respojson["result"]))
+        END
+
+
+
         result.config(text=str(respojson["result"]))
         root.after(5000,exitresultwindow);
         #root.destroy();

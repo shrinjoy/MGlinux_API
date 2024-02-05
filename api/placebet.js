@@ -17,8 +17,8 @@ module.exports = {
                                  db.query("SELECT FORMAT(GETDATE(), 'yyyyMMddHHmmssfff') as barcode")
                                 .then((data) => {
                                     var barcodedata =  data.recordset[0]["barcode"];
-                                    var querystring = `INSERT INTO [playjeeto].[dbo].[TICKET99] (TICKETNUMBER,TICKETDETAILS,TICKETTOTALRS,GAMEDATE,GAMETIME,TARMINALID,GAMEID) 
-                                    VALUES ('${barcodedata}','${req["tickets"]}',${req["totalbet"]},FORMAT(GETDATE(), 'yyyy-MM-dd'),FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss'),'${req["username"]}','${req["gameid"]}');`;
+                                    var querystring = `INSERT INTO [playjeeto].[dbo].[TICKET99] (TICKETNUMBER,TICKETDETAILS,TICKETRS,TICKETTOTALRS,GAMEDATE,GAMETIME,TARMINALID,GAMEID) 
+                                    VALUES ('${barcodedata}','${req["tickets"]}',1,${req["totalbet"]},FORMAT(GETDATE(), 'yyyy-MM-dd'),FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss'),'${req["username"]}','${req["gameid"]}');`;
                                     db.query(querystring)
                                         .then((data) => {
                                             resolve({ "barcode": barcodedata,"message":"placed bet "});
