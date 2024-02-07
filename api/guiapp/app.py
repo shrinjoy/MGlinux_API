@@ -339,7 +339,7 @@ def animatecardimage():
 
 
     card_label.place(x=105, y=120, width=current_width, height=cardimage_height)
-    root.after(1,animatecardimage);
+    root.after(2,animatecardimage);
 
 def updatetime():
     global timer
