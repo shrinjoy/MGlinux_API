@@ -9,6 +9,7 @@ var getallresult = require('./getalllastresults')
 var getalluserdata = require('./getalluserdata')
 var getresultbyid = require('./getgameresultbyID')
 var placebet = require('./placebet')
+var cancelticket = require('./cancelbybarcode')
 const sqlConfig = {
     user: 'playjeeto',
     password: 'Playjeeto@2023',
@@ -43,6 +44,18 @@ app.post('/getresultbyid', async function (req, res) {
         res.status(404).send(err);
     })
 })
+
+
+app.post('/cancelbybarcode',function(req,res){
+    cancelticket.cancel(req.body,sql).then((data)=>{
+
+        res.status(200).send(data);
+    })
+    .catch((err)=>{
+        res.status(404).send(err);
+    })
+})
+
 
 
 app.get('/getallresult', async function (req, res) {
@@ -84,11 +97,11 @@ app.post('/getalluserdata', function (req, res) {
 });
 app.post('/placebet',async function (req, res) {
   await  placebet.placebet(sql,req.body).then((data)=>{
-        res.status(200).send({data})
+        res.status(200).send(data)
     })
     .catch((error)=>{
 
-        res.status(404).send({error})
+        res.status(404).send(error)
 
     })
 })

@@ -7,7 +7,7 @@ import requests
 from PIL import Image, ImageTk
 import keyboard
 import subprocess
-
+import random;
 
 
 
@@ -22,18 +22,16 @@ nextgametime="";
 nextgameid="";
 
 
-
+lastbarcode="none"
 
 print("username"+username);
 print("pass"+password);
 
 
 def on_key_event(e):
-    print(f"Key Event: {e.event_type}, Key Name: {e.name}")
-    if e.event_type == keyboard.KEY_DOWN:
-        print(f"Barcode scanned: {e.name}")
     
-    root.after(0,lambda: keyboard.hook(on_key_event))
+    
+    root.after(100,lambda: keyboard.hook(on_key_event))
 
     END
 
@@ -130,16 +128,8 @@ background_image = ImageTk.PhotoImage(resized_image)
 image_label = Label(root, image=background_image)
 image_label.place(x=10, y=100, width=backgroundimage_width, height=backgroundimage_height)
 
-card_image = Image.open("1.jpeg")
-cardimage_width=200
-cardimage_height=200
-# Resize the image to fit within the desired dimensions (e.g., 200x200)
-cardresized_image = card_image.resize((cardimage_width, cardimage_height))
-# Convert the resized image to a PhotoImage
-card_image = ImageTk.PhotoImage(cardresized_image)
-# Create a label to display the resized background image
-card_label = Label(root, image=card_image)
-card_label.place(x=55, y=120, width=cardimage_width, height=cardimage_height)
+
+
 def updatetime():
     global timer
     response = requests.get("http://localhost:3000/timeleft")
@@ -150,6 +140,7 @@ def updatetime():
     END
 
 def buyticket():
+
     updateuserdata();
     betstring = ""
     betindex = 0
@@ -179,7 +170,10 @@ def buyticket():
             jsonobject = {"username":"ADMIN","password":"12345","tickets":str(betstring),"totalbet":totalbet,"gameid":jsontimerdata['gameid']}
             print(jsonobject)
             r=requests.post("http://localhost:3000/placebet",json=jsonobject)
-            print(r)
+            rdata = r.json()
+            print(rdata["barcode"])
+            global lastbarcode;
+            lastbarcode=str(rdata["barcode"])
             print("betentries:"+betstring)
             print("totalbet:"+str(totalbet))
             print("bet placed")
@@ -205,12 +199,30 @@ def clearbets():
 END
 
 
-stonebutton = Button(root,text="Stones",background="white",foreground="black",command=buyticket,font=("Aerial",15,"bold")).place(x=50,y=650)
+
+def cancelticket():
+    global lastbarcode
+    jsonobj = {"barcode":str(lastbarcode)}
+    cancelbarcodedata = requests.post("http://localhost:3000/cancelbybarcode",json=jsonobj);
+    print(cancelbarcodedata.json());
+    updatetime();
+    updateuserdata();
+    print("canceled the ticket");
+    END
+
+def getanyrandomentry():
+
+    index = random.randint(0,len(betentries)-1)
+    betentries[index].delete(0,tkinter.END);
+    betentries[ index].insert(0,1);
+    END
+
+#stonebutton = Button(root,text="Stones",background="white",foreground="black",command=buyticket,font=("Aerial",15,"bold")).place(x=50,y=650)
 luckystonebutton = Button(root,text="F2 Lucky Stone",background="white",foreground="black",command=buyticket,font=("Aerial",15,"bold")).place(x=150,y=650)
 
 buybutton = Button(root,text="F6-Buy",background="red",foreground="black",command=buyticket,font=("Aerial",15,"bold")).place(x=50,y=700)
 clearbutton = Button(root,text="F5-Clear",background="skyblue",command=clearbets,foreground="black",font=("Aerial",15,"bold")).place(x=150,y=700)
-cancelticketbutton = Button(root,text="F5-Cancel",background="skyblue",foreground="black",font=("Aerial",15,"bold")).place(x=250,y=700)
+cancelticketbutton = Button(root,text="F5-Cancel",background="skyblue",foreground="black",font=("Aerial",15,"bold"),command=cancelticket).place(x=250,y=700)
 lastreceiptbutton = Button(root,text="Last Reciept",background="skyblue",foreground="black",font=("Aerial",15,"bold")).place(x=380,y=700)
 exitbutton = Button(root,text="Exit(X)",background="red",foreground="black",font=("Aerial",15,"bold")).place(x=680,y=700)
 purchasedetails = Button(root,text="Purchase Details",background="white",foreground="black",font=("Aerial",10,"bold")).place(x=780,y=700)
@@ -218,7 +230,7 @@ stonesdetails = Button(root,text="F7 Stones",background="white",foreground="blac
 
 barcodelabeltext = Label(root, text="F8- \n barcode",font=("Aerial",10,"bold"),foreground="black",background="yellow").place(x=810,y= 660)
 barcodeentry = Entry(root,font=("Aerial",10,"bold"))
-luckystonebutton = Button(root,text="F2 Lucky Stone",background="white",foreground="black",command=buyticket,font=("Aerial",15,"bold")).place(x=150,y=650)
+luckystonebutton = Button(root,text="F2 Lucky Stone",background="white",foreground="black",command=getanyrandomentry,font=("Aerial",15,"bold")).place(x=150,y=650)
 
 
 resultlistbox  = Listbox(root,font=("Aerial",20,"bold"),background="Red")
@@ -261,7 +273,7 @@ def get_all_result():
     else:
         print(f"Failed to fetch data. Status code: {response.status_code}")
 
-root.bind("F",set_focus);
+root.bind("B",set_focus);
 barcodeentry.place(x=850,y=660,width=100)
 resultlistbox.place(x=0,y=400,width=350,height=200)
 get_all_result()
@@ -276,6 +288,59 @@ def format_timer(seconds):
     return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
 
 
+current_width=0;
+candec = True;
+
+
+
+card_image = Image.open("1.jpeg")
+
+cardimage_width=200
+cardimage_height=200
+# Resize the image to fit within the desired dimensions (e.g., 200x200)
+cardresized_image = card_image.resize((cardimage_width, cardimage_height))
+# Convert the resized image to a PhotoImage
+card_image = ImageTk.PhotoImage(cardresized_image)
+# Create a label to display the resized background image
+card_label = Label(root, image=card_image)
+def animatecardimage():
+    global current_width;
+    global candec
+    global card_image;
+    global cardresized_image;
+    global cardimage_width;
+    global cardimage_height
+    global card_label;
+    if(candec==False):
+       
+        current_width+=1;
+        
+    END
+
+
+    if(candec==True):
+        current_width-=1;
+          
+    END
+
+    if(current_width>190):
+        candec=True;
+    if(current_width<2):
+
+        card_image = Image.open(str(random.randint(1,8))+".jpeg");
+        cardresized_image = card_image.resize((cardimage_width, cardimage_height))
+# Convert the resized image to a PhotoImage
+        card_image = ImageTk.PhotoImage(cardresized_image)
+# Create a label to display the resized background image
+        card_label = Label(root, image=card_image)
+        candec=False
+
+    
+
+
+    card_label.place(x=105, y=120, width=current_width, height=cardimage_height)
+    root.after(1,animatecardimage);
+
 def updatetime():
     global timer
     response = requests.get("http://localhost:3000/timeleft")
@@ -287,7 +352,7 @@ def updatetime():
     nextgamedate = str(jsontimerdata['nextgamedate']);
     nextgametime = str(jsontimerdata['nextgametime']);
     nextgameid = str(jsontimerdata['gameid'])
-
+    
     timer=(jsontimerdata['time'])
     gifteventcode.config(text="Gift Event Code \n"+str(jsontimerdata["gameid"]));
     END
@@ -299,7 +364,7 @@ def update():
     global nextgamedate;
     global nextgametime;
     global nextgameid;
-
+   
     timer -=1
     if(timer < 1):
 
@@ -329,7 +394,7 @@ def keypressupdate(event):
 
 root.bind("<KeyPress>",keypressupdate)
 root.after(0, update)
-
+root.after(0, animatecardimage)
 
 balancetext.place(x=650,y = 10)
 root.mainloop()
