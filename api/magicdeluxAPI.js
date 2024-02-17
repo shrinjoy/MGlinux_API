@@ -10,6 +10,10 @@ var getalluserdata = require('./getalluserdata')
 var getresultbyid = require('./getgameresultbyID')
 var placebet = require('./placebet')
 var cancelticket = require('./cancelbybarcode')
+const fastifyCors = require('@fastify/cors');
+
+// Enable CORS
+app.register(fastifyCors);
 const sqlConfig = {
     user: 'playjeeto',
     password: 'Playjeeto@2023',

@@ -1,0 +1,45 @@
+*<html>
+    <link rel="stylesheet" href="theme.css">
+    
+    <body>
+
+
+        <div style="min-height: 768;">
+        <div>
+            <label style="position: absolute; align-content: center; align-items: center; text-align: center; vertical-align: middle;">
+               game gift code
+               <br>
+               <label id="gameid" style="align-content: center; align-items: center; text-align: center; vertical-align: middle;">A00</label>
+            </label>
+            <label  style="position: absolute;left: 20%; align-items: center; text-align: center; vertical-align: middle;">
+                game time
+                <br>
+                <label id="timer" style="align-content: center; align-items: center; text-align: center; vertical-align: middle;">0000</label>
+             </label>
+        </div>
+        
+        
+            <div >
+            <img  id ="background"src="./public/background.png">
+            <img  id ="card"src="./public/1.jpeg">
+    
+            <div id="buttonholder">
+            <table id="betinputpanel">    </table>
+            </div>
+        </div>
+        <div id="lowerpanel">
+        <button class="gamebutton">Buy</button>
+        <button class="gamebutton">Advance</button>
+        <button class="gamebutton">Clear</button>
+        <button class="gamebutton">Cancel</button>
+        <button class="gamebutton">Exit</button>
+    </div>
+</div>
+
+
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
+    <script src="cardanimation.js"></script>
+    <script src="app.js"></script>
+</html>

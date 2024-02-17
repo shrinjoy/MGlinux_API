@@ -1,0 +1,83 @@
+#background
+{
+ border: 1px solid black;
+ width: 15%;
+ height: 350px;
+ position: absolute;
+ top: 15%;
+ left: 5%;
+}
+
+#lowerpanel
+{
+    position: absolute;
+   top:1000px;
+    width: 90%;
+}
+
+.gamebutton {
+    border: 1px solid black;
+   
+   bottom: 0;
+    margin-right:0%; /* Use right instead of margin-right for positioning */
+    width: 15%;
+    height: auto;
+    font-size: 26px; /* Specify the unit (px) for font-size */
+  }
+#card
+{
+    border: 1px solid black;
+    width: 13%;
+    height: 180px;
+    position: absolute;
+    top: 20%;
+    left: 6%;
+    animation: sizeChange 1s infinite alternate ease-in-out;
+
+}
+body
+{
+    background-color: yellow;
+}
+td
+{
+   
+    align-content: center;
+    align-items: center;
+    text-align: center; /* Center the content horizontally */
+    vertical-align: middle; /* Center the content vertically */
+    border: 1px solid black;
+   
+   
+}
+.betinput
+{
+    width: 40%;
+}
+.spacer
+{ display: block;
+    margin-top : 15%; /* Adjust the height as needed */
+    content: ""; /* For styling purposes */
+    border: none; /* Remove default border */
+}
+#buttonholder
+{
+    border: 1px solid black;
+    width: 75%;
+   
+    position: absolute;
+    top: 15%;
+    left: 23%;
+    background-color:greenyellow;
+
+}
+
+
+  @keyframes sizeChange {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
