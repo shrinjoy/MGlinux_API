@@ -35,6 +35,15 @@
     animation: sizeChange 1s infinite alternate ease-in-out;
 
 }
+#res_sofar_div
+{
+  border: 1px solid black;
+  width:20%;
+  height: 250px;
+  position: absolute;
+  top: 70%;
+  left: 20px;
+}
 body
 {
     background-color: yellow;
@@ -50,6 +59,14 @@ td
    
    
 }
+
+
+label
+{
+  font-family: 'Courier New', Courier, monospace,bold;
+  font-weight: bolder;
+}
+
 .betinput
 {
     width: 40%;

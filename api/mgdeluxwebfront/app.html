@@ -1,45 +1,76 @@
 *<html>
-    <link rel="stylesheet" href="theme.css">
-    
-    <body>
+<link rel="stylesheet" href="theme.css">
+
+<body>
 
 
-        <div style="min-height: 768;">
+    <div style="min-height: 768;">
         <div>
-            <label style="position: absolute; align-content: center; align-items: center; text-align: center; vertical-align: middle;">
-               game gift code
-               <br>
-               <label id="gameid" style="align-content: center; align-items: center; text-align: center; vertical-align: middle;">A00</label>
+            <h1>Metro delux</h1>
+            <label
+                style="position: absolute; align-content: center; align-items: center; text-align: center; vertical-align: middle;">
+                game gift code
+                <br>
+                <label id="gameid"
+                    style="align-content: center; align-items: center; text-align: center; vertical-align: middle;">A00</label>
             </label>
-            <label  style="position: absolute;left: 20%; align-items: center; text-align: center; vertical-align: middle;">
+            <label
+                style="position: absolute;left: 20%; align-items: center; text-align: center; vertical-align: middle;">
                 game time
                 <br>
-                <label id="timer" style="align-content: center; align-items: center; text-align: center; vertical-align: middle;">0000</label>
-             </label>
+                <label id="timer"
+                    style="align-content: center; align-items: center; text-align: center; vertical-align: middle;">0000</label>
+            </label>
+            <label
+                style="position: absolute;left: 30%; align-items: center; text-align: center; vertical-align: middle;">
+                P.No.
+
+                <label id="username"
+                    style="align-content: center; color: red;align-items: center; text-align: center; vertical-align: middle;">123456789</label>
+            </label>
+            <label id="balance"
+                style="position: absolute;left: 45%; align-items: center; text-align: center; vertical-align: middle;">
+                00000
+            </label>
+            <label
+                style="position: absolute;left: 50%; align-items: center; text-align: center; vertical-align: middle;">
+                Time
+                <label id="realtime"
+                    style="align-content: center; color: red;align-items: center; text-align: center; vertical-align: middle;">00:00:00</label>
+
+            </label>
         </div>
-        
-        
-            <div >
-            <img  id ="background"src="./public/background.png">
-            <img  id ="card"src="./public/1.jpeg">
-    
+
+
+        <div>
+            <img id="background" src="./public/background.png">
+            <img id="card" src="./public/1.jpeg">
+
             <div id="buttonholder">
-            <table id="betinputpanel">    </table>
+                <table id="betinputpanel"> </table>
             </div>
         </div>
+
+        <div  id = "res_sofar_div">
+            <table id="res_sofar_table">
+
+
+            </table>
+        </div>
         <div id="lowerpanel">
-        <button class="gamebutton">Buy</button>
-        <button class="gamebutton">Advance</button>
-        <button class="gamebutton">Clear</button>
-        <button class="gamebutton">Cancel</button>
-        <button class="gamebutton">Exit</button>
+            <button class="gamebutton">Buy</button>
+            <button class="gamebutton">Advance</button>
+            <button class="gamebutton">Clear</button>
+            <button class="gamebutton">Cancel</button>
+            <button class="gamebutton">Exit</button>
+        </div>
     </div>
-</div>
 
 
-    </body>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
-    <script src="cardanimation.js"></script>
-    <script src="app.js"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
+<script src="cardanimation.js"></script>
+<script src="app.js"></script>
+
 </html>
