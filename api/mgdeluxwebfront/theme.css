@@ -49,9 +49,25 @@ body
 {
     background-color: yellow;
 }
-td
+.oldres
 {
-   
+
+  align-content: center;
+  align-items: center;
+  text-align: center; /* Center the content horizontally */
+  vertical-align: middle; /* Center the content vertically */
+  border: 2px solid black;
+  position: relative;
+  width: 25%;
+}
+.tablerow
+{
+  width: 100%;
+  overflow-x:visible;
+}
+.td_betinp
+{
+  
     align-content: center;
     align-items: center;
     text-align: center; /* Center the content horizontally */
