@@ -1,6 +1,9 @@
 *<html>
-<link rel="stylesheet" href="theme.css">
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="theme.css">
 <body>
 
 
@@ -29,11 +32,11 @@
                     style="align-content: center; color: red;align-items: center; text-align: center; vertical-align: middle;">123456789</label>
             </label>
             <label id="balance"
-                style="position: absolute;left: 45%; align-items: center; text-align: center; vertical-align: middle;">
+                style="position: absolute;left: 55%; align-items: center; text-align: center; vertical-align: middle;">
                 00000
             </label>
             <label
-                style="position: absolute;left: 50%; align-items: center; text-align: center; vertical-align: middle;">
+                style="position: absolute;left: 70%; align-items: center; text-align: center; vertical-align: middle;">
                 Time
                 <label id="realtime"
                     style="align-content: center; color: red;align-items: center; text-align: center; vertical-align: middle;">00:00:00</label>
@@ -43,20 +46,36 @@
 
 
         <div>
-            <img id="background" src="./public/background.png">
+            <div id="background">
+            <img style="width: 100%; height: 100%;" src="./public/background.png">
             <img id="card" src="./public/1.jpeg">
+            <div  id = "res_sofar_div">
 
+
+                <table id="res_sofar_table">
+    
+                <tr>
+                    <td>A00</td>
+                   
+    
+                    <td>A00</td>
+                    <td>A00</td>
+                   
+                    <td>A00</td>
+                    <td>A00</td>
+                   
+                    <td>A00</td>
+                </tr>
+                </table>
+            </div>
+            </div>
+           
             <div id="buttonholder">
                 <table id="betinputpanel"> </table>
             </div>
         </div>
 
-        <div  id = "res_sofar_div">
-            <table id="res_sofar_table">
-
-
-            </table>
-        </div>
+      
         <div id="lowerpanel">
             <button class="gamebutton">Buy</button>
             <button class="gamebutton">Advance</button>
