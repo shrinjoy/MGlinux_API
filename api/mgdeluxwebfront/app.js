@@ -60,12 +60,14 @@ function loadallpossiblefuturebets() {
         var parsedData = res.data;
         var count = 0;
         var tablerow = document.createElement("tr");
-        console.clear();
+
         var firstbet = 0;
         for (var key in parsedData) {
             if (parsedData.hasOwnProperty(key)) {
 
-                
+                if (key.toString() === gameid) {
+                    console.log("found same id");
+                } else {
                     if (parsedData[key].toString().trim().length === 0) {
                         count += 1;
                         if (count == 10) {
@@ -96,9 +98,10 @@ function loadallpossiblefuturebets() {
 
 
                     }
-                
-                console.log(firstbet);
-                firstbet += 1;
+
+                }
+
+
             }
         }
     });
@@ -209,6 +212,9 @@ function gettimeandgameid() {
     }).then(function (res) {
         time = res["data"]["time"];
         gameid = res["data"]["gameid"];
+        bettingID = [];
+        bettingID = [gameid.toString()];
+       // console.log(bettingID);
     });
 }
 
@@ -234,15 +240,21 @@ function getuserdata(usernamex, passwordx) {
 
 getuserdata("ADMIN", "12345");
 gettimeandgameid();
+
 loadallpossiblefuturebets();
 function timerupdate() {
     time -= 1;
     if (time < 1) {
+        console.clear();
         getAllResultsSoFar();
 
         gettimeandgameid();
+
+
         loadallpossiblefuturebets();
+
     }
+    console.log(bettingID)
     gametimertext.innerHTML = formatSecondsToTime(time);
     gameidtext.innerHTML = gameid;
     realtimertext.innerHTML = getCurrentTime();
