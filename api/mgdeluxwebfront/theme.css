@@ -1,20 +1,35 @@
 #background
 {
  border: 1px solid black;
- width: 15%;
+ width: 20%;
  height: 350px;
  position: absolute;
- top: 15%;
- left: 5%;
+ top: 8%;
+ left: 0%;
 }
-
+#advancebet_show
+{
+  border: 1px solid black;
+  width: auto;
+  height: auto;
+  display: none;
+  z-index: 100;
+  top:550px;
+  left: 20%;
+  background-color: white;
+  position: absolute;
+}
 #lowerpanel
 {
     position: absolute;
-   top:1000px;
+   top:850px;
     width: 90%;
 }
-
+#advance_bet_table td{
+  text-align: center;
+  border: 1px solid black;
+  white-space: nowrap;
+}
 .gamebutton {
     border: 1px solid black;
    
@@ -23,7 +38,10 @@
     width: 15%;
     height: auto;
     font-size: 26px; /* Specify the unit (px) for font-size */
+    position: relative;
+ 
   }
+
 #card
 {
     border: 1px solid black;
@@ -49,19 +67,33 @@ body
 {
     background-color: yellow;
 }
+
+
+#oldresid
+{
+  
+  color: white;
+}
 .oldres
 {
+  width: 1%;
+  min-width: 40px;
+  min-height: 40px;
+  text-align: center;
+  border: 1px solid black;
 
-  align-content: center;
-  align-items: center;
-  text-align: center; /* Center the content horizontally */
-  vertical-align: middle; /* Center the content vertically */
-  border: 2px solid black;
   position: relative;
-  width: 25%;
+  margin: 0%;
+  padding: 0%;
+
+  white-space: nowrap;
+  font-size:large;
+  font-weight: bold;
 }
 .tablerow
 {
+  width: 1%;
+  white-space: nowrap;
   width: 100%;
   overflow-x:visible;
 }
@@ -82,6 +114,7 @@ label
 {
   font-family: 'Courier New', Courier, monospace,bold;
   font-weight: bolder;
+  font-size:large;
 }
 
 .betinput
@@ -100,7 +133,7 @@ label
     width: 75%;
    
     position: absolute;
-    top: 15%;
+    top: 8%;
     left: 23%;
     background-color:greenyellow;
 
