@@ -254,7 +254,7 @@ function timerupdate() {
         loadallpossiblefuturebets();
 
     }
-    console.log(bettingID)
+   
     gametimertext.innerHTML = formatSecondsToTime(time);
     gameidtext.innerHTML = gameid;
     realtimertext.innerHTML = getCurrentTime();
