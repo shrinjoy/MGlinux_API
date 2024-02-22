@@ -39,10 +39,10 @@ for (y = -1; y < 10; y++) {
         
         inp.setAttribute("type","number");
         inp.addEventListener("input", function () {
-            inputfieldupdate(this.id)
+            inputfieldupdate()
 
         });
-      
+     
         if (x === -1 || y === -1) {
             
             //blocks are all bet inputs
@@ -83,23 +83,15 @@ for (y = -1; y < 10; y++) {
 function allfieldbetplace(thisid)
 {
     var betdata = thisid;
-
     if(betdata[0]==="T")
     {
-       
-        
-       
         for(x = 0;x<10;x++)
         {
             var idinp="";
-          
+            idinp=`NR${x}${thisid[1]}`
+            document.getElementById(idinp).value=document.getElementById(thisid).value;
             
-                idinp=`NR${x}${thisid[1]}`
-                document.getElementById(idinp).value=document.getElementById(thisid).value;
-
         }
-        
-
         console.log("top");
     }
     if(betdata[0]=="B")
@@ -128,16 +120,18 @@ function allfieldbetplace(thisid)
             document.getElementById(idinp).value=document.getElementById(thisid).value;
         }
     }
+    inputfieldupdate();
     console.log(betdata[0],betdata[1]);
 }
 
 
-function inputfieldupdate(inpid) {
+function inputfieldupdate() {
     totalbet = 0;
 
     for (y = 0; y < 10; y++) {
         for (x = 0; x < 10; x++) {
             // Get the input element
+            console.log(`NR${y}${x}`);
             let inputElement = document.getElementById(`NR${y}${x}`);
             
             // Get the value and parse it to an integer, or use 0 if not a valid number
