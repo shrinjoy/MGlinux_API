@@ -25,6 +25,9 @@
    top:850px;
     width: 90%;
 }
+#lowerpanel label{
+  font-size: medium;
+}
 #advance_bet_table td{
   text-align: center;
   border: 1px solid black;
@@ -35,9 +38,9 @@
    
    bottom: 0;
     margin-right:0%; /* Use right instead of margin-right for positioning */
-    width: 15%;
+    width: 10%;
     height: auto;
-    font-size: 26px; /* Specify the unit (px) for font-size */
+    font-size: 16px; /* Specify the unit (px) for font-size */
     position: relative;
  
   }

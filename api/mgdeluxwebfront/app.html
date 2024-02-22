@@ -1,4 +1,3 @@
-*
 <html>
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -161,6 +160,10 @@
         <button class="gamebutton">Clear</button>
         <button class="gamebutton">Cancel</button>
         <button class="gamebutton">Exit</button>
+        
+        <label  id="totqt">Total Qty:<label id="totqt_val">0.00</label></label>
+        <label  id="totamt">Total Amnt:<label id="totamt_val">0.00</label></label>
+        </div>
       </div>
     </div>
   </body>
@@ -170,7 +173,9 @@
   <script src="app.js"></script>
   <script>
 
-
-
+    function hideblock()
+  {
+  document.getElementById("advancebet_show").style="display:none";
+  }
   </script>
 </html>

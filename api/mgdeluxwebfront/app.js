@@ -9,7 +9,21 @@ var time = 99999;
 var gameid = "X00";
 var userbalance = 0;
 var userid = "nouser";
+
+
+var alltop =0;
+var allbottom=0;//
+var betinputs
+var totalbet;
+
+
+
+
+
 for (y = -1; y < 10; y++) {
+
+
+    var betdata=[]; 
     var tr = document.createElement("tr");
     for (x = -1; x < 10; x++) {
         var td = document.createElement("td");
@@ -21,10 +35,31 @@ for (y = -1; y < 10; y++) {
 
         var inp = document.createElement("input");
         inp.setAttribute("class", "betinput");
-        inp.setAttribute("id", `${x}${y}`);
+        inp.setAttribute("id", `NR${y}${x}`);
+        
+        inp.setAttribute("type","number");
+        inp.addEventListener("input", function () {
+            inputfieldupdate(this.id)
 
+        });
+      
         if (x === -1 || y === -1) {
+            
             //blocks are all bet inputs
+            
+            if(x==-1)
+            {
+                inp.setAttribute("id",`B${y}`);
+            }
+            if(y==-1)
+            {
+                inp.setAttribute("id",`T${x}`);
+            }
+            inp.addEventListener("input", function () {
+              allfieldbetplace(this.id)
+    
+            });
+
         } else {
             td.append(namelabel);
         }
@@ -34,14 +69,90 @@ for (y = -1; y < 10; y++) {
             td.append(namelabel);
             //this is a block field for header ;c
             namelabel.innerHTML = "Block";
-        } else {
+        } 
+        else {
             td.append(inp);
         }
         tr.append(td);
+        
     }
     betinputpanel.append(tr);
 }
 ///getallresult
+
+function allfieldbetplace(thisid)
+{
+    var betdata = thisid;
+
+    if(betdata[0]==="T")
+    {
+       
+        
+       
+        for(x = 0;x<10;x++)
+        {
+            var idinp="";
+          
+            
+                idinp=`NR${x}${thisid[1]}`
+                document.getElementById(idinp).value=document.getElementById(thisid).value;
+
+        }
+        
+
+        console.log("top");
+    }
+    if(betdata[0]=="B")
+    {
+        console.log("bottom");
+        limit =0;
+       
+        limit = parseInt(betdata[1])+1;
+
+        
+        console.log(`${parseInt(betdata[1])*10}${(limit*10)}`)
+        for(x = parseInt(betdata[1])*10;x<(limit*10);x++)
+        {
+        
+            var idinp="";
+            if(x<10)
+            {
+                idinp=`NR0${x}`
+            }
+            else
+            {
+                idinp=`NR${x}`
+
+            }
+            
+            document.getElementById(idinp).value=document.getElementById(thisid).value;
+        }
+    }
+    console.log(betdata[0],betdata[1]);
+}
+
+
+function inputfieldupdate(inpid) {
+    totalbet = 0;
+
+    for (y = 0; y < 10; y++) {
+        for (x = 0; x < 10; x++) {
+            // Get the input element
+            let inputElement = document.getElementById(`NR${y}${x}`);
+            
+            // Get the value and parse it to an integer, or use 0 if not a valid number
+            let inputValue = parseInt(inputElement.value) || 0;
+
+            // Add the valid number to totalbet
+            totalbet += inputValue;
+        }
+    }
+
+    document.getElementById("totqt_val").innerHTML  = totalbet;
+    document.getElementById("totamt_val").innerHTML = totalbet;
+}
+
+
 
 function loadallpossiblefuturebets() {
     var advancebet = document.getElementById("advancebet_show");
@@ -181,17 +292,19 @@ function getAllResultsSoFar() {
                     gameresultname.setAttribute("class", "oldres");
                     gameresultname.setAttribute("id", "oldresid");
                     gameidname.append(gameresultname);
-
+                 
                     tablerow.append(gameidname);
-
-                    if (count == 2) {
+                    count += 1;
+                   if(count==3)
+                   {
+                    table.append(tablerow);
                         count = 0;
                         tablerow = document.createElement("tr");
                         tablerow.setAttribute("class", "tablerow");
-                        table.append(tablerow);
-                    } else {
-                        count += 1;
-                    }
+                   }
+                    
+                       
+                    
                 }
             }
 
