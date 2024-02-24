@@ -9,17 +9,11 @@ var time = 99999;
 var gameid = "X00";
 var userbalance = 0;
 var userid = "nouser";
-
-
 var alltop =0;
 var allbottom=0;//
 var betinputs
 var totalbet;
-
-
-
 var lastbetbarcode="";
-
 for (y = -1; y < 10; y++) {
 
 
@@ -78,8 +72,6 @@ for (y = -1; y < 10; y++) {
     }
     betinputpanel.append(tr);
 }
-///getallresult
-
 function allfieldbetplace(thisid)
 {
     var betdata = thisid;
@@ -123,8 +115,6 @@ function allfieldbetplace(thisid)
     inputfieldupdate();
     console.log(betdata[0],betdata[1]);
 }
-
-
 function inputfieldupdate() {
     totalbet = 0;
 
@@ -145,14 +135,6 @@ function inputfieldupdate() {
     document.getElementById("totqt_val").innerHTML  = totalbet;
     document.getElementById("totamt_val").innerHTML = totalbet;
 }
-
-
-//username
-//password
-//tickets
-//totalbet
-//gameid
-
 function buyticket()
 {
     var datax=[];
@@ -219,8 +201,6 @@ bettingID.push(currentid);
 
     /**/
 }
-
-
 function loadallpossiblefuturebets() {
     var advancebet = document.getElementById("advancebet_show");
     var advancebettable = document.getElementById("advance_bet_table");
@@ -285,7 +265,6 @@ function loadallpossiblefuturebets() {
     });
 
 }
-
 showadvancebet_bool = false;
 function showadvancebet() {
     var advancebet = document.getElementById("advancebet_show");
@@ -299,8 +278,6 @@ function showadvancebet() {
         showadvancebet_bool = true;
     }
 }
-
-// Function to handle checkbox change event
 function addidtolistforadvancebet(checkboxId) {
     // Print a message with the checkbox ID
 
@@ -317,7 +294,6 @@ function addidtolistforadvancebet(checkboxId) {
         console.log(bettingID);
     }
 }
-
 function getAllResultsSoFar() {
     var table = document.getElementById("res_sofar_table");
     if (table) {
@@ -382,9 +358,7 @@ function getAllResultsSoFar() {
             console.log("Failed to fetch result data: " + err);
         });
 }
-
 getAllResultsSoFar();
-
 function gettimeandgameid() {
     axios({
         method: "get",
@@ -397,7 +371,6 @@ function gettimeandgameid() {
        // console.log(bettingID);
     });
 }
-
 function getuserdata(usernamex, passwordx) {
     axios({
         method: "post",
@@ -419,10 +392,8 @@ function getuserdata(usernamex, passwordx) {
             //alert(err);
         });
 }
-
 getuserdata("ADMIN", "12345");
 gettimeandgameid();
-
 loadallpossiblefuturebets();
 function timerupdate() {
     time -= 1;
@@ -462,5 +433,4 @@ function formatSecondsToTime(seconds) {
 
     return formattedTime;
 }
-
 setInterval(timerupdate, 1000);
