@@ -1,3 +1,8 @@
+//username
+//password
+//tickets
+//totalbet
+//gameid
 module.exports = {
     placebet: function (db, req) {
         return new Promise((resolve, reject) => {

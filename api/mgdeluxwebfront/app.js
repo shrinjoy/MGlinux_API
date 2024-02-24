@@ -18,7 +18,7 @@ var totalbet;
 
 
 
-
+var lastbetbarcode="";
 
 for (y = -1; y < 10; y++) {
 
@@ -131,7 +131,7 @@ function inputfieldupdate() {
     for (y = 0; y < 10; y++) {
         for (x = 0; x < 10; x++) {
             // Get the input element
-            console.log(`NR${y}${x}`);
+           
             let inputElement = document.getElementById(`NR${y}${x}`);
             
             // Get the value and parse it to an integer, or use 0 if not a valid number
@@ -146,6 +146,79 @@ function inputfieldupdate() {
     document.getElementById("totamt_val").innerHTML = totalbet;
 }
 
+
+//username
+//password
+//tickets
+//totalbet
+//gameid
+
+function buyticket()
+{
+    var datax=[];
+    for(y=0;y<10;y++)
+    {
+        for(x=0;x<10;x++)
+        {
+            var id=`${y}${x}`
+            datax.push(`${y}${x}Q${parseInt(document.getElementById("NR"+id).value)||0}`)
+        }
+    }
+
+    data= {
+        username: username,
+        password: password,
+        tickets:datax.toString(),
+        totalbet:totalbet,
+        gameid:gameid.toString()
+    }
+    console.log(data);
+
+
+
+    bettingID.forEach(e =>{
+        axios({
+            method: "post",
+            url: "http://localhost:3000/placebet",
+            data: {
+                username: username,
+                password: password,
+                tickets:datax.toString(),
+                totalbet:totalbet,
+                gameid:e.toString()
+            },
+        })
+            .then(function (res) {
+                console.log("placed bet in id:"+e.toString());
+            console.log(res["data"]["barcode"]);
+            getuserdata(username,password)
+
+            })
+            .catch(function(err){
+
+
+                alert(err)
+                getuserdata(username,password)
+
+            });
+    })
+var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+// Loop through each checkbox and uncheck it
+checkboxes.forEach(function(checkbox) {
+  checkbox.checked = false;
+getuserdata(username,password)
+
+
+var currentid=
+bettingID[0];
+bettingID=[];
+bettingID.push(currentid);
+});
+
+
+    /**/
+}
 
 
 function loadallpossiblefuturebets() {
@@ -336,6 +409,8 @@ function getuserdata(usernamex, passwordx) {
     })
         .then(function (res) {
             userid = res["data"]["username"];
+            username=userid;
+            password=res["data"]["password"]
             userbalance = res["data"]["balance"];
             document.getElementById("balance").innerHTML = userbalance;
             document.getElementById("username").innerHTML = userid;
