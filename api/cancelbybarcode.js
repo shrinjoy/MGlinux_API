@@ -16,8 +16,13 @@ module.exports = {
                             var username = balancedata.recordset[0]["TARMINALID"];
                             sql.query(`UPDATE [playjeeto].[dbo].[CLIENTLOGIN] set CLIENTBALANCE  = CLIENTBALANCE+${balancetoadd} where CLIENTUSERNAME='${username}'`).then((data) => {
                                 console.log("added this balance:" + balancedata);
-
+                                sql.query(`DELETE [playjeeto].[dbo].[TICKET99] WHERE TICKETNUMBER= '${req["barcode"]}' `).then((d2)=>{
                                 resolve({ "message": "canceled bet" });
+
+                                })
+                                .catch((err) => {
+                                    reject({ "error": "failed to add balance back due to :" + err })
+                                })
                             })
                                 .catch((err) => {
                                     reject({ "error": "failed to add balance back due to :" + err })

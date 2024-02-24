@@ -36,7 +36,10 @@ for (y = -1; y < 10; y++) {
             inputfieldupdate()
 
         });
-     
+        inp.addEventListener("change", function () {
+            inputfieldupdate()
+
+        });
         if (x === -1 || y === -1) {
             
             //blocks are all bet inputs
@@ -173,6 +176,7 @@ function buyticket()
             .then(function (res) {
                 console.log("placed bet in id:"+e.toString());
             console.log(res["data"]["barcode"]);
+            lastbetbarcode=res["data"]["barcode"]
             getuserdata(username,password)
 
             })
@@ -196,6 +200,7 @@ var currentid=
 bettingID[0];
 bettingID=[];
 bettingID.push(currentid);
+clearallinputs();
 });
 
 
@@ -432,5 +437,35 @@ function formatSecondsToTime(seconds) {
         .padStart(2, "0")}:${secondsFormatted.toString().padStart(2, "0")}`;
 
     return formattedTime;
+}
+function clearallinputs()
+{
+    var inputnumberbox = document.querySelectorAll('input[type="number"]');
+
+    inputnumberbox.forEach(e=>{
+        e.value=null;
+    })
+    inputfieldupdate();
+}
+function cancelbet()
+{
+// /cancelbybarcode
+axios({
+    method: "post",
+    url: "http://localhost:3000/cancelbybarcode",
+    data: {
+        barcode:lastbetbarcode
+    },
+})
+    .then(function (res) {
+        getuserdata(username,password)
+
+
+    }).catch((err)=>{
+        alert("no ticket with code-"+lastbetbarcode+"   found" )
+        getuserdata(username,password)
+
+    })
+   lastbetbarcode=''
 }
 setInterval(timerupdate, 1000);
