@@ -40,7 +40,7 @@
   white-space: nowrap;
 }
 .gamebutton {
-    border: 1px solid black;
+    border: 0px solid black;
     margin-right: 10px;
    bottom: 0;
    /* Use right instead of margin-right for positioning */
@@ -48,6 +48,7 @@
     height: auto;
     font-size: 16px; /* Specify the unit (px) for font-size */
     position: relative;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
  
   }
 
@@ -148,7 +149,7 @@ label
 
 .betinput
 {
-    width: 40%;
+    width: 80%;
 }
 .spacer
 { display: block;
@@ -164,7 +165,7 @@ label
     position: absolute;
     top: 8%;
     left: 23%;
-    background-color:greenyellow;
+    background-color:#47e315;
 
 }
 
