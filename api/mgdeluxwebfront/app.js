@@ -30,7 +30,7 @@ for (y = -1; y < 10; y++) {
         var inp = document.createElement("input");
         inp.setAttribute("class", "betinput");
         inp.setAttribute("id", `NR${y}${x}`);
-        
+        inp.setAttribute("min","0")
         inp.setAttribute("type","number");
         inp.addEventListener("input", function () {
             inputfieldupdate()
@@ -77,6 +77,16 @@ for (y = -1; y < 10; y++) {
 }
 function allfieldbetplace(thisid)
 {
+    let inputValue = parseInt(document.getElementById(thisid).value);
+           
+
+    if (isNaN(inputValue) || inputValue < 0) {
+        
+        document.getElementById(thisid).value = ''; // Clear the input
+    }
+
+
+
     var betdata = thisid;
     if(betdata[0]==="T")
     {
@@ -84,20 +94,20 @@ function allfieldbetplace(thisid)
         {
             var idinp="";
             idinp=`NR${x}${thisid[1]}`
-            document.getElementById(idinp).value=document.getElementById(thisid).value;
+            document.getElementById(idinp).value=(parseInt(document.getElementById(thisid).value)||0)+ (parseInt(document.getElementById(idinp).value)||0);
             
         }
-        console.log("top");
+        //("top");
     }
     if(betdata[0]=="B")
     {
-        console.log("bottom");
+        //("bottom");
         limit =0;
        
         limit = parseInt(betdata[1])+1;
 
         
-        console.log(`${parseInt(betdata[1])*10}${(limit*10)}`)
+        //(`${parseInt(betdata[1])*10}${(limit*10)}`)
         for(x = parseInt(betdata[1])*10;x<(limit*10);x++)
         {
         
@@ -112,11 +122,11 @@ function allfieldbetplace(thisid)
 
             }
             
-            document.getElementById(idinp).value=document.getElementById(thisid).value;
+            document.getElementById(idinp).value=(parseInt(document.getElementById(thisid).value)||0)+(parseInt(document.getElementById(idinp).value)||0);
         }
     }
     inputfieldupdate();
-    console.log(betdata[0],betdata[1]);
+    //(betdata[0],betdata[1]);
 }
 function inputfieldupdate() {
     totalbet = 0;
@@ -129,14 +139,19 @@ function inputfieldupdate() {
             
             // Get the value and parse it to an integer, or use 0 if not a valid number
             let inputValue = parseInt(inputElement.value) || 0;
+           
 
+            if (isNaN(inputValue) || inputValue < 0) {
+                
+                inputElement.value = ''; // Clear the input
+            }
             // Add the valid number to totalbet
             totalbet += inputValue;
         }
     }
 
-    document.getElementById("totqt_val").innerHTML  = totalbet;
-    document.getElementById("totamt_val").innerHTML = totalbet;
+    document.getElementById("totqt_val").innerHTML  = "total Qnt:"+totalbet;
+    document.getElementById("totamt_val").innerHTML = "total Amnt:"+totalbet;
 }
 function buyticket()
 {
@@ -157,7 +172,7 @@ function buyticket()
         totalbet:totalbet,
         gameid:gameid.toString()
     }
-    console.log(data);
+    //(data);
 
 
 
@@ -174,8 +189,8 @@ function buyticket()
             },
         })
             .then(function (res) {
-                console.log("placed bet in id:"+e.toString());
-            console.log(res["data"]["barcode"]);
+                //("placed bet in id:"+e.toString());
+            //(res["data"]["barcode"]);
             lastbetbarcode=res["data"]["barcode"]
             getuserdata(username,password)
 
@@ -196,13 +211,13 @@ checkboxes.forEach(function(checkbox) {
 getuserdata(username,password)
 
 
+
+});
 var currentid=
 bettingID[0];
 bettingID=[];
 bettingID.push(currentid);
 clearallinputs();
-});
-
 
     /**/
 }
@@ -216,6 +231,7 @@ function loadallpossiblefuturebets() {
     while (advancebettable.rows.length > 0) {
         advancebettable.deleteRow(1);
     }
+     startloading=false;
     axios({
         method: "get",
         url: "http://localhost:3000/getallresult",
@@ -227,10 +243,12 @@ function loadallpossiblefuturebets() {
         var firstbet = 0;
         for (var key in parsedData) {
             if (parsedData.hasOwnProperty(key)) {
-
+                
                 if (key.toString() === gameid) {
-                    console.log("found same id");
+                    //("found same id");
+                    startloading=true;
                 } else {
+                    if(startloading===true){
                     if (parsedData[key].toString().trim().length === 0) {
                         count += 1;
                         if (count == 10) {
@@ -249,7 +267,7 @@ function loadallpossiblefuturebets() {
                             addidtolistforadvancebet(this.id);
                         });
 
-                        /* console.log(
+                        /* //(
                              `${key}${parsedData[key]} ${
                              parsedData[key].toString().trim().length
                              }`
@@ -261,6 +279,7 @@ function loadallpossiblefuturebets() {
 
 
                     }
+                }
 
                 }
 
@@ -291,21 +310,74 @@ function showstones() {
 // /getallresultbydate
 function showresultbydate()
 {
+    var table = document.getElementById("stones_table");
+    if (table) {
+        var rowCount = table.rows.length;
+
+        for (var i = rowCount - 1; i > 0; i--) {
+            table.deleteRow(i);
+        }
+    }
+    if (table) {
+        var rowCount = table.rows.length;
+
+        for (var i = rowCount - 1; i > 0; i--) {
+            table.deleteRow(i);
+        }
+    }
+    var tablerow = document.createElement("tr");
+    // Clear existing rows in the table
+    table.innerHTML = "";
+
     axios({
         method: "post",
         url: "http://localhost:3000/getallresultbydate",
-        data: {
+        data:{
             date:document.getElementById("date").value.toString()
-        },
+        }
     })
         .then(function (res) {
-           
-            console.log(res);
-    
-        }).catch((err)=>{
-           
-    
+            // Assuming res.data is already a parsed JSON object
+            var parsedData = res.data;
+            var count = 0;
+            var tr;
+            //(res);
+            for (var key in parsedData) {
+                if (parsedData.hasOwnProperty(key)) {
+                    var gameidname = document.createElement("td");
+                    var gameresultname = document.createElement("td");
+                    gameidname.innerHTML = key;
+                    //rowspan="1" colspan="2"
+                    gameidname.setAttribute("class", "oldres");
+                    //gameidname.setAttribute("rowspan","1")
+                    gameresultname.innerHTML = "NR"+parsedData[key];
+                    gameresultname.setAttribute("class", "oldres");
+                    gameresultname.setAttribute("id", "oldresid");
+                    gameidname.append(gameresultname);
+                 
+                    tablerow.append(gameidname);
+                    count += 1;
+                   if(count==10)
+                   {
+                    table.append(tablerow);
+                        count = 0;
+                        tablerow = document.createElement("tr");
+                        tablerow.setAttribute("class", "tablerow");
+                   }
+                    
+                       
+                    
+                }
+               
+
+            }
+            table.append(tablerow);
+            // Move the return statement outside the loop
+            return res.data;
         })
+        .catch((err) => {
+            //("Failed to fetch result data: " + err);
+        });
 }
 
 
@@ -327,17 +399,17 @@ function showadvancebet() {
 function addidtolistforadvancebet(checkboxId) {
     // Print a message with the checkbox ID
 
-    //console.log(`Checkbox with ID '${checkboxId}' is ${document.getElementById(checkboxId).checked ? 'checked' : 'unchecked'}`);
+    ////(`Checkbox with ID '${checkboxId}' is ${document.getElementById(checkboxId).checked ? 'checked' : 'unchecked'}`);
     if (document.getElementById(checkboxId).checked === true) {
         bettingID.push(checkboxId);
-        console.log(bettingID);
+        //(bettingID);
     } else if (document.getElementById(checkboxId).checked === false) {
         for (k = 0; k < bettingID.length; k++) {
             if (bettingID[k] === checkboxId) {
                 bettingID.splice(k, 1);
             }
         }
-        console.log(bettingID);
+        //(bettingID);
     }
 }
 function getAllResultsSoFar() {
@@ -369,7 +441,7 @@ function getAllResultsSoFar() {
             var parsedData = res.data;
             var count = 0;
             var tr;
-            console.log(res);
+            //(res);
             for (var key in parsedData) {
                 if (parsedData.hasOwnProperty(key)) {
                     var gameidname = document.createElement("td");
@@ -397,12 +469,13 @@ function getAllResultsSoFar() {
                     
                 }
             }
+            table.append(tablerow);
 
             // Move the return statement outside the loop
             return res.data;
         })
         .catch((err) => {
-            console.log("Failed to fetch result data: " + err);
+            //("Failed to fetch result data: " + err);
         });
 }
 getAllResultsSoFar();
@@ -415,7 +488,7 @@ function gettimeandgameid() {
         gameid = res["data"]["gameid"];
         bettingID = [];
         bettingID = [gameid.toString()];
-       // console.log(bettingID);
+       // //(bettingID);
     });
 }
 function getuserdata(usernamex, passwordx) {

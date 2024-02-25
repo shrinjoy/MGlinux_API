@@ -147,12 +147,18 @@
 
       <div id="stone_show">
         <button onclick="showstones()">X</button>
-        <div id="stone_control_box">
+        <div style="height: 100px;background-color : red;" id="stone_control_box">
           <label>Select Date</label>
           <input id="date" type="date">
           <button onclick="showresultbydate()">Show Stone</button>
         </div>
-        <table id="stones_table">
+        <table style="
+        overflow-y: scroll;
+       height: 80%;
+        width: 100%;
+        overflow-x: visible;
+        display: block;
+      " id="stones_table">
         </table>
       </div>
 
@@ -175,8 +181,10 @@
         <button class="gamebutton" onclick="showstones()" >Stone</button>
         <button class="gamebutton">Exit</button>
         
-        <label  id="totqt">Total Qty:<label id="totqt_val">0.00</label></label>
-        <label  id="totamt">Total Amnt:<label id="totamt_val">0.00</label></label>
+
+
+      <label id="totqt_val">total Qnt:0.00</label>
+       <label id="totamt_val">total Amnt:0.00</label>
         </div>
       </div>
     </div>
@@ -186,7 +194,11 @@
   <script src="cardanimation.js"></script>
   <script src="app.js"></script>
   <script>
+ const today = new Date().toISOString().split('T')[0];
 
+// Set the default value of the input to today
+document.getElementById('date').value = today;
+showresultbydate()
     function hideblock()
   {
   document.getElementById("advancebet_show").style="display:none";
