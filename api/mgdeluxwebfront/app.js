@@ -179,7 +179,7 @@ function buyticket()
     bettingID.forEach(e =>{
         axios({
             method: "post",
-            url: "http://localhost:3000/placebet",
+            url: "http://193.203.163.194:3000/placebet",
             data: {
                 username: username,
                 password: password,
@@ -234,7 +234,7 @@ function loadallpossiblefuturebets() {
      startloading=false;
     axios({
         method: "get",
-        url: "http://localhost:3000/getallresult",
+        url: "http://193.203.163.194:3000/getallresult",
     }).then(function (res) {
         var parsedData = res.data;
         var count = 0;
@@ -331,7 +331,7 @@ function showresultbydate()
 
     axios({
         method: "post",
-        url: "http://localhost:3000/getallresultbydate",
+        url: "http://193.203.163.194:3000/getallresultbydate",
         data:{
             date:document.getElementById("date").value.toString()
         }
@@ -434,7 +434,7 @@ function getAllResultsSoFar() {
 
     axios({
         method: "get",
-        url: "http://localhost:3000/getallresultsofar",
+        url: "http://193.203.163.194:3000/getallresultsofar",
     })
         .then(function (res) {
             // Assuming res.data is already a parsed JSON object
@@ -482,7 +482,7 @@ getAllResultsSoFar();
 function gettimeandgameid() {
     axios({
         method: "get",
-        url: "http://localhost:3000/timeleft",
+        url: "http://193.203.163.194:3000/timeleft",
     }).then(function (res) {
         time = res["data"]["time"];
         gameid = res["data"]["gameid"];
@@ -494,7 +494,7 @@ function gettimeandgameid() {
 function getuserdata(usernamex, passwordx) {
     axios({
         method: "post",
-        url: "http://localhost:3000/getalluserdata",
+        url: "http://193.203.163.194:3000/getalluserdata",
         data: {
             username: usernamex,
             password: passwordx,
@@ -567,7 +567,7 @@ function cancelbet()
 // /cancelbybarcode
 axios({
     method: "post",
-    url: "http://localhost:3000/cancelbybarcode",
+    url: "http://193.203.163.194:3000/cancelbybarcode",
     data: {
         barcode:lastbetbarcode
     },
