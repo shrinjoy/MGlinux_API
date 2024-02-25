@@ -142,7 +142,7 @@ app.get('/timeleft', async function (req, res) {
         res.status(400).send({ "message": "failed to get time because -" + err })
     }
 })
-app.listen({ port: 3000 }, (err) => {
+app.listen({  host: "0.0.0.0",port: 3000 }, (err) => {
     if (err) {
         console.log("error occured:" + err);
     }
