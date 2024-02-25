@@ -1,5 +1,24 @@
 module.exports =
 {
+    getlastresults_all_sofar: function (db) {
+        return new Promise((resolve, reject) => {
+           
+            db.query(`SELECT * FROM [playjeeto].[dbo].[RESULT99] WHERE CONVERT(DATE, GAMEDATE) = CONVERT(DATE,GETDATE());`)
+                .then((data) => {
+                    var arraydata = {};
+                    console.log(data.recordset.length);
+                    data.recordset.forEach(element => {
+                        arraydata[element["GAMENUM"]] = element["GAMERESULT"];
+                    });
+
+                    resolve(arraydata); // Resolve the JSON object directly
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject({"message": err});
+                });
+        });
+    },
     getlastresults_all: function (db) {
         return new Promise((resolve, reject) => {
             db.query(`SELECT * FROM [playjeeto].[dbo].[RESULT] WHERE CONVERT(DATE, GAMEDATE) = CONVERT(DATE, GETDATE());`).then((data) => {

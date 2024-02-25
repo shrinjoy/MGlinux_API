@@ -45,6 +45,23 @@
  
   }
 
+
+#stone_show
+{
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  z-index: 300;
+  display: none;
+  background-color: red;
+}
+
+
+#stone_control_box
+{
+  text-align: center;
+}
+
 #card
 {
     border: 1px solid black;

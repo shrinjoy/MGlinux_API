@@ -270,6 +270,47 @@ function loadallpossiblefuturebets() {
     });
 
 }
+
+showstones_bool=false;
+
+function showstones() {
+    var advancebet = document.getElementById("stone_show");
+
+    if (showadvancebet_bool === true) {
+        advancebet.style = "display:none";
+        showadvancebet_bool = false;
+    } else if (showadvancebet_bool === false) {
+        advancebet.style = "display:block";
+
+        showadvancebet_bool = true;
+    }
+}
+
+
+
+// /getallresultbydate
+function showresultbydate()
+{
+    axios({
+        method: "post",
+        url: "http://localhost:3000/getallresultbydate",
+        data: {
+            date:document.getElementById("date").value.toString()
+        },
+    })
+        .then(function (res) {
+           
+            console.log(res);
+    
+        }).catch((err)=>{
+           
+    
+        })
+}
+
+
+
+
 showadvancebet_bool = false;
 function showadvancebet() {
     var advancebet = document.getElementById("advancebet_show");
@@ -321,13 +362,14 @@ function getAllResultsSoFar() {
 
     axios({
         method: "get",
-        url: "http://localhost:3000/getallresult",
+        url: "http://localhost:3000/getallresultsofar",
     })
         .then(function (res) {
             // Assuming res.data is already a parsed JSON object
             var parsedData = res.data;
             var count = 0;
             var tr;
+            console.log(res);
             for (var key in parsedData) {
                 if (parsedData.hasOwnProperty(key)) {
                     var gameidname = document.createElement("td");
@@ -336,7 +378,7 @@ function getAllResultsSoFar() {
                     //rowspan="1" colspan="2"
                     gameidname.setAttribute("class", "oldres");
                     //gameidname.setAttribute("rowspan","1")
-                    gameresultname.innerHTML = parsedData[key];
+                    gameresultname.innerHTML = "NR"+parsedData[key];
                     gameresultname.setAttribute("class", "oldres");
                     gameresultname.setAttribute("id", "oldresid");
                     gameidname.append(gameresultname);

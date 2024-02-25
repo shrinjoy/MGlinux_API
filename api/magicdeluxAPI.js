@@ -84,7 +84,17 @@ app.get('/getallresult', async function (req, res) {
         })
 
 })
+app.get('/getallresultsofar', async function (req, res) {
+    await getallresult.getlastresults_all_sofar(sql).then((data) => {
+        res.status(200).send(data);
 
+    })
+        .catch((err) => {
+            res.status(400).send({ err });
+
+        })
+
+})
 
 app.post('/canlogin', function (req, res) {
     login.canlogin(sql, req.body).then((data) => {
