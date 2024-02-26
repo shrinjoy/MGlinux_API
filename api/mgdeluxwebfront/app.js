@@ -81,21 +81,31 @@ function checklogin()
 {
 // /canlogin
 
-
+console.log(document.getElementById("uname").value.toString(), document.getElementById("pword").value.toString());
+var name = document.getElementById("uname").value.toString();
+var pass = document.getElementById("pword").value.toString();
 axios({
     method: "post",
     url: "http://193.203.163.194:3000/canlogin",
     data: {
-        username: document.getElementById("uname").value.toString(),
-        password: document.getElementById("pword").value.toString(),
+        username: name,
+        password: pass
     },
     })
     .then(function (res) {
 
-        document.getElementById("loginform").style("display:none")
+        document.getElementById("loginform").style="display:none"
+        getuserdata(name,pass)
+        setInterval(function() {
+            getuserdata(username, password);
+        }, 1000);
+
+        username=name;
+        password=pass;
+       
 
     }).catch((err)=>{
-
+        console.log(err);
         alert("wrong username or password")
     })
 }
@@ -533,12 +543,13 @@ function getuserdata(usernamex, passwordx) {
             userbalance = res["data"]["balance"];
             document.getElementById("balance").innerHTML = userbalance;
             document.getElementById("username").innerHTML = userid;
+            console.log("usernamepassdata fetched XDXD")
         })
         .catch((err) => {
             //alert(err);
         });
 }
-getuserdata("ADMIN", "12345");
+
 gettimeandgameid();
 loadallpossiblefuturebets();
 function timerupdate() {
