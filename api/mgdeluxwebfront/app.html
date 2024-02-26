@@ -10,10 +10,44 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"
   ></script>
-
+  <head>
+    <style>
+       @keyframes colorChange {
+      0% {
+        color: red;
+      }
+      50% {
+        color: #ff004c; /* Bright red */
+      }
+      75% {
+        color: #ff009d; /* Bright red */
+      }
+      100% {
+        color: red;
+      }
+    }
+    </style>
+  </head>
   <link rel="stylesheet" href="theme.css" />
   <body>
     <div style="min-height: 768">
+
+      <div  id="loginform">
+        <h1 style="color: red; animation: colorChange 5s infinite; ">
+          Metro Delux
+        </h1>
+        <label >Username</label>
+       
+        <input id ="uname" type="text">
+    
+        <label>Password</label>
+       
+
+        <input  id="pword" type="text">
+        <button onclick="checklogin()">login</button>
+      </div>
+
+
       <div>
         <h1>Metro delux</h1>
         <label

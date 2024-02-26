@@ -75,6 +75,32 @@ for (y = -1; y < 10; y++) {
     }
     betinputpanel.append(tr);
 }
+
+
+function checklogin()
+{
+// /canlogin
+
+
+axios({
+    method: "post",
+    url: "http://193.203.163.194:3000/canlogin",
+    data: {
+        username: document.getElementById("uname").value.toString(),
+        password: document.getElementById("pword").value.toString(),
+    },
+    })
+    .then(function (res) {
+
+        document.getElementById("loginform").style("display:none")
+
+    }).catch((err)=>{
+
+        alert("wrong username or password")
+    })
+}
+
+
 function allfieldbetplace(thisid)
 {
     let inputValue = parseInt(document.getElementById(thisid).value);

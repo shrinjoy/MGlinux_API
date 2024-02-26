@@ -9,15 +9,9 @@ module.exports = {
                }
                else
                {
-                    if(data.recordset.CLIENTMAC === request["macid"])
-                    {
+                 
                         resolve({"message": "good to log in "})
-                    }
-                  else if(data.recordset.CLIENTMAC !== request["macid"])
-                    {
-                        reject({"message":"contact office"})
-
-                    }
+                    
 
                }
 
