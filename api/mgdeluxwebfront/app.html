@@ -30,25 +30,44 @@
   </head>
   <link rel="stylesheet" href="theme.css" />
   <body>
-    <div style="min-height: 768">
-
-      <div  id="loginform">
-        <h1 style="color: red; animation: colorChange 5s infinite; ">
-          Metro Delux
-        </h1>
-        <label >Username</label>
-       
-        <input id ="uname" type="text">
+    <div style="min-height: 768px;">
+      <div id="loginform" style="position: absolute;">
+        <img style="position: absolute; width: 100%; height: 100%; z-index: -1;" src="./public/back_image.png" alt="Background Image">
     
-        <label>Password</label>
-       
-
-        <input  id="pword" type="text">
-        <button onclick="checklogin()">login</button>
+        <h1 style="color: red; animation: colorChange 5s infinite; text-decoration: underline; text-align: center;">
+          Metro Delux SIGN IN
+        </h1>
+        <label style="text-align: center;">ID</label>
+        <input placeholder="ENTER ID" id="uID" type="text">
+    
+        <label style="text-align: center;">Username</label>
+        <input placeholder="ENTER USERNAME" id="uname" type="text">
+        <label style="text-align: center; color: grey;">(case sensitive)</label>
+    
+        <label style="text-align: center;">Password</label>
+        <input placeholder="ENTER PASSWORD" id="pword" type="text">
+    
+      
+          
+        <div style="width: 100%;margin-left: -200px; display: flex; align-items: center; justify-content: center;">
+          <input id="sig" type="checkbox" style="margin: 0; padding: 0; vertical-align: middle;">
+          
+          <span style="font-size: 18px; margin-left: -200px; vertical-align: middle;">Keep me signed in</span>
+        </div>
+        
+    
+        <h1 style="font-weight: bold; text-align: center;" id="catchpa">123456</h1>
+        <input style="margin: 0 auto; text-align: center; width: 50%;" placeholder="enter catchpa">
+    
+        <button style="border-radius: 20px; font-size: xx-large; width: 50%; margin-top: 20px; background-color: dodgerblue; color: white; border: 0px;" onclick="checklogin()">Login</button>
       </div>
+    </div>
+    
+    
 
 
       <div>
+       
         <h1>Metro delux</h1>
         <label
           style="
@@ -228,6 +247,8 @@
   <script src="cardanimation.js"></script>
   <script src="app.js"></script>
   <script>
+
+    document.getElementById("catchpa").innerHTML=Math.floor(Math.random() * (999999 - 300000 + 1)) + 300000;
  const today = new Date().toISOString().split('T')[0];
 
 // Set the default value of the input to today

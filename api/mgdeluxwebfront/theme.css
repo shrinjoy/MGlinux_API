@@ -36,19 +36,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column; /* Added property to align content vertically */
-  height: 100vh;
+  flex-direction: column; /* Align content vertically */
 }
 
 #loginform label,
 #loginform input {
-  margin-bottom: 10px; /* Add some margin between label and input for better spacing */
+  margin-bottom: 10px;
+  font-size: 3vw; /* Corrected font size unit to vw */
+  border-radius: 20px;
+  border: none;
+  box-shadow: none;
+  left: 50%;
+  width: 50%;
 }
 #lowerpanel  label{
   
   font-size: 3vw;
   white-space: nowrap; 
-  margin-right: 10px;
+
   border: 0px solid black;
 }
 #advance_bet_table td{
