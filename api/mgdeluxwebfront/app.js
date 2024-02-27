@@ -322,6 +322,9 @@ function loadallpossiblefuturebets() {
 
             }
         }
+    }).catch((err)=>{
+        alert("failed to load the data try to load again");
+        loadallpossiblefuturebets();
     });
 
 }
