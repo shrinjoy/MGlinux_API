@@ -43,6 +43,9 @@ for (y = -1; y < 10; y++) {
         if (x === -1 || y === -1) {
             
             //blocks are all bet inputs
+            namelabel.innerHTML="&nbsp"
+            td.append(namelabel);
+
             
             if(x==-1)
             {

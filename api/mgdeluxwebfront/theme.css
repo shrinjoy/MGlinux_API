@@ -172,6 +172,7 @@ label
 .betinput
 {
     width: 80%;
+    -moz-appearance: textfield;
 }
 .spacer
 { display: block;
