@@ -2,7 +2,7 @@
 {
 
  width: 20%;
- height: 400px;
+ height: 500px;
  position: absolute;
  top: 8%;
  left: 0%;
@@ -22,7 +22,7 @@
 #lowerpanel
 {
     position: absolute;
-   top:850px;
+   top:890px;
     width: 90%;display: flex; /* Use flexbox to make the elements flex containers */
     align-items: center; /* Align items vertically in the center */
     justify-content: space-between;
@@ -59,9 +59,9 @@ input[type=number] {
 }
 #lowerpanel  label{
   
-  font-size: 3vw;
+  font-size: 19px;
   white-space: nowrap; 
-
+  margin-left: 20px;
   border: 0px solid black;
 }
 #advance_bet_table td{
@@ -147,7 +147,7 @@ body
   padding: 0%;
 
   white-space: nowrap;
-  font-size:larger;
+  font-size:large;
   font-weight: bold;
 }
 .tablerow
@@ -172,7 +172,7 @@ body
 
 label
 {
-  font-family: 'Courier New', Courier, monospace,bold;
+ 
   font-weight: bolder;
   font-size:large;
 }

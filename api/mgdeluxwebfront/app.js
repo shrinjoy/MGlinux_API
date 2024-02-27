@@ -499,7 +499,7 @@ function getAllResultsSoFar() {
                  
                     tablerow.append(gameidname);
                     count += 1;
-                   if(count==3)
+                   if(count==4)
                    {
                     table.append(tablerow);
                         count = 0;
