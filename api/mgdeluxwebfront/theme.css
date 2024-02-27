@@ -23,9 +23,23 @@
 {
     position: absolute;
    top:890px;
-    width: 90%;display: flex; /* Use flexbox to make the elements flex containers */
-    align-items: center; /* Align items vertically in the center */
-    justify-content: space-between;
+ 
+  padding-top: 0px;
+  border: 0px;
+}
+#lowerpaneltable{
+  border-collapse: separate;
+  border-spacing: 10px;
+  padding-left: 10px;
+  padding-top: 0px;
+  border: 0px;
+}
+#lowerpaneltable td{
+  height: 80px;
+  min-height: 800px;
+  font-size:1.8dvw;
+  border: 0px;
+  
 }
 #loginform {
   position: absolute;
@@ -57,30 +71,13 @@ input[type=number] {
   left: 50%;
   width: 50%;
 }
-#lowerpanel  label{
-  
-  font-size: 19px;
-  white-space: nowrap; 
-  margin-left: 20px;
-  border: 0px solid black;
-}
+
 #advance_bet_table td{
   text-align: center;
   border: 1px solid black;
   white-space: nowrap;
 }
-.gamebutton {
-    border: 0px solid black;
-    margin-right: 10px;
-   bottom: 0;
-   /* Use right instead of margin-right for positioning */
-    width: 20%;
-    height: auto;
-    font-size: 32px; /* Specify the unit (px) for font-size */
-    position: relative;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
- 
-  }
+
 
 
 #stone_show
@@ -188,6 +185,8 @@ label
     content: ""; /* For styling purposes */
     border: none; /* Remove default border */
 }
+
+
 #buttonholder
 {
     border: 1px solid black;

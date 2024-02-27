@@ -228,18 +228,40 @@
         </div>
       </div>
       <div id="lowerpanel">
-        <button class="gamebutton" style="background-color:#e8c595" onclick="buyticket()">Buy</button>
-        <button class="gamebutton"  style="background-color:#00ffff" onclick="showadvancebet()">Advance</button>
-        <button class="gamebutton"  style="background-color:#00ffff" onclick="clearallinputs()">Clear</button>
-        <button class="gamebutton"  style="background-color:#00ffff" onclick="cancelbet()">Cancel</button>
-        <button class="gamebutton"  style="background-color:#00ffff">Report</button>
-        <button class="gamebutton"   style="background-color:#00ffff" onclick="showstones()" >Stone</button>
+        
+        <table style="width: 100%;" id="lowerpaneltable">
+          <tr>
+            <td>
+        <button class="gamebutton" style="background-color:#e8c595" onclick="buyticket()">F5-Buy</button>
+      </td>
+      <td>
+        <button class="gamebutton"  style="background-color:#00ffff" onclick="showadvancebet()">Advance Draw(F6)</button>
+      </td>
+      <td>
+        <button class="gamebutton"  style="background-color:#00ffff" onclick="clearallinputs()">Clear(ESC)</button>
+      </td>
+      <td>
+        <button class="gamebutton"  style="background-color:#00ffff" onclick="cancelbet()">Cancel(F9)</button>
+      </td>
+      <td>
+        <button class="gamebutton"  style="background-color:#00ffff">Report(F4)</button>
+      </td>
+      <td>
+        <button class="gamebutton"   style="background-color:#00ffff" onclick="showstones()" >Stone(F7)</button>
+      </td>
+      <td>
         <button class="gamebutton"   style="background-color:#e8c595">Exit</button>
+      </td>
         
 
-
+      <td>
        <label id="totqt_val">total Qnt:0</label>
+      </td>
+      <td>
        <label id="totamt_val">total Amnt:0</label>
+      </td>
+      </tr>
+      </table>
         </div>
       </div>
     </div>
