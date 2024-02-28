@@ -82,12 +82,6 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-#loginform label {
-  font-size: 12px;
-  color: black;
-
-}
-
 #advance_bet_table td {
   text-align: center;
   border: 1px solid black;
@@ -226,15 +220,6 @@ label {
   }
 }
 
-#loginBtn .loginWrapper .loginBtn {
-  background: #011EFE;
-  color: #fff;
-  border: none;
-  padding: 15px 20px;
-  border-radius: 25px;
-  text-transform: uppercase;
-}
-
 .loginWrapper h1 {
   color: #4d7ae1;
   border-color: #1161ee;
@@ -251,6 +236,7 @@ label {
   color: black;
   text-transform: uppercase;
   text-align: center;
+  width: 100%;
 }
 
 .loginWrapper input {
@@ -273,4 +259,13 @@ label {
   height: 15px;
   margin-right: 10px;
   vertical-align: middle;
+}
+
+.loginWrapper .loginBtn {
+  background: #011EFE;
+  color: #fff;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
+  text-transform: uppercase;
 }
