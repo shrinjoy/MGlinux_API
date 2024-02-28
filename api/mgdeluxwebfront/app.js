@@ -85,15 +85,17 @@ function checklogin() {
     },
   })
     .then(function (res) {
-      document.getElementById("loginform").style = "display:none";
-      document.querySelector("mainContent").style = "display:block";
-      getuserdata(name, pass);
-      setInterval(function () {
-        getuserdata(username, password);
-      }, 1000);
+      if ((res.data.status = "200")) {
+        document.getElementById("loginform").style = "display:none";
+        document.querySelector("mainContent").style = "display:block";
+        getuserdata(name, pass);
+        setInterval(function () {
+          getuserdata(username, password);
+        }, 1000);
 
-      username = name;
-      password = pass;
+        username = name;
+        password = pass;
+      }
     })
     .catch((err) => {
       console.log(err);
