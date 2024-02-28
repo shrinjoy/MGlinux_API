@@ -1,78 +1,92 @@
-#background
-{
+#background {
 
- width: 20%;
- height: 500px;
- position: absolute;
- top: 8%;
- left: 0%;
+  width: 20%;
+  height: 500px;
+  position: absolute;
+  top: 8%;
+  left: 0%;
 }
-#advancebet_show
-{
+
+#advancebet_show {
   border: 1px solid black;
   width: auto;
   height: auto;
   display: none;
   z-index: 100;
-  top:550px;
+  top: 550px;
   left: 20%;
   background-color: white;
   position: absolute;
 }
-#lowerpanel
-{
-    position: absolute;
-   top:890px;
- 
+
+#lowerpanel {
+  position: absolute;
+  top: 890px;
+
   padding-top: 0px;
   border: 0px;
 }
-#lowerpaneltable{
+
+#lowerpaneltable {
   border-collapse: separate;
   border-spacing: 10px;
   padding-left: 10px;
   padding-top: 0px;
   border: 0px;
 }
-#lowerpaneltable td{
+
+#lowerpaneltable td {
   height: 80px;
   min-height: 800px;
-  font-size:1.8dvw;
+  font-size: 1.8dvw;
   border: 0px;
-  
+
 }
+
 #loginform {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: yellow;
   z-index: 900;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column; /* Align content vertically */
+  flex-direction: column;
+  /* Align content vertically */
 }
+
+.loginWrapper {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  max-width: 525px;
+  min-height: 670px;
+  padding: 90px 70px 50px 70px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type=number] {
-    -moz-appearance:textfield;
-}
-#loginform label,
-#loginform input {
-  margin-bottom: 10px;
-  font-size: 3vw; /* Corrected font size unit to vw */
-  border-radius: 20px;
-  border: none;
-  box-shadow: none;
-  left: 50%;
-  width: 50%;
+  -moz-appearance: textfield;
 }
 
-#advance_bet_table td{
+#loginform label {
+  font-size: 12px;
+  color: black;
+
+}
+
+#advance_bet_table td {
   text-align: center;
   border: 1px solid black;
   white-space: nowrap;
@@ -80,8 +94,7 @@ input[type=number] {
 
 
 
-#stone_show
-{
+#stone_show {
   border: 3px solid black;
   position: absolute;
   width: 100%;
@@ -90,49 +103,47 @@ input[type=number] {
   display: none;
   background-color: red;
 }
-#stone_show table{
+
+#stone_show table {
   background-color: red;
 }
 
-#stone_control_box
-{
+#stone_control_box {
   text-align: center;
 }
 
-#card
-{
-  
-    width: 55%;
-    height: 120px;
-    position: absolute;
-    top: 15%;
-    left: 25%;
-    animation: sizeChange 1s infinite alternate ease-in-out;
+#card {
+
+  width: 55%;
+  height: 120px;
+  position: absolute;
+  top: 15%;
+  left: 25%;
+  animation: sizeChange 1s infinite alternate ease-in-out;
 
 }
-#res_sofar_div
-{
- 
-  width:100%;
+
+#res_sofar_div {
+
+  width: 100%;
   height: 250px;
- 
+
   top: 600px;
   left: 20px;
   background-color: red;
 }
-body
-{
-    background-color: yellow;
+
+body {
+  background-color: yellow;
 }
 
 
-#oldresid
-{
-  
+#oldresid {
+
   color: white;
 }
-.oldres
-{
+
+.oldres {
   width: 1%;
   min-width: 40px;
   min-height: 40px;
@@ -144,67 +155,112 @@ body
   padding: 0%;
 
   white-space: nowrap;
-  font-size:large;
+  font-size: large;
   font-weight: bold;
 }
-.tablerow
-{
+
+.tablerow {
   width: 1%;
   white-space: nowrap;
   width: 100%;
-  overflow-x:visible;
+  overflow-x: visible;
 }
-.td_betinp
-{
-  
-    align-content: center;
-    align-items: center;
-    text-align: center; /* Center the content horizontally */
-    vertical-align: middle; /* Center the content vertically */
-    border: 1px solid black;
-   
-   
+
+.td_betinp {
+
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  /* Center the content horizontally */
+  vertical-align: middle;
+  /* Center the content vertically */
+  border: 1px solid black;
+
+
 }
 
 
-label
-{
- 
+label {
+
   font-weight: bolder;
-  font-size:large;
+  font-size: large;
 }
 
-.betinput
-{
-    width: 80%;
-    -moz-appearance: textfield;
-}
-.spacer
-{ display: block;
-    margin-top : 15%; /* Adjust the height as needed */
-    content: ""; /* For styling purposes */
-    border: none; /* Remove default border */
+.betinput {
+  width: 80%;
+  -moz-appearance: textfield;
 }
 
-
-#buttonholder
-{
-    border: 1px solid black;
-    width: 75%;
-   
-    position: absolute;
-    top: 8%;
-    left: 23%;
-    background-color:#47e315;
-
+.spacer {
+  display: block;
+  margin-top: 15%;
+  /* Adjust the height as needed */
+  content: "";
+  /* For styling purposes */
+  border: none;
+  /* Remove default border */
 }
 
 
-  @keyframes sizeChange {
-    from {
-      transform: scaleX(0);
-    }
-    to {
-      transform: scaleX(1);
-    }
+#buttonholder {
+  border: 1px solid black;
+  width: 75%;
+
+  position: absolute;
+  top: 8%;
+  left: 23%;
+  background-color: #47e315;
+
+}
+
+
+@keyframes sizeChange {
+  from {
+    transform: scaleX(0);
   }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+#loginBtn .loginWrapper .loginBtn {
+  background: #011EFE;
+  color: #fff;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
+  text-transform: uppercase;
+}
+
+.loginWrapper h1 {
+  color: #4d7ae1;
+  border-color: #1161ee;
+  padding-bottom: 5px;
+  margin: 0 15px 10px 0;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+  font-size: 22px;
+  text-align: center;
+}
+
+.loginWrapper .inputLabel {
+  font-size: 12px;
+  color: black;
+  text-transform: uppercase;
+}
+
+.loginWrapper input {
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
+  width: 100%;
+  color: black;
+  text-transform: uppercase;
+}
+
+.loginWrapper .keepSignedIn {
+  color: green;
+  font: 600 16px/18px 'Open Sans', sans-serif;
+
+}
