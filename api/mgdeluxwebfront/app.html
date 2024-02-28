@@ -64,13 +64,10 @@
                   required
                 />
               </div>
-              <div
-                class="mt-3 d-flex align-items-center justify-content-center"
-              >
-                <input id="sig" type="checkbox" />
-                <span class="keepSignedIn">Keep me signed in</span>
-              </div>
               <div class="mt-3">
+                <label class="inputLabel mb-3"
+                  >Please enter the number as you see in the image</label
+                >
                 <h1 style="font-weight: bold; text-align: center" id="catchpa">
                   123456
                 </h1>
@@ -79,9 +76,12 @@
                   placeholder="Enter Captcha"
                   required
                 />
-                <label class="inputLabel mt-3"
-                  >Please enter the number as you see in the image</label
-                >
+              </div>
+              <div
+                class="mt-3 d-flex align-items-center justify-content-center"
+              >
+                <input id="sig" type="checkbox" />
+                <span class="keepSignedIn">Keep me signed in</span>
               </div>
               <button class="loginBtn mt-3" onclick="checklogin()">
                 Sign In
