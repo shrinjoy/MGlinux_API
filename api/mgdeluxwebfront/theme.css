@@ -245,9 +245,10 @@ label {
   text-transform: uppercase;
   height: 45px;
   font-size: 14px;
+  outline: none;
 }
 
-.loginWrapper input:active {
+.loginWrapper input:focus {
   border: 2px solid #011EFE;
 }
 
