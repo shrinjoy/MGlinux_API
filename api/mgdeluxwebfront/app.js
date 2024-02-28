@@ -95,7 +95,7 @@ function checklogin() {
         document.getElementById("loginform").style = "display:none";
 
         document.getElementsByClassName("mainContent").style = "display:block";
-document.getElementById("mc").style = "display:block"
+        document.getElementById("mc").style = "display:block"
 
         getuserdata(name, pass);
         setInterval(function () {
