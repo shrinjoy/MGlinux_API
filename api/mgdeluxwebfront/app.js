@@ -14,6 +14,11 @@ var allbottom = 0; //
 var betinputs;
 var totalbet;
 var lastbetbarcode = "";
+
+
+
+document.getElementById("mc").style = "display:none"
+
 for (y = -1; y < 10; y++) {
   var betdata = [];
   var tr = document.createElement("tr");
@@ -90,6 +95,8 @@ function checklogin() {
         document.getElementById("loginform").style = "display:none";
 
         document.getElementsByClassName("mainContent").style = "display:block";
+document.getElementById("mc").style = "display:block"
+
         getuserdata(name, pass);
         setInterval(function () {
           getuserdata(username, password);
