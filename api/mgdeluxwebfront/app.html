@@ -1,181 +1,206 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metro Deluxe</title>
     <style>
-       @keyframes colorChange {
-      0% {
-        color: rgb(47, 0, 255);
+      @keyframes colorChange {
+        0% {
+          color: rgb(47, 0, 255);
+        }
+        50% {
+          color: rgb(87, 52, 241); /* Bright red */
+        }
+        75% {
+          color: rgb(70, 29, 255); /* Bright red */
+        }
+        100% {
+          color: rgb(47, 0, 255);
+        }
       }
-      50% {
-        color: rgb(87, 52, 241); /* Bright red */
-      }
-      75% {
-        color: rgb(70, 29, 255); /* Bright red */
-      }
-      100% {
-        color: rgb(47, 0, 255);
-      }
-    }
     </style>
+    <link rel="stylesheet" href="theme.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   </head>
-  <link rel="stylesheet" href="theme.css" />
-  <link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  />
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  ></script>
   <body>
-    
-      <section id="loginform">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-xl-5">
-              <div class="loginWrapper">
-                <h1 style="width: max-content; border-bottom: 2px solid #1161ee;">
-                  Metro Delux SIGN IN
-                </h1>
-                <div class="mt-3">
-                  <label class="inputLabel">ID</label>
-                  <input placeholder="ENTER ID" id="uID" type="text" required>
-                  <!-- <label style="text-align: center;">or</label> -->
-                </div>
-                <div class="mt-3">
-                  <label class="inputLabel">Username</label>
-                  <input maxlength="5" placeholder="ENTER USERNAME" id="uname" type="text" required>
-                  <label class="d-block text-center" style="color: gray">(case sensitive)</label>
-                </div>
-                <div class="mt-3">
-                  <label class="inputLabel">Password</label>
-                  <input placeholder="ENTER PASSWORD" id="pword" type="text" required>
-                </div>
-                <div class="mt-3 d-flex align-items-center justify-content-center">
-                  <input id="sig" type="checkbox">
-                  <span class="keepSignedIn">Keep me signed in</span>
-                </div>
-                <div class="mt-3">
-                  <h1 style="font-weight: bold; text-align: center;" id="catchpa">123456</h1>
-                  <input style="margin: 0 auto; width: 100%;" placeholder="Enter Captcha" required>
-                  <label class="inputLabel mt-3">Please enter the number as you see in the image</label>
-                </div>
-                <button class="loginBtn mt-3" onclick="checklogin()">Sign In</button>
+    <section id="loginform">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-5 col-9 mx-auto">
+            <div class="loginWrapper">
+              <h1 style="width: max-content; border-bottom: 2px solid #1161ee">
+                Metro Delux SIGN IN
+              </h1>
+              <div class="mt-3">
+                <label class="inputLabel">ID</label>
+                <input placeholder="ENTER ID" id="uID" type="text" required />
+                <!-- <label style="text-align: center;">or</label> -->
               </div>
+              <div class="mt-3">
+                <label class="inputLabel">Username</label>
+                <input
+                  maxlength="5"
+                  placeholder="ENTER USERNAME"
+                  id="uname"
+                  type="text"
+                  required
+                />
+                <label class="d-block text-center" style="color: gray"
+                  >(case sensitive)</label
+                >
+              </div>
+              <div class="mt-3">
+                <label class="inputLabel">Password</label>
+                <input
+                  placeholder="ENTER PASSWORD"
+                  id="pword"
+                  type="text"
+                  required
+                />
+              </div>
+              <div class="mt-3">
+                <label class="inputLabel mb-3"
+                  >Please enter the number as you see in the image</label
+                >
+                <h1 style="font-weight: bold; text-align: center" id="catchpa">
+                  123456
+                </h1>
+                <input
+                  style="margin: 0 auto; width: 100%"
+                  placeholder="Enter Captcha"
+                  required
+                />
+              </div>
+              <div
+                class="mt-3 d-flex align-items-center justify-content-center"
+              >
+                <input id="sig" type="checkbox" />
+                <span class="keepSignedIn">Keep me signed in</span>
+              </div>
+              <button class="loginBtn mt-3" onclick="checklogin()">
+                Sign In
+              </button>
             </div>
           </div>
         </div>
-      </section>
-    
-      <div class="mainContent">
-        <div>
-          <h1>Metro delux</h1>
+      </div>
+    </section>
+
+    <div class="mainContent" style="display: none">
+      <div>
+        <h1>Metro delux</h1>
+        <label
+          style="
+            position: absolute;
+            align-content: center;
+            align-items: center;
+            text-align: center;
+            vertical-align: middle;
+          "
+        >
+          game gift code
+          <br />
           <label
+            id="gameid"
             style="
-              position: absolute;
               align-content: center;
               align-items: center;
               text-align: center;
               vertical-align: middle;
             "
+            >A00</label
           >
-            game gift code
-            <br />
-            <label
-              id="gameid"
-              style="
-                align-content: center;
-                align-items: center;
-                text-align: center;
-                vertical-align: middle;
-              "
-              >A00</label
-            >
-          </label>
+        </label>
+        <label
+          style="
+            position: absolute;
+            left: 20%;
+            align-items: center;
+            text-align: center;
+            vertical-align: middle;
+          "
+        >
+          game time
+          <br />
           <label
+            id="timer"
             style="
-              position: absolute;
-              left: 20%;
+              align-content: center;
               align-items: center;
               text-align: center;
               vertical-align: middle;
             "
+            >0000</label
           >
-            game time
-            <br />
-            <label
-              id="timer"
-              style="
-                align-content: center;
-                align-items: center;
-                text-align: center;
-                vertical-align: middle;
-              "
-              >0000</label
-            >
-          </label>
-          <label
-            style="
-              position: absolute;
-              left: 35%;
-              align-items: center;
-              text-align: center;
-              vertical-align: middle;
-            "
-          >
-            P.No.
-  
-            <label
-              id="username"
-              style="
-                align-content: center;
-                color: red;
-                align-items: center;
-                text-align: center;
-                vertical-align: middle;
-              "
-              >123456789</label
-            >
-          </label>
-          <label
-            id="balance"
-            style="
-              position: absolute;
-              left: 55%;
-              align-items: center;
-              text-align: center;
-              vertical-align: middle;
-            "
-          >
-            00000
-          </label>
-          <label
-            style="
-              position: absolute;
-              left: 70%;
-              align-items: center;
-              text-align: center;
-              vertical-align: middle;
-            "
-          >
-            Time
-            <label
-              id="realtime"
-              style="
-                align-content: center;
-                color: red;
-                align-items: center;
-                text-align: center;
-                vertical-align: middle;
-              "
-              >00:00:00</label
-            >
-          </label>
-        </div>
-      </div>
+        </label>
+        <label
+          style="
+            position: absolute;
+            left: 35%;
+            align-items: center;
+            text-align: center;
+            vertical-align: middle;
+          "
+        >
+          P.No.
 
+          <label
+            id="username"
+            style="
+              align-content: center;
+              color: red;
+              align-items: center;
+              text-align: center;
+              vertical-align: middle;
+            "
+            >123456789</label
+          >
+        </label>
+        <label
+          id="balance"
+          style="
+            position: absolute;
+            left: 55%;
+            align-items: center;
+            text-align: center;
+            vertical-align: middle;
+          "
+        >
+          00000
+        </label>
+        <label
+          style="
+            position: absolute;
+            left: 70%;
+            align-items: center;
+            text-align: center;
+            vertical-align: middle;
+          "
+        >
+          Time
+          <label
+            id="realtime"
+            style="
+              align-content: center;
+              color: red;
+              align-items: center;
+              text-align: center;
+              vertical-align: middle;
+            "
+            >00:00:00</label
+          >
+        </label>
+      </div>
       <div>
         <div id="background">
           <img
-            style="width: 100%; height: 60%;position: relative;"
+            style="width: 100%; height: 60%; position: relative"
             src="./public/background.png"
           />
           <img id="card" src="./public/1.jpeg" />
@@ -188,7 +213,6 @@
                 overflow-x: visible;
                 display: block;
                 background-color: red;
-
               "
               id="res_sofar_table"
             ></table>
@@ -202,85 +226,139 @@
 
       <div id="stone_show">
         <button onclick="showstones()">X</button>
-        <div style="height: 100px;background-color : red;" id="stone_control_box">
+        <div
+          style="height: 100px; background-color: red"
+          id="stone_control_box"
+        >
           <label>Select Date</label>
-          <input id="date" type="date">
+          <input id="date" type="date" />
           <button onclick="showresultbydate()">Show Stone</button>
         </div>
-        <table style="
-        overflow-y: scroll;
-       height: 80%;
-        width: 100%;
-        overflow-x: visible;
-        display: block;
-      " id="stones_table">
-        </table>
+        <table
+          style="
+            overflow-y: scroll;
+            height: 80%;
+            width: 100%;
+            overflow-x: visible;
+            display: block;
+          "
+          id="stones_table"
+        ></table>
       </div>
 
-
       <div id="advancebet_show">
-        <div style="background-color: brown;width: 100%;height: auto;text-align: center;color: white;font-weight: bolder;font-size: larger;">Advance Draw</div>
-        <table id="advance_bet_table">
-          
-        </table>
-        <div style="background-color: brown;width: 100%;height: auto;text-align: center;color: white;font-weight: bolder;font-size: larger;">
-        <button onclick="showadvancebet()" >OK</button><button onclick="hideblock()" >Cancel</button>
+        <div
+          style="
+            background-color: brown;
+            width: 100%;
+            height: auto;
+            text-align: center;
+            color: white;
+            font-weight: bolder;
+            font-size: larger;
+          "
+        >
+          Advance Draw
+        </div>
+        <table id="advance_bet_table"></table>
+        <div
+          style="
+            background-color: brown;
+            width: 100%;
+            height: auto;
+            text-align: center;
+            color: white;
+            font-weight: bolder;
+            font-size: larger;
+          "
+        >
+          <button onclick="showadvancebet()">OK</button
+          ><button onclick="hideblock()">Cancel</button>
         </div>
       </div>
       <div id="lowerpanel">
-        
-        <table style="width: 100%;" id="lowerpaneltable">
+        <table style="width: 100%" id="lowerpaneltable">
           <tr>
             <td>
-        <button class="gamebutton" style="background-color:#e8c595" onclick="buyticket()">F5-Buy</button>
-      </td>
-      <td>
-        <button class="gamebutton"  style="background-color:#00ffff" onclick="showadvancebet()">Advance Draw(F6)</button>
-      </td>
-      <td>
-        <button class="gamebutton"  style="background-color:#00ffff" onclick="clearallinputs()">Clear(ESC)</button>
-      </td>
-      <td>
-        <button class="gamebutton"  style="background-color:#00ffff" onclick="cancelbet()">Cancel(F9)</button>
-      </td>
-      <td>
-        <button class="gamebutton"  style="background-color:#00ffff">Report(F4)</button>
-      </td>
-      <td>
-        <button class="gamebutton"   style="background-color:#00ffff" onclick="showstones()" >Stone(F7)</button>
-      </td>
-      <td>
-        <button class="gamebutton"   style="background-color:#e8c595">Exit</button>
-      </td>
-        
-
-      <td>
-       <label id="totqt_val">total Qnt:0</label>
-      </td>
-      <td>
-       <label id="totamt_val">total Amnt:0</label>
-      </td>
-      </tr>
-      </table>
-        </div>
+              <button
+                class="gamebutton"
+                style="background-color: #e8c595"
+                onclick="buyticket()"
+              >
+                F5-Buy
+              </button>
+            </td>
+            <td>
+              <button
+                class="gamebutton"
+                style="background-color: #00ffff"
+                onclick="showadvancebet()"
+              >
+                Advance Draw(F6)
+              </button>
+            </td>
+            <td>
+              <button
+                class="gamebutton"
+                style="background-color: #00ffff"
+                onclick="clearallinputs()"
+              >
+                Clear(ESC)
+              </button>
+            </td>
+            <td>
+              <button
+                class="gamebutton"
+                style="background-color: #00ffff"
+                onclick="cancelbet()"
+              >
+                Cancel(F9)
+              </button>
+            </td>
+            <td>
+              <button class="gamebutton" style="background-color: #00ffff">
+                Report(F4)
+              </button>
+            </td>
+            <td>
+              <button
+                class="gamebutton"
+                style="background-color: #00ffff"
+                onclick="showstones()"
+              >
+                Stone(F7)
+              </button>
+            </td>
+            <td>
+              <button class="gamebutton" style="background-color: #e8c595">
+                Exit
+              </button>
+            </td>
+            <td>
+              <label id="totqt_val">total Qnt:0</label>
+            </td>
+            <td>
+              <label id="totamt_val">total Amnt:0</label>
+            </td>
+          </tr>
+        </table>
       </div>
-    
+    </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
   <script src="cardanimation.js"></script>
   <script src="app.js"></script>
   <script>
+    document.getElementById("catchpa").innerHTML =
+      Math.floor(Math.random() * (999999 - 300000 + 1)) + 300000;
+    const today = new Date().toISOString().split("T")[0];
 
-    document.getElementById("catchpa").innerHTML=Math.floor(Math.random() * (999999 - 300000 + 1)) + 300000;
- const today = new Date().toISOString().split('T')[0];
-
-// Set the default value of the input to today
-document.getElementById('date').value = today;
-showresultbydate()
-    function hideblock()
-  {
-  document.getElementById("advancebet_show").style="display:none";
-  }
+    // Set the default value of the input to today
+    document.getElementById("date").value = today;
+    showresultbydate();
+    function hideblock() {
+      document.getElementById("advancebet_show").style = "display:none";
+    }
   </script>
 </html>
