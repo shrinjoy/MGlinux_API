@@ -85,9 +85,11 @@ function checklogin() {
     },
   })
     .then(function (res) {
+        
       if ((res.data.status = "200")) {
-        document.getElementById("loginform").remove;
-        document.querySelector("mainContent").style = "display:block";
+        document.getElementById("loginform").style = "display:none";
+
+        document.getElementsByClassName("mainContent").style = "display:block";
         getuserdata(name, pass);
         setInterval(function () {
           getuserdata(username, password);
