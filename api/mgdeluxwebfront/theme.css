@@ -48,7 +48,9 @@
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: yellow;
+  background: url('./public/back_image.png');
+  background-position: center center;
+  background-size: cover;
   z-index: 900;
   display: flex;
   align-items: center;
@@ -238,7 +240,7 @@ label {
   border-color: #1161ee;
   padding-bottom: 5px;
   margin: 0 15px 10px 0;
-  display: inline-block;
+  display: block;
   border-bottom: 2px solid transparent;
   font-size: 22px;
   text-align: center;
@@ -248,6 +250,7 @@ label {
   font-size: 12px;
   color: black;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .loginWrapper input {
@@ -263,4 +266,11 @@ label {
   color: green;
   font: 600 16px/18px 'Open Sans', sans-serif;
 
+}
+
+.loginWrapper #sig {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  vertical-align: middle;
 }
