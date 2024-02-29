@@ -268,6 +268,11 @@ body {
   height: 100vh;
 }
 
+.gameWrapper .headerRow {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .gameWrapper .headerRow h1 {
   color: #CE0B00;
   font-size: 18px;
