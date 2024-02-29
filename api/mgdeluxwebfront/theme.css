@@ -279,8 +279,11 @@ body {
   font-size: 18px;
 }
 
-.gameWrapper .headerRow label {
+.gameWrapper .gameRow .col-3 .headerRow label {
   display: block;
+}
+
+.gameWrapper .headerRow label {
   font-size: 18px;
   font-weight: 700;
 }
