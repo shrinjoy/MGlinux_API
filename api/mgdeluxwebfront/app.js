@@ -101,6 +101,26 @@ function checklogin() {
 
         username = name;
         password = pass;
+
+        function isMobileDevice() {
+          return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          );
+        }
+        function setViewportMetaTag() {
+          var viewportMetaTag = document.createElement("meta");
+          viewportMetaTag.setAttribute("name", "viewport");
+          viewportMetaTag.setAttribute(
+            "content",
+            isMobileDevice()
+              ? "width=device-width, initial-scale=0.1"
+              : "width=device-width, initial-scale=1.0"
+          );
+          document.head.appendChild(viewportMetaTag);
+        }
+        window.onload = function () {
+          setViewportMetaTag();
+        };
       }
     })
     .catch((err) => {
