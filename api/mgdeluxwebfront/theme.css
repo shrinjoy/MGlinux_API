@@ -312,6 +312,7 @@ body {
 .gameRow #betinputpanel label {
   font-size: 12px;
   color: #212124e0;
+  font-weight: 700;
 }
 
 .gameRow .imgWrapper {

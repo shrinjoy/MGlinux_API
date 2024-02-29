@@ -26,7 +26,7 @@ for (y = -1; y < 10; y++) {
     var namelabel = document.createElement("label");
     namelabel.innerHTML = `NR${y}${x}`;
     var br = document.createElement("br");
-    br.setAttribute("class", "spacer");
+    // br.setAttribute("class", "spacer");
 
     var inp = document.createElement("input");
     inp.setAttribute("class", "betinput");
