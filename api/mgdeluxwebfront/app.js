@@ -571,3 +571,11 @@ function cancelbet() {
   lastbetbarcode = "";
 }
 setInterval(timerupdate, 1000);
+
+var viewMode = getCookie("view-mode");
+
+if (viewMode == "desktop") {
+  viewport.setAttribute("content", "width=1024");
+} else if (viewMode == "mobile") {
+  viewport.setAttribute("content", "width=device-width,initial-scale=0.1");
+}
