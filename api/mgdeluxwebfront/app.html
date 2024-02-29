@@ -92,258 +92,176 @@
       </div>
     </section>
 
-    <div id="mc" class="mainContent">
-      <div>
-        <h1>Metro delux</h1>
-        <label
-          style="
-            position: absolute;
-            align-content: center;
-            align-items: center;
-            text-align: center;
-            vertical-align: middle;
-          "
-        >
-          game gift code
-          <br />
-          <label
-            id="gameid"
-            style="
-              align-content: center;
-              align-items: center;
-              text-align: center;
-              vertical-align: middle;
-            "
-            >A00</label
-          >
-        </label>
-        <label
-          style="
-            position: absolute;
-            left: 20%;
-            align-items: center;
-            text-align: center;
-            vertical-align: middle;
-          "
-        >
-          game time
-          <br />
-          <label
-            id="timer"
-            style="
-              align-content: center;
-              align-items: center;
-              text-align: center;
-              vertical-align: middle;
-            "
-            >0000</label
-          >
-        </label>
-        <label
-          style="
-            position: absolute;
-            left: 35%;
-            align-items: center;
-            text-align: center;
-            vertical-align: middle;
-          "
-        >
-          P.No.
+    <section id="mc" class="mainContent">
+      <div class="container-fluid">
+        <div class="row">
+          <div>
+            <h1>Metro delux</h1>
+          </div>
+          <div class="col-2">
+            <label> game gift code </label>
+            <label id="gameid">A00</label>
+          </div>
+          <div class="col-2">
+            <label> game time </label>
+            <label id="timer">0000</label>
+          </div>
+          <div class="col-2">
+            <label> P.No. </label> <label id="username">123456789</label>
+          </div>
+          <div class="col-2"><label id="balance"> 00000 </label></div>
+          <div class="col-2">
+            <label> Time</label> <label id="realtime">00:00:00</label>
+          </div>
 
-          <label
-            id="username"
-            style="
-              align-content: center;
-              color: red;
-              align-items: center;
-              text-align: center;
-              vertical-align: middle;
-            "
-            >123456789</label
-          >
-        </label>
-        <label
-          id="balance"
-          style="
-            position: absolute;
-            left: 55%;
-            align-items: center;
-            text-align: center;
-            vertical-align: middle;
-          "
-        >
-          00000
-        </label>
-        <label
-          style="
-            position: absolute;
-            left: 70%;
-            align-items: center;
-            text-align: center;
-            vertical-align: middle;
-          "
-        >
-          Time
-          <label
-            id="realtime"
-            style="
-              align-content: center;
-              color: red;
-              align-items: center;
-              text-align: center;
-              vertical-align: middle;
-            "
-            >00:00:00</label
-          >
-        </label>
-      </div>
-      <div>
-        <div id="background">
-          <img
-            style="width: 100%; height: 60%; position: relative"
-            src="./public/background.png"
-          />
-          <img id="card" src="./public/1.jpeg" />
-          <div id="res_sofar_div">
+          <div>
+            <div id="background">
+              <img
+                style="width: 100%; height: 60%; position: relative"
+                src="./public/background.png"
+              />
+              <img id="card" src="./public/1.jpeg" />
+              <div id="res_sofar_div">
+                <table
+                  style="
+                    overflow-y: scroll;
+                    height: 170%;
+                    width: 100%;
+                    overflow-x: visible;
+                    display: block;
+                    background-color: red;
+                  "
+                  id="res_sofar_table"
+                ></table>
+              </div>
+            </div>
+
+            <div id="buttonholder">
+              <table id="betinputpanel"></table>
+            </div>
+          </div>
+          <div id="lowerpanel">
+            <table style="width: 100%" id="lowerpaneltable">
+              <tr>
+                <td>
+                  <button
+                    class="gamebutton"
+                    style="background-color: #e8c595"
+                    onclick="buyticket()"
+                  >
+                    F5-Buy
+                  </button>
+                </td>
+                <td>
+                  <button
+                    class="gamebutton"
+                    style="background-color: #00ffff"
+                    onclick="showadvancebet()"
+                  >
+                    Advance Draw(F6)
+                  </button>
+                </td>
+                <td>
+                  <button
+                    class="gamebutton"
+                    style="background-color: #00ffff"
+                    onclick="clearallinputs()"
+                  >
+                    Clear(ESC)
+                  </button>
+                </td>
+                <td>
+                  <button
+                    class="gamebutton"
+                    style="background-color: #00ffff"
+                    onclick="cancelbet()"
+                  >
+                    Cancel(F9)
+                  </button>
+                </td>
+                <td>
+                  <button class="gamebutton" style="background-color: #00ffff">
+                    Report(F4)
+                  </button>
+                </td>
+                <td>
+                  <button
+                    class="gamebutton"
+                    style="background-color: #00ffff"
+                    onclick="showstones()"
+                  >
+                    Stone(F7)
+                  </button>
+                </td>
+                <td>
+                  <button class="gamebutton" style="background-color: #e8c595">
+                    Exit
+                  </button>
+                </td>
+                <td>
+                  <label id="totqt_val">total Qnt:0</label>
+                </td>
+                <td>
+                  <label id="totamt_val">total Amnt:0</label>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div id="stone_show">
+            <button onclick="showstones()">X</button>
+            <div
+              style="height: 100px; background-color: red"
+              id="stone_control_box"
+            >
+              <label>Select Date</label>
+              <input id="date" type="date" />
+              <button onclick="showresultbydate()">Show Stone</button>
+            </div>
             <table
               style="
                 overflow-y: scroll;
-                height: 170%;
+                height: 80%;
                 width: 100%;
                 overflow-x: visible;
                 display: block;
-                background-color: red;
               "
-              id="res_sofar_table"
+              id="stones_table"
             ></table>
           </div>
-        </div>
-
-        <div id="buttonholder">
-          <table id="betinputpanel"></table>
-        </div>
-      </div>
-
-      <div id="stone_show">
-        <button onclick="showstones()">X</button>
-        <div
-          style="height: 100px; background-color: red"
-          id="stone_control_box"
-        >
-          <label>Select Date</label>
-          <input id="date" type="date" />
-          <button onclick="showresultbydate()">Show Stone</button>
-        </div>
-        <table
-          style="
-            overflow-y: scroll;
-            height: 80%;
-            width: 100%;
-            overflow-x: visible;
-            display: block;
-          "
-          id="stones_table"
-        ></table>
-      </div>
-
-      <div id="advancebet_show">
-        <div
-          style="
-            background-color: brown;
-            width: 100%;
-            height: auto;
-            text-align: center;
-            color: white;
-            font-weight: bolder;
-            font-size: larger;
-          "
-        >
-          Advance Draw
-        </div>
-        <table id="advance_bet_table"></table>
-        <div
-          style="
-            background-color: brown;
-            width: 100%;
-            height: auto;
-            text-align: center;
-            color: white;
-            font-weight: bolder;
-            font-size: larger;
-          "
-        >
-          <button onclick="showadvancebet()">OK</button
-          ><button onclick="hideblock()">Cancel</button>
+          <div id="advancebet_show">
+            <div
+              style="
+                background-color: brown;
+                width: 100%;
+                height: auto;
+                text-align: center;
+                color: white;
+                font-weight: bolder;
+                font-size: larger;
+              "
+            >
+              Advance Draw
+            </div>
+            <table id="advance_bet_table"></table>
+            <div
+              style="
+                background-color: brown;
+                width: 100%;
+                height: auto;
+                text-align: center;
+                color: white;
+                font-weight: bolder;
+                font-size: larger;
+              "
+            >
+              <button onclick="showadvancebet()">OK</button
+              ><button onclick="hideblock()">Cancel</button>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="lowerpanel">
-        <table style="width: 100%" id="lowerpaneltable">
-          <tr>
-            <td>
-              <button
-                class="gamebutton"
-                style="background-color: #e8c595"
-                onclick="buyticket()"
-              >
-                F5-Buy
-              </button>
-            </td>
-            <td>
-              <button
-                class="gamebutton"
-                style="background-color: #00ffff"
-                onclick="showadvancebet()"
-              >
-                Advance Draw(F6)
-              </button>
-            </td>
-            <td>
-              <button
-                class="gamebutton"
-                style="background-color: #00ffff"
-                onclick="clearallinputs()"
-              >
-                Clear(ESC)
-              </button>
-            </td>
-            <td>
-              <button
-                class="gamebutton"
-                style="background-color: #00ffff"
-                onclick="cancelbet()"
-              >
-                Cancel(F9)
-              </button>
-            </td>
-            <td>
-              <button class="gamebutton" style="background-color: #00ffff">
-                Report(F4)
-              </button>
-            </td>
-            <td>
-              <button
-                class="gamebutton"
-                style="background-color: #00ffff"
-                onclick="showstones()"
-              >
-                Stone(F7)
-              </button>
-            </td>
-            <td>
-              <button class="gamebutton" style="background-color: #e8c595">
-                Exit
-              </button>
-            </td>
-            <td>
-              <label id="totqt_val">total Qnt:0</label>
-            </td>
-            <td>
-              <label id="totamt_val">total Amnt:0</label>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
+    </section>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
