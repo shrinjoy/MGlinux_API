@@ -270,6 +270,7 @@ body {
 
 .mainContent {
   background-color: yellow;
+
 }
 
 .gameWrapper .headerRow h1 {
@@ -341,4 +342,26 @@ body {
   height: 100%;
   object-fit: contain;
   animation: sizeChange 1s infinite alternate ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 991px) {
+  .mainContent {
+    /* Responsive Code */
+    width: 1366px;
+    height: 100vh;
+    overflow: scroll;
+  }
 }
