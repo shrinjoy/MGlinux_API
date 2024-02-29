@@ -271,7 +271,8 @@ body {
 
 .mainContent {
   background-color: yellow;
-
+  width: 100vw;
+  height: 100vh;
 }
 
 .gameWrapper .headerRow h1 {
