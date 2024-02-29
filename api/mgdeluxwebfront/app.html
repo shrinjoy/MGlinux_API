@@ -94,53 +94,100 @@
 
     <section id="mc" class="mainContent">
       <div class="container-fluid">
-        <div class="row">
-          <div>
-            <h1>Metro delux</h1>
-          </div>
-          <div class="col-2">
-            <label> game gift code </label>
-            <label id="gameid">A00</label>
-          </div>
-          <div class="col-2">
-            <label> game time </label>
-            <label id="timer">0000</label>
-          </div>
-          <div class="col-2">
-            <label> P.No. </label> <label id="username">123456789</label>
-          </div>
-          <div class="col-2"><label id="balance"> 00000 </label></div>
-          <div class="col-2">
-            <label> Time</label> <label id="realtime">00:00:00</label>
+        <div class="gameWrapper">
+          <div class="row headerRow">
+            <div>
+              <h1>Metro delux</h1>
+            </div>
+            <div class="col-2">
+              <div>Game Gift Code</div>
+              <label id="gameid">A00</label>
+            </div>
+            <div class="col-2">
+              <label> Game Time </label>
+              <label id="timer">0000</label>
+            </div>
+            <div class="col-2">
+              <label> P.No. </label> <label id="username">123456789</label>
+            </div>
+            <div class="col-2">
+              <label>Balance</label>
+              <label id="balance"> 00000 </label>
+            </div>
+            <div class="col-2">
+              <label> Time</label> <label id="realtime">00:00:00</label>
+            </div>
           </div>
 
-          <div>
-            <div id="background">
-              <img
-                style="width: 100%; height: 60%; position: relative"
-                src="./public/background.png"
-              />
-              <img id="card" src="./public/1.jpeg" />
-              <div id="res_sofar_div">
-                <table
-                  style="
-                    overflow-y: scroll;
-                    height: 170%;
-                    width: 100%;
-                    overflow-x: visible;
-                    display: block;
-                    background-color: red;
-                  "
-                  id="res_sofar_table"
-                ></table>
+          <div class="row gameRow">
+            <div class="col-3">
+              <div id="background">
+                <img
+                  style="width: 100%; height: 60%; position: relative"
+                  src="./public/background.png"
+                />
+                <img id="card" src="./public/1.jpeg" />
+                <div id="res_sofar_div">
+                  <table
+                    style="
+                      overflow-y: scroll;
+                      height: 170%;
+                      width: 100%;
+                      overflow-x: visible;
+                      display: block;
+                      background-color: red;
+                    "
+                    id="res_sofar_table"
+                  ></table>
+                </div>
               </div>
             </div>
 
-            <div id="buttonholder">
-              <table id="betinputpanel"></table>
+            <div class="col-9">
+              <div id="buttonholder">
+                <table id="betinputpanel"></table>
+              </div>
             </div>
           </div>
-          <div id="lowerpanel">
+
+          <div class="buttonsRow">
+            <div class="btnItem">
+              <button class="gamebutton" onclick="buyticket()">Buy(F5)</button>
+            </div>
+            <div class="btnItem">
+              <button class="gamebutton" onclick="showadvancebet()">
+                Advance Draw(F6)
+              </button>
+            </div>
+            <div class="btnItem">
+              <button class="gamebutton" onclick="clearallinputs()">
+                Clear(ESC)
+              </button>
+            </div>
+            <div class="btnItem">
+              <button class="gamebutton" onclick="cancelbet()">
+                Cancel(F9)
+              </button>
+            </div>
+            <div class="btnItem">
+              <button class="gamebutton">Report(F4)</button>
+            </div>
+            <div class="btnItem">
+              <button class="gamebutton" onclick="showstones()">
+                Stone(F7)
+              </button>
+            </div>
+            <div class="btnItem">
+              <button class="gamebutton">Exit</button>
+            </div>
+            <div class="btnItem">
+              <label id="totqt_val">Total Qty:0</label>
+            </div>
+            <div class="btnItem">
+              <label id="totamt_val">Total Amnt:0</label>
+            </div>
+          </div>
+          <!-- <div id="lowerpanel">
             <table style="width: 100%" id="lowerpaneltable">
               <tr>
                 <td>
@@ -206,7 +253,7 @@
                 </td>
               </tr>
             </table>
-          </div>
+          </div> -->
 
           <div id="stone_show">
             <button onclick="showstones()">X</button>

@@ -19,7 +19,7 @@
   position: absolute;
 }
 
-#lowerpanel {
+/* #lowerpanel {
   position: absolute;
   top: 890px;
 
@@ -41,7 +41,7 @@
   font-size: 1.8dvw;
   border: 0px;
 
-}
+} */
 
 #loginform {
   position: fixed;
@@ -270,4 +270,21 @@ label {
   border-radius: 25px;
   text-transform: uppercase;
   width: 100%;
+}
+
+.mainContent .gameWrapper .headerRow {
+  display: block;
+}
+
+.mainContent .gameWrapper .buttonsRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainContent .gameWrapper .buttonsRow .gamebutton {
+  background-color: rgb(0, 255, 255);
+  color: #212124e0;
+  padding: 5px 15px;
+  height: 40px;
+  font-size: 16px;
 }
