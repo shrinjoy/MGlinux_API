@@ -272,13 +272,24 @@ label {
   width: 100%;
 }
 
+.mainContent {
+  background-color: yellow;
+}
+
+.gameWrapper .headerRow h1 {
+  color: #CE0B00;
+  font-size: 18px;
+}
+
 .gameWrapper .headerRow label {
   display: block;
+  font-size: 14px;
 }
 
 .gameWrapper .buttonsRow {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .gameWrapper .buttonsRow .btnItem {

@@ -101,18 +101,19 @@
             </div>
             <div class="col-2">
               <label>Game Gift Code</label>
-              <label id="gameid">A00</label>
+              <label id="gameid" style="color: blue">A00</label>
             </div>
             <div class="col-2">
               <label> Game Time </label>
               <label id="timer">0000</label>
             </div>
             <div class="col-2">
-              <label> P.No. </label> <label id="username">123456789</label>
+              <label> P.No. </label>
+              <label id="username" style="color: #ce0b00">123456789</label>
             </div>
             <div class="col-2">
               <label>Balance</label>
-              <label id="balance"> 00000 </label>
+              <label id="balance" style="color: #ce0b00"> 00000 </label>
             </div>
             <div class="col-2">
               <label> Time</label> <label id="realtime">00:00:00</label>
@@ -152,7 +153,13 @@
 
           <div class="buttonsRow">
             <div class="btnItem">
-              <button class="gamebutton" onclick="buyticket()">Buy(F5)</button>
+              <button
+                class="gamebutton"
+                onclick="buyticket()"
+                style="background-color: #eac697"
+              >
+                Buy(F5)
+              </button>
             </div>
             <div class="btnItem">
               <button class="gamebutton" onclick="showadvancebet()">
@@ -177,8 +184,10 @@
                 Stone(F7)
               </button>
             </div>
-            <div class="btnItem">
-              <button class="gamebutton">Exit</button>
+            <div class="btnItem" width="60px;">
+              <button class="gamebutton" style="background-color: #eac697">
+                Exit
+              </button>
             </div>
             <div class="btnItem" style="width: max-content">
               <label id="totqt_val">Total Qty: <span>0</span></label>
