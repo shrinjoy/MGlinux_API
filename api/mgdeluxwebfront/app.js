@@ -94,6 +94,14 @@ function checklogin() {
         document.getElementsByClassName("mainContent").style = "display:block";
         document.getElementById("mc").style = "display:block";
 
+        var viewportMetaTag = document.querySelector('meta[name="viewport"]');
+        if (viewportMetaTag) {
+          viewportMetaTag.setAttribute(
+            "content",
+            "width=device-width, initial-scale=0.1"
+          );
+        }
+
         getuserdata(name, pass);
         setInterval(function () {
           getuserdata(username, password);
@@ -101,26 +109,6 @@ function checklogin() {
 
         username = name;
         password = pass;
-
-        function isMobileDevice() {
-          return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          );
-        }
-        function setViewportMetaTag() {
-          var viewportMetaTag = document.createElement("meta");
-          viewportMetaTag.setAttribute("name", "viewport");
-          viewportMetaTag.setAttribute(
-            "content",
-            isMobileDevice()
-              ? "width=device-width, initial-scale=0.1"
-              : "width=device-width, initial-scale=1.0"
-          );
-          document.head.appendChild(viewportMetaTag);
-        }
-        window.onload = function () {
-          setViewportMetaTag();
-        };
       }
     })
     .catch((err) => {
