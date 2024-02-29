@@ -15,9 +15,7 @@ var betinputs;
 var totalbet;
 var lastbetbarcode = "";
 
-
-
-document.getElementById("mc").style = "display:none"
+document.getElementById("mc").style = "display:none";
 
 for (y = -1; y < 10; y++) {
   var betdata = [];
@@ -90,12 +88,11 @@ function checklogin() {
     },
   })
     .then(function (res) {
-        
       if ((res.data.status = "200")) {
         document.getElementById("loginform").style = "display:none";
 
         document.getElementsByClassName("mainContent").style = "display:block";
-        document.getElementById("mc").style = "display:block"
+        document.getElementById("mc").style = "display:block";
 
         getuserdata(name, pass);
         setInterval(function () {
@@ -173,8 +170,10 @@ function inputfieldupdate() {
     }
   }
 
-  document.getElementById("totqt_val").innerHTML = "total Qnt:" + totalbet;
-  document.getElementById("totamt_val").innerHTML = "total Amnt:" + totalbet;
+  document.getElementById("totqt_val").innerHTML =
+    "Total Qnt: <span>" + totalbet + "</span>";
+  document.getElementById("totamt_val").innerHTML =
+    "Total Amnt: <span>" + totalbet + "</span>";
 }
 function buyticket() {
   var datax = [];
