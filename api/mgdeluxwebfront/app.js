@@ -590,8 +590,8 @@ function mobileUIFix(){
       );
     }
     // This sets the Required style for '#buttonholder'
-    var buttonHolder = document.getElementById('buttonholder');
-    buttonHolder.style.width = 'max-content';
+    // var buttonHolder = document.getElementById('buttonholder');
+    // buttonHolder.style.width = 'max-content';
 
     // This sets the Required style for '#res_sofar_div'
     var resSofarDiv = document.getElementById('res_sofar_div');
@@ -599,15 +599,15 @@ function mobileUIFix(){
     resSofarDiv.style.margin = 'auto';
 
     // This sets the Required style for '.betinput'
-    var betInput = document.querySelectorAll('.betinput');
-    betInput.forEach(element => {
-      element.style.width= '75%';
-    });
+    // var betInput = document.querySelectorAll('.betinput');
+    // betInput.forEach(element => {
+    //   element.style.width= '75%';
+    // });
 
     // This sets the Required style for '.td_betinp'
-    var tdBetInp = document.querySelectorAll('.td_betinp');
-    tdBetInp.forEach(element => {
-      element.style.maxWidth= '75px';
-    });
+    // var tdBetInp = document.querySelectorAll('.td_betinp');
+    // tdBetInp.forEach(element => {
+    //   element.style.maxWidth= '75px';
+    // });
   }
 }
