@@ -9,13 +9,13 @@
 
 #advancebet_show {
   border: 1px solid black;
-  width: 80%;
+  width: 55%;
   height: 665px;
   display: none;
   z-index: 100;
   top: 80px;
-  left: 50%;
-  transform: translate(-50%);
+  left: 80px;
+  /* transform: translate(-50%); */
   background-color: white;
   position: absolute;
 }
