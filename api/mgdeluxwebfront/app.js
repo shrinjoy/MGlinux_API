@@ -595,7 +595,7 @@ function mobileUIFix(){
 
     // This sets the Required style for '#res_sofar_div'
     var resSofarDiv = document.getElementById('res_sofar_div');
-    resSofarDiv.style.width = '85%';
+    resSofarDiv.style.width = '95%';
     resSofarDiv.style.margin = 'auto';
 
     // This sets the Required style for '.betinput'
