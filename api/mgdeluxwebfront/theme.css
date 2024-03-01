@@ -396,17 +396,17 @@ body {
     height: 100%;
   }
 
-  .td_betinp{
+  /* .td_betinp{
     max-width: 75px;
-  }
-  .betinput{
+  } */
+  /* .betinput{
     width: 65%;
-  }
-  #buttonholder{
+  } */
+  /* #buttonholder{
     width: max-content;
-  }
-  #res_sofar_div{
+  } */
+  /* #res_sofar_div{
     margin: auto;
     width: 85%;
-  }
+  } */
 }

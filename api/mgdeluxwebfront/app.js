@@ -94,13 +94,7 @@ function checklogin() {
         document.getElementsByClassName("mainContent").style = "display:block";
         document.getElementById("mc").style = "display:block";
 
-        var viewportMetaTag = document.querySelector('meta[name="viewport"]');
-        if (viewportMetaTag) {
-          viewportMetaTag.setAttribute(
-            "content",
-            "width=device-width, initial-scale=0.1"
-          );
-        }
+        mobileUIFix();
 
         getuserdata(name, pass);
         setInterval(function () {
@@ -582,3 +576,38 @@ function cancelbet() {
   lastbetbarcode = "";
 }
 setInterval(timerupdate, 1000);
+
+
+function mobileUIFix(){
+  x = window.matchMedia("(max-width: 991px)");
+  if (x.matches){
+    // This sets the Required Meta Tag
+    var viewportMetaTag = document.querySelector('meta[name="viewport"]');
+    if (viewportMetaTag) {
+      viewportMetaTag.setAttribute(
+        "content",
+        "width=device-width, initial-scale=0.1"
+      );
+    }
+    // This sets the Required style for '#buttonholder'
+    var buttonHolder = document.getElementById('buttonholder');
+    buttonHolder.style.width = 'max-content';
+
+    // This sets the Required style for '#res_sofar_div'
+    var resSofarDiv = document.getElementById('res_sofar_div');
+    resSofarDiv.style.width = '85%';
+    resSofarDiv.style.margin = 'auto';
+
+    // This sets the Required style for '.betinput'
+    var betInput = document.querySelectorAll('.betinput');
+    betInput.forEach(element => {
+      element.style.width= '65%';
+    });
+
+    // This sets the Required style for '.td_betinp'
+    var tdBetInp = document.querySelectorAll('.td_betinp');
+    tdBetInp.forEach(element => {
+      element.style.maxWidth= '75px';
+    });
+  }
+}
