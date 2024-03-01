@@ -355,7 +355,7 @@ function showresultbydate() {
       for (var key in parsedData) {
         if (parsedData.hasOwnProperty(key)) {
           var gameidname = document.createElement("td");
-          var gameresultname = document.createElement("td");
+          // var gameresultname = document.createElement("td");
           var textWrapper = document.createElement("div");
           var textWrapper2 = document.createElement("div");
           // gameidname.innerHTML = key;
@@ -368,9 +368,9 @@ function showresultbydate() {
           textWrapper2.setAttribute("id", "oldresid");
           //gameidname.setAttribute("rowspan","1")
           // gameresultname.innerHTML = "NR" + parsedData[key];
-          gameresultname.setAttribute("class", "oldres");
+          // gameresultname.setAttribute("class", "oldres");
           // gameresultname.setAttribute("id", "oldresid");
-          gameidname.append(gameresultname);
+          // gameidname.append(gameresultname);
 
           tablerow.append(gameidname);
           count += 1;

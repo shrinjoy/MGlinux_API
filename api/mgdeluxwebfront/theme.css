@@ -369,7 +369,9 @@ body {
   object-fit: contain;
   animation: sizeChange 1s infinite alternate ease-in-out;
 }
-
+#stones_table #oldresid{
+  border-top: 1px solid black;
+}
 
 
 
