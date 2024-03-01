@@ -601,7 +601,7 @@ function mobileUIFix(){
     // This sets the Required style for '.betinput'
     var betInput = document.querySelectorAll('.betinput');
     betInput.forEach(element => {
-      element.style.width= '65%';
+      element.style.width= '75%';
     });
 
     // This sets the Required style for '.td_betinp'
