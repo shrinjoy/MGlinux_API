@@ -356,13 +356,20 @@ function showresultbydate() {
         if (parsedData.hasOwnProperty(key)) {
           var gameidname = document.createElement("td");
           var gameresultname = document.createElement("td");
-          gameidname.innerHTML = key;
+          var textWrapper = document.createElement("div");
+          var textWrapper2 = document.createElement("div");
+          // gameidname.innerHTML = key;
           //rowspan="1" colspan="2"
           gameidname.setAttribute("class", "oldres");
+          gameidname.append(textWrapper);
+          textWrapper.innerHTML = key;
+          gameidname.append(textWrapper2);
+          textWrapper2.innerHTML = "NR" + parsedData[key];
+          textWrapper2.setAttribute("id", "oldresid");
           //gameidname.setAttribute("rowspan","1")
-          gameresultname.innerHTML = "NR" + parsedData[key];
+          // gameresultname.innerHTML = "NR" + parsedData[key];
           gameresultname.setAttribute("class", "oldres");
-          gameresultname.setAttribute("id", "oldresid");
+          // gameresultname.setAttribute("id", "oldresid");
           gameidname.append(gameresultname);
 
           tablerow.append(gameidname);

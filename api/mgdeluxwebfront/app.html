@@ -172,6 +172,9 @@
                 <div class="col-2">
                   <label> Time</label> <label id="realtime">00:00:00</label>
                 </div>
+                <div class="col-2 me-auto">
+                  <button class="background-color: red">Change Password</button>
+                </div>
               </div>
               <div id="buttonholder">
                 <table id="betinputpanel"></table>
@@ -179,8 +182,8 @@
             </div>
           </div>
 
-          <div class="buttonsRow">
-            <div class="btnItem">
+          <div class="buttonsRow" style="margin-left: 10px;">
+            <div class="btnItem" style="width: 200px;">
               <button
                 class="gamebutton"
                 onclick="buyticket()"
@@ -293,14 +296,14 @@
           </div> -->
 
           <div id="stone_show">
-            <button onclick="showstones()">X</button>
+            <button onclick="showstones()" style="position: absolute;right: 0;top: 0;">X</button>
             <div
-              style="height: 50px; background-color: red"
+              style="background-color: red;padding: 25px 0; margin-bottom: 30px;"
               id="stone_control_box"
             >
-              <label>Select Date</label>
+              <label class="text-white">Select Date</label>
               <input id="date" type="date" />
-              <button onclick="showresultbydate()">Show Stone</button>
+              <button onclick="showresultbydate()" style="border-radius: 5px; background-color: #fff;">Show Stone</button>
             </div>
             <table
               style="
