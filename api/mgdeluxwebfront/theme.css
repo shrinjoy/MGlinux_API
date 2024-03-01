@@ -9,14 +9,19 @@
 
 #advancebet_show {
   border: 1px solid black;
-  width: auto;
-  height: auto;
+  width: 80%;
+  height: 665px;
   display: none;
   z-index: 100;
-  top: 550px;
-  left: 20%;
+  top: 80px;
+  left: 50%;
+  transform: translate(-50%);
   background-color: white;
   position: absolute;
+}
+#advance_bet_table{
+  width: 100%;
+  height: 600px;
 }
 
 /* #lowerpanel {
