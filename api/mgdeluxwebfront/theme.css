@@ -396,4 +396,8 @@ body {
   #buttonholder{
     width: max-content;
   }
+  #res_sofar_div{
+    margin: auto;
+    width: 85%;
+  }
 }
