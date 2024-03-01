@@ -276,9 +276,10 @@ function loadallpossiblefuturebets() {
                   tablerow = document.createElement("tr");
                 }
                 var td = document.createElement("td");
-                var tdText = document.createElement("label"); // remove if necessary
-                tdText.innerHTML = key; // remove if necessary
-                td.append(tdText); // remove if necessary
+                td.innerHTML = key;
+                // var tdText = document.createElement("label"); // remove if necessary
+                // tdText.innerHTML = key; // remove if necessary
+                // td.append(tdText); // remove if necessary
                 var inp = document.createElement("input");
                 inp.setAttribute("type", "checkbox");
                 inp.setAttribute("id", `${key}`);
