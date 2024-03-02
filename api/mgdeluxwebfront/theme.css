@@ -19,11 +19,13 @@
   background-color: white;
   position: absolute;
 }
-#advance_bet_table{
+
+#advance_bet_table {
   width: 100%;
   height: 600px;
 }
-#advance_bet_table td label{
+
+#advance_bet_table td label {
   width: 50px;
   font-weight: 500;
 }
@@ -129,7 +131,7 @@ input[type=number] {
 
 #res_sofar_div {
   width: 100%;
-  height: 345px;
+  height: 445px;
   background-color: red;
   /* position: relative;
   top: 40px; */
@@ -370,7 +372,7 @@ body {
   animation: sizeChange 1s infinite alternate ease-in-out;
 }
 
-#stones_table .oldres div{
+#stones_table .oldres div {
   padding: 10px 0;
   border: 1px solid black;
 }
