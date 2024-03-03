@@ -40,10 +40,13 @@ for (y = -1; y < 10; y++) {
       inputfieldupdate();
     });
     if (x === -1 || y === -1) {
+
+
+     
       //blocks are all bet inputs
       namelabel.innerHTML = "&nbsp";
       td.append(namelabel);
-
+      inp.setAttribute("data-oldall",0)
       if (x == -1) {
         inp.setAttribute("id", `B${y}`);
       }
@@ -114,6 +117,11 @@ function checklogin() {
 function allfieldbetplace(thisid) {
   let inputValue = parseInt(document.getElementById(thisid).value);
 
+
+  //data-oldall
+
+
+
   if (isNaN(inputValue) || inputValue < 0) {
     document.getElementById(thisid).value = ""; // Clear the input
   }
@@ -126,6 +134,7 @@ function allfieldbetplace(thisid) {
       document.getElementById(idinp).value =
         (parseInt(document.getElementById(thisid).value) || 0) +
         (parseInt(document.getElementById(idinp).value) || 0);
+        document.getElementById(idinp).value -=( parseInt( document.getElementById(thisid).getAttribute("data-oldall")||0))
     }
     //("top");
   }
@@ -147,9 +156,17 @@ function allfieldbetplace(thisid) {
       document.getElementById(idinp).value =
         (parseInt(document.getElementById(thisid).value) || 0) +
         (parseInt(document.getElementById(idinp).value) || 0);
+        document.getElementById(idinp).value -=( parseInt( document.getElementById(thisid).getAttribute("data-oldall")||0))
     }
   }
+
+  
+
+
   inputfieldupdate();
+  
+  document.getElementById(thisid).setAttribute("data-oldall", document.getElementById(thisid).value);
+  
   //(betdata[0],betdata[1]);
 }
 function inputfieldupdate() {
@@ -167,6 +184,10 @@ function inputfieldupdate() {
       if (isNaN(inputValue) || inputValue < 0) {
         inputElement.value = ""; // Clear the input
       }
+
+
+
+      inputElement.setAttribute("data-old",inputElement.value);
       // Add the valid number to totalbet
       totalbet += inputValue;
     }
