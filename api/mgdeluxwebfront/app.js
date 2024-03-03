@@ -181,7 +181,7 @@ function inputfieldupdate() {
       // Get the value and parse it to an integer, or use 0 if not a valid number
       let inputValue = parseInt(inputElement.value) || 0;
 
-      if (isNaN(inputValue) || inputValue < 0) {
+      if (isNaN(inputValue) || inputValue <= 0) {
         inputElement.value = ""; // Clear the input
       }
 
@@ -582,7 +582,11 @@ function clearallinputs() {
 
   inputnumberbox.forEach((e) => {
     e.value = null;
+    e.setAttribute("data-oldall",0);
+  
   });
+
+
   inputfieldupdate();
 }
 function cancelbet() {
