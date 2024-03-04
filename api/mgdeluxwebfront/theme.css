@@ -472,8 +472,6 @@ body {
 .reportPanel .playDetails th{
   background-color: brown;
   padding: 20px 5px;
-}
-.reportPanel .playDetails th td{
   color: #fff;
   border-left: 1px solid #fff;
 }
