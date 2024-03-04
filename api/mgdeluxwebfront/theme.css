@@ -155,6 +155,25 @@ body {
   color: white;
 }
 
+
+
+
+
+@keyframes popup_slide
+{
+  from
+  {
+    left: 25%;
+  }
+  to
+  {
+    left: 225%;
+  }
+ 
+}
+
+
+
 .oldres {
   width: 150px;
   /* width: 1%;
@@ -475,4 +494,62 @@ body {
   color: #fff;
   border-left: 1px solid #fff;
   text-align: center;
+}
+#popup
+{
+  position: absolute;
+  z-index: 1000;
+ background-color: green;
+ display: none;
+ top: 25%;
+ left: 25%;
+ width: 50%;
+ height: 10%;
+ text-align: center;
+ align-items: center;
+ justify-content: center;
+ color: white;
+ font-weight: bolder;
+ font-size: 2vh;
+
+}
+#popup_notif_show
+{
+  position: absolute;
+  z-index: 1000;
+ background-color: green;
+ display: flex;
+ top: 25%;
+ left: 25%;
+ width: 50%;
+ height: 10%;
+ text-align: center;
+ align-items: center;
+ justify-content: center;
+ color: white;
+ font-weight: bolder;
+ font-size: 2vh;
+
+
+}
+
+#popup_notif_slide
+{
+  position: absolute;
+  z-index: 1000;
+ background-color: green;
+ display: flex;
+ top: 25%;
+ left: 25%;
+ width: 50%;
+ height: 10%;
+ text-align: center;
+ align-items: center;
+ justify-content: center;
+ color: white;
+ font-weight: bolder;
+ font-size: 2vh;
+
+animation:  popup_slide 1s forwards;
+    
 }

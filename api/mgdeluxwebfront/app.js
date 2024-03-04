@@ -107,9 +107,35 @@ function checklogin() {
     })
     .catch((err) => {
       console.log(err);
-      alert("wrong username or password");
+      showpopup("Wrong username or password","red");
     });
 }
+
+
+async function  showpopup(popuptext,popupcolor)
+{
+
+
+
+
+
+var popup = document.getElementById("popup")
+
+document.getElementById("popup_msg").innerHTML=popuptext;
+popup.style = `background-color:${popupcolor}`
+
+popup.setAttribute("id","popup_notif_show")
+await new Promise(resolve => setTimeout(resolve, 200));
+
+popup.setAttribute("id","popup_notif_slide")
+await new Promise(resolve => setTimeout(resolve, 500));
+popup.setAttribute("id","popup")
+
+
+
+
+}
+
 
 function allfieldbetplace(thisid) {
   let inputValue = parseInt(document.getElementById(thisid).value);
@@ -178,6 +204,10 @@ function inputfieldupdate() {
     "Total Amnt: <span>" + totalbet + "</span>";
 }
 function buyticket() {
+
+
+
+  if(totalbet>0){
   var datax = [];
   for (y = 0; y < 10; y++) {
     for (x = 0; x < 10; x++) {
@@ -212,12 +242,18 @@ function buyticket() {
       .then(function (res) {
         //("placed bet in id:"+e.toString());
         //(res["data"]["barcode"]);
+       
         lastbetbarcode = res["data"]["barcode"];
         getuserdata(username, password);
+        showpopup("Transaction Succesfull","green");//popup_function
+       datax = null;
+       totalbet = 0;
       })
       .catch(function (err) {
         alert(err);
         getuserdata(username, password);
+        showpopup("Transaction Failed","green");//popup_function
+
       });
   });
   var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -231,7 +267,12 @@ function buyticket() {
   bettingID = [];
   bettingID.push(currentid);
   clearallinputs();
+  }
+  else
+  {
+    showpopup("Transaction Failed","green");//popup_function
 
+  }
   /**/
 }
 function loadallpossiblefuturebets() {
@@ -579,7 +620,8 @@ function cancelbet() {
       getuserdata(username, password);
     })
     .catch((err) => {
-      alert("no ticket with code-" + lastbetbarcode + "   found");
+      showpopup("No tickets to cancel","green");//popup_function
+
       getuserdata(username, password);
     });
   lastbetbarcode = "";
