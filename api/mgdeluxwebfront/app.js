@@ -620,3 +620,14 @@ function mobileUIFix(){
     // });
   }
 }
+
+function togglePopup(e){
+  var wrapper = document.querySelector(`[wrapper-id='${e}']`);
+  var wrapperStyles = getComputedStyle();
+
+  if (wrapperStyles.display === 'none'){
+    wrapper.style.display = 'block';
+  } else{
+    wrapper.style.display = 'none';
+  }
+}

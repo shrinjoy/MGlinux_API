@@ -193,7 +193,7 @@
               </button>
             </div>
             <div class="btnItem">
-              <button class="gamebutton" onclick="showadvancebet()">
+              <button class="gamebutton" onclick="togglePopup(1)">
                 Advance Draw(F6)
               </button>
             </div>
@@ -208,10 +208,10 @@
               </button>
             </div>
             <div class="btnItem">
-              <button class="gamebutton">Report(F4)</button>
+              <button class="gamebutton" onclick="togglePopup(2)">Report(F4)</button>
             </div>
             <div class="btnItem">
-              <button class="gamebutton" onclick="showstones()">
+              <button class="gamebutton" onclick="togglePopup(3)">
                 Stone(F7)
               </button>
             </div>
@@ -295,8 +295,8 @@
             </table>
           </div> -->
 
-          <div id="stone_show">
-            <button onclick="showstones()" style="position: absolute;right: 0;top: 0;">X</button>
+          <div id="stone_show" wrapper-id="3">
+            <button onclick="togglePopup(3)" style="position: absolute;right: 0;top: 0;">X</button>
             <div
               style="background-color: red;padding: 25px 0; margin-bottom: 30px;"
               id="stone_control_box"
@@ -316,7 +316,7 @@
               id="stones_table"
             ></table>
           </div>
-          <div id="advancebet_show">
+          <div id="advancebet_show" wrapper-id="1">
             <div
               style="
                 background-color: brown;
@@ -344,8 +344,8 @@
                 padding: 10px 0;
               "
             >
-              <button onclick="showadvancebet()">OK</button>
-              <button onclick="hideblock()">Cancel</button>
+              <button onclick="togglePopup(1)">OK</button>
+              <button onclick="togglePopup(1)">Cancel</button>
             </div>
           </div>
         </div>
