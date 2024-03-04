@@ -14,7 +14,7 @@
   display: none;
   z-index: 100;
   top: 80px;
-  left: 80px;
+  left: 35px;
   /* transform: translate(-50%); */
   background-color: white;
   position: absolute;
@@ -295,9 +295,6 @@ body {
   background-color: #fffb00;
   width: 100vw;
   height: 100vh;
-}
-.gameWrapper{
-  border: 1px solid red;
 }
 .gameWrapper .headerRow {
   display: flex;
