@@ -9,8 +9,8 @@
 
 #advancebet_show {
   border: 1px solid black;
-  width: 55%;
-  height: 665px;
+  width: 95%;
+  height: auto;
   display: none;
   z-index: 100;
   top: 80px;
@@ -101,10 +101,11 @@ input[type=number] {
 #stone_show {
   border: 1px solid black;
   position: absolute;
-  top: 80px;
-  left: 80px;
-  width: auto;
-  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95vw;
+  height: 95vh;
   z-index: 300;
   display: none;
   background-color: yellow;

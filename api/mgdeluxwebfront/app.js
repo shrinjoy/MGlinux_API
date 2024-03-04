@@ -454,7 +454,9 @@ function getAllResultsSoFar() {
         if (parsedData.hasOwnProperty(key)) {
           var gameidname = document.createElement("td");
           var gameresultname = document.createElement("td");
-          gameidname.innerHTML = key;
+          var randoLab = document.createElement('label');
+          randoLab.innerHTML = key;
+          gameidname.append(randoLab);
           //rowspan="1" colspan="2"
           gameidname.setAttribute("class", "oldres");
           //gameidname.setAttribute("rowspan","1")
