@@ -553,3 +553,15 @@ body {
 animation:  popup_slide 1s forwards;
     
 }
+@keyframes popup_slide
+{
+  from
+  {
+    left: 25%;
+  }
+  to
+  {
+    left: 225%;
+  }
+ 
+}
