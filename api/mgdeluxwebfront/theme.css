@@ -461,3 +461,10 @@ body {
   background-color: #fff;
   /* display: none; */
 }
+
+.reportPanel .nav {
+      display: block;
+      padding-left: inherit;
+      margin-bottom: inherit;
+      list-style: inherit;
+}
