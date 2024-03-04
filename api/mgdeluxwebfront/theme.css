@@ -19,11 +19,13 @@
   background-color: white;
   position: absolute;
 }
-#advance_bet_table{
+
+#advance_bet_table {
   width: 100%;
   height: 600px;
 }
-#advance_bet_table td label{
+
+#advance_bet_table td label {
   width: 50px;
   font-weight: 500;
 }
@@ -183,7 +185,11 @@ body {
 }
 
 .betinput {
+<<<<<<< HEAD
   width: 75%;
+=======
+  width: 55%;
+>>>>>>> 985c86d1865f6248602c775daa8cd13a1196dc89
   border-radius: 4px;
   border: 1px solid #454545;
   margin-bottom: 5px;
@@ -322,7 +328,7 @@ body {
 }
 
 .gameWrapper .buttonsRow .btnItem label {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
 }
 
@@ -340,7 +346,7 @@ body {
 }
 
 .gameRow #betinputpanel label {
-  font-size: 15px;
+  font-size: 18px;
   color: #212124;
   font-weight: 700;
 }
@@ -373,7 +379,7 @@ body {
   animation: sizeChange 1s infinite alternate ease-in-out;
 }
 
-#stones_table .oldres div{
+#stones_table .oldres div {
   padding: 10px 0;
   border: 1px solid black;
 }
