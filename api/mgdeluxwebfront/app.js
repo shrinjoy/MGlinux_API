@@ -623,7 +623,7 @@ function mobileUIFix(){
 
 function togglePopup(e){
   var wrapper = document.querySelector(`[data-id='${e}']`);
-  var wrapperStyles = getComputedStyle();
+  var wrapperStyles = getComputedStyle(wrapper);
 
   if (wrapperStyles.display === 'none'){
     wrapper.style.display = 'block';
