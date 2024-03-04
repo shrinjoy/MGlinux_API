@@ -112,29 +112,6 @@ function checklogin() {
 }
 
 
-async function  showpopup(popuptext,popupcolor)
-{
-
-
-
-
-
-var popup = document.getElementById("popup")
-
-document.getElementById("popup_msg").innerHTML=popuptext;
-popup.style = `background-color:${popupcolor}`
-
-popup.setAttribute("id","popup_notif_show")
-await new Promise(resolve => setTimeout(resolve, 200));
-
-popup.setAttribute("id","popup_notif_slide")
-await new Promise(resolve => setTimeout(resolve, 500));
-popup.setAttribute("id","popup")
-
-
-
-
-}
 
 
 function allfieldbetplace(thisid) {
@@ -672,4 +649,29 @@ function togglePopup(e){
   } else{
     wrapper.style.display = 'none';
   }
+}
+
+
+async function  showpopup(popuptext,popupcolor)
+{
+
+
+
+
+
+var popup = document.getElementById("popup")
+
+document.getElementById("popup_msg").innerHTML=popuptext;
+popup.style = `background-color:${popupcolor}`
+
+popup.setAttribute("id","popup_notif_show")
+await new Promise(resolve => setTimeout(resolve, 200));
+
+popup.setAttribute("id","popup_notif_slide")
+await new Promise(resolve => setTimeout(resolve, 500));
+popup.setAttribute("id","popup")
+
+
+
+
 }
