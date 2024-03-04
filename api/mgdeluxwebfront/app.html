@@ -173,7 +173,7 @@
                   <label> Time :</label> <label id="realtime">&nbsp;&nbsp;00:00:00</label>
                 </div>
                 <div class="col-3 text-end">
-                  <button class="text-white border-0" style="background-color: red">Change Password</button>
+                  <button class="text-white border-0" style="background-color: red" onclick="togglePopup(4)">Change Password</button>
                 </div>
               </div>
               <div id="buttonholder">
@@ -348,7 +348,7 @@
               <button onclick="togglePopup(1)">Cancel</button>
             </div>
           </div>
-          <div class="changePassword" data-id="3" onclick="togglePopup(3)">
+          <div class="changePassword" data-id="3">
             <div
               style="
                 background-color: brown;
@@ -363,7 +363,7 @@
               "
             >
               <label class="text-white">Change Password</label>
-              <div style="position:absolute; right: 0; top: 0;"><button onclick="togglePopup(3)">X</button></div>
+              <div style="position:absolute; right: 0; top: 0;"><button onclick="togglePopup(4)">X</button></div>
             </div>
             <div>
               <form action="#" class="p-3">
