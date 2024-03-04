@@ -30,7 +30,7 @@
   </head>
   <body>
     <section id="loginform">
-      <div class="container-fluid" style="border-bottom: 1px solid red;">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-xl-5 col-9 mx-auto">
             <div class="loginWrapper">
@@ -93,7 +93,7 @@
     </section>
 
     <section id="mc" class="mainContent">
-      <div class="container-fluid">
+      <div class="container-fluid" style="border-bottom: 1px solid red;">
         <div class="gameWrapper">
           <div class="row headerRow">
             <!-- <div>
@@ -192,7 +192,7 @@
                 Buy(F5)
               </button>
             </div>
-            <div class="btnItem">
+            <div class="btnItem" style="width: 180px;">
               <button class="gamebutton" onclick="togglePopup(1)">
                 Advance Draw(F6)
               </button>
@@ -346,6 +346,41 @@
             >
               <button onclick="togglePopup(1)">OK</button>
               <button onclick="togglePopup(1)">Cancel</button>
+            </div>
+          </div>
+          <div class="changePassword">
+            <div
+              style="
+                background-color: brown;
+                width: 100%;
+                height: auto;
+                text-align: left;
+                color: white;
+                font-weight: bolder;
+                font-size: larger;
+                padding: 5px 0;
+              "
+            >
+              <label class="text-white">Change Password:-</label>
+              
+              <form action="#">
+                <div>
+                  <label for="">Enter Current Password:-</label>
+                  <input type="text" class="gameInputText">
+                </div>
+                <div>
+                  <label for="">Enter New Password:-</label>
+                  <input type="text" class="gameInputText">
+                </div>
+                <div>
+                  <label for="">Re-Enter Password:-</label>
+                  <input type="text" class="gameInputText">
+                </div>
+                <div>
+                  <button type="submit">Submit</button>
+                </div>
+              </form>
+              
             </div>
           </div>
         </div>
