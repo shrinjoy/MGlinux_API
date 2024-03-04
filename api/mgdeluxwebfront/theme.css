@@ -9,12 +9,12 @@
 
 #advancebet_show {
   border: 1px solid black;
-  width: 55%;
-  height: 665px;
+  width: 95%;
+  height: auto;
   display: none;
   z-index: 100;
   top: 80px;
-  left: 80px;
+  left: 35px;
   /* transform: translate(-50%); */
   background-color: white;
   position: absolute;
@@ -101,10 +101,11 @@ input[type=number] {
 #stone_show {
   border: 1px solid black;
   position: absolute;
-  top: 80px;
-  left: 80px;
-  width: auto;
-  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95vw;
+  height: 95vh;
   z-index: 300;
   display: none;
   background-color: yellow;
@@ -131,11 +132,17 @@ input[type=number] {
 
 #res_sofar_div {
   width: 100%;
-  height: 575px;
+  height: 29vh;
   background-color: red;
   /* position: relative;
   top: 40px; */
 }
+ #res_sofar_table .oldres label{
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
 
 
 body {
@@ -152,7 +159,8 @@ body {
   width: 150px;
   /* width: 1%;
   min-width: 40px; */
-  min-height: 40px;
+  /* min-height: 40px; */
+  height: 45px;
   text-align: center;
   border: 1px solid black;
 
@@ -184,11 +192,18 @@ body {
 }
 
 .betinput {
-  width: 55%;
+  width: 75%;
   border-radius: 4px;
   border: 1px solid #454545;
   margin-bottom: 5px;
   -moz-appearance: textfield;
+  height: 40px;
+  font-size: 28px;
+}
+.gameInputText{
+  border: 1px solid #45454575;
+  font-size: 18px;
+  width: 200px;
 }
 
 .spacer {
@@ -204,6 +219,7 @@ body {
 
 #buttonholder {
   border: 1px solid black;
+  height: 40vh;
   /* width: 75%; */
   /* position: absolute; */
   /* top: 8%; */
@@ -285,7 +301,6 @@ body {
   width: 100vw;
   height: 100vh;
 }
-
 .gameWrapper .headerRow {
   display: flex;
   justify-content: flex-start;
@@ -332,26 +347,26 @@ body {
 .gameWrapper .buttonsRow .gamebutton {
   background-color: rgb(0, 255, 255);
   color: #212124e0;
-  padding: 5px 5px;
+  /* padding: 5px 5px; */
   height: 40px;
   font-size: 16px;
   width: 100%;
 }
 
 .gameRow #betinputpanel label {
-  font-size: 18px;
+  font-size: 28px;
   color: #212124;
   font-weight: 700;
 }
 
 .gameRow .imgWrapper {
-  width: 250px;
-  height: 240px;
+  width: 280px;
+  height: 315px;
   overflow: hidden;
 }
 
 .gameRow .imgWrapper img {
-  object-fit: cover;
+  object-fit: unset;
   width: 100%;
   height: 100%;
 }
@@ -396,13 +411,18 @@ body {
     overflow: scroll;
   } */
   .gameRow .imgWrapper {
-    width: 100%;
-    height: 175px;
+    width: 280px;
+    height: 315px;
+    overflow: hidden;
   }
 
   .gameRow .imgWrapper2 {
     width: 100%;
     height: 100%;
+  }
+
+  .gameRow .imgWrapper img{
+    object-fit: unset !important;
   }
 
   /* .td_betinp{
@@ -418,4 +438,41 @@ body {
     margin: auto;
     width: 85%;
   } */
+}
+
+.changePassword{
+  width: 95vw;
+  height: 95vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  display: none;
+}
+
+.reportPanel{
+  width: 95vw;
+  height: 95vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  display: none;
+}
+
+.reportPanel .nav {
+      display: block;
+      padding-left: 65px;
+      padding-top: 15px;
+      list-style: inherit;
+}
+
+.reportPanel .playDetails th{
+  background-color: brown;
+  padding: 50px 5px;
+  color: #fff;
+  border-left: 1px solid #fff;
+  text-align: center;
 }

@@ -40,13 +40,10 @@ for (y = -1; y < 10; y++) {
       inputfieldupdate();
     });
     if (x === -1 || y === -1) {
-
-
-     
       //blocks are all bet inputs
       namelabel.innerHTML = "&nbsp";
       td.append(namelabel);
-      inp.setAttribute("data-oldall",0)
+
       if (x == -1) {
         inp.setAttribute("id", `B${y}`);
       }
@@ -117,11 +114,6 @@ function checklogin() {
 function allfieldbetplace(thisid) {
   let inputValue = parseInt(document.getElementById(thisid).value);
 
-
-  //data-oldall
-
-
-
   if (isNaN(inputValue) || inputValue < 0) {
     document.getElementById(thisid).value = ""; // Clear the input
   }
@@ -134,7 +126,6 @@ function allfieldbetplace(thisid) {
       document.getElementById(idinp).value =
         (parseInt(document.getElementById(thisid).value) || 0) +
         (parseInt(document.getElementById(idinp).value) || 0);
-        document.getElementById(idinp).value -=( parseInt( document.getElementById(thisid).getAttribute("data-oldall")||0))
     }
     //("top");
   }
@@ -156,17 +147,9 @@ function allfieldbetplace(thisid) {
       document.getElementById(idinp).value =
         (parseInt(document.getElementById(thisid).value) || 0) +
         (parseInt(document.getElementById(idinp).value) || 0);
-        document.getElementById(idinp).value -=( parseInt( document.getElementById(thisid).getAttribute("data-oldall")||0))
     }
   }
-
-  
-
-
   inputfieldupdate();
-  
-  document.getElementById(thisid).setAttribute("data-oldall", document.getElementById(thisid).value);
-  
   //(betdata[0],betdata[1]);
 }
 function inputfieldupdate() {
@@ -181,13 +164,9 @@ function inputfieldupdate() {
       // Get the value and parse it to an integer, or use 0 if not a valid number
       let inputValue = parseInt(inputElement.value) || 0;
 
-      if (isNaN(inputValue) || inputValue <= 0) {
+      if (isNaN(inputValue) || inputValue < 0) {
         inputElement.value = ""; // Clear the input
       }
-
-
-
-      inputElement.setAttribute("data-old",inputElement.value);
       // Add the valid number to totalbet
       totalbet += inputValue;
     }
@@ -475,7 +454,9 @@ function getAllResultsSoFar() {
         if (parsedData.hasOwnProperty(key)) {
           var gameidname = document.createElement("td");
           var gameresultname = document.createElement("td");
-          gameidname.innerHTML = key;
+          var randoLab = document.createElement('label');
+          randoLab.innerHTML = key;
+          gameidname.append(randoLab);
           //rowspan="1" colspan="2"
           gameidname.setAttribute("class", "oldres");
           //gameidname.setAttribute("rowspan","1")
@@ -582,11 +563,7 @@ function clearallinputs() {
 
   inputnumberbox.forEach((e) => {
     e.value = null;
-    e.setAttribute("data-oldall",0);
-  
   });
-
-
   inputfieldupdate();
 }
 function cancelbet() {
@@ -641,5 +618,16 @@ function mobileUIFix(){
     // tdBetInp.forEach(element => {
     //   element.style.maxWidth= '75px';
     // });
+  }
+}
+
+function togglePopup(e){
+  var wrapper = document.querySelector(`[data-id='${e}']`);
+  var wrapperStyles = getComputedStyle(wrapper);
+
+  if (wrapperStyles.display === 'none'){
+    wrapper.style.display = 'block';
+  } else{
+    wrapper.style.display = 'none';
   }
 }
