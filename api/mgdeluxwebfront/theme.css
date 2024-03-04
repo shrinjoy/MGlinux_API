@@ -137,6 +137,9 @@ input[type=number] {
   /* position: relative;
   top: 40px; */
 }
+ #res_sofar_table .oldres label{
+  height: 40px;
+ }
 
 
 body {
