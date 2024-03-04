@@ -464,7 +464,16 @@ body {
 
 .reportPanel .nav {
       display: block;
-      padding-left: inherit;
-      margin-bottom: inherit;
+      padding-left: 65px;
+      padding-top: 15px;
       list-style: inherit;
+}
+
+.reportPanel .playDetails th{
+  background-color: brown;
+  padding: 20px 5px;
+}
+.reportPanel .playDetails th td{
+  color: #fff;
+  border-left: 1px solid #fff;
 }
