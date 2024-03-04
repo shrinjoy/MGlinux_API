@@ -139,6 +139,9 @@ input[type=number] {
 }
  #res_sofar_table .oldres label{
   height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
  }
 
 
