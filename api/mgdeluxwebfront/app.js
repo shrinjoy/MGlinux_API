@@ -622,7 +622,7 @@ function mobileUIFix(){
 }
 
 function togglePopup(e){
-  var wrapper = document.querySelector(`[wrapper-id='${e}']`);
+  var wrapper = document.querySelector(`[data-id='${e}']`);
   var wrapperStyles = getComputedStyle();
 
   if (wrapperStyles.display === 'none'){
