@@ -11,6 +11,7 @@ var getresultbyid = require('./getgameresultbyID')
 var placebet = require('./placebet')
 var cancelticket = require('./cancelbybarcode')
 var getallresultbydate = require("./getalllastresults_bydate");
+var changepasswordbyuser = require("./changepassword");
 const fastifyCors = require('@fastify/cors');
 
 // Enable CORS
@@ -60,6 +61,23 @@ app.post('/cancelbybarcode',function(req,res){
         res.status(404).send(err);
     })
 })
+
+app.post('/changepassword', async function (req, res) {
+
+    await changepasswordbyuser.changepassword(req.body,sql).then((data) => {
+        res.status(200).send(data);
+
+    })
+        .catch((err) => {
+            res.status(400).send({ err });
+
+        })
+
+})
+
+
+
+
 
 app.post('/getallresultbydate', async function (req, res) {
     await getallresultbydate.getlastresults_all_bydate(sql,req.body).then((data) => {
