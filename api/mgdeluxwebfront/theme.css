@@ -207,6 +207,7 @@ body {
 
 #buttonholder {
   border: 1px solid black;
+  height: 40vh;
   /* width: 75%; */
   /* position: absolute; */
   /* top: 8%; */
@@ -348,8 +349,8 @@ body {
 }
 
 .gameRow .imgWrapper {
-  width: 250px;
-  height: 240px;
+  width: 280px;
+  height: 315px;
   overflow: hidden;
 }
 
