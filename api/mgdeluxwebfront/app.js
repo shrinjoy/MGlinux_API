@@ -250,7 +250,7 @@ function buyticket() {
        totalbet = 0;
       })
       .catch(function (err) {
-        alert(err);
+       // alert(err);
         getuserdata(username, password);
         showpopup("Transaction Failed","green");//popup_function
 
@@ -339,7 +339,7 @@ function loadallpossiblefuturebets() {
       }
     })
     .catch((err) => {
-      alert("failed to load the data try to load again");
+     // alert("failed to load the data try to load again");
       loadallpossiblefuturebets();
     });
 }
