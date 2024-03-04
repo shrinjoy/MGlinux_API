@@ -471,7 +471,8 @@ body {
 
 .reportPanel .playDetails th{
   background-color: brown;
-  padding: 20px 5px;
+  padding: 50px 5px;
   color: #fff;
   border-left: 1px solid #fff;
+  text-align: center;
 }
