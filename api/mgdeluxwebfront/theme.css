@@ -132,14 +132,14 @@ input[type=number] {
 
 #res_sofar_div {
   width: 100%;
-  height: 1120px;
+  height: 705px;
   /* background-color: red; */
   /* position: relative;
   top: 40px; */
 }
 
 #res_sofar_table .oldres label {
-  height: 80px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -182,7 +182,7 @@ body {
   /* width: 1%;
   min-width: 40px; */
   /* min-height: 40px; */
-  height: 80px;
+  height: 50px;
   text-align: center;
   border: 1px solid black;
 
