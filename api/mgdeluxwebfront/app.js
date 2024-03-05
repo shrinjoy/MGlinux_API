@@ -24,7 +24,7 @@ for (y = -1; y < 10; y++) {
     var td = document.createElement("td");
     td.setAttribute("class", "td_betinp");
     var namelabel = document.createElement("label");
-    namelabel.innerHTML = `NR${y}${x}`;
+    namelabel.innerHTML = `MD${y}${x}`;
     var br = document.createElement("br");
     // br.setAttribute("class", "spacer");
 
