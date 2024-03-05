@@ -107,7 +107,7 @@ function checklogin() {
     })
     .catch((err) => {
       console.log(err);
-      showpopup("Wrong username or password","red");
+      showpopup("Wrong username or password", "red");
     });
 }
 
@@ -184,70 +184,69 @@ function buyticket() {
 
 
 
-  if(totalbet>0){
-  var datax = [];
-  for (y = 0; y < 10; y++) {
-    for (x = 0; x < 10; x++) {
-      var id = `${y}${x}`;
-      datax.push(
-        `${y}${x}Q${parseInt(document.getElementById("NR" + id).value) || 0}`
-      );
+  if (totalbet > 0) {
+    var datax = [];
+    for (y = 0; y < 10; y++) {
+      for (x = 0; x < 10; x++) {
+        var id = `${y}${x}`;
+        datax.push(
+          `${y}${x}Q${parseInt(document.getElementById("NR" + id).value) || 0}`
+        );
+      }
     }
-  }
 
-  data = {
-    username: username,
-    password: password,
-    tickets: datax.toString(),
-    totalbet: totalbet,
-    gameid: gameid.toString(),
-  };
-  //(data);
+    data = {
+      username: username,
+      password: password,
+      tickets: datax.toString(),
+      totalbet: totalbet,
+      gameid: gameid.toString(),
+    };
+    //(data);
 
-  bettingID.forEach((e) => {
-    axios({
-      method: "post",
-      url: "http://193.203.163.194:3000/placebet",
-      data: {
-        username: username,
-        password: password,
-        tickets: datax.toString(),
-        totalbet: totalbet,
-        gameid: e.toString(),
-      },
-    })
-      .then(function (res) {
-        //("placed bet in id:"+e.toString());
-        //(res["data"]["barcode"]);
-       
-        lastbetbarcode = res["data"]["barcode"];
-        getuserdata(username, password);
-        showpopup("Transaction Succesfull","green");//popup_function
-       datax = null;
-       totalbet = 0;
+    bettingID.forEach((e) => {
+      axios({
+        method: "post",
+        url: "http://193.203.163.194:3000/placebet",
+        data: {
+          username: username,
+          password: password,
+          tickets: datax.toString(),
+          totalbet: totalbet,
+          gameid: e.toString(),
+        },
       })
-      .catch(function (err) {
-       // alert(err);
-        getuserdata(username, password);
-        showpopup("Transaction Failed","green");//popup_function
+        .then(function (res) {
+          //("placed bet in id:"+e.toString());
+          //(res["data"]["barcode"]);
 
-      });
-  });
-  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+          lastbetbarcode = res["data"]["barcode"];
+          getuserdata(username, password);
+          showpopup("Transaction Succesfull", "green");//popup_function
+          datax = null;
+          totalbet = 0;
+        })
+        .catch(function (err) {
+          // alert(err);
+          getuserdata(username, password);
+          showpopup("Transaction Failed", "green");//popup_function
 
-  // Loop through each checkbox and uncheck it
-  checkboxes.forEach(function (checkbox) {
-    checkbox.checked = false;
-    getuserdata(username, password);
-  });
-  var currentid = bettingID[0];
-  bettingID = [];
-  bettingID.push(currentid);
-  clearallinputs();
+        });
+    });
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    // Loop through each checkbox and uncheck it
+    checkboxes.forEach(function (checkbox) {
+      checkbox.checked = false;
+      getuserdata(username, password);
+    });
+    var currentid = bettingID[0];
+    bettingID = [];
+    bettingID.push(currentid);
+    clearallinputs();
   }
-  else
-  {
-    showpopup("Transaction Failed","green");//popup_function
+  else {
+    showpopup("Transaction Failed", "green");//popup_function
 
   }
   /**/
@@ -316,7 +315,7 @@ function loadallpossiblefuturebets() {
       }
     })
     .catch((err) => {
-     // alert("failed to load the data try to load again");
+      // alert("failed to load the data try to load again");
       loadallpossiblefuturebets();
     });
 }
@@ -597,7 +596,7 @@ function cancelbet() {
       getuserdata(username, password);
     })
     .catch((err) => {
-      showpopup("No tickets to cancel","green");//popup_function
+      showpopup("No tickets to cancel", "green");//popup_function
 
       getuserdata(username, password);
     });
@@ -606,9 +605,9 @@ function cancelbet() {
 setInterval(timerupdate, 1000);
 
 
-function mobileUIFix(){
+function mobileUIFix() {
   x = window.matchMedia("(max-width: 991px)");
-  if (x.matches){
+  if (x.matches) {
     // This sets the Required Meta Tag
     var viewportMetaTag = document.querySelector('meta[name="viewport"]');
     if (viewportMetaTag) {
@@ -640,38 +639,60 @@ function mobileUIFix(){
   }
 }
 
-function togglePopup(e){
+function togglePopup(e) {
   var wrapper = document.querySelector(`[data-id='${e}']`);
   var wrapperStyles = getComputedStyle(wrapper);
 
-  if (wrapperStyles.display === 'none'){
+  if (wrapperStyles.display === 'none') {
     wrapper.style.display = 'block';
-  } else{
+  } else {
     wrapper.style.display = 'none';
   }
 }
 
 
-async function  showpopup(popuptext,popupcolor)
-{
+async function showpopup(popuptext, popupcolor) {
 
 
 
 
 
-var popup = document.getElementById("popup")
+  var popup = document.getElementById("popup")
 
-document.getElementById("popup_msg").innerHTML=popuptext;
-popup.style = `background-color:${popupcolor}`
+  document.getElementById("popup_msg").innerHTML = popuptext;
+  popup.style = `background-color:${popupcolor}`
 
-popup.setAttribute("id","popup_notif_show")
-await new Promise(resolve => setTimeout(resolve, 200));
+  popup.setAttribute("id", "popup_notif_show")
+  await new Promise(resolve => setTimeout(resolve, 200));
 
-popup.setAttribute("id","popup_notif_slide")
-await new Promise(resolve => setTimeout(resolve, 500));
-popup.setAttribute("id","popup")
-
-
+  popup.setAttribute("id", "popup_notif_slide")
+  await new Promise(resolve => setTimeout(resolve, 500));
+  popup.setAttribute("id", "popup")
 
 
+
+
+}
+
+function changePassword() {
+  var username = document.querySelector('.changePassword #username').value.toString();
+  var currentPassword = document.querySelector('.changePassword #password').value.toString();
+  var newPassword = document.querySelector('.changePassword #newpassword').value.toString();
+
+  axios({
+    method: "post",
+    url: "http://193.203.163.194:3000/changepassword",
+    data: {
+      username: username,
+      password: currentPassword,
+      newpassword: newPassword,
+    },
+  })
+    .then(function (res) {
+      console.log(res);
+      showpopup("Password Changed Successfully", "green");
+    })
+    .catch(error => {
+      showpopup("Please Try Again", "red");
+    })
 }

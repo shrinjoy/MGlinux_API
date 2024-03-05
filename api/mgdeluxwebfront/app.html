@@ -335,12 +335,12 @@
             <div style="position:absolute; right: 0; top: 0;"><button onclick="togglePopup(4)">X</button></div>
           </div>
           <div>
-            <form action="http://193.203.163.194:3000/changepassword" class="p-3" method="POST">
+            <form class="p-3">
               <div class="p-2">
                 <div class="border-top row p-3">
                   <div class="col-6">
-                    <label for="username" style="font-weight: 500;"><span class="text-danger">*</span>Enter Current
-                      Password:-</label>
+                    <label for="username" style="font-weight: 500;"><span class="text-danger">*</span>Enter
+                      Username:-</label>
                   </div>
                   <div class="col-6">
                     <input type="text" class="gameInputText" name="username" id="username">
@@ -348,7 +348,7 @@
                 </div>
                 <div class="border-top row p-2">
                   <div class="col-6">
-                    <label for="password" style="font-weight: 500;"><span class="text-danger">*</span>Enter New
+                    <label for="password" style="font-weight: 500;"><span class="text-danger">*</span>Enter Current
                       Password:-</label>
                   </div>
                   <div class="col-6">
@@ -357,7 +357,7 @@
                 </div>
                 <div class="border-top border-bottom row p-2">
                   <div class="col-6">
-                    <label for="newpassword" style="font-weight: 500;"><span class="text-danger">*</span>Re-Enter
+                    <label for="newpassword" style="font-weight: 500;"><span class="text-danger">*</span>Enter New
                       Password:-</label>
                   </div>
                   <div class="col-6">
@@ -365,7 +365,7 @@
                   </div>
                 </div>
                 <div class="text-center pt-2">
-                  <button type="submit">Submit</button>
+                  <button onclick="changePassword()">Submit</button>
                 </div>
               </div>
             </form>
