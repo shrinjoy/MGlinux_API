@@ -499,7 +499,7 @@ function getAllResultsSoFar() {
           //rowspan="1" colspan="2"
           gameidname.setAttribute("class", "oldres");
           //gameidname.setAttribute("rowspan","1")
-          gameresultname.innerHTML = "NR" + parsedData[key];
+          gameresultname.innerHTML = "MD" + parsedData[key];
           gameresultname.setAttribute("class", "oldres");
           gameresultname.setAttribute("id", "oldresid");
           gameidname.append(gameresultname);
