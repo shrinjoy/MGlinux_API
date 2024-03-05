@@ -104,8 +104,8 @@ input[type=number] {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 95vw;
-  height: 95vh;
+  width: 85vw;
+  height: 85vh;
   z-index: 300;
   display: none;
   background-color: yellow;
@@ -132,17 +132,22 @@ input[type=number] {
 
 #res_sofar_div {
   width: 100%;
-  height: 29vh;
-  background-color: red;
+  height: 31vh;
+  /* background-color: red; */
   /* position: relative;
   top: 40px; */
 }
- #res_sofar_table .oldres label{
+
+#res_sofar_table .oldres label {
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
- }
+}
+
+#res_sofar_table .oldres {
+  background-color: red;
+}
 
 
 body {
@@ -159,17 +164,15 @@ body {
 
 
 
-@keyframes popup_slide
-{
-  from
-  {
+@keyframes popup_slide {
+  from {
     left: 25%;
   }
-  to
-  {
+
+  to {
     left: 225%;
   }
- 
+
 }
 
 
@@ -219,7 +222,8 @@ body {
   height: 40px;
   font-size: 28px;
 }
-.gameInputText{
+
+.gameInputText {
   border: 1px solid #45454575;
   font-size: 18px;
   width: 200px;
@@ -320,6 +324,7 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
 .gameWrapper .headerRow {
   display: flex;
   justify-content: flex-start;
@@ -440,7 +445,7 @@ body {
     height: 100%;
   }
 
-  .gameRow .imgWrapper img{
+  .gameRow .imgWrapper img {
     object-fit: unset !important;
   }
 
@@ -459,9 +464,9 @@ body {
   } */
 }
 
-.changePassword{
-  width: 95vw;
-  height: 95vh;
+.changePassword {
+  width: 85vw;
+  height: 85vh;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -470,9 +475,9 @@ body {
   display: none;
 }
 
-.reportPanel{
-  width: 95vw;
-  height: 95vh;
+.reportPanel {
+  width: 85vw;
+  height: 85vh;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -482,86 +487,84 @@ body {
 }
 
 .reportPanel .nav {
-      display: block;
-      padding-left: 65px;
-      padding-top: 15px;
-      list-style: inherit;
+  display: block;
+  padding-left: 65px;
+  padding-top: 15px;
+  list-style: inherit;
 }
 
-.reportPanel .playDetails th{
+.reportPanel .playDetails th {
   background-color: brown;
   padding: 50px 5px;
   color: #fff;
   border-left: 1px solid #fff;
   text-align: center;
 }
-#popup
-{
+
+#popup {
   position: absolute;
   z-index: 1000;
- background-color: green;
- display: none;
- top: 25%;
- left: 25%;
- width: 50%;
- height: 10%;
- text-align: center;
- align-items: center;
- justify-content: center;
- color: white;
- font-weight: bolder;
- font-size: 2vh;
-
-}
-#popup_notif_show
-{
-  position: absolute;
-  z-index: 1000;
- background-color: green;
- display: flex;
- top: 25%;
- left: 25%;
- width: 50%;
- height: 10%;
- text-align: center;
- align-items: center;
- justify-content: center;
- color: white;
- font-weight: bolder;
- font-size: 2vh;
-
+  background-color: green;
+  display: none;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 10%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bolder;
+  font-size: 2vh;
 
 }
 
-#popup_notif_slide
-{
+#popup_notif_show {
   position: absolute;
   z-index: 1000;
- background-color: green;
- display: flex;
- top: 25%;
- left: 25%;
- width: 50%;
- height: 10%;
- text-align: center;
- align-items: center;
- justify-content: center;
- color: white;
- font-weight: bolder;
- font-size: 2vh;
+  background-color: green;
+  display: flex;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 10%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bolder;
+  font-size: 2vh;
 
-animation:  popup_slide 1s forwards;
-    
+
 }
-@keyframes popup_slide
-{
-  from
-  {
+
+#popup_notif_slide {
+  position: absolute;
+  z-index: 1000;
+  background-color: green;
+  display: flex;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 10%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bolder;
+  font-size: 2vh;
+
+  animation: popup_slide 1s forwards;
+
+}
+
+@keyframes popup_slide {
+  from {
     left: 25%;
   }
-  to
-  {
+
+  to {
     left: 225%;
   }
- 
+
 }
