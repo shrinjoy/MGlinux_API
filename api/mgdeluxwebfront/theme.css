@@ -435,7 +435,7 @@ body {
     height: 100vh;
     overflow: scroll;
   } */
-  .gameRow .imgWrapper {
+  /* .gameRow .imgWrapper {
     width: 280px;
     height: 315px;
     overflow: hidden;
@@ -448,7 +448,7 @@ body {
 
   .gameRow .imgWrapper img {
     object-fit: unset !important;
-  }
+  } */
 
   /* .td_betinp{
     max-width: 75px;
