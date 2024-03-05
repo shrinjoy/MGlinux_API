@@ -403,7 +403,7 @@ function showresultbydate() {
           gameidname.append(textWrapper);
           textWrapper.innerHTML = key;
           gameidname.append(textWrapper2);
-          textWrapper2.innerHTML = "NR" + parsedData[key];
+          textWrapper2.innerHTML = "MD" + parsedData[key];
           textWrapper2.setAttribute("id", "oldresid");
           //gameidname.setAttribute("rowspan","1")
           // gameresultname.innerHTML = "NR" + parsedData[key];
