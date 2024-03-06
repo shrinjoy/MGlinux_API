@@ -290,7 +290,10 @@ function resetbetdata()
     bettingID.push(currentid);
     clearallinputs();
 }
-function loadallpossiblefuturebets() {
+async function loadallpossiblefuturebets() {
+  console.clear();
+  console.log("loading future bets");
+
   var advancebet = document.getElementById("advancebet_show");
   var advancebettable = document.getElementById("advance_bet_table");
   var firstid;
@@ -300,8 +303,9 @@ function loadallpossiblefuturebets() {
   while (advancebettable.rows.length > 0) {
     advancebettable.deleteRow(1);
   }
+  
   startloading = false;
-  axios({
+  await axios({
     method: "get",
     url: "http://193.203.163.194:3000/getallresult",
   })
@@ -333,29 +337,25 @@ function loadallpossiblefuturebets() {
                 var inp = document.createElement("input");
                 inp.setAttribute("type", "checkbox");
                 inp.setAttribute("id", `${key}`);
-
+                console.log(`${key}`)
                 // Add event listener to each checkbox
                 inp.addEventListener("change", function () {
                   addidtolistforadvancebet(this.id);
                 });
-
-                /* //(
-                             `${key}${parsedData[key]} ${
-                             parsedData[key].toString().trim().length
-                             }`
-                         );*/
                 td.append(inp);
-
                 tablerow.append(td);
               }
             }
           }
+          
         }
       }
+      advancebettable.append(tablerow);
+      
     })
     .catch((err) => {
       // alert("failed to load the data try to load again");
-      loadallpossiblefuturebets();
+     loadallpossiblefuturebets();
     });
 }
 
@@ -577,7 +577,7 @@ function getuserdata(usernamex, passwordx) {
 }
 
 gettimeandgameid();
-loadallpossiblefuturebets();
+
 function timerupdate() {
   time -= 1;
   if (time < 1) {
