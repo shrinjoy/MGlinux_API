@@ -723,25 +723,30 @@ async function showpopup(popuptext, popupcolor) {
 
 }
 
-function changePassword() {
-  var username = document.querySelector('.changePassword #username').value.toString();
-  var currentPassword = document.querySelector('.changePassword #password').value.toString();
-  var newPassword = document.querySelector('.changePassword #newpassword').value.toString();
-
+function changePassword(event) {
+  event.preventDefault();
+  var data_username =  document.getElementById("cpusername").value.toString();
+  var data_currentPassword = document.getElementById("password").value.toString();
+  var data_newPassword = document.getElementById("newpassword").value.toString();
+  console.log(`${data_username} ${data_currentPassword} ${data_newPassword}`)
   axios({
     method: "post",
     url: "http://193.203.163.194:3000/changepassword",
     data: {
-      username: username,
-      password: currentPassword,
-      newpassword: newPassword,
+      username: data_username,
+      password: data_currentPassword,
+      newpassword: data_newPassword,
     },
   })
     .then(function (res) {
+      
       console.log(res);
       showpopup("Password Changed Successfully", "green");
+      location.reload()
+     
     })
     .catch(error => {
+      console.log(error);
       showpopup("Please Try Again", "red");
     })
 }
