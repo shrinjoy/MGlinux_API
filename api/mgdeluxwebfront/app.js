@@ -750,3 +750,4 @@ function changePassword(event) {
       showpopup("Please Try Again", "red");
     })
 }
+loadallpossiblefuturebets();
