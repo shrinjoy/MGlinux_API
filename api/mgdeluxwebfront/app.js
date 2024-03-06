@@ -206,7 +206,7 @@ function buyticket() {
 
 
 
-  if (totalbet > 0) {
+  if (totalbet > 0 && time > 10) {
     var datax = [];
     for (y = 0; y < 10; y++) {
       for (x = 0; x < 10; x++) {
@@ -269,9 +269,26 @@ function buyticket() {
   }
   else {
     showpopup("Transaction Failed", "green");//popup_function
-
+    resetbetdata();
   }
   /**/
+}
+
+
+
+function resetbetdata()
+{
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    // Loop through each checkbox and uncheck it
+    checkboxes.forEach(function (checkbox) {
+      checkbox.checked = false;
+      getuserdata(username, password);
+    });
+    var currentid = bettingID[0];
+    bettingID = [];
+    bettingID.push(currentid);
+    clearallinputs();
 }
 function loadallpossiblefuturebets() {
   var advancebet = document.getElementById("advancebet_show");
@@ -571,7 +588,15 @@ function timerupdate() {
 
     loadallpossiblefuturebets();
   }
+  if(time<10)
+  {
+    gametimertext.style="color:red"
+  }
+  else
+  {
+    gametimertext.style="color:black"
 
+  }
   gametimertext.innerHTML = formatSecondsToTime(time);
   gameidtext.innerHTML = gameid;
   realtimertext.innerHTML = getCurrentTime();
@@ -602,6 +627,7 @@ function clearallinputs() {
 
   inputnumberbox.forEach((e) => {
     e.value = null;
+    e.setAttribute("data-oldall", 0);
   });
   inputfieldupdate();
 }
