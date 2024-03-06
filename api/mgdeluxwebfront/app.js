@@ -268,7 +268,7 @@ function buyticket() {
     clearallinputs();
   }
   else {
-    showpopup("Transaction Failed", "green");//popup_function
+    showpopup("Transaction Failed", "red");//popup_function
     resetbetdata();
   }
   /**/
@@ -642,9 +642,10 @@ function cancelbet() {
   })
     .then(function (res) {
       getuserdata(username, password);
+      showpopup("Canceled ticket", "green");//popup_function
     })
     .catch((err) => {
-      showpopup("No tickets to cancel", "green");//popup_function
+      showpopup("No tickets to cancel", "red");//popup_function
 
       getuserdata(username, password);
     });
