@@ -22,7 +22,7 @@
 
 #advance_bet_table {
   width: 100%;
-  height: 800px;
+  height: auto;
 }
 
 #advance_bet_table td label {
