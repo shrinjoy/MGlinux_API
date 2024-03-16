@@ -53,6 +53,25 @@ module.exports={
         )
 
     })
+   },
+   //SELECT [GAMEDATE] as date, [TICKETTOTALRS] as purchasepoint, [WINRS] as pwtpoint,[TICKETTOTALRS]-[WINRS] as netpoint FROM ticket99 where gamedate BETWEEN CONVERT(DATE, '2024-03-06') AND CONVERT(DATE, '2024-03-10') AND tarminalid = 'ADMIN' ORDER BY INTNUMBER DESC;
+   getreportfromdatetilldate:function(db,sql)
+   {
+    return new Promise((resolve,reject)=>{
+        db.query(`SELECT [GAMEDATE] as date, [TICKETTOTALRS] as purchasepoint, [WINRS] as pwtpoint,[TICKETTOTALRS]-[WINRS] as netpoint FROM ticket99 where gamedate BETWEEN CONVERT(DATE, '${sql["start_date"]}') AND CONVERT(DATE,'${sql["end_date"]}') AND tarminalid = '${sql['username']}'  ORDER BY INTNUMBER DESC;`).then((data)=>{
+          arraydata = []
+          data.recordsets.forEach(element => {
+            arraydata.push(element);
+          });
+          
+          resolve(arraydata);
+        })
+        .catch((err)=>{
+                reject(err);
+            }
+        )
+
+    })
    }
 }
 //get result by date for all 
