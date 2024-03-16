@@ -12,6 +12,7 @@ var placebet = require('./placebet')
 var cancelticket = require('./cancelbybarcode')
 var getallresultbydate = require("./getalllastresults_bydate");
 var changepasswordbyuser = require("./changepassword");
+var getreport = require('./getreport');
 const fastifyCors = require('@fastify/cors');
 
 // Enable CORS
@@ -148,6 +149,24 @@ app.post('/placebet',async function (req, res) {
 
     })
 })
+
+app.post('/getreportbydate',function(req,res){
+    getreport.gerreportbydate(sql,req.body).then((data)=>{
+        res.status(200).send({data});
+    })
+    .catch((err)=>{
+        res.status(400).send({err});
+    })
+})
+app.post('/getreportbydateandid',function(req,res){
+    getreport.getreportbydateandid(sql,req.body).then((data)=>{
+        res.status(200).send({data});
+    })
+    .catch((err)=>{
+        res.status(400).send({err});
+    })
+})
+
 app.get('/', function (req, res) {
     res.status(200).send({ "message": "welcome to the root of magic deluxe api" })
 })
