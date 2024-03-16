@@ -751,3 +751,18 @@ function changePassword(event) {
     })
 }
 loadallpossiblefuturebets();
+
+function getReportFromDate(){
+  var table = document.getElementById('datewiseSummaryTable');
+  var startDate = document.getElementById('startDate');
+  var endDate = document.getElementById('endDate');
+  startDate = startDate.value;
+  endDate = endDate.value;
+  var submit = document.getElementById('submit');
+
+  submit.addEventListener('click', function(){
+    console.log('startDate', startDate, 'endDate', endDate);
+  })
+ 
+
+}
