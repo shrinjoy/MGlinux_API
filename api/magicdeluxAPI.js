@@ -93,7 +93,7 @@ app.post('/getallresultbydate', async function (req, res) {
 })
 
 app.post('/getreportfromdatetodate', async function (req, res) {
-    await getallresultbydate.getreportfromdatetilldate(sql,req.body).then((data) => {
+    await  getreport.getreportfromdatetilldate(sql,req.body).then((data) => {
         res.status(200).send(data);
     })
         .catch((err) => {
