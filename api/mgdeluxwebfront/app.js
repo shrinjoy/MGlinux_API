@@ -724,7 +724,7 @@ function getReportFromDate() {
   var table = document.getElementById("datewiseSummaryTable");
   var startDate = document.getElementById("startDate");
   var endDate = document.getElementById("endDate");
-  var submit = document.getElementById("submit");
+  var submit = document.getElementById("summarySubmit");
 
   submit.addEventListener("click", function () {
     var startDateValue = startDate.value;
@@ -738,7 +738,7 @@ function getReportFromDate() {
         end_date: endDateValue,
       })
       .then(function (response) {
-        var responseData = response.data.flat(); // Flatten the array
+        var responseData = response.data.flat();
         responseData.forEach(function (item) {
           var tr = document.createElement("tr");
 
@@ -778,6 +778,115 @@ function getReportFromDate() {
   });
 }
 
+function getDetailReportFromDate() {
+  var table = document.getElementById("playDetailsTable");
+  var currentDate = document.getElementById("reportDate");
+  var submit = document.getElementById("reportSubmit");
+
+  submit.addEventListener("click", function () {
+    var dateValue = currentDate.value;
+
+    axios
+      .post("http://193.203.163.194:3000/getreportbydate", {
+        username: username,
+        date: dateValue,
+      })
+      .then(function (response) {
+        console.log(response.data.data[0]);
+        var responseData = response.data.data[0];
+        responseData.forEach(function (game, index) {
+          var tr = document.createElement("tr");
+
+          // Serial No. (Index No.)
+          var serialNo = document.createElement("td");
+          var serialNoTextNode = document.createTextNode(index + 1);
+          serialNo.appendChild(serialNoTextNode);
+          tr.appendChild(serialNo);
+
+          // Gift Event Code (GAMEID)
+          var gameId = document.createElement("td");
+          var gameIdTextNode = document.createTextNode(game.GAMEID);
+          gameId.appendChild(gameIdTextNode);
+          tr.appendChild(gameId);
+
+          // Qty (TICKETTOTALRS[0])
+          var qty = document.createElement("td");
+          var qtyTextNode = document.createTextNode(game.TICKETTOTALRS[0]);
+          qty.appendChild(qtyTextNode);
+          tr.appendChild(qty);
+
+          // Points (TICKETTOTALRS[1])
+          var points = document.createElement("td");
+          var pointsTextNode = document.createTextNode(game.TICKETTOTALRS[1]);
+          points.appendChild(pointsTextNode);
+          tr.appendChild(points);
+
+          // Request ID (TICKETNUMBER)
+          var requestId = document.createElement("td");
+          var requestIdTextNode = document.createTextNode(game.TICKETNUMBER);
+          requestId.appendChild(requestIdTextNode);
+          tr.appendChild(requestId);
+
+          // Date Time (GAMETIME)
+          var utcTimestamp = game.GAMETIME;
+
+          var dateObject = new Date(utcTimestamp);
+
+          var year = dateObject.getFullYear();
+          var month = String(dateObject.getMonth() + 1).padStart(2, "0"); // Month starts from 0
+          var day = String(dateObject.getDate()).padStart(2, "0");
+          var hours = String(dateObject.getHours()).padStart(2, "0");
+          var minutes = String(dateObject.getMinutes()).padStart(2, "0");
+
+          var formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}`;
+
+          var dateTime = document.createElement("td");
+          var dateTimeTextNode = document.createTextNode(formattedDateTime);
+          dateTime.appendChild(dateTimeTextNode);
+          tr.appendChild(dateTime);
+
+          // Gift Points (WINRS)
+          var giftPoints = document.createElement("td");
+          var giftPointsTextNode = document.createTextNode(game.WINRS);
+          giftPoints.appendChild(giftPointsTextNode);
+          tr.appendChild(giftPoints);
+
+          // Stone (N/A)
+          var stone = document.createElement("td");
+          if (!game.GAMERESULT) {
+            var stoneTextNode = document.createTextNode("N/A");
+            stone.appendChild(stoneTextNode);
+            tr.appendChild(stone);
+          } else {
+            var stoneTextNode = document.createTextNode(game.GAMERESULT);
+            stone.appendChild(stoneTextNode);
+            tr.appendChild(stone);
+          }
+
+          // Status (Active)
+          var status = document.createElement("td");
+          var statusTextNode = document.createTextNode("Active");
+          status.appendChild(statusTextNode);
+          tr.appendChild(status);
+
+          // View
+          var view = document.createElement("td");
+          var viewLink = document.createElement("a");
+          viewLink.href = "#"; // Add your view link here
+          viewLink.textContent = "View";
+          view.appendChild(viewLink);
+          tr.appendChild(view);
+
+          table.appendChild(tr);
+        });
+      })
+      .catch(function (error) {
+        console.error("Error:", error);
+      });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   getReportFromDate();
+  getDetailReportFromDate();
 });
