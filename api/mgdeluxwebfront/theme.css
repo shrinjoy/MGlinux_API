@@ -59,7 +59,7 @@
   top: 0;
   width: 100vw;
   height: 100vh;
-  background: url('./public/back_image.png');
+  background: url("./public/back_image.png");
   background-position: center center;
   background-size: cover;
   z-index: 900;
@@ -80,13 +80,13 @@
   /* transform: translate(-50%, -50%); */
 }
 
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -95,8 +95,6 @@ input[type=number] {
   border: 1px solid black;
   white-space: nowrap;
 }
-
-
 
 #stone_show {
   border: 1px solid black;
@@ -149,20 +147,13 @@ input[type=number] {
   background-color: red;
 }
 
-
 body {
   background-color: yellow;
 }
 
-
 #oldresid {
-
   color: white;
 }
-
-
-
-
 
 @keyframes popup_slide {
   from {
@@ -172,10 +163,7 @@ body {
   to {
     left: 225%;
   }
-
 }
-
-
 
 .oldres {
   width: 150px;
@@ -203,7 +191,6 @@ body {
 }
 
 .td_betinp {
-
   align-content: center;
   align-items: center;
   text-align: center;
@@ -240,7 +227,6 @@ body {
   /* Remove default border */
 }
 
-
 #buttonholder {
   border: 1px solid black;
   height: 1065px;
@@ -249,9 +235,7 @@ body {
   /* top: 8%; */
   /* left: 23%; */
   background-color: #47e315;
-
 }
-
 
 @keyframes sizeChange {
   from {
@@ -294,13 +278,12 @@ body {
 }
 
 .loginWrapper input:focus {
-  border: 2px solid #011EFE;
+  border: 2px solid #011efe;
 }
 
 .loginWrapper .keepSignedIn {
   color: green;
-  font: 600 16px/18px 'Open Sans', sans-serif;
-
+  font: 600 16px/18px "Open Sans", sans-serif;
 }
 
 .loginWrapper #sig {
@@ -311,7 +294,7 @@ body {
 }
 
 .loginWrapper .loginBtn {
-  background: #011EFE;
+  background: #011efe;
   color: #fff;
   border: none;
   padding: 15px 20px;
@@ -334,7 +317,7 @@ body {
 }
 
 .gameWrapper .headerRow h1 {
-  color: #CE0B00;
+  color: #ce0b00;
   font-size: 26px;
   font-weight: 700;
 }
@@ -417,19 +400,7 @@ body {
   border: 1px solid black;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 @media only screen and (max-width: 991px) {
-
   /* .mainContent {
     width: 1366px;
     height: 100vh;
@@ -478,9 +449,9 @@ body {
 
 .reportPanel {
   width: 85vw;
-  height: 85vh;
+  height: 100%;
   position: absolute;
-  top: 50%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
@@ -517,7 +488,6 @@ body {
   color: white;
   font-weight: bolder;
   font-size: 2vh;
-
 }
 
 #popup_notif_show {
@@ -535,8 +505,6 @@ body {
   color: white;
   font-weight: bolder;
   font-size: 2vh;
-
-
 }
 
 #popup_notif_slide {
@@ -556,7 +524,6 @@ body {
   font-size: 2vh;
 
   animation: popup_slide 1s forwards;
-
 }
 
 @keyframes popup_slide {
@@ -567,5 +534,4 @@ body {
   to {
     left: 225%;
   }
-
 }

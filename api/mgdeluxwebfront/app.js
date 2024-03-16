@@ -40,13 +40,10 @@ for (y = -1; y < 10; y++) {
       inputfieldupdate();
     });
     if (x === -1 || y === -1) {
-
-
-     
       //blocks are all bet inputs
       namelabel.innerHTML = "&nbsp";
       td.append(namelabel);
-      inp.setAttribute("data-oldall",0)
+      inp.setAttribute("data-oldall", 0);
       if (x == -1) {
         inp.setAttribute("id", `B${y}`);
       }
@@ -72,7 +69,6 @@ for (y = -1; y < 10; y++) {
   }
   betinputpanel.append(tr);
 }
-
 
 function checklogin() {
   // /canlogin
@@ -115,16 +111,10 @@ function checklogin() {
     });
 }
 
-
-
-
 function allfieldbetplace(thisid) {
   let inputValue = parseInt(document.getElementById(thisid).value);
 
-
   //data-oldall
-
-
 
   if (isNaN(inputValue) || inputValue < 0) {
     document.getElementById(thisid).value = ""; // Clear the input
@@ -138,7 +128,9 @@ function allfieldbetplace(thisid) {
       document.getElementById(idinp).value =
         (parseInt(document.getElementById(thisid).value) || 0) +
         (parseInt(document.getElementById(idinp).value) || 0);
-        document.getElementById(idinp).value -=( parseInt( document.getElementById(thisid).getAttribute("data-oldall")||0))
+      document.getElementById(idinp).value -= parseInt(
+        document.getElementById(thisid).getAttribute("data-oldall") || 0
+      );
     }
     //("top");
   }
@@ -160,17 +152,18 @@ function allfieldbetplace(thisid) {
       document.getElementById(idinp).value =
         (parseInt(document.getElementById(thisid).value) || 0) +
         (parseInt(document.getElementById(idinp).value) || 0);
-        document.getElementById(idinp).value -=( parseInt( document.getElementById(thisid).getAttribute("data-oldall")||0))
+      document.getElementById(idinp).value -= parseInt(
+        document.getElementById(thisid).getAttribute("data-oldall") || 0
+      );
     }
   }
 
-  
-
-
   inputfieldupdate();
-  
-  document.getElementById(thisid).setAttribute("data-oldall", document.getElementById(thisid).value);
-  
+
+  document
+    .getElementById(thisid)
+    .setAttribute("data-oldall", document.getElementById(thisid).value);
+
   //(betdata[0],betdata[1]);
 }
 function inputfieldupdate() {
@@ -189,9 +182,7 @@ function inputfieldupdate() {
         inputElement.value = ""; // Clear the input
       }
 
-
-
-      inputElement.setAttribute("data-old",inputElement.value);
+      inputElement.setAttribute("data-old", inputElement.value);
       // Add the valid number to totalbet
       totalbet += inputValue;
     }
@@ -203,9 +194,6 @@ function inputfieldupdate() {
     "Total Amnt: <span>" + totalbet + "</span>";
 }
 function buyticket() {
-
-
-
   if (totalbet > 0 && time > 10) {
     var datax = [];
     for (y = 0; y < 10; y++) {
@@ -244,15 +232,14 @@ function buyticket() {
 
           lastbetbarcode = res["data"]["barcode"];
           getuserdata(username, password);
-          showpopup("Transaction Succesfull", "green");//popup_function
+          showpopup("Transaction Succesfull", "green"); //popup_function
           datax = null;
           totalbet = 0;
         })
         .catch(function (err) {
           // alert(err);
           getuserdata(username, password);
-          showpopup("Transaction Failed", "green");//popup_function
-
+          showpopup("Transaction Failed", "green"); //popup_function
         });
     });
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -266,33 +253,29 @@ function buyticket() {
     bettingID = [];
     bettingID.push(currentid);
     clearallinputs();
-  }
-  else {
-    showpopup("Transaction Failed", "red");//popup_function
+  } else {
+    showpopup("Transaction Failed", "red"); //popup_function
     resetbetdata();
   }
   /**/
 }
 
-
-
-function resetbetdata()
-{
+function resetbetdata() {
   var checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-    // Loop through each checkbox and uncheck it
-    checkboxes.forEach(function (checkbox) {
-      checkbox.checked = false;
-      getuserdata(username, password);
-    });
-    var currentid = bettingID[0];
-    bettingID = [];
-    bettingID.push(currentid);
-    clearallinputs();
+  // Loop through each checkbox and uncheck it
+  checkboxes.forEach(function (checkbox) {
+    checkbox.checked = false;
+    getuserdata(username, password);
+  });
+  var currentid = bettingID[0];
+  bettingID = [];
+  bettingID.push(currentid);
+  clearallinputs();
 }
 async function loadallpossiblefuturebets() {
-  console.clear();
-  console.log("loading future bets");
+  // console.clear();
+  // console.log("loading future bets");
 
   var advancebet = document.getElementById("advancebet_show");
   var advancebettable = document.getElementById("advance_bet_table");
@@ -303,7 +286,7 @@ async function loadallpossiblefuturebets() {
   while (advancebettable.rows.length > 0) {
     advancebettable.deleteRow(1);
   }
-  
+
   startloading = false;
   await axios({
     method: "get",
@@ -337,7 +320,7 @@ async function loadallpossiblefuturebets() {
                 var inp = document.createElement("input");
                 inp.setAttribute("type", "checkbox");
                 inp.setAttribute("id", `${key}`);
-                console.log(`${key}`)
+                // console.log(`${key}`)
                 // Add event listener to each checkbox
                 inp.addEventListener("change", function () {
                   addidtolistforadvancebet(this.id);
@@ -347,15 +330,13 @@ async function loadallpossiblefuturebets() {
               }
             }
           }
-          
         }
       }
       advancebettable.append(tablerow);
-      
     })
     .catch((err) => {
       // alert("failed to load the data try to load again");
-     loadallpossiblefuturebets();
+      loadallpossiblefuturebets();
     });
 }
 
@@ -510,7 +491,7 @@ function getAllResultsSoFar() {
         if (parsedData.hasOwnProperty(key)) {
           var gameidname = document.createElement("td");
           var gameresultname = document.createElement("td");
-          var randoLab = document.createElement('label');
+          var randoLab = document.createElement("label");
           randoLab.innerHTML = key;
           gameidname.append(randoLab);
           //rowspan="1" colspan="2"
@@ -569,7 +550,7 @@ function getuserdata(usernamex, passwordx) {
       userbalance = res["data"]["balance"];
       document.getElementById("balance").innerHTML = userbalance;
       document.getElementById("username").innerHTML = userid;
-      console.log("usernamepassdata fetched XDXD");
+      // console.log("usernamepassdata fetched XDXD");
     })
     .catch((err) => {
       //alert(err);
@@ -581,21 +562,17 @@ gettimeandgameid();
 function timerupdate() {
   time -= 1;
   if (time < 1) {
-    console.clear();
+    // console.clear();
     getAllResultsSoFar();
 
     gettimeandgameid();
 
     loadallpossiblefuturebets();
   }
-  if(time<10)
-  {
-    gametimertext.style="color:red"
-  }
-  else
-  {
-    gametimertext.style="color:black"
-
+  if (time < 10) {
+    gametimertext.style = "color:red";
+  } else {
+    gametimertext.style = "color:black";
   }
   gametimertext.innerHTML = formatSecondsToTime(time);
   gameidtext.innerHTML = gameid;
@@ -642,17 +619,16 @@ function cancelbet() {
   })
     .then(function (res) {
       getuserdata(username, password);
-      showpopup("Canceled ticket", "green");//popup_function
+      showpopup("Canceled ticket", "green"); //popup_function
     })
     .catch((err) => {
-      showpopup("No tickets to cancel", "red");//popup_function
+      showpopup("No tickets to cancel", "red"); //popup_function
 
       getuserdata(username, password);
     });
   lastbetbarcode = "";
 }
 setInterval(timerupdate, 1000);
-
 
 function mobileUIFix() {
   x = window.matchMedia("(max-width: 991px)");
@@ -670,9 +646,9 @@ function mobileUIFix() {
     // buttonHolder.style.width = 'max-content';
 
     // This sets the Required style for '#res_sofar_div'
-    var resSofarDiv = document.getElementById('res_sofar_div');
-    resSofarDiv.style.width = '95%';
-    resSofarDiv.style.margin = 'auto';
+    var resSofarDiv = document.getElementById("res_sofar_div");
+    resSofarDiv.style.width = "95%";
+    resSofarDiv.style.margin = "auto";
 
     // This sets the Required style for '.betinput'
     // var betInput = document.querySelectorAll('.betinput');
@@ -692,43 +668,37 @@ function togglePopup(e) {
   var wrapper = document.querySelector(`[data-id='${e}']`);
   var wrapperStyles = getComputedStyle(wrapper);
 
-  if (wrapperStyles.display === 'none') {
-    wrapper.style.display = 'block';
+  if (wrapperStyles.display === "none") {
+    wrapper.style.display = "block";
   } else {
-    wrapper.style.display = 'none';
+    wrapper.style.display = "none";
   }
 }
 
-
 async function showpopup(popuptext, popupcolor) {
-
-
-
-
-
-  var popup = document.getElementById("popup")
+  var popup = document.getElementById("popup");
 
   document.getElementById("popup_msg").innerHTML = popuptext;
-  popup.style = `background-color:${popupcolor}`
+  popup.style = `background-color:${popupcolor}`;
 
-  popup.setAttribute("id", "popup_notif_show")
-  await new Promise(resolve => setTimeout(resolve, 200));
+  popup.setAttribute("id", "popup_notif_show");
+  await new Promise((resolve) => setTimeout(resolve, 200));
 
-  popup.setAttribute("id", "popup_notif_slide")
-  await new Promise(resolve => setTimeout(resolve, 500));
-  popup.setAttribute("id", "popup")
-
-
-
-
+  popup.setAttribute("id", "popup_notif_slide");
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  popup.setAttribute("id", "popup");
 }
 
 function changePassword(event) {
   event.preventDefault();
-  var data_username =  document.getElementById("cpusername").value.toString();
-  var data_currentPassword = document.getElementById("password").value.toString();
-  var data_newPassword = document.getElementById("newpassword").value.toString();
-  console.log(`${data_username} ${data_currentPassword} ${data_newPassword}`)
+  var data_username = document.getElementById("cpusername").value.toString();
+  var data_currentPassword = document
+    .getElementById("password")
+    .value.toString();
+  var data_newPassword = document
+    .getElementById("newpassword")
+    .value.toString();
+  console.log(`${data_username} ${data_currentPassword} ${data_newPassword}`);
   axios({
     method: "post",
     url: "http://193.203.163.194:3000/changepassword",
@@ -739,30 +709,75 @@ function changePassword(event) {
     },
   })
     .then(function (res) {
-      
       console.log(res);
       showpopup("Password Changed Successfully", "green");
-      location.reload()
-     
+      location.reload();
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
       showpopup("Please Try Again", "red");
-    })
+    });
 }
 loadallpossiblefuturebets();
 
-function getReportFromDate(){
-  var table = document.getElementById('datewiseSummaryTable');
-  var startDate = document.getElementById('startDate');
-  var endDate = document.getElementById('endDate');
-  startDate = startDate.value;
-  endDate = endDate.value;
-  var submit = document.getElementById('submit');
+function getReportFromDate() {
+  var table = document.getElementById("datewiseSummaryTable");
+  var startDate = document.getElementById("startDate");
+  var endDate = document.getElementById("endDate");
+  var submit = document.getElementById("submit");
 
-  submit.addEventListener('click', function(){
-    console.log('startDate', startDate, 'endDate', endDate);
-  })
- 
+  submit.addEventListener("click", function () {
+    var startDateValue = startDate.value;
+    var endDateValue = endDate.value;
+    console.log("startDate", startDateValue, "endDate", endDateValue);
 
+    axios
+      .post("http://193.203.163.194:3000/getreportfromdatetodate", {
+        username: username,
+        start_date: startDateValue,
+        end_date: endDateValue,
+      })
+      .then(function (response) {
+        var responseData = response.data.flat(); // Flatten the array
+        responseData.forEach(function (item) {
+          var tr = document.createElement("tr");
+
+          var dateCell = document.createElement("td");
+          var dateTextNode = document.createTextNode(item.date);
+          var date = new Date(item.date);
+          var formattedDate = date.toLocaleDateString();
+          dateTextNode.textContent = formattedDate;
+          dateCell.appendChild(dateTextNode);
+
+          var purchasePointCell = document.createElement("td");
+          var purchasePointTextNode = document.createTextNode(
+            item.purchasepoint
+          );
+          purchasePointCell.appendChild(purchasePointTextNode);
+
+          var pwtpointCell = document.createElement("td");
+          var pwtpointTextNode = document.createTextNode(item.pwtpoint);
+          pwtpointCell.appendChild(pwtpointTextNode);
+
+          var netpointCell = document.createElement("td");
+          var netpointTextNode = document.createTextNode(item.netpoint);
+          netpointCell.appendChild(netpointTextNode);
+
+          tr.appendChild(dateCell);
+          tr.appendChild(purchasePointCell);
+          tr.appendChild(pwtpointCell);
+          tr.appendChild(netpointCell);
+
+          table.appendChild(tr);
+        });
+        console.log("Response:", response.data);
+      })
+      .catch(function (error) {
+        console.error("Error:", error);
+      });
+  });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  getReportFromDate();
+});
