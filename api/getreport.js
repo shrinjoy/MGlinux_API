@@ -35,8 +35,25 @@ module.exports={
             )
 
         })
-    }
+    },
+   getticketbybarcode:function(db,sql)
+   {
+    return new Promise((resolve,reject)=>{
+        db.query(`Select  * from ticket99 where TICKETNUMBER='${sql['barcode']}'  order by INTNUMBER DESC`).then((data)=>{
+          arraydata = []
+          data.recordsets.forEach(element => {
+            arraydata.push(element);
+          });
+          
+          resolve(arraydata);
+        })
+        .catch((err)=>{
+                reject(err);
+            }
+        )
 
+    })
+   }
 }
 //get result by date for all 
 //Select ticketnumber,gamedate,DROWTIME,gametime,tickettotalrs,tarminalcls from ticket99 where gamedate=CONVERT(DATE,'2024-03-13') and tarminalid='ADMIN' order by INTNUMBER DESC 

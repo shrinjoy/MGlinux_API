@@ -167,6 +167,15 @@ app.post('/getreportbydateandid',function(req,res){
     })
 })
 
+app.post('/getticketbybarcode',function(req,res){
+    getreport.getticketbybarcode(sql,req.body).then((data)=>{
+        res.status(200).send({data});
+    })
+    .catch((err)=>{
+        res.status(400).send({err});
+    })
+})
+
 app.get('/', function (req, res) {
     res.status(200).send({ "message": "welcome to the root of magic deluxe api" })
 })
