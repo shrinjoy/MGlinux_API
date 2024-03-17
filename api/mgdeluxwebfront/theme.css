@@ -545,3 +545,26 @@ body {
     left: 225%;
   }
 }
+
+.barcodePopup {
+  display: none;
+  background-color: #fff;
+  padding: 20px;
+  width: 600px;
+  height: 900px;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.barcodePopup .content {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+}
+.barcodePopup .content p {
+  margin-bottom: 5px;
+  font-weight: 700;
+}

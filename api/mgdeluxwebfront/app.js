@@ -792,7 +792,7 @@ function getDetailReportFromDate() {
         date: dateValue,
       })
       .then(function (response) {
-        console.log(response.data.data[0]);
+        // console.log(response.data.data[0]);
         var responseData = response.data.data[0];
         responseData.forEach(function (game, index) {
           var tr = document.createElement("tr");
@@ -891,17 +891,69 @@ function getDetailReportFromDate() {
 }
 
 function viewBarcodeByTicket(event) {
+  var reportPanel = document.querySelector(".barcodePopup");
   var viewButton = event.target;
   var ticketNumber = viewButton
     .closest("tr")
     .querySelector("#ticketNumber").textContent;
+  reportPanel.style.display = "block";
 
   axios
     .post("http://193.203.163.194:3000/getticketbybarcode", {
       barcode: ticketNumber,
     })
     .then(function (response) {
-      console.log(response.data.data[0]);
+      // console.log(response.data.data[0]);
+      var responseData = response.data.data[0];
+
+      var qtyPopupValue = 0;
+
+      responseData.forEach(function (item) {
+        var ticketGroup = document.querySelector(".barcodePopup .ticketGroup");
+        var ticketDetailsArray = item.TICKETDETAILS.split(",");
+        ticketDetailsArray.forEach(function (ticketDetail) {
+          if (!ticketDetail.includes("Q0")) {
+            var divElement = document.createElement("div");
+            var pElement = document.createElement("p");
+            var textNode = document.createTextNode(ticketDetail.trim());
+
+            qtyPopupValue = qtyPopupValue + 1;
+
+            pElement.appendChild(textNode);
+            divElement.appendChild(pElement);
+            ticketGroup.appendChild(divElement);
+          }
+        });
+
+        var dateTimePopup = document.getElementById("dateTimePopup");
+        var dateSpan = document.createElement("span");
+        dateSpan.innerHTML = item.GAMEDATE.slice(0, 10);
+        dateTimePopup.append(dateSpan);
+
+        var timeSpan = document.createElement("span");
+        timeSpan.style.marginLeft = "5px";
+        timeSpan.innerHTML = item.GAMETIME.slice(11, 19);
+        dateTimePopup.append(timeSpan);
+
+        var gameIdPopup = document.getElementById("gameIdPopup");
+        gameIdPopup.innerHTML = item.GAMEID;
+
+        var posIdPopup = document.getElementById("posIdPopup");
+        posIdPopup.innerHTML = item.TARMINALID;
+
+        var barCodePopupValue = document.getElementById("barCodePopupValue");
+        barCodePopupValue.innerHTML = ticketNumber;
+
+        var qtyPopup = document.getElementById("qtyPopup");
+        qtyPopup.innerHTML = qtyPopupValue;
+
+        var totalPtsPopup = document.getElementById("totalPtsPopup");
+        totalPtsPopup.innerHTML = qtyPopup.innerHTML;
+
+        JsBarcode("#barcodeEle", `${ticketNumber}`);
+
+        // console.log(item.TICKETDETAILS);
+      });
     });
 }
 

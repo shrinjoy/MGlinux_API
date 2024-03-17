@@ -577,6 +577,38 @@
               </div>
             </div>
           </div>
+          <div class="barcodePopup">
+            <div class="content">
+              <p>For Amusement Only</p>
+              <p>D.D: <span id="dateTimePopup"></span></p>
+              <div class="d-flex justify-content-center">
+                <div>
+                  <p>D.T: <span id="gameIdPopup"></span></p>
+                </div>
+                <div class="ms-2">
+                  <p>Pos ID: <span id="posIdPopup"></span></p>
+                </div>
+              </div>
+              <div class="ticketGroup"></div>
+              <div class="d-flex justify-content-center">
+                <div>
+                  <p>Qty. <span id="qtyPopup"></span></p>
+                </div>
+                <div class="ms-2">
+                  <p>Total Pts. <span id="totalPtsPopup"></span></p>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center">
+                <div><p>G.id:</p></div>
+                <div>
+                  <p><span class="ms-2" id="barCodePopupValue"></span></p>
+                </div>
+              </div>
+              <div class="barcodeImage">
+                <svg id="barcodeEle"></svg>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -586,6 +618,7 @@
   <script src="cardanimation.js"></script>
   <script src="app.js"></script>
   <script src="frontendfunc.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
   <script>
     document.getElementById("catchpa").innerHTML =
       Math.floor(Math.random() * (999999 - 300000 + 1)) + 300000;
