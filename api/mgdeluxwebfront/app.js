@@ -817,12 +817,14 @@ function getDetailReportFromDate() {
 
           // Points (TICKETTOTALRS[1])
           var points = document.createElement("td");
+          points.style.textAlign = "right";
           var pointsTextNode = document.createTextNode(game.TICKETTOTALRS[1]);
           points.appendChild(pointsTextNode);
           tr.appendChild(points);
 
           // Request ID (TICKETNUMBER)
           var requestId = document.createElement("td");
+          requestId.id = "ticketNumber";
           var requestIdTextNode = document.createTextNode(game.TICKETNUMBER);
           requestId.appendChild(requestIdTextNode);
           tr.appendChild(requestId);
@@ -847,6 +849,7 @@ function getDetailReportFromDate() {
 
           // Gift Points (WINRS)
           var giftPoints = document.createElement("td");
+          giftPoints.style.textAlign = "right";
           var giftPointsTextNode = document.createTextNode(game.WINRS);
           giftPoints.appendChild(giftPointsTextNode);
           tr.appendChild(giftPoints);
@@ -873,6 +876,7 @@ function getDetailReportFromDate() {
           var view = document.createElement("td");
           var viewLink = document.createElement("a");
           viewLink.href = "#"; // Add your view link here
+          viewLink.setAttribute("onclick", "viewBarcodeByTicket(event)");
           viewLink.textContent = "View";
           view.appendChild(viewLink);
           tr.appendChild(view);
@@ -884,6 +888,21 @@ function getDetailReportFromDate() {
         console.error("Error:", error);
       });
   });
+}
+
+function viewBarcodeByTicket(event) {
+  var viewButton = event.target;
+  var ticketNumber = viewButton
+    .closest("tr")
+    .querySelector("#ticketNumber").textContent;
+
+  axios
+    .post("http://193.203.163.194:3000/getticketbybarcode", {
+      barcode: ticketNumber,
+    })
+    .then(function (response) {
+      console.log(response.data.data[0]);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
