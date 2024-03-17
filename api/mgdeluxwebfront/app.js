@@ -915,6 +915,7 @@ function viewBarcodeByTicket(event) {
           if (!ticketDetail.includes("Q0")) {
             var divElement = document.createElement("div");
             var pElement = document.createElement("p");
+            pElement.classList.add("elementToClear");
             var textNode = document.createTextNode(ticketDetail.trim());
 
             qtyPopupValue = qtyPopupValue + 1;
@@ -927,11 +928,15 @@ function viewBarcodeByTicket(event) {
 
         var dateTimePopup = document.getElementById("dateTimePopup");
         var dateSpan = document.createElement("span");
+        dateSpan.id = "dateSpan";
+        dateSpan.classList.add("elementToClear");
         dateSpan.innerHTML = item.GAMEDATE.slice(0, 10);
         dateTimePopup.append(dateSpan);
 
         var timeSpan = document.createElement("span");
         timeSpan.style.marginLeft = "5px";
+        timeSpan.id = "timeSpan";
+        timeSpan.classList.add("elementToClear");
         timeSpan.innerHTML = item.GAMETIME.slice(11, 19);
         dateTimePopup.append(timeSpan);
 
@@ -950,7 +955,10 @@ function viewBarcodeByTicket(event) {
         var totalPtsPopup = document.getElementById("totalPtsPopup");
         totalPtsPopup.innerHTML = qtyPopup.innerHTML;
 
-        JsBarcode("#barcodeEle", `${ticketNumber}`);
+        JsBarcode("#barcodeEle", `${ticketNumber}`, {
+          fontSize: 28,
+          height: 60,
+        });
 
         // console.log(item.TICKETDETAILS);
       });
@@ -961,3 +969,14 @@ document.addEventListener("DOMContentLoaded", function () {
   getReportFromDate();
   getDetailReportFromDate();
 });
+
+function closeBarCodePopup() {
+  var reportPanel = document.querySelector(".barcodePopup");
+
+  var elementsToClear = document.querySelectorAll(".elementToClear");
+  elementsToClear.forEach(function (element) {
+    element.innerHTML = "";
+  });
+
+  reportPanel.style.display = "none";
+}

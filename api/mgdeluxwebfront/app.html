@@ -578,34 +578,50 @@
             </div>
           </div>
           <div class="barcodePopup">
+            <div style="position: absolute; right: 0; top: 0">
+              <button onclick="closeBarCodePopup()">X</button>
+            </div>
             <div class="content">
               <p>For Amusement Only</p>
               <p>D.D: <span id="dateTimePopup"></span></p>
               <div class="d-flex justify-content-center">
                 <div>
-                  <p>D.T: <span id="gameIdPopup"></span></p>
+                  <p>
+                    D.T: <span id="gameIdPopup" class="elementToClear"></span>
+                  </p>
                 </div>
                 <div class="ms-2">
-                  <p>Pos ID: <span id="posIdPopup"></span></p>
+                  <p>
+                    Pos ID: <span id="posIdPopup" class="elementToClear"></span>
+                  </p>
                 </div>
               </div>
               <div class="ticketGroup"></div>
               <div class="d-flex justify-content-center">
                 <div>
-                  <p>Qty. <span id="qtyPopup"></span></p>
+                  <p>Qty. <span id="qtyPopup" class="elementToClear"></span></p>
                 </div>
                 <div class="ms-2">
-                  <p>Total Pts. <span id="totalPtsPopup"></span></p>
+                  <p>
+                    Total Pts.
+                    <span id="totalPtsPopup" class="elementToClear"></span>
+                  </p>
                 </div>
               </div>
               <div class="d-flex justify-content-center">
                 <div><p>G.id:</p></div>
                 <div>
-                  <p><span class="ms-2" id="barCodePopupValue"></span></p>
+                  <p>
+                    <span
+                      class="ms-2"
+                      id="barCodePopupValue"
+                      class="elementToClear"
+                    ></span>
+                  </p>
                 </div>
               </div>
               <div class="barcodeImage">
-                <svg id="barcodeEle"></svg>
+                <svg id="barcodeEle" class="elementToClear"></svg>
               </div>
             </div>
           </div>
