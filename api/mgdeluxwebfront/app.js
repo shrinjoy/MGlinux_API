@@ -691,7 +691,8 @@ async function showpopup(popuptext, popupcolor) {
 
 function changePassword(event) {
   event.preventDefault();
-  var data_username = document.getElementById("cpusername").value.toString();
+  var data_username = username;
+  var currentpass  = document.getElementById("cpusername").value.toString();
   var data_currentPassword = document
     .getElementById("password")
     .value.toString();
@@ -704,7 +705,7 @@ function changePassword(event) {
     url: "http://193.203.163.194:3000/changepassword",
     data: {
       username: data_username,
-      password: data_currentPassword,
+      password: currentpass,
       newpassword: data_newPassword,
     },
   })
