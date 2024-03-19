@@ -1173,3 +1173,11 @@ console.log(betentryarray);
 // Now, let's create options for each item in the betentryarray
 const selectElement = document.getElementById("buttonSelectorReport");
 createOptions(betentryarray, selectElement);
+
+function countTotal() {
+  var totalQty = document.querySelectorAll("");
+  var a = 0;
+  totalQty.forEach((item) => {
+    a = a + item.textContent;
+  });
+}
