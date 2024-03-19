@@ -571,3 +571,6 @@ body {
   margin-bottom: 5px;
   font-weight: 700;
 }
+.total {
+  display: none !important;
+}
