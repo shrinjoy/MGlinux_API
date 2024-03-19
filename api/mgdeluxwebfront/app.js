@@ -504,7 +504,7 @@ function getAllResultsSoFar() {
 
           tablerow.append(gameidname);
           count += 1;
-          if (count == 4) {
+          if (count == 3) {
             table.append(tablerow);
             count = 0;
             tablerow = document.createElement("tr");

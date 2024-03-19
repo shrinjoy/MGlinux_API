@@ -137,6 +137,8 @@ input[type="number"] {
 }
 
 #res_sofar_table .oldres label {
+  font-size: 28px;
+  font-weight: 700;
   height: 50px;
   display: flex;
   justify-content: center;
@@ -179,7 +181,7 @@ body {
   padding: 0%;
 
   white-space: nowrap;
-  font-size: large;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -362,7 +364,7 @@ body {
 }
 
 .gameRow #betinputpanel label {
-  font-size: 28px;
+  font-size: 24px;
   color: #212124;
   font-weight: 700;
 }
