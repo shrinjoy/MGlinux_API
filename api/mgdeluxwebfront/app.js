@@ -868,7 +868,7 @@ function getDetailReportFromDate() {
             var utcTimestamp = game.GAMETIME;
 
             var dateObject = new Date(utcTimestamp);
-
+            dateObject.setMinutes(dateObject.getMinutes() + 330);
             var year = dateObject.getFullYear();
             var month = String(dateObject.getMonth() + 1).padStart(2, "0"); // Month starts from 0
             var day = String(dateObject.getDate()).padStart(2, "0");
@@ -971,6 +971,7 @@ function getDetailReportFromDate() {
             var utcTimestamp = game.GAMETIME;
 
             var dateObject = new Date(utcTimestamp);
+            dateObject.setMinutes(dateObject.getMinutes() + 330);
 
             var year = dateObject.getFullYear();
             var month = String(dateObject.getMonth() + 1).padStart(2, "0"); // Month starts from 0
