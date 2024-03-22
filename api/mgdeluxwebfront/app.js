@@ -692,7 +692,7 @@ async function showpopup(popuptext, popupcolor) {
 function changePassword(event) {
   event.preventDefault();
   var data_username = username;
-  var currentpass  = document.getElementById("cpusername").value.toString();
+  var currentpass = document.getElementById("cpusername").value.toString();
   var data_currentPassword = document
     .getElementById("password")
     .value.toString();
@@ -1181,3 +1181,29 @@ function countTotal() {
     a = a + item.textContent;
   });
 }
+
+
+
+// Page Idle Script 
+let time = new Date().getTime();
+
+const setActivityTime = () => {
+  time = new Date().getTime();
+};
+
+document.body.addEventListener("touchstart", setActivityTime);
+document.body.addEventListener("touchmove", setActivityTime);
+document.body.addEventListener("touchend", setActivityTime);
+document.body.addEventListener("mousedown", setActivityTime);
+document.body.addEventListener("mousemove", setActivityTime);
+document.body.addEventListener("keypress", setActivityTime);
+
+const refresh = () => {
+  if (new Date().getTime() - time >= 60000) {
+    window.location.reload(true);
+  } else {
+    setTimeout(refresh, 10000);
+  }
+};
+
+setTimeout(refresh, 10000);
