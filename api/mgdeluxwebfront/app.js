@@ -15,8 +15,6 @@ var betinputs;
 var totalbet;
 var lastbetbarcode = "";
 
-document.getElementById("mc").style = "display:none";
-
 for (y = -1; y < 10; y++) {
   var betdata = [];
   var tr = document.createElement("tr");
