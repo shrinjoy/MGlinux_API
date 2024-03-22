@@ -363,7 +363,11 @@ body {
   font-weight: 700;
   width: 100%;
 }
+#buybuttonXD
+{
+  font-size: 25px;
 
+}
 .gameRow #betinputpanel label {
   font-size: 24px;
   color: #212124;

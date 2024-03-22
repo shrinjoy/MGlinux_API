@@ -1201,6 +1201,7 @@ document.body.addEventListener("keypress", setActivityTime);
 
 const refresh = () => {
   if (new Date().getTime() - timea >= 60000) {
+    alert("session time out")
     window.location.reload(true);
   } else {
     setTimeout(refresh, 10000);
