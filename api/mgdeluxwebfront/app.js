@@ -1204,8 +1204,8 @@ const refresh = () => {
     alert("session time out")
     window.location.reload(true);
   } else {
-    setTimeout(refresh, 10000);
+    setTimeout(refresh, 1);
   }
 };
 
-setTimeout(refresh, 10000);
+setTimeout(refresh, 1);
