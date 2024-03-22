@@ -875,7 +875,7 @@ function getDetailReportFromDate() {
             var hours = String(dateObject.getHours()).padStart(2, "0");
             var minutes = String(dateObject.getMinutes()).padStart(2, "0");
 
-            var formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}`;
+            var formattedDateTime = utcTimestamp;//`${year}-${month}-${day} ${hours}:${minutes}`;
 
             var dateTime = document.createElement("td");
             var dateTimeTextNode = document.createTextNode(formattedDateTime);
@@ -978,7 +978,7 @@ function getDetailReportFromDate() {
             var hours = String(dateObject.getHours()).padStart(2, "0");
             var minutes = String(dateObject.getMinutes()).padStart(2, "0");
 
-            var formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}`;
+            var formattedDateTime = utcTimestamp;//`${year}-${month}-${day} ${hours}:${minutes}`;
 
             var dateTime = document.createElement("td");
             var dateTimeTextNode = document.createTextNode(formattedDateTime);
