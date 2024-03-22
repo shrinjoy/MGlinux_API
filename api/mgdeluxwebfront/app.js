@@ -1200,7 +1200,7 @@ document.body.addEventListener("mousemove", setActivityTime);
 document.body.addEventListener("keypress", setActivityTime);
 
 const refresh = () => {
-  if (new Date().getTime() - timea >= 60000) {
+  if (new Date().getTime() - timea >= 7*60000) {
     alert("session time out")
     window.location.reload(true);
   } else {
