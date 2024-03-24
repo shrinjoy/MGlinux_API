@@ -1079,7 +1079,7 @@ function viewBarcodeByTicket(event) {
       barcode: ticketNumber,
     })
     .then(function (response) {
-      // console.log(response.data.data[0]);
+      
       var responseData = response.data.data[0];
 
       var qtyPopupValue = 0;
@@ -1087,11 +1087,10 @@ function viewBarcodeByTicket(event) {
       responseData.forEach(function (item) {
         var ticketGroup = document.querySelector(".barcodePopup .ticketGroup");
         var ticketDetailsArray = item.TICKETDETAILS.split(",");
-       
+        qtyPopupValue=(item["TICKETTOTALRS"]);
         ticketDetailsArray.forEach(function (ticketDetail) {
 
-          console.log(ticketDetail+"-"+ticketDetail.substring(3)+"-"+ticketDetail.substring(0,2));
-
+       
           if (parseInt(ticketDetail.substring(3))!==0) {
             var divElement = document.createElement("div");
             var pElement = document.createElement("p");
@@ -1137,10 +1136,10 @@ function viewBarcodeByTicket(event) {
         barCodePopupValue.innerHTML = ticketNumber;
 
         var qtyPopup = document.getElementById("qtyPopup");
-        qtyPopup.innerHTML = qtyPopupValue;
+        qtyPopup.innerHTML = item["TICKETTOTALRS"];
 
         var totalPtsPopup = document.getElementById("totalPtsPopup");
-        totalPtsPopup.innerHTML = qtyPopup.innerHTML;
+        totalPtsPopup.innerHTML = item["TICKETTOTALRS"];
 
         JsBarcode("#barcodeEle", `${ticketNumber}`, {
           fontSize: 28,
