@@ -213,8 +213,21 @@ function buyticket() {
       gameid: gameid.toString(),
     };
     //(data);
+    var tempids =bettingID;
+    
+    if(bettingID.length>1)
+    {
+      tempids.shift();
+    }
+    else if(bettingID.length == 1)
+    {
+      tempids = [];
+      tempids.push(gameid);
+    }
+    
+    console.log(tempids);
 
-    bettingID.forEach((e) => {
+    tempids.forEach((e) => {
       axios({
         method: "post",
         url: "http://193.203.163.194:3000/placebet",
@@ -232,14 +245,26 @@ function buyticket() {
 
           lastbetbarcode = res["data"]["barcode"];
           getuserdata(username, password);
+
+          try{
           showpopup("Transaction Succesfull", "green"); //popup_function
+          }
+          catch{
+
+          }
           datax = null;
           totalbet = 0;
         })
         .catch(function (err) {
           // alert(err);
           getuserdata(username, password);
+          try{
           showpopup("Transaction Failed", "green"); //popup_function
+          }
+          catch
+          {
+
+          }
         });
     });
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -254,7 +279,12 @@ function buyticket() {
     bettingID.push(currentid);
     clearallinputs();
   } else {
+    try{
     showpopup("Transaction Failed", "red"); //popup_function
+    }
+    catch{
+
+    }
     resetbetdata();
   }
   /**/
@@ -676,6 +706,7 @@ function togglePopup(e) {
 }
 
 async function showpopup(popuptext, popupcolor) {
+  try{
   var popup = document.getElementById("popup");
 
   document.getElementById("popup_msg").innerHTML = popuptext;
@@ -687,6 +718,11 @@ async function showpopup(popuptext, popupcolor) {
   popup.setAttribute("id", "popup_notif_slide");
   await new Promise((resolve) => setTimeout(resolve, 500));
   popup.setAttribute("id", "popup");
+  }
+  catch
+  {
+
+  }
 }
 
 function changePassword(event) {
