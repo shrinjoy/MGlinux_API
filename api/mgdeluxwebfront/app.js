@@ -1067,6 +1067,8 @@ function getDetailReportFromDate() {
 }
 
 function viewBarcodeByTicket(event) {
+
+  closeBarCodePopup();
   var reportPanel = document.querySelector(".barcodePopup");
   var viewButton = event.target;
   var ticketNumber = viewButton
