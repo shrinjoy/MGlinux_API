@@ -1087,22 +1087,21 @@ function viewBarcodeByTicket(event) {
       responseData.forEach(function (item) {
         var ticketGroup = document.querySelector(".barcodePopup .ticketGroup");
         var ticketDetailsArray = item.TICKETDETAILS.split(",");
+       
         ticketDetailsArray.forEach(function (ticketDetail) {
-          if (!ticketDetail.includes("Q0")) {
+
+          console.log(ticketDetail+"-"+ticketDetail.substring(3)+"-"+ticketDetail.substring(0,2));
+
+          if (parseInt(ticketDetail.substring(3))!==0) {
             var divElement = document.createElement("div");
             var pElement = document.createElement("p");
             pElement.classList.add("elementToClear");
             var ticketRaw = ticketDetail.trim();
-            var abv = ticketDetail.substring(1, 2);
+            var abv = ticketDetail.substring(0, 2);
             var abvbv = "";
 
-            if (parseInt(abv) < 10) {
-              abvbv = "0" + abv;
-            } else {
-              abvbv = abv;
-            }
-
-            let ticMD = "MD" + abvbv + "*" + ticketDetail.substring(3);
+           
+            let ticMD = "MD" + ticketDetail.substring(0, 2) + "*" + ticketDetail.substring(3);
             // let ticQ = ticketDetail
             var textNode = document.createTextNode(ticMD);
 
