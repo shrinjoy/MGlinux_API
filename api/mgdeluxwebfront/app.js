@@ -558,6 +558,7 @@ function gettimeandgameid() {
     url: "http://193.203.163.194:3000/timeleft",
   }).then(function (res) {
     time = res["data"]["time"];
+    time=time-10;
     gameid = res["data"]["gameid"];
     bettingID = [];
     bettingID = [gameid.toString()];
