@@ -194,7 +194,7 @@ function inputfieldupdate() {
     "Total Amnt: <span>" + totalbet + "</span>";
 }
 function buyticket() {
-  if (totalbet > 0 && time > 10) {
+  if (totalbet > 0 && time > 12) {
     var datax = [];
     for (y = 0; y < 10; y++) {
       for (x = 0; x < 10; x++) {
@@ -558,7 +558,7 @@ function gettimeandgameid() {
     url: "http://193.203.163.194:3000/timeleft",
   }).then(function (res) {
     time = res["data"]["time"];
-    time=time-10;
+    time=time-20;
     gameid = res["data"]["gameid"];
     bettingID = [];
     bettingID = [gameid.toString()];
