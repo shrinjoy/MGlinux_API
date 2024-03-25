@@ -5,9 +5,12 @@
 //gameid
 module.exports = {
     placebet: function (db, req) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => 
+        {
 
-            db.query(`SELECT DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`).then((data) => {
+            db.query(`SELECT DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
+            .then((data) => 
+            {
                 if(data.recordset[0].timer >10)
                 userdata = db
                     .query(
@@ -51,10 +54,17 @@ module.exports = {
                     .catch((err) => {
                         reject({ message: "failed to place bets because " + err });
                     });
-            });
-        }
-        )
+            })
+            .catch(err)
+            {
+                reject({ message: "times up " + err });
+    
+            }
+            
+        })
+        
+        
     },
-};
+}
 //SELECT DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;
 //sql.query(`SELECT GAMEID,TARMINALDATE AS NEXTGAMEDATE,TARMINALTIME AS NEXTGAMETIME,NEXTDRAW,DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
