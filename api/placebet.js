@@ -12,7 +12,7 @@ module.exports = {
             .then((data) => 
             {
                 
-                if(data.recordset[0].timer-10 >10)
+                if(data.recordset[0].timer-10 >10){
                 console.log("time left:"+data.recordset[0].timer-10 )
                 userdata = db
                     .query(
@@ -26,7 +26,8 @@ module.exports = {
                             db.query(
                                 `UPDATE [playjeeto].[dbo].[CLIENTLOGIN]  set CLIENTBALANCE  = CLIENTBALANCE -${req["totalbet"]}`
                             )
-                                .then((data) => {
+                                .then((data) => 
+                                {
                         console.log("deducted client balance" );
 
                                     db.query("SELECT FORMAT(GETDATE(), 'yyyyMMddHHmmssfff') as barcode")
@@ -42,6 +43,8 @@ module.exports = {
 
                                                 })
                                                 .catch((err) => {
+                        console.log("failed to place bet" );
+
                                                     reject({ error: `${err}` });
                                                 });
 
@@ -51,6 +54,8 @@ module.exports = {
                                         })
                                 })
                                 .catch((err) => {
+                        console.log("failed to deduct client balance" );
+
                                     reject({ message: "failed to place bet because- " + err });
                                 });
                         } else {
@@ -60,9 +65,11 @@ module.exports = {
                     .catch((err) => {
                         reject({ message: "failed to place bets because " + err });
                     });
+                }
             })
             .catch(err)
             {
+                console.log("times up")
                 reject({ message: "times up " + err });
     
             }
