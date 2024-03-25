@@ -714,7 +714,7 @@ async function showpopup(popuptext, popupcolor) {
   popup.style = `background-color:${popupcolor}`;
 
   popup.setAttribute("id", "popup_notif_show");
-  await new Promise((resolve) => setTimeout(resolve, 200));
+  await new Promise((resolve) => setTimeout(resolve, 700));
 
   popup.setAttribute("id", "popup_notif_slide");
   await new Promise((resolve) => setTimeout(resolve, 500));
