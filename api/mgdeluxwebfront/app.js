@@ -194,7 +194,7 @@ function inputfieldupdate() {
     "Total Amnt: <span>" + totalbet + "</span>";
 }
 function buyticket() {
-  if (totalbet > 0 && time > 12) {
+  if (totalbet > 0 && time > 10) {
     var datax = [];
     for (y = 0; y < 10; y++) {
       for (x = 0; x < 10; x++) {
