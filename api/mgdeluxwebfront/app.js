@@ -256,7 +256,7 @@ function buyticket() {
           totalbet = 0;
         })
         .catch(function (err) {
-          // alert(err);
+           alert(err);
           getuserdata(username, password);
           try{
           showpopup("Transaction Failed", "green"); //popup_function

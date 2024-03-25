@@ -11,12 +11,15 @@ module.exports = {
             db.query(`SELECT DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
             .then((data) => 
             {
+                
                 if(data.recordset[0].timer-10 >10)
+                console.log("time left:"+data.recordset[0].timer-10 )
                 userdata = db
                     .query(
                         `SELECT * from [playjeeto].[dbo].[CLIENTLOGIN] where CLIENTUSERNAME ='${req["username"]}' and CLIENTPASSWORD='${req["password"]}'`
                     )
                     .then((data) => {
+                        console.log("user found" )
                         //check if user has enough balance;
                         if (data.recordset[0].CLIENTBALANCE > req["totalbet"]) {
                             //deduct balance from user wallet
@@ -24,6 +27,7 @@ module.exports = {
                                 `UPDATE [playjeeto].[dbo].[CLIENTLOGIN]  set CLIENTBALANCE  = CLIENTBALANCE -${req["totalbet"]}`
                             )
                                 .then((data) => {
+                        console.log("deducted client balance" );
 
                                     db.query("SELECT FORMAT(GETDATE(), 'yyyyMMddHHmmssfff') as barcode")
                                         .then((data) => {
@@ -34,6 +38,8 @@ module.exports = {
                                             db.query(querystring)
                                                 .then((data) => {
                                                     resolve({ "barcode": barcodedata, "message": "placed bet " });
+                        console.log("placed bet" );
+
                                                 })
                                                 .catch((err) => {
                                                     reject({ error: `${err}` });
