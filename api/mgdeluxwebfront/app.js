@@ -256,15 +256,9 @@ function buyticket() {
           totalbet = 0;
         })
         .catch(function (err) {
-           alert(err);
+           
           getuserdata(username, password);
-          try{
-          showpopup("Transaction Failed", "green"); //popup_function
-          }
-          catch
-          {
-
-          }
+         
         });
     });
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
