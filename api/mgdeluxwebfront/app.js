@@ -242,9 +242,10 @@ function buyticket() {
         .then(function (res) {
           //("placed bet in id:"+e.toString());
           //(res["data"]["barcode"]);
-
+          console.log("placed the bet");
           lastbetbarcode = res["data"]["barcode"];
           getuserdata(username, password);
+          console.log("got user data");
 
           try{
           showpopup("Transaction Succesfull", "green"); //popup_function
@@ -256,6 +257,7 @@ function buyticket() {
           totalbet = 0;
         })
         .catch(function (err) {
+          showpopup("Transaction Failed", "red"); //popup_function
            
           getuserdata(username, password);
          
