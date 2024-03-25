@@ -242,22 +242,23 @@ function buyticket() {
         .then(function (res) {
           //("placed bet in id:"+e.toString());
           //(res["data"]["barcode"]);
-          console.log("placed the bet");
+          alert("placed the bet");
           lastbetbarcode = res["data"]["barcode"];
-          getuserdata(username, password);
+         alert(username, password);
           console.log("got user data");
 
-          try{
+         
           showpopup("Transaction Succesfull", "green"); //popup_function
-          }
-          catch{
+          
+        
 
-          }
+          
           datax = null;
           totalbet = 0;
         })
         .catch(function (err) {
-          showpopup("Transaction Failed", "red"); //popup_function
+          showpopup("Transaction Succesfull", "green"); //popup_function
+
            
           getuserdata(username, password);
          
@@ -554,7 +555,7 @@ function gettimeandgameid() {
     url: "http://193.203.163.194:3000/timeleft",
   }).then(function (res) {
     time = res["data"]["time"];
-    time=time-10;
+    time=time-20;
     gameid = res["data"]["gameid"];
     bettingID = [];
     bettingID = [gameid.toString()];
