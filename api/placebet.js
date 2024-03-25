@@ -11,7 +11,7 @@ module.exports = {
             db.query(`SELECT DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
             .then((data) => 
             {
-                if(data.recordset[0].timer >10)
+                if(data.recordset[0].timer-10 >10)
                 userdata = db
                     .query(
                         `SELECT * from [playjeeto].[dbo].[CLIENTLOGIN] where CLIENTUSERNAME ='${req["username"]}' and CLIENTPASSWORD='${req["password"]}'`
