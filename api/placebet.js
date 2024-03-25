@@ -66,6 +66,11 @@ module.exports = {
                         reject({ message: "failed to place bets because " + err });
                     });
                 }
+                else
+                {
+                reject({ message: "times up " + err });
+
+                }
             })
             .catch((err)=>{
                 console.log("times up")
