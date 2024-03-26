@@ -75,40 +75,48 @@ function checklogin() {
 
   console.log(
     document.getElementById("uname").value.toString(),
-    document.getElementById("pword").value.toString()
+    document.getElementById("pword").value.toString(),
   );
   var name = document.getElementById("uname").value.toString();
   var pass = document.getElementById("pword").value.toString();
-  axios({
-    method: "post",
-    url: "http://193.203.163.194:3000/canlogin",
-    data: {
-      username: name,
-      password: pass,
-    },
-  })
-    .then(function (res) {
-      if ((res.data.status = "200")) {
-        document.getElementById("loginform").style = "display:none";
+  var captcha = document.getElementById('catchpa').textContent;
+  var captchaInput = document.getElementById('captchaInput').value;
 
-        document.getElementsByClassName("mainContent").style = "display:block";
-        document.getElementById("mc").style = "display:block";
-
-        mobileUIFix();
-
-        getuserdata(name, pass);
-        setInterval(function () {
-          getuserdata(username, password);
-        }, 1000);
-
-        username = name;
-        password = pass;
-      }
+  if (captchaInput === captcha) {
+    axios({
+      method: "post",
+      url: "http://193.203.163.194:3000/canlogin",
+      data: {
+        username: name,
+        password: pass,
+      },
     })
-    .catch((err) => {
-      console.log(err);
-      showpopup("Wrong username or password", "red");
-    });
+      .then(function (res) {
+        if ((res.data.status = "200")) {
+          document.getElementById("loginform").style = "display:none";
+
+          document.getElementsByClassName("mainContent").style = "display:block";
+          document.getElementById("mc").style = "display:block";
+
+          mobileUIFix();
+
+          getuserdata(name, pass);
+          setInterval(function () {
+            getuserdata(username, password);
+          }, 1000);
+
+          username = name;
+          password = pass;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        showpopup("Wrong username or password", "red");
+      });
+  } else {
+    showpopup("Wrong CAPTCHA", "red");
+  }
+
 }
 
 function allfieldbetplace(thisid) {
@@ -213,18 +221,16 @@ function buyticket() {
       gameid: gameid.toString(),
     };
     //(data);
-    var tempids =bettingID;
-    
-    if(bettingID.length>1)
-    {
+    var tempids = bettingID;
+
+    if (bettingID.length > 1) {
       tempids.shift();
     }
-    else if(bettingID.length == 1)
-    {
+    else if (bettingID.length == 1) {
       tempids = [];
       tempids.push(gameid);
     }
-    
+
     console.log(tempids);
 
     tempids.forEach((e) => {
@@ -242,17 +248,17 @@ function buyticket() {
         .then(function (res) {
           //("placed bet in id:"+e.toString());
           //(res["data"]["barcode"]);
-          
+
           lastbetbarcode = res["data"]["barcode"];
-        
+
           console.log("got user data");
 
-         
-          showpopup("Transaction Succesfull", "green"); //popup_function
-          
-        
 
-          
+          showpopup("Transaction Succesfull", "green"); //popup_function
+
+
+
+
           datax = null;
           totalbet = 0;
         })
@@ -262,9 +268,9 @@ function buyticket() {
           alert(err);
           showpopup("Transaction Failed", "red"); //popup_function
 
-           
+
           getuserdata(username, password);
-         
+
         });
     });
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -279,10 +285,10 @@ function buyticket() {
     bettingID.push(currentid);
     clearallinputs();
   } else {
-    try{
-    showpopup("Transaction Failed", "red"); //popup_function
+    try {
+      showpopup("Transaction Failed", "red"); //popup_function
     }
-    catch{
+    catch {
 
     }
     resetbetdata();
@@ -558,7 +564,7 @@ function gettimeandgameid() {
     url: "http://193.203.163.194:3000/timeleft",
   }).then(function (res) {
     time = res["data"]["time"];
-    time=time-10;
+    time = time - 10;
     gameid = res["data"]["gameid"];
     bettingID = [];
     bettingID = [gameid.toString()];
@@ -707,18 +713,18 @@ function togglePopup(e) {
 }
 
 async function showpopup(popuptext, popupcolor) {
-  try{
-  var popup = document.getElementById("popup");
+  try {
+    var popup = document.getElementById("popup");
 
-  document.getElementById("popup_msg").innerHTML = popuptext;
-  popup.style = `background-color:${popupcolor}`;
+    document.getElementById("popup_msg").innerHTML = popuptext;
+    popup.style = `background-color:${popupcolor}`;
 
-  popup.setAttribute("id", "popup_notif_show");
-  await new Promise((resolve) => setTimeout(resolve, 700));
+    popup.setAttribute("id", "popup_notif_show");
+    await new Promise((resolve) => setTimeout(resolve, 700));
 
-  popup.setAttribute("id", "popup_notif_slide");
-  await new Promise((resolve) => setTimeout(resolve, 500));
-  popup.setAttribute("id", "popup");
+    popup.setAttribute("id", "popup_notif_slide");
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    popup.setAttribute("id", "popup");
   }
   catch
   {
@@ -1082,7 +1088,7 @@ function viewBarcodeByTicket(event) {
       barcode: ticketNumber,
     })
     .then(function (response) {
-      
+
       var responseData = response.data.data[0];
 
       var qtyPopupValue = 0;
@@ -1090,11 +1096,11 @@ function viewBarcodeByTicket(event) {
       responseData.forEach(function (item) {
         var ticketGroup = document.querySelector(".barcodePopup .ticketGroup");
         var ticketDetailsArray = item.TICKETDETAILS.split(",");
-        qtyPopupValue=(item["TICKETTOTALRS"]);
+        qtyPopupValue = (item["TICKETTOTALRS"]);
         ticketDetailsArray.forEach(function (ticketDetail) {
 
-       
-          if (parseInt(ticketDetail.substring(3))!==0) {
+
+          if (parseInt(ticketDetail.substring(3)) !== 0) {
             var divElement = document.createElement("div");
             var pElement = document.createElement("p");
             pElement.classList.add("elementToClear");
@@ -1102,7 +1108,7 @@ function viewBarcodeByTicket(event) {
             var abv = ticketDetail.substring(0, 2);
             var abvbv = "";
 
-           
+
             let ticMD = "MD" + ticketDetail.substring(0, 2) + "*" + ticketDetail.substring(3);
             // let ticQ = ticketDetail
             var textNode = document.createTextNode(ticMD);
@@ -1237,7 +1243,7 @@ document.body.addEventListener("mousemove", setActivityTime);
 document.body.addEventListener("keypress", setActivityTime);
 
 const refresh = () => {
-  if (new Date().getTime() - timea >= 7*60000) {
+  if (new Date().getTime() - timea >= 7 * 60000) {
     alert("session time out")
     window.location.reload(true);
   } else {
