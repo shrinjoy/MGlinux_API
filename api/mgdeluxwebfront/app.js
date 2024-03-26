@@ -542,7 +542,14 @@ function addidtolistforadvancebet(checkboxId) {
   }
 }
 function getAllResultsSoFar() {
-  var table = document.getElementById("res_sofar_table");
+  
+
+  axios({
+    method: "get",
+    url: "http://193.203.163.194:3000/getallresultsofar",
+  })
+    .then(function (res) {
+      var table = document.getElementById("res_sofar_table");
   if (table) {
     var rowCount = table.rows.length;
 
@@ -560,12 +567,6 @@ function getAllResultsSoFar() {
   var tablerow = document.createElement("tr");
   // Clear existing rows in the table
   table.innerHTML = "";
-
-  axios({
-    method: "get",
-    url: "http://193.203.163.194:3000/getallresultsofar",
-  })
-    .then(function (res) {
       // Assuming res.data is already a parsed JSON object
       var parsedData = res.data;
       var count = 0;
@@ -612,7 +613,7 @@ function gettimeandgameid() {
     url: "http://193.203.163.194:3000/timeleft",
   }).then(function (res) {
     time = res["data"]["time"];
-    time = time - 14;
+    time = time - 12;
     gameid = res["data"]["gameid"];
     bettingID = [];
     bettingID = [gameid.toString()];
@@ -673,6 +674,10 @@ function getCurrentTime() {
   return currentTime;
 }
 function formatSecondsToTime(seconds) {
+  if(seconds<0)
+  {
+    seconds=0;
+  }
   const date = new Date(seconds * 1000); // Convert seconds to milliseconds
   const hours = date.getUTCHours();
   const minutes = date.getUTCMinutes();
