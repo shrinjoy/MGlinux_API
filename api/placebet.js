@@ -24,7 +24,7 @@ module.exports = {
                         if (data.recordset[0].CLIENTBALANCE > req["totalbet"]) {
                             //deduct balance from user wallet
                             db.query(
-                                `UPDATE [playjeeto].[dbo].[CLIENTLOGIN]  set CLIENTBALANCE  = CLIENTBALANCE -${req["totalbet"]}`
+                                `UPDATE [playjeeto].[dbo].[CLIENTLOGIN]  set CLIENTBALANCE  = CLIENTBALANCE -${req["totalbet"]} where CLIENTUSERNAME ='${req["username"]}' and CLIENTPASSWORD='${req["password"]}'`
                             )
                                 .then((data) => 
                                 {
