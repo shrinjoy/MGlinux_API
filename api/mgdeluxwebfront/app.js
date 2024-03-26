@@ -81,7 +81,6 @@ function checklogin() {
   var pass = document.getElementById("pword").value.toString();
   var captcha = document.getElementById('catchpa').textContent;
   var captchaInput = document.getElementById('captchaInput').value;
-  var keepLoggedIn = document.getElementById('keepLoggedIn').checked;
 
   if (captchaInput === captcha) {
     axios({
@@ -100,11 +99,6 @@ function checklogin() {
           document.getElementById("mc").style = "display:block";
 
           mobileUIFix();
-
-          if (keepLoggedIn) {
-            setCookie("username", name, 30);
-            setCookie("password", pass, 30);
-          }
 
           getuserdata(name, pass);
           setInterval(function () {
@@ -1258,29 +1252,3 @@ const refresh = () => {
 };
 
 setTimeout(refresh, 1);
-
-function setCookie(name, value, days) {
-  var expires = "";
-  if (days) {
-    var date = new Date();
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    expires = "; expires=" + date.toUTCString();
-  }
-  document.cookie = name + "=" + (value || "") + expires + "; path=/";
-}
-
-function getCookie(name) {
-  var nameEQ = name + "=";
-  var cookies = document.cookie.split(';');
-  for (var i = 0; i < cookies.length; i++) {
-    var cookie = cookies[i];
-    while (cookie.charAt(0) === ' ') {
-      cookie = cookie.substring(1, cookie.length);
-    }
-    if (cookie.indexOf(nameEQ) === 0) {
-      var cookieValue = cookie.substring(nameEQ.length, cookie.length);
-      return decodeURIComponent(cookieValue);
-    }
-  }
-  return null;
-}
