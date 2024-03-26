@@ -70,6 +70,18 @@ for (y = -1; y < 10; y++) {
   betinputpanel.append(tr);
 }
 
+try{
+  var d =getJSONCookie("userdata");
+  document.getElementById("uname").value=d.user_name;
+  document.getElementById("pword").value=d.user_pass;
+
+}
+catch
+{
+
+}
+
+
 function checklogin() {
   // /canlogin
 
@@ -107,6 +119,13 @@ function checklogin() {
 
           username = name;
           password = pass;
+
+          if(document.getElementById("keepLoggedIn").checked)
+          {
+            var jdata ={user_name:name,user_pass:pass}
+            setJSONCookie("userdata",jdata,365);
+          }
+
         }
       })
       .catch((err) => {
@@ -118,6 +137,35 @@ function checklogin() {
   }
 
 }
+
+
+
+function setJSONCookie(name, data, daysToExpire) {
+  const jsonData = JSON.stringify(data);
+  let expires = "";
+  if (daysToExpire) {
+      const date = new Date();
+      date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + encodeURIComponent(jsonData) + expires + "; path=/";
+}
+function getJSONCookie(name) {
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith(name + "=")) {
+          const jsonStr = decodeURIComponent(cookie.substring(name.length + 1));
+          return JSON.parse(jsonStr);
+      }
+  }
+  return null; // Cookie not found
+}
+
+
+
+
+
 
 function allfieldbetplace(thisid) {
   let inputValue = parseInt(document.getElementById(thisid).value);
