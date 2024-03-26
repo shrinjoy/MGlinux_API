@@ -288,7 +288,7 @@ body {
   font: 600 16px/18px "Open Sans", sans-serif;
 }
 
-.loginWrapper #sig {
+.loginWrapper #keepLoggedIn {
   width: 15px;
   height: 15px;
   margin-right: 10px;
