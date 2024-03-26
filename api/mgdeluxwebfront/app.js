@@ -260,7 +260,7 @@ function buyticket() {
 
 
           alert(err);
-          showpopup("Transaction Succesfull", "green"); //popup_function
+          showpopup("Transaction Failed", "red"); //popup_function
 
            
           getuserdata(username, password);
