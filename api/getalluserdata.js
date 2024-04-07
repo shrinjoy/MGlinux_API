@@ -11,7 +11,6 @@ module.exports = {
                 {
                    
                     resolve({
-                        "userid":data.recordset[0].CLIENTID, 
                         "username":data.recordset[0].CLIENTUSERNAME,
                         "password":data.recordset[0].CLIENTPASSWORD,
                         "status":data.recordset[0].CLIENTSTATUS,
