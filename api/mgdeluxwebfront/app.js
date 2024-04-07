@@ -99,6 +99,7 @@ function checklogin() {
       method: "post",
       url: "http://193.203.163.194:3000/canlogin",
       data: {
+        userid:document.getElementById("uname").value.toString(),
         username: name,
         password: pass,
       },
