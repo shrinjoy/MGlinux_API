@@ -72,8 +72,8 @@ for (y = -1; y < 10; y++) {
 
 try{
   var d =getJSONCookie("userdata");
-  document.getElementById("uname").value=d.user_name;
-  document.getElementById("pword").value=d.user_pass;
+  document.getElementById("uname").value=d.user_ID;
+  document.getElementById("uID").value=d.user_name;
 
 }
 catch
@@ -123,7 +123,7 @@ function checklogin() {
 
           if(document.getElementById("keepLoggedIn").checked)
           {
-            var jdata ={user_name:name,user_pass:pass}
+            var jdata ={user_name:name,user_ID:document.getElementById("uname").value.toString()}
             setJSONCookie("userdata",jdata,365);
           }
 
