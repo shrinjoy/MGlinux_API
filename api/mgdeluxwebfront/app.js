@@ -635,7 +635,7 @@ function getuserdata(usernamex, passwordx) {
       password = res["data"]["password"];
       userbalance = res["data"]["balance"];
       document.getElementById("balance").innerHTML = userbalance;
-      document.getElementById("username").innerHTML = userid;
+      document.getElementById("username").innerHTML =  res["data"]["userid"];
       // console.log("usernamepassdata fetched XDXD");
     })
     .catch((err) => {
