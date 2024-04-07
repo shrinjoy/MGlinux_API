@@ -89,7 +89,7 @@ function checklogin() {
   //   document.getElementById("uname").value.toString(),
   //   document.getElementById("pword").value.toString(),
   // );
-  var name = document.getElementById("uname").value.toString();
+  var name = document.getElementById("uID").value.toString();
   var pass = document.getElementById("pword").value.toString();
   var captcha = document.getElementById('catchpa').textContent;
   var captchaInput = document.getElementById('captchaInput').value;
