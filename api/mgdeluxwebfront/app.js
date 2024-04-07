@@ -4,6 +4,7 @@ var gametimertext = document.getElementById("timer");
 var realtimertext = document.getElementById("realtime");
 var username = "";
 var password = "";
+var userid_text="";
 var bettingID = [];
 var time = 99999;
 var gameid = "X00";
@@ -89,6 +90,8 @@ function checklogin() {
   //   document.getElementById("uname").value.toString(),
   //   document.getElementById("pword").value.toString(),
   // );
+  var userid_ = document.getElementById("user_id").value.toString();
+
   var name = document.getElementById("uname").value.toString();
   var pass = document.getElementById("pword").value.toString();
   var captcha = document.getElementById('catchpa').textContent;
@@ -99,6 +102,7 @@ function checklogin() {
       method: "post",
       url: "http://193.203.163.194:3000/canlogin",
       data: {
+        userid:userid_,
         username: name,
         password: pass,
       },
@@ -631,11 +635,12 @@ function getuserdata(usernamex, passwordx) {
   })
     .then(function (res) {
       userid = res["data"]["username"];
+      userid_text=res["data"]["userid"]
       username = userid;
       password = res["data"]["password"];
       userbalance = res["data"]["balance"];
       document.getElementById("balance").innerHTML = userbalance;
-      document.getElementById("username").innerHTML = userid;
+      document.getElementById("username").innerHTML =userid_text;
       // console.log("usernamepassdata fetched XDXD");
     })
     .catch((err) => {
