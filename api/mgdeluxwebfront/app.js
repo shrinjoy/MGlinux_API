@@ -1303,10 +1303,10 @@ const refresh = () => {
 
 setTimeout(refresh, 1);
 
-function checkBrowser() {
-  var isFirefox = typeof InstallTrigger !== 'undefined';
-  if (!isFirefox) {
-    document.body.innerHTML = "<h1>Access Denied. Use Firefox.</h1>";
-  }
-}
-checkBrowser();
+// function checkBrowser() {
+//   var isFirefox = typeof InstallTrigger !== 'undefined';
+//   if (!isFirefox) {
+//     document.body.innerHTML = "<h1>Access Denied. Use Firefox.</h1>";
+//   }
+// }
+// checkBrowser();
