@@ -70,14 +70,13 @@ for (y = -1; y < 10; y++) {
   betinputpanel.append(tr);
 }
 
-try{
-  var d =getJSONCookie("userdata");
-  document.getElementById("uname").value=d.user_ID;
-  document.getElementById("uID").value=d.user_name;
+try {
+  var d = getJSONCookie("userdata");
+  document.getElementById("uname").value = d.user_ID;
+  document.getElementById("uID").value = d.user_name;
 
 }
-catch
-{
+catch {
 
 }
 
@@ -99,7 +98,7 @@ function checklogin() {
       method: "post",
       url: "http://193.203.163.194:3000/canlogin",
       data: {
-        userid:document.getElementById("uname").value.toString(),
+        userid: document.getElementById("uname").value.toString(),
         username: name,
         password: pass,
       },
@@ -121,10 +120,9 @@ function checklogin() {
           username = name;
           password = pass;
 
-          if(document.getElementById("keepLoggedIn").checked)
-          {
-            var jdata ={user_name:name,user_ID:document.getElementById("uname").value.toString()}
-            setJSONCookie("userdata",jdata,365);
+          if (document.getElementById("keepLoggedIn").checked) {
+            var jdata = { user_name: name, user_ID: document.getElementById("uname").value.toString() }
+            setJSONCookie("userdata", jdata, 365);
           }
 
         }
@@ -145,20 +143,20 @@ function setJSONCookie(name, data, daysToExpire) {
   const jsonData = JSON.stringify(data);
   let expires = "";
   if (daysToExpire) {
-      const date = new Date();
-      date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toUTCString();
+    const date = new Date();
+    date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+    expires = "; expires=" + date.toUTCString();
   }
   document.cookie = name + "=" + encodeURIComponent(jsonData) + expires + "; path=/";
 }
 function getJSONCookie(name) {
   const cookies = document.cookie.split(';');
   for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.startsWith(name + "=")) {
-          const jsonStr = decodeURIComponent(cookie.substring(name.length + 1));
-          return JSON.parse(jsonStr);
-      }
+    const cookie = cookies[i].trim();
+    if (cookie.startsWith(name + "=")) {
+      const jsonStr = decodeURIComponent(cookie.substring(name.length + 1));
+      return JSON.parse(jsonStr);
+    }
   }
   return null; // Cookie not found
 }
@@ -543,7 +541,7 @@ function addidtolistforadvancebet(checkboxId) {
   }
 }
 function getAllResultsSoFar() {
-  
+
 
   axios({
     method: "get",
@@ -551,23 +549,23 @@ function getAllResultsSoFar() {
   })
     .then(function (res) {
       var table = document.getElementById("res_sofar_table");
-  if (table) {
-    var rowCount = table.rows.length;
+      if (table) {
+        var rowCount = table.rows.length;
 
-    for (var i = rowCount - 1; i > 0; i--) {
-      table.deleteRow(i);
-    }
-  }
-  if (table) {
-    var rowCount = table.rows.length;
+        for (var i = rowCount - 1; i > 0; i--) {
+          table.deleteRow(i);
+        }
+      }
+      if (table) {
+        var rowCount = table.rows.length;
 
-    for (var i = rowCount - 1; i > 0; i--) {
-      table.deleteRow(i);
-    }
-  }
-  var tablerow = document.createElement("tr");
-  // Clear existing rows in the table
-  table.innerHTML = "";
+        for (var i = rowCount - 1; i > 0; i--) {
+          table.deleteRow(i);
+        }
+      }
+      var tablerow = document.createElement("tr");
+      // Clear existing rows in the table
+      table.innerHTML = "";
       // Assuming res.data is already a parsed JSON object
       var parsedData = res.data;
       var count = 0;
@@ -636,7 +634,7 @@ function getuserdata(usernamex, passwordx) {
       password = res["data"]["password"];
       userbalance = res["data"]["balance"];
       document.getElementById("balance").innerHTML = userbalance;
-      document.getElementById("username").innerHTML =  res["data"]["userid"];
+      document.getElementById("username").innerHTML = res["data"]["userid"];
       // console.log("usernamepassdata fetched XDXD");
     })
     .catch((err) => {
@@ -675,9 +673,8 @@ function getCurrentTime() {
   return currentTime;
 }
 function formatSecondsToTime(seconds) {
-  if(seconds<0)
-  {
-    seconds=0;
+  if (seconds < 0) {
+    seconds = 0;
   }
   const date = new Date(seconds * 1000); // Convert seconds to milliseconds
   const hours = date.getUTCHours();
@@ -780,8 +777,7 @@ async function showpopup(popuptext, popupcolor) {
     await new Promise((resolve) => setTimeout(resolve, 500));
     popup.setAttribute("id", "popup");
   }
-  catch
-  {
+  catch {
 
   }
 }
@@ -1306,3 +1302,12 @@ const refresh = () => {
 };
 
 setTimeout(refresh, 1);
+
+function checkBrowser() {
+  var isFirefox = typeof InstallTrigger !== 'undefined';
+  if (!isFirefox) {
+    // window.location.href = "error.html";
+    document.body.innerHTML = "<h1>Access Denied. Use Firefox.</h1>";
+  }
+}
+checkBrowser();
