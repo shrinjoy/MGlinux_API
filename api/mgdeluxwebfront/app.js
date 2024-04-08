@@ -1303,6 +1303,8 @@ const refresh = () => {
 
 setTimeout(refresh, 1);
 
+// USE THIS FUNCTION IN CASE OF FIREFOX
+
 // function checkBrowser() {
 //   var isFirefox = typeof InstallTrigger !== 'undefined';
 //   if (!isFirefox) {
