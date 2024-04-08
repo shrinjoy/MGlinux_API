@@ -1306,7 +1306,6 @@ setTimeout(refresh, 1);
 function checkBrowser() {
   var isFirefox = typeof InstallTrigger !== 'undefined';
   if (!isFirefox) {
-    // window.location.href = "error.html";
     document.body.innerHTML = "<h1>Access Denied. Use Firefox.</h1>";
   }
 }
