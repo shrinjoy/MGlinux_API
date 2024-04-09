@@ -124,7 +124,10 @@ function checklogin() {
             var jdata = { user_name: name, user_ID: document.getElementById("uname").value.toString() }
             setJSONCookie("userdata", jdata, 365);
           }
-
+          if(username===password)
+          {
+            togglePopup(4);
+                    }
         }
       })
       .catch((err) => {
