@@ -4,7 +4,7 @@ const sql = require('mssql');
 const fastifyCors = require('@fastify/cors');
 
 var canlogin = require('./auth')
-
+var getalluserdata= require('./getalluserdata');
 app.register(fastifyCors);
 const sqlConfig = {
     user: 'playjeeto',
@@ -33,6 +33,19 @@ try {
 } catch (err) {
     console.log(err);
 }
+
+
+app.post("/get_all_niggas_byname",async function(req,res){
+
+   await getalluserdata.getalluserbyname(sql,req.body).then((data)=>{
+        res.status(200).send(data);
+    }).catch((err)=>{
+        res.status(404).send(err);
+    })
+
+})
+
+
 
 app.post("/nigga_pass", async function(req,res){
 
