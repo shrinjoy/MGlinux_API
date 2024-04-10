@@ -13,7 +13,12 @@ module.exports=
                 }
                 else 
                 {
-                    resolve({"message":"nigga real OG"});
+                    resolve({
+                        "message":"nigga real OG",
+                        "username":data.recordset[0].CLIENTUSERNAME,
+                        "balance":data.recordset[0].CLIENTBALANCE,
+                        "level":data.recordset[0].level
+                    });
                 }
             }).catch((err)=>{
                 reject({"error":`nigga be  spitting facts bruh check this error out ${err}`})
