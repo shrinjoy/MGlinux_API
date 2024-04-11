@@ -4,6 +4,7 @@ const sql = require('mssql');
 const fastifyCors = require('@fastify/cors');
 
 var canlogin = require('./auth')
+var transferamount = require('./moneytrasnfer');
 var getalluserdata= require('./getalluserdata');
 app.register(fastifyCors);
 const sqlConfig = {
@@ -35,6 +36,23 @@ try {
 }
 
 
+app.post("/transfermoney",async function(req,res){
+    await transferamount.sendmoney(sql,req.body).then((data)=>{
+        res.status(200).send(data);
+    })
+    .catch((err)=>{
+        res.status(400).send(err);
+    })
+})
+app.post("/adjustmoney",async function(req,res){
+    await transferamount.takemoney(sql,req.body).then((data)=>{
+        res.status(200).send(data);
+    })
+    .catch((err)=>{
+        res.status(400).send(err);
+
+    })
+})
 app.post("/get_all_niggas_byname",async function(req,res){
 
    await getalluserdata.getalluserbyname(sql,req.body).then((data)=>{
