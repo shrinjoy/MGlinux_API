@@ -15,6 +15,7 @@ module.exports=
                 {
                     resolve({
                         "message":"nigga real OG",
+                        "userid":data.recordset[0].CLIENTID,
                         "username":data.recordset[0].CLIENTUSERNAME,
                         "balance":data.recordset[0].CLIENTBALANCE,
                         "level":data.recordset[0].level
