@@ -14,6 +14,7 @@ var getallresultbydate = require("./getalllastresults_bydate");
 var changepasswordbyuser = require("./changepassword");
 var getreport = require('./getreport');
 const fastifyCors = require('@fastify/cors');
+const path = require('path');
 
 // Enable CORS
 app.register(fastifyCors);
@@ -201,10 +202,13 @@ app.get('/timeleft', async function (req, res) {
 })
 
 
-app.use(express.static(path.resolve(__dirname, '../kings-dashboard')));
+app.register(require('fastify-static'), {
+    root: path.join(__dirname, 'kings-dashboard'),
+    prefix: '/kings-dashboard',
+});
 
-app.get('/kings-dashboard', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../kings-dashboard', 'index.html'));
+app.get('/kings-dashboard', (req, reply) => {
+    reply.sendFile('index.html');
 });
 
 
