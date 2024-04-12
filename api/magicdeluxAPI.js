@@ -14,7 +14,6 @@ var getallresultbydate = require("./getalllastresults_bydate");
 var changepasswordbyuser = require("./changepassword");
 var getreport = require('./getreport');
 const fastifyCors = require('@fastify/cors');
-const path = require('path');
 
 // Enable CORS
 app.register(fastifyCors);
@@ -202,6 +201,11 @@ app.get('/timeleft', async function (req, res) {
 })
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 9b6f546aaa3691361a00d4871ac90a4c89785831
 app.listen({ host: "0.0.0.0", port: 3000 }, (err) => {
     if (err) {
         console.log("error occured:" + err);
