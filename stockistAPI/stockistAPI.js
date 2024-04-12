@@ -2,7 +2,7 @@ var fastify = require("fastify");
 var app = fastify({});
 const sql = require('mssql');
 const fastifyCors = require('@fastify/cors');
-
+var getuserdata= require('./getuserdata')
 var canlogin = require('./auth')
 var transferamount = require('./moneytrasnfer');
 var getalluserdata= require('./getalluserdata');
@@ -61,6 +61,30 @@ app.post("/get_all_niggas_byname",async function(req,res){
         res.status(404).send(err);
     })
 
+})
+
+app.post("/getniggabyid",async function(req,res){
+await getuserdata.getuserdatabyID(sql,req.body).then((data)=>{
+
+res.status(200).send(data)
+
+})
+.catch((err)=>{
+res.status(400).send(err)
+
+})
+})
+
+app.post("/getniggabyname",async function(req,res){
+  await  getuserdata.getuserdatabyName(sql,req.body).then((data)=>{
+    
+    res.status(200).send(data)
+    
+    })
+    .catch((err)=>{
+    res.status(400).send(err)
+    
+    })
 })
 
 
