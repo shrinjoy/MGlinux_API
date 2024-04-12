@@ -201,11 +201,6 @@ app.get('/timeleft', async function (req, res) {
 })
 
 
-app.use(express.static(path.resolve(__dirname, '../kings-dashboard')));
-
-app.get('/kings-dashboard', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../kings-dashboard', 'index.html'));
-});
 
 
 app.listen({ host: "0.0.0.0", port: 3000 }, (err) => {
