@@ -202,16 +202,6 @@ app.get('/timeleft', async function (req, res) {
 })
 
 
-app.register(require('fastify-static'), {
-    root: path.join(__dirname, 'kings-dashboard'),
-    prefix: '/kings-dashboard',
-});
-
-app.get('/kings-dashboard', (req, reply) => {
-    reply.sendFile('index.html');
-});
-
-
 app.listen({ host: "0.0.0.0", port: 3000 }, (err) => {
     if (err) {
         console.log("error occured:" + err);
