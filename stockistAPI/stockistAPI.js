@@ -6,6 +6,7 @@ var getuserdata= require('./getuserdata')
 var canlogin = require('./auth')
 var transferamount = require('./moneytrasnfer');
 var getalluserdata= require('./getalluserdata');
+var getreportofalluser = require('./getreportofalluser')
 app.register(fastifyCors);
 const sqlConfig = {
     user: 'playjeeto',
@@ -102,6 +103,19 @@ app.post("/nigga_pass", async function(req,res){
 
 })
 
+app.post("/getreportbydate", async function(req,res){
+
+    await getreportofalluser.getreportofalluser(sql,req.body).then((data)=>{
+         res.status(200).send(data); 
+     })
+     .catch((err)=>{
+         res.status(400).send(err);
+ 
+     })
+     
+ 
+ })
+ 
 
 
 
