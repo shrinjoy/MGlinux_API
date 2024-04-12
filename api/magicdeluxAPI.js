@@ -43,29 +43,29 @@ console.log("connected to database ");
 
 
 app.post('/getresultbyid', async function (req, res) {
-   await getresultbyid.getresultbyidofanygame(sql,req.body)
-    .then((data)=>{
-        res.status(200).send(data);
-    })
-    .catch((err)=>{
-        res.status(404).send(err);
-    })
+    await getresultbyid.getresultbyidofanygame(sql, req.body)
+        .then((data) => {
+            res.status(200).send(data);
+        })
+        .catch((err) => {
+            res.status(404).send(err);
+        })
 })
 
 
-app.post('/cancelbybarcode',function(req,res){
-    cancelticket.cancel(req.body,sql).then((data)=>{
+app.post('/cancelbybarcode', function (req, res) {
+    cancelticket.cancel(req.body, sql).then((data) => {
 
         res.status(200).send(data);
     })
-    .catch((err)=>{
-        res.status(404).send(err);
-    })
+        .catch((err) => {
+            res.status(404).send(err);
+        })
 })
 
 app.post('/changepassword', async function (req, res) {
 
-    await changepasswordbyuser.changepassword(req.body,sql).then((data) => {
+    await changepasswordbyuser.changepassword(req.body, sql).then((data) => {
         res.status(200).send(data);
 
     })
@@ -81,7 +81,7 @@ app.post('/changepassword', async function (req, res) {
 
 
 app.post('/getallresultbydate', async function (req, res) {
-    await getallresultbydate.getlastresults_all_bydate(sql,req.body).then((data) => {
+    await getallresultbydate.getlastresults_all_bydate(sql, req.body).then((data) => {
         res.status(200).send(data);
 
     })
@@ -93,7 +93,7 @@ app.post('/getallresultbydate', async function (req, res) {
 })
 
 app.post('/getreportfromdatetodate', async function (req, res) {
-    await  getreport.getreportfromdatetilldate(sql,req.body).then((data) => {
+    await getreport.getreportfromdatetilldate(sql, req.body).then((data) => {
         res.status(200).send(data);
     })
         .catch((err) => {
@@ -140,7 +140,7 @@ app.post('/getalluserdata', function (req, res) {
     try {
         getalluserdata.getdata(sql, req.body).then((data) => {
 
-            res.status(200).send(data )
+            res.status(200).send(data)
         })
             .catch((err) => {
                 res.status(400).send({ err })
@@ -150,41 +150,41 @@ app.post('/getalluserdata', function (req, res) {
         res.status(400).send({ err })
     }
 });
-app.post('/placebet',async function (req, res) {
-  await  placebet.placebet(sql,req.body).then((data)=>{
+app.post('/placebet', async function (req, res) {
+    await placebet.placebet(sql, req.body).then((data) => {
         res.status(200).send(data)
     })
-    .catch((error)=>{
-        console.log(error);
-        res.status(404).send(error)
+        .catch((error) => {
+            console.log(error);
+            res.status(404).send(error)
 
-    })
+        })
 })
 
-app.post('/getreportbydate',function(req,res){
-    getreport.gerreportbydate(sql,req.body).then((data)=>{
-        res.status(200).send({data});
+app.post('/getreportbydate', function (req, res) {
+    getreport.gerreportbydate(sql, req.body).then((data) => {
+        res.status(200).send({ data });
     })
-    .catch((err)=>{
-        res.status(400).send({err});
-    })
+        .catch((err) => {
+            res.status(400).send({ err });
+        })
 })
-app.post('/getreportbydateandid',function(req,res){
-    getreport.getreportbydateandid(sql,req.body).then((data)=>{
-        res.status(200).send({data});
+app.post('/getreportbydateandid', function (req, res) {
+    getreport.getreportbydateandid(sql, req.body).then((data) => {
+        res.status(200).send({ data });
     })
-    .catch((err)=>{
-        res.status(400).send({err});
-    })
+        .catch((err) => {
+            res.status(400).send({ err });
+        })
 })
 
-app.post('/getticketbybarcode',function(req,res){
-    getreport.getticketbybarcode(sql,req.body).then((data)=>{
-        res.status(200).send({data});
+app.post('/getticketbybarcode', function (req, res) {
+    getreport.getticketbybarcode(sql, req.body).then((data) => {
+        res.status(200).send({ data });
     })
-    .catch((err)=>{
-        res.status(400).send({err});
-    })
+        .catch((err) => {
+            res.status(400).send({ err });
+        })
 })
 
 app.get('/', function (req, res) {
@@ -193,13 +193,22 @@ app.get('/', function (req, res) {
 app.get('/timeleft', async function (req, res) {
     try {
         var data = await sql.query(`SELECT GAMEID,TARMINALDATE AS NEXTGAMEDATE,TARMINALTIME AS NEXTGAMETIME,NEXTDRAW,DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
-        res.status(200).send({ "time": data.recordset[0].timer, "gameid": data.recordset[0].GAMEID,"nextgamedate":data.recordset[0].NEXTGAMEDATE,"nextgametime":data.recordset[0].NEXTGAMETIME })
+        res.status(200).send({ "time": data.recordset[0].timer, "gameid": data.recordset[0].GAMEID, "nextgamedate": data.recordset[0].NEXTGAMEDATE, "nextgametime": data.recordset[0].NEXTGAMETIME })
 
     } catch (err) {
         res.status(400).send({ "message": "failed to get time because -" + err })
     }
 })
-app.listen({  host: "0.0.0.0",port: 3000 }, (err) => {
+
+
+app.use(express.static(path.resolve(__dirname, '../kings-dashboard')));
+
+app.get('/kings-dashboard', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../kings-dashboard', 'index.html'));
+});
+
+
+app.listen({ host: "0.0.0.0", port: 3000 }, (err) => {
     if (err) {
         console.log("error occured:" + err);
     }
