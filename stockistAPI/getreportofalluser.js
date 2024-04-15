@@ -47,7 +47,7 @@ module.exports=
            [playjeeto].[dbo].[TICKET99]
        ON 
            CLIENTLOGIN.CLIENTUSERNAME = TICKET99.TARMINALID
-           where  (CLIENTLOGIN.CLIENTDIST='spark' or CLIENTLOGIN.CLIENTSUPDIST='${json["username"]}' or CLIENTLOGIN.CLIENTADMIN='${json["username"]}') 
+           where  (CLIENTLOGIN.CLIENTDIST='${json["username"]}' or CLIENTLOGIN.CLIENTSUPDIST='${json["username"]}' or CLIENTLOGIN.CLIENTADMIN='${json["username"]}') 
        GROUP BY
            CLIENTLOGIN.CLIENTUSERNAME,
            CLIENTLOGIN.INTNUMBER,
