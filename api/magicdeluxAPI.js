@@ -135,6 +135,15 @@ app.post('/canlogin', function (req, res) {
             res.status(400).send({ err })
         })
 });
+app.post('/canlogin_macid', function (req, res) {
+    login.canlogin_macid(sql, req.body).then((data) => {
+
+        res.status(200).send({ data })
+    })
+        .catch((err) => {
+            res.status(400).send({ err })
+        })
+});
 app.post('/getalluserdata', function (req, res) {
 
     try {
