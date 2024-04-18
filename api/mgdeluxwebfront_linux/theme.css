@@ -231,7 +231,7 @@ body {
 
 #buttonholder {
   border: 1px solid black;
-  height: 1065px;
+  /* height: 1065px; */
   /* width: 75%; */
   /* position: absolute; */
   /* top: 8%; */
@@ -308,7 +308,7 @@ body {
 .mainContent {
   background-color: #fffb00;
   width: 100vw;
-  height: 110vh;
+  height: 100vh;
 }
 
 .gameWrapper .headerRow {
