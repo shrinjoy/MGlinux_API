@@ -354,7 +354,7 @@ body {
   color: red;
 }
 
-.headerRow .changePassword {
+.headerRow .changePasswordbtn {
   background-color: red;
   font-size: 18px;
 }
@@ -581,7 +581,7 @@ body {
 }
 
 
-@media only screen and (max-width: 800px) and (max-height: 600px) {
+@media only screen and (max-width: 800px) {
 
   .gameWrapper .headerRow h1 {
     font-size: 20px;
@@ -600,7 +600,7 @@ body {
     font-size: 16px;
   }
 
-  .headerRow .changePassword {
+  .headerRow .changePasswordbtn {
     font-size: 14px;
   }
 
@@ -627,6 +627,10 @@ body {
   .gameRow .imgWrapper2 {
     width: 60%;
     height: 70%;
+  }
+
+  .betinput {
+    margin-bottom: 0px;
   }
 
 
