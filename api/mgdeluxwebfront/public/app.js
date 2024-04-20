@@ -660,6 +660,8 @@ function timerupdate() {
   if (time < 10) {
     gametimertext.style = "color:red";
   } else {
+
+    gettimeandgameid();
     gametimertext.style = "color:black";
   }
   gametimertext.innerHTML = formatSecondsToTime(time);
