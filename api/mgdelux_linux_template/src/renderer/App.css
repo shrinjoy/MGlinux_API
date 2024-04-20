@@ -86,7 +86,10 @@ body {
 }
 
 #res_sofar_table tr td {
-  width: 33%;
+  width: 80px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
   background-color: red;
 }
 

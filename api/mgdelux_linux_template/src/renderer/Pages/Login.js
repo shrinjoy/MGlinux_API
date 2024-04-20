@@ -25,7 +25,7 @@ function Login() {
                 console.log(data);
                 setUserName(username);
                 navigate('/game');
-            } else {
+            } else if(error){
                 setError("Incorrect Username/Password Entered!")
             }
         }

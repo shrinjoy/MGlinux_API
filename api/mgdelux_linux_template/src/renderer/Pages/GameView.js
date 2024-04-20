@@ -110,7 +110,7 @@ function GameView() {
                                             if (!rows[rowIndex]) rows[rowIndex] = []; // Initialize row if it doesn't exist
                                             rows[rowIndex].push(
                                                 <td key={key}>{key}</td>,
-                                                <td key={value}>{value}</td>
+                                                <td key={value} className='text-white'>{value}</td>
                                             );
                                             return rows;
                                         }, []).map((row, index) => (
