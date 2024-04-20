@@ -83,7 +83,7 @@ function GameView() {
                             </div>
                             <div className="col-6 text-center">
                                 <label> Countdown </label>
-                                <label id="timer" className='d-block'>{gameTime}</label>
+                                <label id="timer">{gameTime}</label>
                             </div>
                         </div>
                         <div id="background" className="mt-2">

@@ -87,10 +87,12 @@ body {
 
 #res_sofar_table tr td {
   width: 80px;
+  height: 33px;
   text-align: center;
   font-weight: 700;
   font-size: 18px;
   background-color: red;
+  border: 1px solid #454545;
 }
 
 #res_sofar_table .oldres {}
@@ -208,7 +210,8 @@ body {
   font-weight: 700;
 }
 
-.gameWrapper .gameRow .col-3 .headerRow label {
+.gameWrapper .gameRow .col-3 .headerRow label,
+.gameRow .headerRow .col-6 label {
   display: block;
 }
 
