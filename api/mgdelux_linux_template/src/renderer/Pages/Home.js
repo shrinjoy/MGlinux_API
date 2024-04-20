@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function Home() {
   const [clickConnect, setClickConnect] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
+  
   const navigate = useNavigate();
 
   return (

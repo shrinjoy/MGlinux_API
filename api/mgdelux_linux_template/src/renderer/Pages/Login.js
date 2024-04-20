@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { verNo } from '../Globals/GlobalMetaData';
 import { login } from '../Globals/GlobalFunctions';
+import { useNavigate } from 'react-router-dom';
+import { DataContext } from '../Context/DataContext';
 
 function Login() {
+    const {userName, setUserName} = useContext(DataContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [userId, setUserId] = useState("");
     const [userMacId, setUserMacId] = useState("");
-    const [error, setError] = useState("")
+    const [error, setError] = useState("");
+
+    const navigate = useNavigate();
 
     async function checkLogin() {
         if (!username.trim()) {
@@ -17,7 +22,9 @@ function Login() {
         } else {
             const data = await login(userId, username, password, userMacId);
             if (data) {
-                console.log(data)
+                console.log(data);
+                setUserName(username);
+                navigate('/game');
             } else {
                 setError("Incorrect Username/Password Entered!")
             }
@@ -36,7 +43,17 @@ function Login() {
             </div>
             <div className='wrapper p-5'>
                 <div className='formWrapper'>
-                    <div className='col-12'>
+                    <div className='col-12 '>
+                        <div className='d-flex justify-content-center'>
+                            <div className='col-1 me-2'>
+                                <label>UserID</label>
+                            </div>
+                            <div>
+                                <input type="text" className="loginInput" value={userId} onChange={(e) => setUserId(e.target.value)} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='col-12 mt-2'>
                         <div className='d-flex justify-content-center'>
                             <div className='col-1 me-2'>
                                 <label>Username</label>
