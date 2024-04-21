@@ -661,7 +661,7 @@ function timerupdate() {
     gametimertext.style = "color:red";
   } else {
 
-    gettimeandgameid();
+    
     gametimertext.style = "color:black";
   }
   gametimertext.innerHTML = formatSecondsToTime(time);
@@ -1317,3 +1317,25 @@ function checkBrowser() {
   }
 }
 checkBrowser();
+
+
+function resetPage() {
+  // Perform actions to reset the page here
+  // For example, reload the page
+
+  location.reload();
+  gameId=null;
+  time=null;
+ 
+  getAllResultsSoFar();
+
+    gettimeandgameid();
+
+    loadallpossiblefuturebets();
+}
+
+// Event listener for when the window loses focus
+window.addEventListener('blur', function() {
+  // Call the resetPage function when the window loses focus
+  resetPage();
+});
