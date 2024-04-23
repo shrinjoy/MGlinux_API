@@ -8,6 +8,7 @@ function GameView() {
     const [time, setTime] = useState(getCurrentTime());
     const [gameTime, setGameTime] = useState(0);
     const [totalBet, setTotalBet] = useState(0);
+    const [totalTickets, setTotalTickets] = useState(0);
     const [isTimerActive, setIsTimerActive] = useState(true);
     const [gameResult, setGameResult] = useState("");
 
@@ -22,8 +23,12 @@ function GameView() {
         setTotalBet(value);
     };
 
+    const handleTotalTicketsChange = (tickets) => {
+        setTotalTickets(tickets);
+    };
+
     useEffect(() => {
-        handleGameResults();
+        // handleGameResults();
         getTimeLeft()
             .then(data => {
                 setGameId(data.gameId);
@@ -69,7 +74,9 @@ function GameView() {
     async function handleBetPlacement() {
         if (totalBet > 0 && gameTime > 10) {
             const data = await placeBet(userName, passWord, totalTickets, totalBet, gameId);
-            console.log('bet placed');
+            if (data) {
+                console.log('bet placed');
+            }
         }
     }
 
@@ -167,7 +174,7 @@ function GameView() {
                                         {rows}
                                     </table>
                                 </div> */}
-                                <BetTable onTotalBetChange={handleTotalBetChange} />
+                                <BetTable onTotalBetChange={handleTotalBetChange} onTotalTicketsChange={handleTotalTicketsChange} />
                             </div>
                         </div>
                         <div className="buttonsRow" style={{ marginLeft: 10 }}>
