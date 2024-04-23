@@ -9,7 +9,7 @@ function GameView() {
     const [gameTime, setGameTime] = useState(0);
     const [totalBet, setTotalBet] = useState(0);
     const [totalTickets, setTotalTickets] = useState(0);
-    const [isTimerActive, setIsTimerActive] = useState(false);
+    const [isTimerActive, setIsTimerActive] = useState(true);
     const [gameResult, setGameResult] = useState("");
 
     useEffect(() => {

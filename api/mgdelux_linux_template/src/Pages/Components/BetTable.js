@@ -7,6 +7,8 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
     const memoizedOnTotalTicketsChange = useCallback(onTotalTicketsChange, []);
 
     const inputRefs = useRef(Array.from({ length: 10 }, () => Array.from({ length: 11 }, () => null)));
+    const [selectedRow, setSelectedRow] = useState(null);
+    const [selectedCol, setSelectedCol] = useState(null);
 
     const handleChange = (e, row, col) => {
         if (col === 10) {
@@ -52,25 +54,40 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
         if (e.key === 'ArrowRight') {
             if (colIndex < 10) {
                 inputRefs.current[rowIndex][colIndex + 1].focus();
+                setSelectedRow(rowIndex);
+                setSelectedCol(colIndex + 1);
             } else {
                 if (rowIndex < 9) {
                     inputRefs.current[rowIndex + 1][0].focus();
+                    setSelectedRow(rowIndex + 1);
+                    setSelectedCol(0);
                 }
             }
         } else if (e.key === 'ArrowLeft') {
             if (colIndex > 0) {
                 inputRefs.current[rowIndex][colIndex - 1].focus();
+                setSelectedRow(rowIndex);
+                setSelectedCol(colIndex - 1);
             } else {
                 if (rowIndex > 0) {
                     inputRefs.current[rowIndex - 1][10].focus();
+                    setSelectedRow(rowIndex - 1);
+                    setSelectedCol(10);
                 }
             }
         } else if (e.key === 'ArrowDown' && rowIndex < 9) {
             inputRefs.current[rowIndex + 1][colIndex].focus();
+            setSelectedRow(rowIndex + 1);
+            setSelectedCol(colIndex);
         } else if (e.key === 'ArrowUp' && rowIndex > 0) {
             inputRefs.current[rowIndex - 1][colIndex].focus();
+            setSelectedRow(rowIndex - 1);
+            setSelectedCol(colIndex);
+        } else if (e.key === 'Delete' && inputs[rowIndex][colIndex] !== '') {
+            handleChange({ target: { value: '0' } }, rowIndex, colIndex);
         }
     };
+
 
     const rows = inputs.map((row, rowIndex) => (
         <tr key={rowIndex}>
@@ -86,6 +103,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
                             value={colIndex === 10 ? extraCellValues[rowIndex] : value}
                             onChange={(e) => handleChange(e, rowIndex, colIndex)}
                             onKeyDown={(e) => handleKeyPress(e, rowIndex, colIndex)}
+                            className={(selectedRow === rowIndex && selectedCol === colIndex) ? 'selected' : ''}
                         />
                     </td>
                 );
