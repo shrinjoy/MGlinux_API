@@ -84,7 +84,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
             setSelectedRow(rowIndex - 1);
             setSelectedCol(colIndex);
         } else if (e.key === 'Delete' && inputs[rowIndex][colIndex] !== '') {
-            handleChange({ target: { value: '0' } }, rowIndex, colIndex);
+            handleChange({ target: { value: '' } }, rowIndex, colIndex);
         }
     };
 
