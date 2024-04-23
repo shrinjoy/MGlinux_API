@@ -283,7 +283,8 @@ body {
     font-weight: 500;
 }
 
-.gameRow #betinputpanel tr td:last-child input {
+.gameRow #betinputpanel tr td:last-child input,
+.gameRow #betinputpanel tr:last-child td input {
     background-color: coral;
 }
 
