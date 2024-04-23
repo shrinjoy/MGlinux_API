@@ -119,15 +119,16 @@ function checklogin() {
 
           username = name;
           password = pass;
-
+          if(username!==password)
+          {
+             
+              document.getElementById('change_password_4').style.display = "none"
+          }
           if (document.getElementById("keepLoggedIn").checked) {
             var jdata = { user_name: name, user_ID: document.getElementById("uname").value.toString() }
             setJSONCookie("userdata", jdata, 365);
           }
-          if(username===password)
-          {
-            togglePopup(4);
-                    }
+          
         }
       })
       .catch((err) => {
@@ -651,6 +652,10 @@ function getuserdata(usernamex, passwordx) {
 gettimeandgameid();
 
 function timerupdate() {
+  if(username===password)
+          {
+           document.getElementById('change_password_4').style.display = "block";
+         }
   time -= 1;
   if (time < 1) {
     // console.clear();
@@ -801,6 +806,11 @@ function changePassword(event) {
     .getElementById("newpassword")
     .value.toString();
   console.log(`${data_username} ${data_currentPassword} ${data_newPassword}`);
+  if(document
+    .getElementById("newpassword")
+    .value===document
+    .getElementById("password")
+    .value){
   axios({
     method: "post",
     url: "http://193.203.163.194:3000/changepassword",
@@ -819,6 +829,11 @@ function changePassword(event) {
       console.log(error);
       showpopup("Please Try Again", "red");
     });
+  }
+  else
+  {
+    showpopup("passwords dont match ","red");
+  }
 }
 loadallpossiblefuturebets();
 
@@ -1345,4 +1360,6 @@ window.addEventListener('blur', function() {
 console.log(`welcome to mgdelux_webversion 1.01 this update fixes include
 -advance bet not placing bet for more than 1 advance bet 
 -bet input sending 0 values 
--timer not reseting when the app is paused`)
+-timer not reseting when the app is paused
+-change password will remain if username password is same
+-added bug fix for when newpassword and retype new password are not same wtf ridz ;c`)
