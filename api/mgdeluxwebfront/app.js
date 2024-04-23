@@ -257,12 +257,15 @@ function buyticket() {
     for (y = 0; y < 10; y++) {
       for (x = 0; x < 10; x++) {
         var id = `${y}${x}`;
+        if(document.getElementById("NR" + id).value>0)
+        {
         datax.push(
           `${y}${x}Q${parseInt(document.getElementById("NR" + id).value) || 0}`
         );
       }
+      }
     }
-
+console.log(datax);
     data = {
       username: username,
       password: password,
@@ -309,7 +312,7 @@ function buyticket() {
 
 
 
-          datax = null;
+        
           totalbet = 0;
         })
         .catch(function (err) {
@@ -324,7 +327,7 @@ function buyticket() {
         });
     });
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
+    datax = null;
     // Loop through each checkbox and uncheck it
     checkboxes.forEach(function (checkbox) {
       checkbox.checked = false;
@@ -1323,7 +1326,7 @@ function resetPage() {
   // Perform actions to reset the page here
   // For example, reload the page
 
-  location.reload();
+ 
   gameId=null;
   time=null;
  
@@ -1331,7 +1334,7 @@ function resetPage() {
 
     gettimeandgameid();
 
-    loadallpossiblefuturebets();
+   console.log("reseting time and id ");
 }
 
 // Event listener for when the window loses focus
@@ -1339,3 +1342,7 @@ window.addEventListener('blur', function() {
   // Call the resetPage function when the window loses focus
   resetPage();
 });
+console.log(`welcome to mgdelux_webversion 1.01 this update fixes include
+-advance bet not placing bet for more than 1 advance bet 
+-bet input sending 0 values 
+-timer not reseting when the app is paused`)
