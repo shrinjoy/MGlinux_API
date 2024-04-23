@@ -9,7 +9,7 @@ function GameView() {
     const [gameTime, setGameTime] = useState(0);
     const [totalBet, setTotalBet] = useState(0);
     const [totalTickets, setTotalTickets] = useState(0);
-    const [isTimerActive, setIsTimerActive] = useState(true);
+    const [isTimerActive, setIsTimerActive] = useState(false);
     const [gameResult, setGameResult] = useState("");
 
     useEffect(() => {
@@ -28,7 +28,7 @@ function GameView() {
     };
 
     useEffect(() => {
-        // handleGameResults();
+        handleGameResults();
         getTimeLeft()
             .then(data => {
                 setGameId(data.gameId);
@@ -61,7 +61,7 @@ function GameView() {
 
     const handleTimerReset = () => {
         setIsTimerActive(true);
-        handleGameResults();
+        // handleGameResults();
         console.log('Sequence Started Again');
     }
 
@@ -169,15 +169,10 @@ function GameView() {
                                         </button>
                                     </div>
                                 </div>
-                                {/* <div id="buttonholder" className="mt-2">
-                                    <table id="betinputpanel" className="h-100 col-12">
-                                        {rows}
-                                    </table>
-                                </div> */}
                                 <BetTable onTotalBetChange={handleTotalBetChange} onTotalTicketsChange={handleTotalTicketsChange} />
                             </div>
                         </div>
-                        <div className="buttonsRow" style={{ marginLeft: 10 }}>
+                        <div className="buttonsRow">
                             <div className="btnItem">
                                 <button
                                     className="gamebutton"

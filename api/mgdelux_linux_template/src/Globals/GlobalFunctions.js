@@ -35,6 +35,11 @@ export async function getTimeLeft() {
             console.log(preparedData);
             return preparedData;
         })
+        .catch(error => {
+            if (error) {
+                getTimeLeft()
+            }
+        })
 }
 
 //Get Game Results

@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 
 function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
     const initialInputs = Array.from({ length: 10 }, () => Array.from({ length: 11 }, () => ''));
     const [inputs, setInputs] = useState(initialInputs);
     const [extraCellValues, setExtraCellValues] = useState(Array.from({ length: 10 }, () => ''));
+    const memoizedOnTotalTicketsChange = useCallback(onTotalTicketsChange, []);
+
+    const inputRefs = useRef(Array.from({ length: 10 }, () => Array.from({ length: 11 }, () => null)));
 
     const handleChange = (e, row, col) => {
         if (col === 10) {
@@ -42,8 +45,34 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
                 }
             });
         });
-        onTotalTicketsChange(totalTickets);
-    }, [inputs, onTotalTicketsChange]);
+        memoizedOnTotalTicketsChange(totalTickets);
+    }, [inputs, memoizedOnTotalTicketsChange]);
+
+    const handleKeyPress = (e, rowIndex, colIndex) => {
+        if (e.key === 'ArrowRight') {
+            if (colIndex < 10) {
+                inputRefs.current[rowIndex][colIndex + 1].focus();
+            } else {
+                if (rowIndex < 9) {
+                    inputRefs.current[rowIndex + 1][0].focus();
+                }
+            }
+        } else if (e.key === 'ArrowLeft') {
+            if (colIndex > 0) {
+                inputRefs.current[rowIndex][colIndex - 1].focus();
+            } else {
+                if (rowIndex > 0) {
+                    inputRefs.current[rowIndex - 1][10].focus();
+                }
+            }
+        } else if (e.key === 'ArrowDown' && rowIndex < 9) {
+            // Move to the cell below
+            inputRefs.current[rowIndex + 1][colIndex].focus();
+        } else if (e.key === 'ArrowUp' && rowIndex > 0) {
+            // Move to the cell above
+            inputRefs.current[rowIndex - 1][colIndex].focus();
+        }
+    };
 
     const rows = inputs.map((row, rowIndex) => (
         <tr key={rowIndex}>
@@ -53,10 +82,12 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
                     <td key={colIndex}>
                         <label htmlFor={`input-${cellId}`}>{cellId}</label>
                         <input
+                            ref={el => inputRefs.current[rowIndex][colIndex] = el}
                             id={`input-${cellId}`}
                             type="text"
                             value={colIndex === 10 ? extraCellValues[rowIndex] : value}
                             onChange={(e) => handleChange(e, rowIndex, colIndex)}
+                            onKeyDown={(e) => handleKeyPress(e, rowIndex, colIndex)}
                         />
                     </td>
                 );
