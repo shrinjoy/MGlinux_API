@@ -66,10 +66,8 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
                 }
             }
         } else if (e.key === 'ArrowDown' && rowIndex < 9) {
-            // Move to the cell below
             inputRefs.current[rowIndex + 1][colIndex].focus();
         } else if (e.key === 'ArrowUp' && rowIndex > 0) {
-            // Move to the cell above
             inputRefs.current[rowIndex - 1][colIndex].focus();
         }
     };
