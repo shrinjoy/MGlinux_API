@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { cancelLastBet, getCurrentTime, getGameResult, getTimeLeft, placeBet } from '../Globals/GlobalFunctions'
 import { DataContext } from '../Context/DataContext';
 import BetTable from './Components/BetTable';
+import Clock from 'react-clock';
+import 'react-clock/dist/Clock.css';
 
 function GameView() {
     const { userName, setUserName, passWord, gameId, setGameId } = useContext(DataContext);
@@ -178,6 +180,9 @@ function GameView() {
                                     <div className="col-3 text-center">
                                         <label> Time :</label>
                                         <label id="realtime">&nbsp;&nbsp;{time}</label>
+                                        <div className='analogClock'>
+                                            <Clock value={time} size={100} />
+                                        </div>
                                     </div>
                                     <div className="col-3 text-end">
                                         <button
