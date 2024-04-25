@@ -39,10 +39,6 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
             setInputs(newInputs);
         }
     };
-
-
-
-
     useEffect(() => {
         const totalBet = inputs
             .flat()
