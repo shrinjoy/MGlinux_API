@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { getCurrentTime, getGameResult, getTimeLeft, placeBet } from '../Globals/GlobalFunctions'
+import { cancelLastBet, getCurrentTime, getGameResult, getTimeLeft, placeBet } from '../Globals/GlobalFunctions'
 import { DataContext } from '../Context/DataContext';
 import BetTable from './Components/BetTable';
 
@@ -11,6 +11,8 @@ function GameView() {
     const [totalTickets, setTotalTickets] = useState(0);
     const [isTimerActive, setIsTimerActive] = useState(true);
     const [gameResult, setGameResult] = useState("");
+    const [lastBetBarCode, setLastBetBarCode] = useState("");
+    const [buttonTrigger, setButtonTrigger] = useState(false);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -28,9 +30,9 @@ function GameView() {
         // console.log(totalTickets);
     };
 
-    useEffect(() => {
-        console.log(totalTickets);
-    }, [totalTickets]);
+    // useEffect(() => {
+    //     console.log(totalTickets);
+    // }, [totalTickets]);
 
     useEffect(() => {
         handleGameResults();
@@ -84,6 +86,17 @@ function GameView() {
             // }
             console.log('bet place fn');
         }
+    }
+
+    async function cancelBet() {
+        const data = cancelLastBet(lastBetBarCode);
+        if (data) {
+            console.log(data);
+        }
+    }
+
+    const handleClearAllValues = () => {
+        setButtonTrigger(true)
     }
 
     return (
@@ -152,7 +165,7 @@ function GameView() {
                                 <div className="headerRow">
                                     <div className="col-3">
                                         <label> P.No. </label>
-                                        <label id="username" style={{ color: "#ce0b00" }}>
+                                        <label id="username" style={{ color: "#ce0b00", marginLeft: 5 }}>
                                             {userName}
                                         </label>
                                     </div>
@@ -175,7 +188,7 @@ function GameView() {
                                         </button>
                                     </div>
                                 </div>
-                                <BetTable onTotalBetChange={handleTotalBetChange} onTotalTicketsChange={handleTotalTicketsChange} />
+                                <BetTable onTotalBetChange={handleTotalBetChange} onTotalTicketsChange={handleTotalTicketsChange} buttonTrigger={buttonTrigger} onClearAllValues={() => setButtonTrigger(false)} />
                             </div>
                         </div>
                         <div className="buttonsRow">
@@ -195,12 +208,12 @@ function GameView() {
                                 </button>
                             </div>
                             <div className="btnItem">
-                                <button className="gamebutton">
+                                <button className="gamebutton" onClick={handleClearAllValues}>
                                     Clear(ESC)
                                 </button>
                             </div>
                             <div className="btnItem">
-                                <button className="gamebutton">
+                                <button className="gamebutton" onClick={cancelBet}>
                                     Cancel(F9)
                                 </button>
                             </div>

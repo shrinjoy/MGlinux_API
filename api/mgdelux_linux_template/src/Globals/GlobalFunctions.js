@@ -50,10 +50,19 @@ export async function getGameResult() {
         })
 }
 
-//Get Game Results
+//Place Bet
 export async function placeBet(userName, passWord, totalTickets, totalBet, gameId) {
     const parsedData = { username: userName, password: passWord, tickets: totalTickets, totalbet: totalBet, gameid: gameId }
     return axiosInstance.post(`/placebet`, parsedData)
+        .then(res => {
+            return res.data;
+        })
+}
+
+//Cancel Last Bet
+export async function cancelLastBet(lastBetBarCode) {
+    const parsedData = { barcode: lastBetBarCode }
+    return axiosInstance.post(`/cancelbybarcode`, parsedData)
         .then(res => {
             return res.data;
         })
