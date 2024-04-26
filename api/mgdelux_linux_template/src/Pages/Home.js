@@ -41,14 +41,14 @@ function Home() {
                     <div style={{ width: '20%' }}>
                         {isConnected ? <button className="homeBtn login" onClick={() => navigate('/login')}>Login</button> : ""}
                     </div>
-                    <div style={{ width: '20%' }}>
+                    <div style={{ width: '20%' }} onClick={() => window.electronAPI.systemSettings()}>
                         <button className="homeBtn">System</button>
                     </div>
-                    <div style={{ width: '20%' }}>
+                    <div style={{ width: '20%' }} onClick={() => window.electronAPI.systemRestart()}>
                         <button className="homeBtn">Restart</button>
                     </div>
                     <div style={{ width: '20%' }}>
-                        <button className="homeBtn">PowerOff</button>
+                        <button className="homeBtn" onClick={() => window.electronAPI.systemShutdown()}>PowerOff</button>
                     </div>
                 </div>
             </div>

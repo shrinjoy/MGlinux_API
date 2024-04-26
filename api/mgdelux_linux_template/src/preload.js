@@ -6,5 +6,15 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('electronAPI', {
     quitApp: () => {
         ipcRenderer.send('quit-app');
+    },
+    systemShutdown: () => {
+        ipcRenderer.send('system-shutdown');
+    },
+    systemRestart: () => {
+        ipcRenderer.send('system-restart');
+    },
+    systemSettings: () => {
+        ipcRenderer.send('system-settings');
     }
 });
+

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
+function BetTable({ onTotalBetChange, onTotalTicketsChange, buttonTrigger, onClearAllValues }) {
     const initialInputs = Array.from({ length: 11 }, () => Array.from({ length: 11 }, () => ''));
     const [inputs, setInputs] = useState(initialInputs);
     const [extraCellValues, setExtraCellValues] = useState(Array.from({ length: 10 }, () => ''));
@@ -10,15 +10,18 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
     const [selectedRow, setSelectedRow] = useState(null);
     const [selectedCol, setSelectedCol] = useState(null);
 
+    // Input Generator
     const handleChange = (e, row, col) => {
-        if (col === 10 && row !== 10) {
+        if (col === 10 && row <= 9) {
             // Update all cells in the same row by adding the input value
             const newExtraCellValues = [...extraCellValues];
             newExtraCellValues[row] = e.target.value;
             setExtraCellValues(newExtraCellValues);
+
             const newRowValues = inputs[row].map((value, index) => {
-                return isNaN(value) ? e.target.value : Number(value) + Number(e.target.value); // Add the new value
+                return Number(e.target.value); // Add the new value
             });
+
             const newInputs = [...inputs];
             newInputs[row] = newRowValues;
             setInputs(newInputs);
@@ -27,9 +30,11 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
             const newExtraCellValues = [...extraCellValues];
             newExtraCellValues[col] = e.target.value;
             setExtraCellValues(newExtraCellValues);
-            const updatedInputs = [...inputs];
-            updatedInputs.forEach((rowValues, index) => {
-                rowValues[col] = isNaN(rowValues[col]) ? e.target.value : Number(rowValues[col]) + Number(e.target.value);
+
+            const updatedInputs = inputs.map((rowValues, rowIndex) => {
+                return rowValues.map((value, colIndex) => {
+                    return colIndex === col ? e.target.value : value;
+                });
             });
             setInputs(updatedInputs);
         } else {
@@ -41,16 +46,21 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
     };
 
 
-
-
+    // Total Bet Generator
     useEffect(() => {
         const totalBet = inputs
-            .flat()
-            .filter((value) => !isNaN(value) && value !== '')
+            .flatMap((row, rowIndex) => {
+                if (rowIndex !== 10) {
+                    return row.filter((value, colIndex) => colIndex !== 10 && !isNaN(value) && value !== '');
+                }
+                return [];
+            })
             .reduce((acc, curr) => acc + Number(curr), 0);
         onTotalBetChange(totalBet);
     }, [inputs, onTotalBetChange]);
 
+
+    // Total Ticket Generator
     useEffect(() => {
         const totalTickets = [];
         inputs.forEach((row, rowIndex) => {
@@ -66,6 +76,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
         memoizedOnTotalTicketsChange(totalTickets);
     }, [inputs, memoizedOnTotalTicketsChange]);
 
+    // Navigate using KeyBoard
     const handleKeyPress = (e, rowIndex, colIndex) => {
         if (e.key === 'ArrowRight') {
             if (colIndex < 9) {
@@ -105,6 +116,16 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange }) {
             handleChange({ target: { value: '' } }, rowIndex, colIndex);
         }
     };
+
+    // Clear All Inputs
+    useEffect(() => {
+        if (buttonTrigger) {
+            const newInputs = initialInputs.map(row => row.map(() => ''));
+            setInputs(newInputs);
+            setExtraCellValues(Array.from({ length: 10 }, () => ''));
+            onClearAllValues();
+        }
+    }, [buttonTrigger]);
 
     const rows = inputs.map((row, rowIndex) => (
         <tr key={rowIndex}>

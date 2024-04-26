@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const { exec } = require('child_process');
 const path = require('node:path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -52,6 +53,25 @@ app.on('window-all-closed', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
+// Start app on windows startup 
+// app.setLoginItemSettings({
+//   openAtLogin: true    
+// })
+
+// System Commands from App
 ipcMain.on('quit-app', () => {
   app.quit();
 });
+
+ipcMain.on('system-shutdown', () => {
+  exec('shutdown /s /t 0');
+})
+
+ipcMain.on('system-restart', () => {
+  exec('shutdown /r /t 0');
+})
+
+ipcMain.on('system-settings', () => {
+  exec('start ms-settings:');
+})
+
