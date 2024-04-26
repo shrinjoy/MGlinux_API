@@ -552,6 +552,8 @@
 <script src="frontendfunc.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
 <script>
+
+  var canplacebet=true;
   var betinputpanel = document.getElementById("betinputpanel");
 var gameidtext = document.getElementById("gameid");
 var gametimertext = document.getElementById("timer");
@@ -807,7 +809,11 @@ function inputfieldupdate() {
     "Total Amnt: <span>" + totalbet + "</span>";
 }
 function buyticket() {
-  if (totalbet > 0 && time > 11) {
+  
+
+
+
+  if (totalbet > 0) {
     var datax = [];
     for (y = 0; y < 10; y++) {
       for (x = 0; x < 10; x++) {
@@ -838,15 +844,17 @@ console.log(datax);
     else if (bettingID.length == 1) {
       
       tempids = [];
-      gettimeandgameid();
+     // gettimeandgameid_withoutreset();
       tempids.push(gameid);
     }
 
     console.log(tempids);
 
     tempids.forEach((e) => {
+     // gettimeandgameid_withoutreset();
 
-      if( time > 11){
+      if( time > 13)
+    {
 
       axios({
         method: "post",
@@ -862,7 +870,7 @@ console.log(datax);
         .then(function (res) {
           //("placed bet in id:"+e.toString());
           //(res["data"]["barcode"]);
-
+          
           lastbetbarcode = res["data"]["barcode"];
 
           console.log("got user data");
@@ -888,6 +896,11 @@ console.log(datax);
 
         });
       }
+      else
+      {
+        showpopup("out of time ", "red"); //popup_function
+
+      }
     });
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
     datax = null;
@@ -910,8 +923,10 @@ console.log(datax);
     resetbetdata();
   }
   loadallpossiblefuturebets();
-  /**/
 }
+
+  /**/
+
 
 function resetbetdata() {
   var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -1174,6 +1189,7 @@ function getAllResultsSoFar() {
     .catch((err) => {
       //("Failed to fetch result data: " + err);
     });
+    cancelbet=true;
 }
 getAllResultsSoFar();
 function gettimeandgameid() {
@@ -1181,11 +1197,27 @@ function gettimeandgameid() {
     method: "get",
     url: "http://193.203.163.194:3000/timeleft",
   }).then(function (res) {
-    time = res["data"]["time"];
-    time = time - 12;
     gameid = res["data"]["gameid"];
+    
+    time = res["data"]["time"];
+    
     bettingID = [];
     bettingID = [gameid.toString()];
+
+    // //(bettingID);
+  });
+}
+function gettimeandgameid_withoutreset() {
+  axios({
+    method: "get",
+    url: "http://193.203.163.194:3000/timeleft",
+  }).then(function (res) {
+    gameid = res["data"]["gameid"];
+    
+    time = res["data"]["time"];
+    time = time - 12;
+   
+
     // //(bettingID);
   });
 }
@@ -1218,6 +1250,8 @@ gettimeandgameid();
 setInterval(() => {
   if(time<12)
   {
+    canplacebet=false;
+
     var advancebettable = document.getElementById("advance_bet_table");
     while (advancebettable.rows.length > 0) {
       advancebettable.deleteRow(0);
@@ -1228,6 +1262,10 @@ setInterval(() => {
     bettingID = [];
     datax=null;
     document.getElementById("advancebet_show").style = "display:none";
+  }
+  else
+  {
+    canplacebet=true;
   }
 }, 1);
 
@@ -1246,8 +1284,10 @@ function timerupdate() {
     gettimeandgameid();
 
     loadallpossiblefuturebets();
+    
   }
   if (time < 11) {
+    cancelbet =false;
     gametimertext.style = "color:red";
   } else {
     
@@ -1952,7 +1992,7 @@ console.log(`welcome to mgdelux_webversion 1.01 this update fixes include
 -timer not reseting when the app is paused
 -change password will remain if username password is same
 -added bug fix for when newpassword and retype new password are not same wtf ridz ;c
--fixed advance bet not reseting on time end XDD`)
+-fixed advance bet not reseting on time end XDDDDD`)
 
 </script>
 <script>

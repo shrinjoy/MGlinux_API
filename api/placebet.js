@@ -12,7 +12,7 @@ module.exports = {
             .then((data) => 
             {
                 
-                if(data.recordset[0].timer >16){
+                if((data.recordset[0].timer-10)>12){
                 console.log("time left:"+data.recordset[0].timer-10 )
                 userdata = db
                     .query(
