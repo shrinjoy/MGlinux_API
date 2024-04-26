@@ -12,6 +12,7 @@ function GameView() {
     const [gameTime, setGameTime] = useState(0);
     const [totalBet, setTotalBet] = useState(0);
     const [totalTickets, setTotalTickets] = useState(0);
+    const [barCodeSearch, setBarCodeSearch] = useState('');
     const [isTimerActive, setIsTimerActive] = useState(true);
     const [gameResult, setGameResult] = useState("");
     const [lastBetBarCode, setLastBetBarCode] = useState("");
@@ -129,7 +130,7 @@ function GameView() {
                                         <label id="timer">{gameTime}</label>
                                     </div>
                                 </div>
-                                <div id="background" className="mt-2">
+                                <div id="background" className="mt-2" style={{ height: 497 }}>
                                     <div className="retardedSpinningShit position-relative">
                                         <div className="imgWrapper mx-auto">
                                             <img src={require('../Assets/images/background.png').default} />
@@ -163,6 +164,40 @@ function GameView() {
                                                 ) : ""}
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+                                <div className='buttonsRow b'>
+                                    <div className='btnItem'>
+                                        <button className='gamebutton'>
+                                            Stone
+                                        </button>
+                                    </div>
+                                    <div className='btnItem'>
+                                        <button className='gamebutton'>
+                                            LuckyPik
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className='buttonsRow'>
+                                    <div className="btnItem">
+                                        <button
+                                            className="gamebutton"
+                                            id="buybuttonXD"
+                                            style={{ backgroundColor: "#eac697" }}
+                                            onClick={handleBetPlacement}
+                                        >
+                                            F6-Buy
+                                        </button>
+                                    </div>
+                                    <div className="btnItem">
+                                        <button className="gamebutton" onClick={handleClearAllValues}>
+                                            Clear(ESC)
+                                        </button>
+                                    </div>
+                                    <div className="btnItem">
+                                        <button className="gamebutton" onClick={cancelBet}>
+                                            Cancel(F9)
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -200,67 +235,54 @@ function GameView() {
                                     </div>
                                 </div>
                                 <BetTable onTotalBetChange={handleTotalBetChange} onTotalTicketsChange={handleTotalTicketsChange} buttonTrigger={buttonTrigger} onClearAllValues={() => setButtonTrigger(false)} />
-                            </div>
-                        </div>
-                        <div className="buttonsRow">
-                            <div className="btnItem">
-                                <button
-                                    className="gamebutton"
-                                    id="buybuttonXD"
-                                    style={{ backgroundColor: "#eac697" }}
-                                    onClick={handleBetPlacement}
-                                >
-                                    F6-Buy
-                                </button>
-                            </div>
-                            <div className="btnItem" style={{ width: 215 }}>
-                                <button className="gamebutton">
-                                    Advance Draw(F8)
-                                </button>
-                            </div>
-                            <div className="btnItem">
-                                <button className="gamebutton" onClick={handleClearAllValues}>
-                                    Clear(ESC)
-                                </button>
-                            </div>
-                            <div className="btnItem">
-                                <button className="gamebutton" onClick={cancelBet}>
-                                    Cancel(F9)
-                                </button>
-                            </div>
-                            <div className="btnItem">
-                                <button className="gamebutton" onClick={() => setReportTrigger(true)}>
-                                    Report(F4)
-                                </button>
-                            </div>
-                            <div className="btnItem">
-                                <button className="gamebutton">
-                                    Stone(F7)
-                                </button>
-                            </div>
-                            <div className="btnItem" style={{ width: 70 }}>
-                                <button
-                                    onClick={() => window.electronAPI.quitApp()}
-                                    className="gamebutton"
-                                    style={{ backgroundColor: "#eac697" }}
-                                >
-                                    Exit
-                                </button>
-                            </div>
-                            <div className="btnItem" style={{ width: "max-content" }}>
-                                <label id="totqt_val">
-                                    Total Qty: <span>{totalBet}</span>
-                                </label>
-                            </div>
-                            <div className="btnItem" style={{ width: "max-content" }}>
-                                <label id="totamt_val">
-                                    Total Amnt: <span>{totalBet}</span>
-                                </label>
+                                <div className='col-md-11 ms-auto'>
+                                    <div className='buttonsRow' style={{ marginTop: '-18px' }}>
+                                        <div>
+                                            <label className='totalBet'>
+                                                {totalBet}
+                                            </label>
+                                        </div>
+                                        <div className='ms-2'>
+                                            <label className='totalBet' style={{ backgroundColor: '#00ff00' }}>
+                                                {totalBet}
+                                            </label>
+                                        </div>
+                                        <div className='ms-4 formWrapper align-items-center'>
+                                            <div>
+                                                <label>F8 Barcode-</label>
+                                            </div>
+                                            <div className='ms-2'>
+                                                <input className="loginInput" type='text' value={barCodeSearch} onChange={(e) => setBarCodeSearch(e.target.value)} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="buttonsRow justify-content-end">
+                                        <div className="btnItem" style={{ width: 70 }}>
+                                            <button
+                                                onClick={() => window.electronAPI.quitApp()}
+                                                className="gamebutton"
+                                                style={{ backgroundColor: "#ff0000" }}
+                                            >
+                                                Exit(X)
+                                            </button>
+                                        </div>
+                                        <div className='btnItem' style={{ width: 120 }}>
+                                            <button className="gamebutton" onClick={() => setReportTrigger(true)}>
+                                                Purchase Details
+                                            </button>
+                                        </div>
+                                        <div className='btnItem'>
+                                            <button className="gamebutton">
+                                                F7 Stones
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className='popupWrapper'>
-                        {reportTrigger ? <ReportPanel /> : ""}
+                        {reportTrigger ? <><button onClick={setReportTrigger(false)}>Close</button><ReportPanel /></> : ""}
                     </div>
                 </div>
             </section>

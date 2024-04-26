@@ -234,7 +234,7 @@ body {
 }
 
 .gameWrapper .buttonsRow .btnItem {
-    width: 150px;
+    width: 90px;
     margin-right: 15px;
 }
 
@@ -252,15 +252,34 @@ body {
     color: #000000;
     /* padding: 5px 5px; */
     height: 30px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     width: 100%;
     border: 1px solid var(--btn-border);
 }
 
-/* #buybuttonXD {
-    font-size: 16px;
-} */
+.buttonsRow.b .gamebutton {
+    background-color: #ffddb8;
+    height: 25px;
+    font-size: 13px;
+}
+
+label.totalBet {
+    width: 70px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: 700;
+    background-color: #ffddb8;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    border: 1px solid var(--btn-border);
+    border-bottom: 1px solid #000;
+}
+
+#buybuttonXD {
+    background-color: #fa544b !important;
+}
 
 .gameRow #betinputpanel label {
     display: block;
