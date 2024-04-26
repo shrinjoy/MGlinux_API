@@ -278,10 +278,13 @@ console.log(datax);
     var tempids = bettingID;
 
     if (bettingID.length > 1) {
+
       tempids.shift();
     }
     else if (bettingID.length == 1) {
+      
       tempids = [];
+      gettimeandgameid();
       tempids.push(gameid);
     }
 
@@ -668,7 +671,7 @@ function timerupdate() {
   if (time < 10) {
     gametimertext.style = "color:red";
   } else {
-
+    
     
     gametimertext.style = "color:black";
   }
