@@ -278,10 +278,13 @@ console.log(datax);
     var tempids = bettingID;
 
     if (bettingID.length > 1) {
+
       tempids.shift();
     }
     else if (bettingID.length == 1) {
+      
       tempids = [];
+      gettimeandgameid();
       tempids.push(gameid);
     }
 
@@ -347,6 +350,7 @@ console.log(datax);
     }
     resetbetdata();
   }
+  loadallpossiblefuturebets();
   /**/
 }
 
@@ -651,6 +655,25 @@ function getuserdata(usernamex, passwordx) {
 
 gettimeandgameid();
 
+
+setInterval(() => {
+  if(time<12)
+  {
+    var advancebettable = document.getElementById("advance_bet_table");
+    while (advancebettable.rows.length > 0) {
+      advancebettable.deleteRow(0);
+    }
+    while (advancebettable.rows.length > 0) {
+      advancebettable.deleteRow(1);
+    }
+    bettingID = [];
+    datax=null;
+    document.getElementById("advancebet_show").style = "display:none";
+  }
+}, 1);
+
+
+
 function timerupdate() {
   if(username===password)
           {
@@ -668,7 +691,7 @@ function timerupdate() {
   if (time < 10) {
     gametimertext.style = "color:red";
   } else {
-
+    
     
     gametimertext.style = "color:black";
   }
@@ -766,6 +789,13 @@ function mobileUIFix() {
 }
 
 function togglePopup(e) {
+
+  if(e==1)
+  {
+    loadallpossiblefuturebets();
+  }
+
+
   var wrapper = document.querySelector(`[data-id='${e}']`);
   var wrapperStyles = getComputedStyle(wrapper);
 
@@ -1362,4 +1392,5 @@ console.log(`welcome to mgdelux_webversion 1.01 this update fixes include
 -bet input sending 0 values 
 -timer not reseting when the app is paused
 -change password will remain if username password is same
--added bug fix for when newpassword and retype new password are not same wtf ridz ;c`)
+-added bug fix for when newpassword and retype new password are not same wtf ridz ;c
+-fixed advance bet not reseting on time end XD`)
