@@ -807,7 +807,7 @@ function inputfieldupdate() {
     "Total Amnt: <span>" + totalbet + "</span>";
 }
 function buyticket() {
-  if (totalbet > 0 && time > 10) {
+  if (totalbet > 0 && time > 11) {
     var datax = [];
     for (y = 0; y < 10; y++) {
       for (x = 0; x < 10; x++) {
@@ -845,6 +845,9 @@ console.log(datax);
     console.log(tempids);
 
     tempids.forEach((e) => {
+
+      if( time > 11){
+
       axios({
         method: "post",
         url: "http://193.203.163.194:3000/placebet",
@@ -872,6 +875,7 @@ console.log(datax);
 
         
           totalbet = 0;
+          
         })
         .catch(function (err) {
 
@@ -883,6 +887,7 @@ console.log(datax);
           getuserdata(username, password);
 
         });
+      }
     });
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
     datax = null;
@@ -1242,7 +1247,7 @@ function timerupdate() {
 
     loadallpossiblefuturebets();
   }
-  if (time < 10) {
+  if (time < 11) {
     gametimertext.style = "color:red";
   } else {
     
@@ -1947,7 +1952,7 @@ console.log(`welcome to mgdelux_webversion 1.01 this update fixes include
 -timer not reseting when the app is paused
 -change password will remain if username password is same
 -added bug fix for when newpassword and retype new password are not same wtf ridz ;c
--fixed advance bet not reseting on time end XD`)
+-fixed advance bet not reseting on time end XDD`)
 
 </script>
 <script>
