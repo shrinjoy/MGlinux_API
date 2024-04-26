@@ -811,7 +811,8 @@ function inputfieldupdate() {
 function buyticket() {
   
 
-
+  if(time>13)
+  {
 
   if (totalbet > 0) {
     var datax = [];
@@ -923,6 +924,7 @@ console.log(datax);
     resetbetdata();
   }
   loadallpossiblefuturebets();
+}
 }
 
   /**/
