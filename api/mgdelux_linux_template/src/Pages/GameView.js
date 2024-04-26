@@ -4,6 +4,7 @@ import { DataContext } from '../Context/DataContext';
 import BetTable from './Components/BetTable';
 import Clock from 'react-clock';
 import 'react-clock/dist/Clock.css';
+import ReportPanel from './Components/ReportPanel';
 
 function GameView() {
     const { userName, setUserName, passWord, gameId, setGameId } = useContext(DataContext);
@@ -15,6 +16,8 @@ function GameView() {
     const [gameResult, setGameResult] = useState("");
     const [lastBetBarCode, setLastBetBarCode] = useState("");
     const [buttonTrigger, setButtonTrigger] = useState(false);
+    // Panel Show - Hide
+    const [reportTrigger, setReportTrigger] = useState(false);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -165,32 +168,35 @@ function GameView() {
                             </div>
                             <div className="col-8">
                                 <div className="headerRow">
-                                    <div className="col-3">
+                                    <div className="col-6 text-end">
                                         <label> P.No. </label>
                                         <label id="username" style={{ color: "#ce0b00", marginLeft: 5 }}>
                                             {userName}
                                         </label>
-                                    </div>
-                                    <div className="col-3 text-end">
-                                        <label id="balance" style={{ color: "#ce0b00" }}>
-                                            {" "}
-                                            00000{" "}
-                                        </label>
-                                    </div>
-                                    <div className="col-3 text-center">
-                                        <label> Time :</label>
-                                        <label id="realtime">&nbsp;&nbsp;{time}</label>
-                                        <div className='analogClock'>
-                                            <Clock value={time} size={100} />
+                                        <div>
+                                            <label id="balance" style={{ color: "#ce0b00" }}>
+                                                {" "}
+                                                00000{" "}
+                                            </label>
                                         </div>
                                     </div>
-                                    <div className="col-3 text-end">
-                                        <button
+                                    <div className="col-3 ms-auto">
+                                        {/* <label> Time :</label>
+                                        <label id="realtime">&nbsp;&nbsp;{time}</label> */}
+                                        <div className='analogClock d-flex justify-content-center'>
+                                            <Clock value={time} size={85} renderNumbers={true} />
+                                        </div>
+                                    </div>
+                                    <div className="col-auto text-end">
+                                        {/* <button
                                             className="text-white border-0"
                                             style={{ backgroundColor: "red", fontSize: 18 }}
                                         >
                                             Change Password
-                                        </button>
+                                        </button> */}
+                                        <div className='imgWrapper status'>
+                                            <img src={require('../Assets/images/lightbulb.png').default} />
+                                        </div>
                                     </div>
                                 </div>
                                 <BetTable onTotalBetChange={handleTotalBetChange} onTotalTicketsChange={handleTotalTicketsChange} buttonTrigger={buttonTrigger} onClearAllValues={() => setButtonTrigger(false)} />
@@ -223,7 +229,7 @@ function GameView() {
                                 </button>
                             </div>
                             <div className="btnItem">
-                                <button className="gamebutton">
+                                <button className="gamebutton" onClick={() => setReportTrigger(true)}>
                                     Report(F4)
                                 </button>
                             </div>
@@ -252,6 +258,9 @@ function GameView() {
                                 </label>
                             </div>
                         </div>
+                    </div>
+                    <div className='popupWrapper'>
+                        {reportTrigger ? <ReportPanel /> : ""}
                     </div>
                 </div>
             </section>

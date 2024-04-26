@@ -12,39 +12,37 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, buttonTrigger, onCle
 
     // Input Generator
     const handleChange = (e, row, col) => {
-        if (col === 10 && row <= 9) {
-            // Update all cells in the same row by adding the input value
-            const newExtraCellValues = [...extraCellValues];
-            newExtraCellValues[row] = e.target.value;
-            setExtraCellValues(newExtraCellValues);
+        const newValue = e.target.value;
+        const newInputs = [...inputs];
 
-            const newRowValues = inputs[row].map((value, index) => {
-                return Number(e.target.value); // Add the new value
-            });
+        newInputs[row][col] = newValue;
 
-            const newInputs = [...inputs];
-            newInputs[row] = newRowValues;
-            setInputs(newInputs);
-        } else if (row === 10 && col !== 10) {
-            // Update all cells in the same column by adding the input value
-            const newExtraCellValues = [...extraCellValues];
-            newExtraCellValues[col] = e.target.value;
-            setExtraCellValues(newExtraCellValues);
-
-            const updatedInputs = inputs.map((rowValues, rowIndex) => {
-                return rowValues.map((value, colIndex) => {
-                    return colIndex === col ? e.target.value : value;
-                });
-            });
-            setInputs(updatedInputs);
-        } else {
-            // Update only the current cell
-            const newInputs = [...inputs];
-            newInputs[row][col] = e.target.value;
-            setInputs(newInputs);
+        if (row === 10) {
+            for (let i = 0; i < newInputs.length - 1; i++) {
+                const existingValue = newInputs[i][col] !== '' ? parseFloat(newInputs[i][col]) : 0;
+                newInputs[i][col] = existingValue + parseFloat(newValue);
+            }
+            newInputs[10][col] = newValue;
         }
-    };
 
+        if (col === 10) {
+            for (let i = 0; i < newInputs[row].length - 1; i++) {
+                const existingValue = newInputs[row][i] !== '' ? parseFloat(newInputs[row][i]) : 0;
+                newInputs[row][i] = existingValue + parseFloat(newValue);
+            }
+            newInputs[row][10] = newValue;
+        }
+
+        if ((row === 10 && newValue === '') || (col === 10 && newValue === '')) {
+            for (let i = 0; i < newInputs.length; i++) {
+                for (let j = 0; j < newInputs[i].length; j++) {
+                    newInputs[i][j] = '';
+                }
+            }
+        }
+
+        setInputs(newInputs);
+    };
 
     // Total Bet Generator
     useEffect(() => {
@@ -112,8 +110,6 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, buttonTrigger, onCle
             inputRefs.current[rowIndex - 1][colIndex].focus();
             setSelectedRow(rowIndex - 1);
             setSelectedCol(colIndex);
-        } else if (e.key === 'Delete' && inputs[rowIndex][colIndex] !== '') {
-            handleChange({ target: { value: '' } }, rowIndex, colIndex);
         }
     };
 
@@ -139,7 +135,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, buttonTrigger, onCle
                                 ref={el => inputRefs.current[rowIndex][colIndex] = el}
                                 id={`input-${cellId}`}
                                 type="text"
-                                value={colIndex === 10 ? extraCellValues[rowIndex] : value}
+                                value={value}
                                 onChange={(e) => handleChange(e, rowIndex, colIndex)}
                                 onKeyDown={(e) => handleKeyPress(e, rowIndex, colIndex)}
                                 className={(selectedRow === rowIndex && selectedCol === colIndex) ? 'selected' : ''}
@@ -154,7 +150,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, buttonTrigger, onCle
     ));
 
     return (
-        <div id="buttonholder" className="mt-2">
+        <div id="buttonholder">
             <table id="betinputpanel" className="h-100 col-12">
                 <tbody>{rows}</tbody>
             </table>
