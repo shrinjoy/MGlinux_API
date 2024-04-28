@@ -13,6 +13,7 @@ var cancelticket = require('./cancelbybarcode')
 var getallresultbydate = require("./getalllastresults_bydate");
 var changepasswordbyuser = require("./changepassword");
 var getreport = require('./getreport');
+var getsalesreport = require('./getsalesreport');
 const fastifyCors = require('@fastify/cors');
 
 // Enable CORS
@@ -77,7 +78,15 @@ app.post('/changepassword', async function (req, res) {
 })
 
 
+app.post('/getsalesreport', async function (req, res) {
+    await getsalesreport.getsalesreport(sql, req.body).then((data) => {
+        res.status(200).send(data);
+    })
+        .catch((err) => {
+            res.status(400).send({ err });
+        })
 
+})
 
 
 app.post('/getallresultbydate', async function (req, res) {
