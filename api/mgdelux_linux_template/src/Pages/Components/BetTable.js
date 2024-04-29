@@ -130,7 +130,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, buttonTrigger, onCle
                     const cellId = `NR${rowIndex}${colIndex}`;
                     return (
                         <td key={colIndex}>
-                            <label htmlFor={`input-${cellId}`}>{rowIndex === 10 || colIndex === 10 ? `A${rowIndex}` : `NR${rowIndex}${colIndex}`}</label>
+                            <label htmlFor={`input-${cellId}`}>{rowIndex === 10 ? "ALL B" : colIndex === 10 ? `ALL A` : `NR${rowIndex}${colIndex}`}</label>
                             <input
                                 ref={el => inputRefs.current[rowIndex][colIndex] = el}
                                 id={`input-${cellId}`}

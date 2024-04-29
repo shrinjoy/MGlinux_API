@@ -5,6 +5,7 @@ import BetTable from './Components/BetTable';
 import Clock from 'react-clock';
 import 'react-clock/dist/Clock.css';
 import ReportPanel from './Components/ReportPanel';
+import BetInfo from './Components/BetInfo';
 
 function GameView() {
     const { userName, setUserName, passWord, gameId, setGameId } = useContext(DataContext);
@@ -19,6 +20,16 @@ function GameView() {
     const [buttonTrigger, setButtonTrigger] = useState(false);
     // Panel Show - Hide
     const [reportTrigger, setReportTrigger] = useState(false);
+    const [betInfoTrigger, setBetInfoTrigger] = useState(false);
+
+    // Close Report Panel
+    const closeReportPanel = () => {
+        setReportTrigger(false);
+    };
+
+    const closeBetInfoPanel = () => {
+        setBetInfoTrigger(false);
+    };
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -168,7 +179,7 @@ function GameView() {
                                 </div>
                                 <div className='buttonsRow b'>
                                     <div className='btnItem'>
-                                        <button className='gamebutton'>
+                                        <button className='gamebutton' onClick={() => setBetInfoTrigger(true)}>
                                             Stone
                                         </button>
                                     </div>
@@ -204,8 +215,8 @@ function GameView() {
                             <div className="col-8">
                                 <div className="headerRow">
                                     <div className="col-6 text-end">
-                                        <label> P.No. </label>
-                                        <label id="username" style={{ color: "#ce0b00", marginLeft: 5 }}>
+                                        <label className='d-inline-block'> P.No. </label>
+                                        <label id="username" style={{ color: "#ce0b00", marginLeft: 5, display: 'inline-block' }}>
                                             {userName}
                                         </label>
                                         <div>
@@ -282,7 +293,10 @@ function GameView() {
                         </div>
                     </div>
                     <div className='popupWrapper'>
-                        {reportTrigger ? <><button onClick={setReportTrigger(false)}>Close</button><ReportPanel /></> : ""}
+                        {reportTrigger ? <ReportPanel onClose={closeReportPanel} /> : ""}
+                    </div>
+                    <div className='popupWrapper'>
+                        {betInfoTrigger ? <BetInfo onClose={closeBetInfoPanel} /> : ""}
                     </div>
                 </div>
             </section>
