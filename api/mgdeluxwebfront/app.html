@@ -189,7 +189,7 @@
             </button>
           </div>
           <div class="btnItem">
-            <button class="gamebutton" onclick="cancelbet()">
+            <button class="gamebutton" onclick="cancel_bet()">
               Cancel(F9)
             </button>
           </div>
@@ -417,6 +417,10 @@
                 <a id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab"
                   aria-controls="pills-profile" aria-selected="false" style="color: #0d6efd">Datewise Summary</a>
               </li>
+              <li>
+                <a id="pills-sales-tab" data-bs-toggle="pill" data-bs-target="#pills-sales" type="button" role="tab"
+                  aria-controls="pills-sales" aria-selected="false" style="color: #0d6efd">Sales report</a>
+              </li>
             </ul>
             <div class="tab-content" id="pills-tabContent" style="border: 1px solid black">
               <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -487,6 +491,26 @@
                     <th>PURCHASE POINT</th>
                     <th>PWT POINT</th>
                     <th>NET POINT</th>
+                  </tr>
+                </table>
+              </div>
+              <div class="tab-pane fade" id="pills-sales" role="tabpanel" aria-labelledby="pills-sales-tab">
+                <div class="d-flex w-100">
+                  <div class="col-2">
+                    <input type="date" name="" id="startDate_sales" />
+                  </div>
+                  <div class="col-2">
+                    <input type="date" name="" id="endDate_sales" />
+                  </div>
+                  <div class="col-2">
+                    <button id="summarySubmit_sales">Get Sales Report</button>
+                  </div>
+                </div>
+                <table class="playDetails w-100" id="salesreporttable">
+                  <tr>
+                    <th>Play Point</th>
+                    <th>Win Point</th>
+                    <th>End Point</th>
                   </tr>
                 </table>
               </div>
@@ -1333,7 +1357,7 @@ function clearallinputs() {
   });
   inputfieldupdate();
 }
-function cancelbet() {
+function cancel_bet() {
   // /cancelbybarcode
   axios({
     method: "post",
@@ -1540,6 +1564,63 @@ function getReportFromDate() {
       });
   });
 }
+
+function getSalesreport() {
+  var table = document.getElementById("salesreporttable");
+  var startDate = document.getElementById("startDate_sales");
+  var endDate = document.getElementById("endDate_sales");
+  var submit = document.getElementById("summarySubmit_sales");
+
+  submit.addEventListener("click", function () {
+    var startDateValue = startDate.value;
+    var endDateValue = endDate.value;
+
+    if (table) {
+      var rowCount = table.rows.length;
+
+      // Delete existing rows except the header
+      for (var i = rowCount - 1; i > 0; i--) {
+        table.deleteRow(i);
+      }
+    }
+
+    // Perform axios POST request
+    axios.post("http://193.203.163.194:3000/getsalesreport", {
+      username: username, // Assuming username is defined somewhere
+      startdate: startDateValue,
+      enddate: endDateValue,
+    })
+    .then((response) => {
+      // Create a new row
+      var tr = document.createElement("tr");
+
+      // Create and populate cells with response data
+      var playtd = document.createElement("td");
+      playtd.innerHTML = response.data.played; // Access response data using response.data
+      playtd.style.textAlign = "center"; // Center align content
+      tr.appendChild(playtd);
+
+      var wintd = document.createElement("td");
+      wintd.innerHTML = response.data.win;
+      wintd.style.textAlign = "center"; // Center align content
+      tr.appendChild(wintd);
+
+      var endtd = document.createElement("td");
+      endtd.innerHTML = response.data.endamount;
+      endtd.style.textAlign = "center"; // Center align content
+      tr.appendChild(endtd);
+
+      // Append the new row to the table
+      table.appendChild(tr);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+  });
+}
+
+
+
 
 function getDetailReportFromDate() {
   var table = document.getElementById("playDetailsTable");
@@ -1866,6 +1947,7 @@ function viewBarcodeByTicket(event) {
 
 document.addEventListener("DOMContentLoaded", function () {
   getReportFromDate();
+  getSalesreport();
   getDetailReportFromDate();
 });
 
@@ -1994,10 +2076,23 @@ console.log(`welcome to mgdelux_webversion 1.01 this update fixes include
 -timer not reseting when the app is paused
 -change password will remain if username password is same
 -added bug fix for when newpassword and retype new password are not same wtf ridz ;c
--fixed advance bet not reseting on time end XDDDDD`)
+-fixed advance bet not reseting on time end XDDDDD
+-fixed cancel bet
+-added current date to all date fields`)
 
 </script>
 <script>
+  function setToday() {
+  // Get today's date in the format "YYYY-MM-DD"
+  var today = new Date().toISOString().split('T')[0];
+  
+  // Set today's date to each date input field
+  var dateInputs = document.querySelectorAll('input[type="date"]');
+  dateInputs.forEach(function(input) {
+    input.value = today;
+  });
+}
+setToday();
   document.getElementById("catchpa").innerHTML =
     Math.floor(Math.random() * (999999 - 300000 + 1)) + 300000;
   const today = new Date().toISOString().split("T")[0];
