@@ -189,7 +189,7 @@
             </button>
           </div>
           <div class="btnItem">
-            <button class="gamebutton" onclick="cancelbet()">
+            <button class="gamebutton" onclick="cancel_bet()">
               Cancel(F9)
             </button>
           </div>
@@ -1357,7 +1357,7 @@ function clearallinputs() {
   });
   inputfieldupdate();
 }
-function cancelbet() {
+function cancel_bet() {
   // /cancelbybarcode
   axios({
     method: "post",
@@ -2076,10 +2076,23 @@ console.log(`welcome to mgdelux_webversion 1.01 this update fixes include
 -timer not reseting when the app is paused
 -change password will remain if username password is same
 -added bug fix for when newpassword and retype new password are not same wtf ridz ;c
--fixed advance bet not reseting on time end XDDDDD`)
+-fixed advance bet not reseting on time end XDDDDD
+-fixed cancel bet
+-added current date to all date fields`)
 
 </script>
 <script>
+  function setToday() {
+  // Get today's date in the format "YYYY-MM-DD"
+  var today = new Date().toISOString().split('T')[0];
+  
+  // Set today's date to each date input field
+  var dateInputs = document.querySelectorAll('input[type="date"]');
+  dateInputs.forEach(function(input) {
+    input.value = today;
+  });
+}
+setToday();
   document.getElementById("catchpa").innerHTML =
     Math.floor(Math.random() * (999999 - 300000 + 1)) + 300000;
   const today = new Date().toISOString().split("T")[0];
