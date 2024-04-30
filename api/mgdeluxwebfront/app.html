@@ -1415,11 +1415,14 @@ function mobileUIFix() {
 
 function togglePopup(e) {
 
-  if(e==1)
+  if(e===1 && username==="ADMIN")
   {
     loadallpossiblefuturebets();
   }
-
+  else if(e===1 && username !="ADMIN")
+  {
+    return null;
+  }
 
   var wrapper = document.querySelector(`[data-id='${e}']`);
   var wrapperStyles = getComputedStyle(wrapper);
