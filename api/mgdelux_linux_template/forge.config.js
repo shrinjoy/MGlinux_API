@@ -4,6 +4,9 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
+    linux: {
+      target: 'deb',
+    },
     icon: './icons/icon'
   },
   rebuildConfig: {},
@@ -23,10 +26,9 @@ module.exports = {
     {
       name: '@electron-forge/maker-deb',
       config: {
-        options: {
-          maintainer: 'MG Deluxe',
-          homepage: 'https://example.com'
-        }
+        maintainer: 'The Forgers',
+        homepage: 'https://example.com',
+        icon: './icons/icon',
       },
     },
     {

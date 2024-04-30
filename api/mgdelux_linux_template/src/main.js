@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const { exec } = require('child_process');
+const os = require('os');
 const path = require('node:path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -64,14 +65,26 @@ ipcMain.on('quit-app', () => {
 });
 
 ipcMain.on('system-shutdown', () => {
-  exec('shutdown /s /t 0');
-})
+  if (os.platform() === 'win32') {
+    exec('shutdown /s /t 0');
+  } else if (os.platform() === 'linux') {
+    exec('sudo shutdown now');
+  }
+});
 
 ipcMain.on('system-restart', () => {
-  exec('shutdown /r /t 0');
-})
+  if (os.platform() === 'win32') {
+    exec('shutdown /r /t 0');
+  } else if (os.platform() === 'linux') {
+    exec('sudo shutdown -r now');
+  }
+});
 
 ipcMain.on('system-settings', () => {
-  exec('start ms-settings:');
-})
+  if (os.platform() === 'win32') {
+    exec('start ms-settings:');
+  } else if (os.platform() === 'linux') {
+    exec('gnome-control-center');
+  }
+});
 
