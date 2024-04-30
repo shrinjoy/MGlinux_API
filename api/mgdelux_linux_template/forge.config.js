@@ -18,11 +18,16 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
+      platforms: ['darwin', 'linux'],
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {},
+      config: {
+        options: {
+          maintainer: 'MG Deluxe',
+          homepage: 'https://example.com'
+        }
+      },
     },
     {
       name: '@electron-forge/maker-rpm',
