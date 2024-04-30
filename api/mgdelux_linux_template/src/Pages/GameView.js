@@ -16,7 +16,9 @@ function GameView() {
     const [barCodeSearch, setBarCodeSearch] = useState('');
     const [isTimerActive, setIsTimerActive] = useState(true);
     const [gameResult, setGameResult] = useState("");
-    const [buttonTrigger, setButtonTrigger] = useState(false);
+    // Simple Buttons
+    const [clearTrigger, setClearTrigger] = useState(false);
+    const [luckyTrigger, setLuckyTrigger] = useState(false);
     // Panel Show - Hide
     const [reportTrigger, setReportTrigger] = useState(false);
     const [betInfoTrigger, setBetInfoTrigger] = useState(false);
@@ -111,7 +113,11 @@ function GameView() {
     }
 
     const handleClearAllValues = () => {
-        setButtonTrigger(true)
+        setClearTrigger(true)
+    }
+
+    const handleLuckyPik = () => {
+        setLuckyTrigger(true)
     }
 
     return (
@@ -182,7 +188,7 @@ function GameView() {
                                         </button>
                                     </div>
                                     <div className='btnItem'>
-                                        <button className='gamebutton'>
+                                        <button className='gamebutton' onClick={handleLuckyPik}>
                                             LuckyPik
                                         </button>
                                     </div>
@@ -243,7 +249,7 @@ function GameView() {
                                         </div>
                                     </div>
                                 </div>
-                                <BetTable onTotalBetChange={handleTotalBetChange} onTotalTicketsChange={handleTotalTicketsChange} buttonTrigger={buttonTrigger} onClearAllValues={() => setButtonTrigger(false)} />
+                                <BetTable onTotalBetChange={handleTotalBetChange} onTotalTicketsChange={handleTotalTicketsChange} clearTrigger={clearTrigger} onClearAllValues={() => setClearTrigger(false)} luckyTrigger={luckyTrigger} onLuckyPick={() => setLuckyTrigger(false)} />
                                 <div className='col-md-11 ms-auto'>
                                     <div className='buttonsRow' style={{ marginTop: '-18px' }}>
                                         <div>
@@ -281,7 +287,7 @@ function GameView() {
                                             </button>
                                         </div>
                                         <div className='btnItem'>
-                                            <button className="gamebutton">
+                                            <button className="gamebutton" onClick={() => setBetInfoTrigger(true)}>
                                                 F7 Stones
                                             </button>
                                         </div>

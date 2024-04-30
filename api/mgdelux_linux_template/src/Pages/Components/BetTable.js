@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-function BetTable({ onTotalBetChange, onTotalTicketsChange, buttonTrigger, onClearAllValues }) {
+function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClearAllValues, luckyTrigger, onLuckyPick }) {
     const initialInputs = Array.from({ length: 11 }, () => Array.from({ length: 11 }, () => ''));
     const [inputs, setInputs] = useState(initialInputs);
     const [extraCellValues, setExtraCellValues] = useState(Array.from({ length: 10 }, () => ''));
@@ -20,7 +20,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, buttonTrigger, onCle
         if (row === 10) {
             for (let i = 0; i < newInputs.length - 1; i++) {
                 const existingValue = newInputs[i][col] !== '' ? parseFloat(newInputs[i][col]) : 0;
-                newInputs[i][col] = existingValue + parseFloat(newValue);
+                newInputs[i][col] = existingValue + (newValue !== '' ? parseFloat(newValue) : 0);
             }
             newInputs[10][col] = newValue;
         }
@@ -28,7 +28,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, buttonTrigger, onCle
         if (col === 10) {
             for (let i = 0; i < newInputs[row].length - 1; i++) {
                 const existingValue = newInputs[row][i] !== '' ? parseFloat(newInputs[row][i]) : 0;
-                newInputs[row][i] = existingValue + parseFloat(newValue);
+                newInputs[row][i] = existingValue + (newValue !== '' ? parseFloat(newValue) : 0);
             }
             newInputs[row][10] = newValue;
         }
@@ -36,7 +36,9 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, buttonTrigger, onCle
         if ((row === 10 && newValue === '') || (col === 10 && newValue === '')) {
             for (let i = 0; i < newInputs.length; i++) {
                 for (let j = 0; j < newInputs[i].length; j++) {
-                    newInputs[i][j] = '';
+                    if (!((i === 10 && j === col) || (i === row && j === 10))) {
+                        newInputs[i][j] = inputs[i][j];
+                    }
                 }
             }
         }
@@ -115,13 +117,29 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, buttonTrigger, onCle
 
     // Clear All Inputs
     useEffect(() => {
-        if (buttonTrigger) {
+        if (clearTrigger) {
             const newInputs = initialInputs.map(row => row.map(() => ''));
             setInputs(newInputs);
             setExtraCellValues(Array.from({ length: 10 }, () => ''));
             onClearAllValues();
         }
-    }, [buttonTrigger]);
+    }, [clearTrigger]);
+
+    // LuckyPik Function
+    useEffect(() => {
+        if (luckyTrigger) {
+            const randomRow = Math.floor(Math.random() * 10);
+            const randomCol = Math.floor(Math.random() * 10);
+
+            // Check if the randomly selected cell is not in Master Row or Column
+            if (randomRow !== 10 && randomCol !== 10) {
+                const newInputs = [...inputs];
+                newInputs[randomRow][randomCol] = "1";
+                setInputs(newInputs);
+            }
+            onLuckyPick();
+        }
+    }, [luckyTrigger])
 
     const rows = inputs.map((row, rowIndex) => (
         <tr key={rowIndex}>
