@@ -517,4 +517,26 @@ button:before {
 .betInfoTable thead tr {
     background-color: blue;
     color: #fff;
+    height: 40px;
+
+}
+
+.betInfoTable thead th {
+    border: 1px solid #9d9d9d;
+    text-align: center;
+}
+
+.betInfoTable tbody tr {
+    background-color: #fff;
+}
+
+.betInfoTable tbody td {
+    border: 1px solid #000;
+}
+
+.betInfoTable tbody td:first-child {
+    background-color: #000;
+    color: #fff;
+    text-align: end;
+    padding-right: 5px;
 }
