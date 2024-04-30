@@ -56,8 +56,8 @@ function BetInfo({ onClose }) {
                 </div>
             </div>
             <div className='botPart mt-2'>
-                <div>
-                    <table className='betInfoTable' style={{ height: '75vh', backgroundColor: '#9d9d9d' }}>
+                <div style={{ height: '75vh', backgroundColor: '#9d9d9d', overflow: 'auto' }}>
+                    <table className='betInfoTable' style={{ height: 'auto' }}>
                         <thead>
                             <tr>
                                 <th>Ticket No.</th>
@@ -69,12 +69,14 @@ function BetInfo({ onClose }) {
                             </tr>
                         </thead>
                         <tbody>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <tr>
+                                <td>123456789</td>
+                                <td>01-11-1001</td>
+                                <td>11:11</td>
+                                <td>11:01</td>
+                                <td>111</td>
+                                <td>PENDING</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
