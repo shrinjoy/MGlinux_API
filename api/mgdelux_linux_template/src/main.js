@@ -14,6 +14,7 @@ const createWindow = () => {
     width: 800,
     height: 600,
     icon: '../icons/icon.ico',
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
