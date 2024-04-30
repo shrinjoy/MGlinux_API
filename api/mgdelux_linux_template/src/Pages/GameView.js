@@ -8,7 +8,7 @@ import ReportPanel from './Components/ReportPanel';
 import BetInfo from './Components/BetInfo';
 
 function GameView() {
-    const { userName, setUserName, passWord, gameId, setGameId } = useContext(DataContext);
+    const { userName, setUserName, passWord, gameId, setGameId, lastBetBarCode, setLastBetBarCode } = useContext(DataContext);
     const [time, setTime] = useState(getCurrentTime());
     const [gameTime, setGameTime] = useState(0);
     const [totalBet, setTotalBet] = useState(0);
@@ -16,7 +16,6 @@ function GameView() {
     const [barCodeSearch, setBarCodeSearch] = useState('');
     const [isTimerActive, setIsTimerActive] = useState(true);
     const [gameResult, setGameResult] = useState("");
-    const [lastBetBarCode, setLastBetBarCode] = useState("");
     const [buttonTrigger, setButtonTrigger] = useState(false);
     // Panel Show - Hide
     const [reportTrigger, setReportTrigger] = useState(false);
@@ -97,11 +96,10 @@ function GameView() {
 
     async function handleBetPlacement() {
         if (totalBet > 0 && gameTime > 10) {
-            // const data = await placeBet(userName, passWord, totalTickets, totalBet, gameId);
-            // if (data) {
-            //     console.log('bet placed');
-            // }
-            console.log('bet place fn');
+            const data = await placeBet(userName, passWord, totalTickets, totalBet, gameId);
+            if (data) {
+                setLastBetBarCode(data.barcode);
+            }
         }
     }
 
