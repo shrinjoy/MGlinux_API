@@ -30,6 +30,7 @@ module.exports = {
         maintainer: 'The Forgers',
         homepage: 'https://example.com',
         icon: './icons/icon',
+        arch: 'ia32',
       },
     },
     {
