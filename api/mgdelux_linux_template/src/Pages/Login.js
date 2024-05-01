@@ -29,17 +29,22 @@ function Login() {
     async function checkLogin() {
         if (!username.trim()) {
             setError("Username is Missing");
+            setTimeout(setError, 2000, "")
         } else if (!password.trim()) {
             setError("Password is Missing");
+            setTimeout(setError, 2000, "")
         } else {
             const data = await login(userId, username, password, userMacId);
-            if (data) {
-                console.log(data);
+            if (data && data.data.message.includes('macid_wrong')) {
+                setError("MAC ID Mismatch");
+                setTimeout(setError, 2000, "");
+            } else if (data) {
                 setUserName(username);
                 setPassWord(password);
                 navigate('/game');
-            } else if (error) {
-                setError("Incorrect Username/Password Entered!")
+            } else {
+                setError("Incorrect Credentials");
+                setTimeout(setError, 2000, "");
             }
         }
     }
@@ -86,7 +91,7 @@ function Login() {
                             </div>
                         </div>
                     </div>
-                    <div className='col-12 text-center'>
+                    <div className='col-12 text-center text-danger fw-bold'>
                         {error ? error : ""}
                     </div>
                     <div className='col-2 offset-1 mt-2'>

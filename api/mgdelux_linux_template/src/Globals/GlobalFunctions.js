@@ -18,7 +18,7 @@ export async function login(userId, loginUsername, password, userMacId) {
             }
         })
         .catch(error => {
-            return error;
+            return null;
         })
 }
 
