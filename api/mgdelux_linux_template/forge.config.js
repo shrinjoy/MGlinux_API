@@ -6,6 +6,7 @@ module.exports = {
     asar: true,
     linux: {
       target: 'deb',
+      arch: 'ia32',
     },
     icon: './icons/icon'
   },
