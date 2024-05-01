@@ -57,6 +57,9 @@ export async function placeBet(userName, passWord, totalTickets, totalBet, gameI
         .then(res => {
             return res.data;
         })
+        .catch(err => {
+            return err;
+        })
 }
 
 //Cancel Last Bet
@@ -65,6 +68,9 @@ export async function cancelLastBet(lastBetBarCode) {
     return axiosInstance.post(`/cancelbybarcode`, parsedData)
         .then(res => {
             return res.data;
+        })
+        .catch(err => {
+            return null;
         })
 }
 

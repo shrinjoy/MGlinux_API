@@ -6,6 +6,9 @@ import Clock from 'react-clock';
 import 'react-clock/dist/Clock.css';
 import ReportPanel from './Components/ReportPanel';
 import BetInfo from './Components/BetInfo';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 function GameView() {
     const { userName, setUserName, passWord, gameId, setGameId, lastBetBarCode, setLastBetBarCode } = useContext(DataContext);
@@ -16,6 +19,7 @@ function GameView() {
     const [barCodeSearch, setBarCodeSearch] = useState('');
     const [isTimerActive, setIsTimerActive] = useState(true);
     const [gameResult, setGameResult] = useState("");
+    const navigate = useNavigate();
     // Simple Buttons
     const [clearTrigger, setClearTrigger] = useState(false);
     const [luckyTrigger, setLuckyTrigger] = useState(false);
@@ -87,28 +91,65 @@ function GameView() {
     const handleTimerReset = () => {
         setIsTimerActive(true);
         // handleGameResults();
-        console.log('Sequence Started Again');
+        // console.log('Sequence Started Again');
     }
 
     async function handleGameResults() {
         const data = await getGameResult();
         setGameResult(data);
-        console.log(data);
+        // console.log(data);
     }
 
     async function handleBetPlacement() {
         if (totalBet > 0 && gameTime > 10) {
             const data = await placeBet(userName, passWord, totalTickets, totalBet, gameId);
-            if (data) {
+            if (data && data.message) {
                 setLastBetBarCode(data.barcode);
+                toast.success("Bet Placed Successfully!", {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    theme: "colored",
+                    // transition: Bounce,
+                });
+            } else {
+                toast.error("Bet Failed!", {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    theme: "colored",
+                    // transition: Bounce,
+                });
             }
+        } else {
+            toast.error("Please Input Amount!", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                theme: "colored",
+                // transition: Bounce,
+            });
         }
     }
 
     async function cancelBet() {
-        const data = cancelLastBet(lastBetBarCode);
-        if (data) {
-            console.log(data);
+        const data = await cancelLastBet(lastBetBarCode);
+        if (data && data.message) {
+            toast.success("Bet Cancelled Successfully!", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                theme: "colored",
+                // transition: Bounce,
+            });
+        } else {
+            toast.error("Bet Cancellation Failed!", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                theme: "colored",
+                // transition: Bounce,
+            });
         }
     }
 
@@ -119,6 +160,12 @@ function GameView() {
     const handleLuckyPik = () => {
         setLuckyTrigger(true)
     }
+
+    useEffect(() => {
+        if (!userName) {
+            navigate('/main_window');
+        }
+    })
 
     return (
         <>
@@ -304,6 +351,7 @@ function GameView() {
                     </div>
                 </div>
             </section>
+            <ToastContainer />
         </>
     )
 }
