@@ -102,24 +102,17 @@ function GameView() {
 
     async function handleBetPlacement() {
         if (totalBet > 0 && gameTime > 10) {
+            const toastId = toast.loading('Placing Bet, Please Wait!', {
+                position: "top-center",
+                hideProgressBar: false,
+                theme: "colored",
+            })
             const data = await placeBet(userName, passWord, totalTickets, totalBet, gameId);
             if (data && data.message) {
                 setLastBetBarCode(data.barcode);
-                toast.success("Bet Placed Successfully!", {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    theme: "colored",
-                    // transition: Bounce,
-                });
+                toast.update(toastId, { render: "Bet Placed Successfully!", type: "success", isLoading: false, autoClose: 2000 });
             } else {
-                toast.error("Bet Failed!", {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    theme: "colored",
-                    // transition: Bounce,
-                });
+                toast.update(toastId, { render: "Bet Failed!", type: "error", isLoading: false, autoClose: 2000 });
             }
         } else {
             toast.error("Please Input Amount!", {
@@ -127,29 +120,21 @@ function GameView() {
                 autoClose: 2000,
                 hideProgressBar: false,
                 theme: "colored",
-                // transition: Bounce,
             });
         }
     }
 
     async function cancelBet() {
         const data = await cancelLastBet(lastBetBarCode);
+        const toastId = toast.loading('Cancelling Bet, Please Wait!', {
+            position: "top-center",
+            hideProgressBar: false,
+            theme: "colored",
+        })
         if (data && data.message) {
-            toast.success("Bet Cancelled Successfully!", {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                theme: "colored",
-                // transition: Bounce,
-            });
+            toast.update(toastId, { render: "Bet Cancelled Successfully!", type: "success", isLoading: false, autoClose: 2000 });
         } else {
-            toast.error("Bet Cancellation Failed!", {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                theme: "colored",
-                // transition: Bounce,
-            });
+            toast.update(toastId, { render: "Bet Cancellation Failed!", type: "error", isLoading: false, autoClose: 2000 });
         }
     }
 
