@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const { exec } = require('child_process');
 const os = require('os');
 const path = require('node:path');
+const getmac = require('getmac')
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -26,12 +27,14 @@ const createWindow = () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  // ipcMain.handle('get-mac-address', fetchMacAddress)
   createWindow();
 
   // On OS X it's common to re-create a window in the app when the
@@ -88,4 +91,16 @@ ipcMain.on('system-settings', () => {
     exec('gnome-control-center');
   }
 });
+
+// Deriving User Mac ID
+ipcMain.handle('get-mac-address', fetchMacAddress)
+
+async function fetchMacAddress() {
+  const macAddress = await getmac.default();
+  if (macAddress) {
+    return macAddress;
+  }
+}
+
+
 

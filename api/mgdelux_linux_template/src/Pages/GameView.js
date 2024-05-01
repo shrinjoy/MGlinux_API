@@ -146,6 +146,7 @@ function GameView() {
         setLuckyTrigger(true)
     }
 
+    // Redirect to Home if userName not available
     useEffect(() => {
         if (!userName) {
             navigate('/main_window');

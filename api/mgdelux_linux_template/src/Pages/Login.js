@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { verNo } from '../Globals/GlobalMetaData';
 import { login } from '../Globals/GlobalFunctions';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,18 @@ function Login() {
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
+
+    // Deriving User Mac ID
+    useEffect(() => {
+        async function getMacAddress() {
+            const res = await window.electronAPI.getMacAddress();
+            if (res) {
+                setUserMacId(res);
+                console.log(res);
+            }
+        }
+        getMacAddress();
+    }, [userMacId])
 
     async function checkLogin() {
         if (!username.trim()) {
