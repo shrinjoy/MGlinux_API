@@ -19,18 +19,57 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
 
         if (row === 10) {
             for (let i = 0; i < newInputs.length - 1; i++) {
-                const existingValue = newInputs[i][col] !== '' ? parseFloat(newInputs[i][col]) : 0;
-                newInputs[i][col] = existingValue + (newValue !== '' ? parseFloat(newValue) : 0);
+                const existingValue = newInputs[i][col] !== '' ? parseFloat(newInputs[i][col]) : 0;//etar mane ki bara tue old value tor all bet er nebe naki tor bet field er nebe 
+
+
+                //first get the latest values
+                newInputs[i][col] = parseInt(document.getElementById(`input-NR${i}${col}`).value||0)+parseInt(document.getElementById(`input-NR${row}${col}`).value||0);
+                //then remove the 
+                newInputs[i][col]-=parseInt(document.getElementById(`input-NR${row}${col}`).getAttribute("data-old")||0)
+                // we check if the value is less than 1 if so then we set it to empty string 
+                if( newInputs[i][col] <1)
+                {
+                    newInputs[i][col] = ""
+                }
+            }
+
+
+            //check value is less than 0 and set it to 0 if it is 
+            if(newValue<0)
+            {
+                newValue = 0;
             }
             newInputs[10][col] = newValue;
+           
+            //storing the lastet value for next iteration 
+            document.getElementById(`input-NR${row}${col}`).setAttribute("data-old", newValue);
+            //same rule for the side bet 
         }
 
         if (col === 10) {
             for (let i = 0; i < newInputs[row].length - 1; i++) {
                 const existingValue = newInputs[row][i] !== '' ? parseFloat(newInputs[row][i]) : 0;
-                newInputs[row][i] = existingValue + (newValue !== '' ? parseFloat(newValue) : 0);
+
+
+                newInputs[row][i] = parseInt(document.getElementById(`input-NR${row}${i}`).value||0)+parseInt(document.getElementById(`input-NR${row}${col}`).value||0);
+                newInputs[row][i]-=parseInt(document.getElementById(`input-NR${row}${col}`).getAttribute("data-old")||0)
+
+                if( newInputs[i][col] <1)
+                {
+                    newInputs[i][col] = ""
+                }
+            }
+            if(newValue<0)
+            {
+                newValue = 0;
             }
             newInputs[row][10] = newValue;
+
+
+          
+
+            document.getElementById(`input-NR${row}${col}`).setAttribute("data-old", newValue);
+//
         }
 
         if ((row === 10 && newValue === '') || (col === 10 && newValue === '')) {
@@ -152,11 +191,12 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
                             <input
                                 ref={el => inputRefs.current[rowIndex][colIndex] = el}
                                 id={`input-${cellId}`}
-                                type="text"
+                                type="number"
                                 value={value}
                                 onChange={(e) => handleChange(e, rowIndex, colIndex)}
                                 onKeyDown={(e) => handleKeyPress(e, rowIndex, colIndex)}
                                 className={(selectedRow === rowIndex && selectedCol === colIndex) ? 'selected' : ''}
+                                data-old={0}
                             />
                         </td>
                     );
