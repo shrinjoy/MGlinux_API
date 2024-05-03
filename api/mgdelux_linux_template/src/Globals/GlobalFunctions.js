@@ -2,6 +2,7 @@ import axios from "axios";
 
 
 const baseName = 'http://193.203.163.194:3000';
+const systemBaseName = 'http://127.0.0.1:3000'
 
 const axiosInstance = axios.create({
     baseURL: baseName,
@@ -84,4 +85,20 @@ export function getCurrentTime() {
     const currentTime = `${hours}:${minutes}:${seconds}`;
 
     return currentTime;
+}
+
+// System Server API
+export function systemServGet(endpoint) {
+    return axiosInstance.get(`${systemBaseName}/${endpoint}`);
+}
+
+export async function systemServPost(endpoint, sysCommand) {
+    const parsedData = { command: sysCommand }
+    return axiosInstance.get(`${systemBaseName}/${endpoint}`, parsedData)
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            return null
+        })
 }

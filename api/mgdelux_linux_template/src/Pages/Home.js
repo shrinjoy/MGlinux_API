@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { systemServGet } from '../Globals/GlobalFunctions';
 
 function Home() {
     const [clickConnect, setClickConnect] = useState(false);
@@ -44,11 +45,11 @@ function Home() {
                     <div style={{ width: '20%' }} onClick={() => window.electronAPI.systemSettings()}>
                         <button className="homeBtn">System</button>
                     </div>
-                    <div style={{ width: '20%' }} onClick={() => window.electronAPI.systemRestart()}>
+                    <div style={{ width: '20%' }} onClick={() => systemServGet("restart")}>
                         <button className="homeBtn">Restart</button>
                     </div>
                     <div style={{ width: '20%' }}>
-                        <button className="homeBtn" onClick={() => window.electronAPI.systemShutdown()}>PowerOff</button>
+                        <button className="homeBtn" onClick={() => systemServGet("shutdown")}>PowerOff</button>
                     </div>
                 </div>
             </div>
