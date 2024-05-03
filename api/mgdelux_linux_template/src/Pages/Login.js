@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { verNo } from '../Globals/GlobalMetaData';
-import { login } from '../Globals/GlobalFunctions';
+import { login, systemServGet } from '../Globals/GlobalFunctions';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
 
@@ -9,7 +9,7 @@ function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [userId, setUserId] = useState("");
-    const [userMacId, setUserMacId] = useState("");
+    const [userMacId, setUserMacId] = useState("50:28:4a:01:7c:d2");
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -17,10 +17,11 @@ function Login() {
     // Deriving User Mac ID
     useEffect(() => {
         async function getMacAddress() {
-            const res = await window.electronAPI.getMacAddress();
+            // const res = await window.electronAPI.getMacAddress();
+            const res = await systemServGet('getmac')
             if (res) {
                 setUserMacId(res);
-                // console.log(res);
+                console.log(res);
             }
         }
         getMacAddress();

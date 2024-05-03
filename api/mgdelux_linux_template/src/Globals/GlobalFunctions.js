@@ -89,7 +89,13 @@ export function getCurrentTime() {
 
 // System Server API
 export function systemServGet(endpoint) {
-    return axiosInstance.get(`${systemBaseName}/${endpoint}`);
+    return axiosInstance.get(`${systemBaseName}/${endpoint}`)
+        .then(res => {
+            return res;
+        })
+        .catch(err => {
+            return null
+        })
 }
 
 export async function systemServPost(endpoint, sysCommand) {
