@@ -7,6 +7,15 @@
 
 //SELECT "INTNUMBER","GAMERESULT","GAMEDATE","GAMEID","GAMETIME","GAMENUM","GAMECLS","GAMEREL","GAMERELDATE" FROM "RESULT99" WHERE "GAMEDATE"=CONVERT(varchar, getdate(), 23) AND "GAMENUM"='A00';
 
+const crypto = require('crypto');
+
+function generateRandomNoise(length) {
+  const buffer = crypto.randomBytes(length);
+  return buffer.toString('hex');
+}
+
+
+
 module.exports = {
     placebet: function (db, req) {
         return new Promise((resolve, reject) => {
@@ -32,9 +41,9 @@ module.exports = {
                                         .then((data) => {
                                             console.log("deducted client balance");
 
-                                            db.query("SELECT FORMAT(GETDATE(), 'yyyyMMddHHmmssfff') as barcode")
+                                            db.query("SELECT REPLACE(CAST(ABS(CAST(CHECKSUM(NEWID()) AS BIGINT) * CAST(RAND() * 1000000 AS BIGINT)) AS VARCHAR), '.', '') as barcode")
                                                 .then((data) => {
-                                                    var barcodedata = "B" + data.recordset[0]["barcode"];
+                                                    var barcodedata = "B" + data.recordset[0]["barcode"]+generateRandomNoise(3);
 
                                                     var querystring = `INSERT INTO [playjeeto].[dbo].[TICKET99] (TICKETNUMBER,TICKETDETAILS,TICKETRS,TICKETTOTALRS,GAMEDATE,GAMETIME,TARMINALID,GAMEID) 
                                     VALUES ('${barcodedata}','${req["tickets"]}',1,${req["totalbet"]},FORMAT(GETDATE(), 'yyyy-MM-dd'),FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss'),'${req["username"]}','${req["gameid"]}');`;
