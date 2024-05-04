@@ -1,584 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Metro Deluxe</title>
-  <style>
-    @keyframes colorChange {
-      0% {
-        color: rgb(47, 0, 255);
-      }
-
-      50% {
-        color: rgb(87, 52, 241);
-        /* Bright red */
-      }
-
-      75% {
-        color: rgb(70, 29, 255);
-        /* Bright red */
-      }
-
-      100% {
-        color: rgb(47, 0, 255);
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="theme.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-
-<body>
-  
-  <div id="popup">
-   
-    <label id="popup_msg">popup</label>
-  </div>
-  <section id="loginform">
-    <label>v1.1</label>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xl-5 col-9 mx-auto">
-          <div class="loginWrapper">
-            <h1 style="width: max-content; border-bottom: 2px solid #1161ee">
-              Metro Deluxe SIGN IN
-            </h1>
-            <div class="mt-3">
-              <label class="inputLabel">ID</label>
-              <input placeholder="ENTER ID" id="uname" type="text" required />
-              <!-- <label style="text-align: center;">or</label> -->
-            </div>
-            <div class="mt-3">
-              <label class="inputLabel">Username</label>
-              <input maxlength="20" placeholder="ENTER USERNAME" id="uID" type="text" required />
-              <label class="d-block text-center" style="color: gray">(case sensitive)</label>
-            </div>
-            <div class="mt-3">
-              <label class="inputLabel">Password</label>
-              <input placeholder="ENTER PASSWORD" id="pword" type="password" required />
-            </div>
-            <div class="mt-3">
-              <label class="inputLabel mb-3">Please enter the number as you see in the image</label>
-              <h1 style="font-weight: bold; text-align: center" id="catchpa">
-                123456
-              </h1>
-              <input style="margin: 0 auto; width: 100%" placeholder="Enter Captcha" id="captchaInput" required />
-            </div>
-            <div class="mt-3 d-flex align-items-center justify-content-center">
-              <input id="keepLoggedIn" name="keepLoggedIn" type="checkbox" />
-              <span class="keepSignedIn">Keep me signed in</span>
-            </div>
-            <button class="loginBtn mt-3" onclick="checklogin()">
-              Sign In
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="mc" class="mainContent" style="display: none;">
-    <div class="container-fluid px-4" style="border-bottom: 1px solid red">
-      <div class="gameWrapper">
-        <div class="row headerRow">
-          <!-- <div>
-              <h1>Metro delux</h1>
-            </div>
-            <div class="col-2">
-              <label>Game Gift Code</label>
-              <label id="gameid" style="color: blue">A00</label>
-            </div>
-            <div class="col-2">
-              <label> Game Time </label>
-              <label id="timer">0000</label>
-            </div> -->
-          <!-- <div class="col-2">
-              <label> P.No. </label>
-              <label id="username" style="color: #ce0b00">123456789</label>
-            </div>
-            <div class="col-2">
-              <label>Balance</label>
-              <label id="balance" style="color: #ce0b00"> 00000 </label>
-            </div>
-            <div class="col-2">
-              <label> Time</label> <label id="realtime">00:00:00</label>
-            </div> -->
-        </div>
-
-        <div class="row gameRow gx-0">
-          <div class="col-3">
-            <div class="headerRow">
-              <div class="col-12 text-center">
-                <h1>Metro Deluxe</h1>
-              </div>
-              <div class="col-6 text-center">
-                <label>Game Gift Code</label>
-                <label id="gameid" style="color: blue">A00</label>
-              </div>
-              <div class="col-6 text-center">
-                <label> Countdown </label>
-                <label id="timer">0000</label>
-              </div>
-            </div>
-            <div id="background" class="mt-2">
-              <div class="retardedSpinningShit position-relative">
-                <div class="imgWrapper mx-auto">
-                  <img src="./public/background.png" />
-                </div>
-                <div class="imgWrapper2">
-                  <img id="card" src="./public/1.jpeg" />
-                </div>
-              </div>
-              <div id="res_sofar_div">
-                <table style="
-                      height: 100%;
-                      width: 100%;
-                      overflow-y: scroll;
-                      display: block;
-                      /* background-color: red; */
-                    " id="res_sofar_table"></table>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-9">
-            <div class="headerRow">
-              <div class="col-3">
-                <label> P.No. </label>
-                <label id="username" style="color: #ce0b00">123456789</label>
-              </div>
-              <div class="col-3 text-end">
-                <!-- <label>Balance</label> -->
-                <label id="balance" style="color: #ce0b00"> 00000 </label>
-              </div>
-              <div class="col-3 text-center">
-                <label> Time :</label>
-                <label id="realtime">&nbsp;&nbsp;00:00:00</label>
-              </div>
-              <div class="col-3 text-end">
-                <button class="text-white border-0" style="background-color: red;font-size:25px;"
-                  onclick="togglePopup(4)">
-                  Change Password
-                </button>
-              </div>
-            </div>
-            <div id="buttonholder" class="mt-2">
-              <table id="betinputpanel" class="h-100"></table>
-            </div>
-          </div>
-        </div>
-
-        <div class="buttonsRow" style="margin-left: 10px">
-          <div class="btnItem" style="width: 200px">
-            <button class="gamebutton" id="buybuttonXD" onclick="buyticket()" style="background-color: #eac697">
-              F6-Buy
-            </button>
-          </div>
-          <div class="btnItem" style="width: 180px">
-            <button class="gamebutton" onclick="togglePopup(1)">
-              Advance Draw(F8)
-            </button>
-          </div>
-          <div class="btnItem">
-            <button class="gamebutton" onclick="clearallinputs()">
-              Clear(ESC)
-            </button>
-          </div>
-          <div class="btnItem">
-            <button class="gamebutton" onclick="cancel_bet()">
-              Cancel(F9)
-            </button>
-          </div>
-          <div class="btnItem">
-            <button class="gamebutton" onclick="togglePopup(2)">
-              Report(F4)
-            </button>
-          </div>
-          <div class="btnItem">
-            <button class="gamebutton" onclick="togglePopup(3)">
-              Stone(F7)
-            </button>
-          </div>
-          <div class="btnItem" style="width: 70px">
-            <button class="gamebutton" style="background-color: #eac697" onclick="location.reload()">
-              Exit
-            </button>
-          </div>
-          <div class="btnItem" style="width: max-content">
-            <label id="totqt_val">Total Qty: <span>0</span></label>
-          </div>
-          <div class="btnItem" style="width: max-content">
-            <label id="totamt_val">Total Amnt: <span>0</span></label>
-          </div>
-        </div>
-        <!-- <div id="lowerpanel">
-            <table style="width: 100%" id="lowerpaneltable">
-              <tr>
-                <td>
-                  <button
-                    class="gamebutton"
-                    style="background-color: #e8c595"
-                    onclick="buyticket()"
-                  >
-                    F5-Buy
-                  </button>
-                </td>
-                <td>
-                  <button
-                    class="gamebutton"
-                    style="background-color: #00ffff"
-                    onclick="showadvancebet()"
-                  >
-                    Advance Draw(F6)
-                  </button>
-                </td>
-                <td>
-                  <button
-                    class="gamebutton"
-                    style="background-color: #00ffff"
-                    onclick="clearallinputs()"
-                  >
-                    Clear(ESC)
-                  </button>
-                </td>
-                <td>
-                  <button
-                    class="gamebutton"
-                    style="background-color: #00ffff"
-                    onclick="cancelbet()"
-                  >
-                    Cancel(F9)
-                  </button>
-                </td>
-                <td>
-                  <button class="gamebutton" style="background-color: #00ffff">
-                    Report(F4)
-                  </button>
-                </td>
-                <td>
-                  <button
-                    class="gamebutton"
-                    style="background-color: #00ffff"
-                    onclick="showstones()"
-                  >
-                    Stone(F7)
-                  </button>
-                </td>
-                <td>
-                  <button class="gamebutton" style="background-color: #e8c595">
-                    Exit
-                  </button>
-                </td>
-                <td>
-                  <label id="totqt_val">total Qnt:0</label>
-                </td>
-                <td>
-                  <label id="totamt_val">total Amnt:0</label>
-                </td>
-              </tr>
-            </table>
-          </div> -->
-
-        <div id="stone_show" data-id="3">
-          <button onclick="togglePopup(3)" style="position: absolute; right: 0; top: 0">
-            X
-          </button>
-          <div style="
-                background-color: red;
-                padding: 25px 0;
-                margin-bottom: 30px;
-              " id="stone_control_box">
-            <label class="text-white">Select Date</label>
-            <input id="date" type="date" />
-            <button onclick="showresultbydate()" style="border-radius: 5px; background-color: #fff">
-              Show Stone
-            </button>
-          </div>
-          <table style="
-                overflow-y: scroll;
-                height: 95%;
-                width: 100%;
-                overflow-x: visible;
-                display: block;
-              " id="stones_table"></table>
-        </div>
-        <div id="advancebet_show" data-id="1">
-          <div style="
-                background-color: brown;
-                width: 100%;
-                height: auto;
-                text-align: center;
-                color: white;
-                font-weight: bolder;
-                font-size: larger;
-                padding: 10px 0;
-              ">
-            Advance Draw
-          </div>
-          <table id="advance_bet_table"></table>
-          <div style="
-                background-color: brown;
-                width: 100%;
-                height: auto;
-                text-align: center;
-                color: white;
-                font-weight: bolder;
-                font-size: larger;
-                padding: 10px 0;
-              ">
-            <button onclick="togglePopup(1)">OK</button>
-            <button onclick="togglePopup(1)">Cancel</button>
-          </div>
-        </div>
-        <div class="changePassword" id="change_password_4" data-id="4">
-          <div style="
-                background-color: brown;
-                width: 100%;
-                height: auto;
-                text-align: left;
-                color: white;
-                font-weight: bolder;
-                font-size: larger;
-                padding: 5px 0;
-                position: relative;
-              ">
-            <label class="text-white">Change Password</label>
-            <div style="position: absolute; right: 0; top: 0">
-              <button onclick="togglePopup(4)">X</button>
-            </div>
-          </div>
-          <div>
-            <form class="p-3">
-              <div class="p-2">
-                <div class="border-top row p-2">
-                  <div class="col-6">
-                    <label for="username" style="font-weight: 700; font-size: 30px"><span
-                        class="text-danger">*</span>Enter Current
-                      Password:-</label>
-                  </div>
-                  <div class="col-6">
-                    <input type="text" class="gameInputText" name="username" id="cpusername" />
-                  </div>
-                </div>
-                <div class="border-top row p-2">
-                  <div class="col-6">
-                    <label for="password" style="font-weight: 700; font-size: 30px"><span
-                        class="text-danger">*</span>Enter New
-                      Password:-</label>
-                  </div>
-                  <div class="col-6">
-                    <input  class="gameInputText" name="password" id="password" />
-                  </div>
-                </div>
-                <div class="border-top border-bottom row p-2">
-                  <div class="col-6">
-                    <label for="newpassword" style="font-weight: 700; font-size: 30px"><span
-                        class="text-danger">*</span>Re-Enter
-                      Password:-</label>
-                  </div>
-                  <div class="col-6">
-                    <input  class="gameInputText" name="newpassword" id="newpassword" />
-                  </div>
-                </div>
-                <div class="text-center pt-2">
-                  <button onclick="changePassword(event)">Submit</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="reportPanel" data-id="2">
-          <div style="
-                background-color: brown;
-                width: 100%;
-                height: 35px;
-                text-align: left;
-                color: white;
-                font-weight: bolder;
-                font-size: larger;
-                padding: 5px 0;
-                position: relative;
-              ">
-            <div style="position: absolute; right: 0; top: 0">
-              <button onclick="togglePopup(2)">X</button>
-            </div>
-          </div>
-          <div class="p-2">
-            <ul class="nav mb-3" id="pills-tab" role="tablist">
-              <li>
-                <a id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab"
-                  aria-controls="pills-home" aria-selected="true" style="color: #0d6efd">Play Details</a>
-              </li>
-              <li>
-                <a id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab"
-                  aria-controls="pills-profile" aria-selected="false" style="color: #0d6efd">Datewise Summary</a>
-              </li>
-              <li>
-                <a id="pills-sales-tab" data-bs-toggle="pill" data-bs-target="#pills-sales" type="button" role="tab"
-                  aria-controls="pills-sales" aria-selected="false" style="color: #0d6efd">Sales report</a>
-              </li>
-            </ul>
-            <div class="tab-content" id="pills-tabContent" style="border: 1px solid black">
-              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div class="d-flex w-100">
-                  <div class="col-2">
-                    <input type="date" name="" id="reportDate" />
-                  </div>
-                  <div class="col-2">
-                    <select name="" id="buttonSelectorReport" style="width: 50px">
-                      <option value="all">All</option>
-                    </select>
-                  </div>
-                  <div class="col-2">
-                    <button id="reportSubmit">Get Report</button>
-                  </div>
-                </div>
-                <table class="playDetails w-100" id="playDetailsTable">
-                  <tr>
-                    <th>Sr. No</th>
-                    <th>Gift Event Code</th>
-                    <th>Qty</th>
-                    <th>Points</th>
-                    <th>Request ID</th>
-                    <th>Date Time</th>
-                    <th>Gift Points</th>
-                    <th>Stone</th>
-                    <th>Status</th>
-                    <th>View</th>
-                  </tr>
-                </table>
-                <div class="total">
-                  <table style="background-color: brown">
-                    <tr>
-                      <td width="89.2px" style="border: 1px solid #fff"></td>
-                      <td width="203.6px" class="text-center text-white fw-bold" style="border: 1px solid #fff">
-                        Total
-                      </td>
-                      <td width="60.2px" class="text-center text-white fw-bold" style="border: 1px solid #fff" \
-                        id="totalQty"></td>
-                      <td width="91.4px" class="text-center text-white fw-bold" style="border: 1px solid #fff"
-                        id="totalPoints"></td>
-                      <td width="146.7px" style="border: 1px solid #fff"></td>
-                      <td width="139.4px" style="border: 1px solid #fff"></td>
-                      <td width="143.7px" class="text-center text-white fw-bold" style="border: 1px solid #fff"
-                        id="totalGiftPoints"></td>
-                      <td width="85.4px" style="border: 1px solid #fff"></td>
-                      <td width="91px" style="border: 1px solid #fff"></td>
-                      <td width="75px" style="border: 1px solid #fff"></td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <div class="d-flex w-100">
-                  <div class="col-2">
-                    <input type="date" name="" id="startDate" />
-                  </div>
-                  <div class="col-2">
-                    <input type="date" name="" id="endDate" />
-                  </div>
-                  <div class="col-2">
-                    <button id="summarySubmit">Get Summary</button>
-                  </div>
-                </div>
-                <table class="playDetails w-100" id="datewiseSummaryTable">
-                  <tr>
-                    <th>DATE</th>
-                    <th>PURCHASE POINT</th>
-                    <th>PWT POINT</th>
-                    <th>NET POINT</th>
-                  </tr>
-                </table>
-              </div>
-              <div class="tab-pane fade" id="pills-sales" role="tabpanel" aria-labelledby="pills-sales-tab">
-                <div class="d-flex w-100">
-                  <div class="col-2">
-                    <input type="date" name="" id="startDate_sales" />
-                  </div>
-                  <div class="col-2">
-                    <input type="date" name="" id="endDate_sales" />
-                  </div>
-                  <div class="col-2">
-                    <button id="summarySubmit_sales">Get Sales Report</button>
-                  </div>
-                </div>
-                <table class="playDetails w-100" id="salesreporttable">
-                  <tr>
-                    <th>Play Point</th>
-                    <th>Win Point</th>
-                    <th>End Point</th>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="barcodePopup">
-          <div style="position: absolute; right: 0; top: 0">
-            <button onclick="closeBarCodePopup()">X</button>
-          </div>
-          <div class="content">
-            <p>For Amusement Only</p>
-            <p>D.D: <span id="dateTimePopup"></span></p>
-            <div class="d-flex justify-content-center">
-              <div>
-                <p>
-                  D.T: <span id="gameIdPopup" class="elementToClear"></span>
-                </p>
-              </div>
-              <div class="ms-2">
-                <p>
-                  Pos ID: <span id="posIdPopup" class="elementToClear"></span>
-                </p>
-              </div>
-            </div>
-            <div class="ticketGroup"></div>
-            <div class="d-flex justify-content-center">
-              <div>
-                <p>Qty. <span id="qtyPopup" class="elementToClear"></span></p>
-              </div>
-              <div class="ms-2">
-                <p>
-                  Total Pts.
-                  <span id="totalPtsPopup" class="elementToClear"></span>
-                </p>
-              </div>
-            </div>
-            <div class="d-flex justify-content-center">
-              <div>
-                <p>G.id:</p>
-              </div>
-              <div>
-                <p>
-                  <span class="ms-2" id="barCodePopupValue" class="elementToClear"></span>
-                </p>
-              </div>
-            </div>
-            <div class="barcodeImage">
-              <svg id="barcodeEle" class="elementToClear"></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- <div style="height: 101vh;visibility: hidden;"></div> -->
-  </section>
-</body>
-
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
-<script src="cardanimation.js"></script>
-
-<script src="frontendfunc.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
-<script>
-
-  var canplacebet=true;
-  var betinputpanel = document.getElementById("betinputpanel");
+var betinputpanel = document.getElementById("betinputpanel");
 var gameidtext = document.getElementById("gameid");
 var gametimertext = document.getElementById("timer");
 var realtimertext = document.getElementById("realtime");
@@ -833,12 +253,7 @@ function inputfieldupdate() {
     "Total Amnt: <span>" + totalbet + "</span>";
 }
 function buyticket() {
-  
-
-  if(time>13)
-  {
-
-  if (totalbet > 0) {
+  if (totalbet > 0 && time > 10) {
     var datax = [];
     for (y = 0; y < 10; y++) {
       for (x = 0; x < 10; x++) {
@@ -869,18 +284,13 @@ console.log(datax);
     else if (bettingID.length == 1) {
       
       tempids = [];
-     // gettimeandgameid_withoutreset();
+      gettimeandgameid();
       tempids.push(gameid);
     }
 
     console.log(tempids);
 
     tempids.forEach((e) => {
-     // gettimeandgameid_withoutreset();
-
-      if( time > 13)
-    {
-
       axios({
         method: "post",
         url: "http://193.203.163.194:3000/placebet",
@@ -895,7 +305,7 @@ console.log(datax);
         .then(function (res) {
           //("placed bet in id:"+e.toString());
           //(res["data"]["barcode"]);
-          
+
           lastbetbarcode = res["data"]["barcode"];
 
           console.log("got user data");
@@ -908,7 +318,6 @@ console.log(datax);
 
         
           totalbet = 0;
-          
         })
         .catch(function (err) {
 
@@ -920,12 +329,6 @@ console.log(datax);
           getuserdata(username, password);
 
         });
-      }
-      else
-      {
-        showpopup("out of time ", "red"); //popup_function
-
-      }
     });
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
     datax = null;
@@ -948,11 +351,8 @@ console.log(datax);
     resetbetdata();
   }
   loadallpossiblefuturebets();
-}
-}
-
   /**/
-
+}
 
 function resetbetdata() {
   var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -1215,7 +615,6 @@ function getAllResultsSoFar() {
     .catch((err) => {
       //("Failed to fetch result data: " + err);
     });
-    cancelbet=true;
 }
 getAllResultsSoFar();
 function gettimeandgameid() {
@@ -1223,27 +622,11 @@ function gettimeandgameid() {
     method: "get",
     url: "http://193.203.163.194:3000/timeleft",
   }).then(function (res) {
-    gameid = res["data"]["gameid"];
-    
-    time = res["data"]["time"];
-    
-    bettingID = [];
-    bettingID = [gameid.toString()];
-
-    // //(bettingID);
-  });
-}
-function gettimeandgameid_withoutreset() {
-  axios({
-    method: "get",
-    url: "http://193.203.163.194:3000/timeleft",
-  }).then(function (res) {
-    gameid = res["data"]["gameid"];
-    
     time = res["data"]["time"];
     time = time - 12;
-   
-
+    gameid = res["data"]["gameid"];
+    bettingID = [];
+    bettingID = [gameid.toString()];
     // //(bettingID);
   });
 }
@@ -1276,8 +659,6 @@ gettimeandgameid();
 setInterval(() => {
   if(time<12)
   {
-    canplacebet=false;
-
     var advancebettable = document.getElementById("advance_bet_table");
     while (advancebettable.rows.length > 0) {
       advancebettable.deleteRow(0);
@@ -1288,10 +669,6 @@ setInterval(() => {
     bettingID = [];
     datax=null;
     document.getElementById("advancebet_show").style = "display:none";
-  }
-  else
-  {
-    canplacebet=true;
   }
 }, 1);
 
@@ -1310,10 +687,8 @@ function timerupdate() {
     gettimeandgameid();
 
     loadallpossiblefuturebets();
-    
   }
-  if (time < 11) {
-    cancelbet =false;
+  if (time < 10) {
     gametimertext.style = "color:red";
   } else {
     
@@ -1357,7 +732,7 @@ function clearallinputs() {
   });
   inputfieldupdate();
 }
-function cancel_bet() {
+function cancelbet() {
   // /cancelbybarcode
   axios({
     method: "post",
@@ -1415,13 +790,9 @@ function mobileUIFix() {
 
 function togglePopup(e) {
 
-  if(e===1 && userid==="2060930024")
+  if(e==1)
   {
     loadallpossiblefuturebets();
-  }
-  else  if(e===1 && userid!=="2060930024")
-  {
-    return null;
   }
 
 
@@ -1568,63 +939,6 @@ function getReportFromDate() {
       });
   });
 }
-
-function getSalesreport() {
-  var table = document.getElementById("salesreporttable");
-  var startDate = document.getElementById("startDate_sales");
-  var endDate = document.getElementById("endDate_sales");
-  var submit = document.getElementById("summarySubmit_sales");
-
-  submit.addEventListener("click", function () {
-    var startDateValue = startDate.value;
-    var endDateValue = endDate.value;
-
-    if (table) {
-      var rowCount = table.rows.length;
-
-      // Delete existing rows except the header
-      for (var i = rowCount - 1; i > 0; i--) {
-        table.deleteRow(i);
-      }
-    }
-
-    // Perform axios POST request
-    axios.post("http://193.203.163.194:3000/getsalesreport", {
-      username: username, // Assuming username is defined somewhere
-      startdate: startDateValue,
-      enddate: endDateValue,
-    })
-    .then((response) => {
-      // Create a new row
-      var tr = document.createElement("tr");
-
-      // Create and populate cells with response data
-      var playtd = document.createElement("td");
-      playtd.innerHTML = response.data.played; // Access response data using response.data
-      playtd.style.textAlign = "center"; // Center align content
-      tr.appendChild(playtd);
-
-      var wintd = document.createElement("td");
-      wintd.innerHTML = response.data.win;
-      wintd.style.textAlign = "center"; // Center align content
-      tr.appendChild(wintd);
-
-      var endtd = document.createElement("td");
-      endtd.innerHTML = response.data.endamount;
-      endtd.style.textAlign = "center"; // Center align content
-      tr.appendChild(endtd);
-
-      // Append the new row to the table
-      table.appendChild(tr);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-  });
-}
-
-
-
 
 function getDetailReportFromDate() {
   var table = document.getElementById("playDetailsTable");
@@ -1951,7 +1265,6 @@ function viewBarcodeByTicket(event) {
 
 document.addEventListener("DOMContentLoaded", function () {
   getReportFromDate();
-  getSalesreport();
   getDetailReportFromDate();
 });
 
@@ -2080,33 +1393,4 @@ console.log(`welcome to mgdelux_webversion 1.01 this update fixes include
 -timer not reseting when the app is paused
 -change password will remain if username password is same
 -added bug fix for when newpassword and retype new password are not same wtf ridz ;c
--fixed advance bet not reseting on time end XDDDDD
--fixed cancel bet
--added current date to all date fields`)
-
-</script>
-<script>
-  function setToday() {
-  // Get today's date in the format "YYYY-MM-DD"
-  var today = new Date().toISOString().split('T')[0];
-  
-  // Set today's date to each date input field
-  var dateInputs = document.querySelectorAll('input[type="date"]');
-  dateInputs.forEach(function(input) {
-    input.value = today;
-  });
-}
-setToday();
-  document.getElementById("catchpa").innerHTML =
-    Math.floor(Math.random() * (999999 - 300000 + 1)) + 300000;
-  const today = new Date().toISOString().split("T")[0];
-
-  // Set the default value of the input to today
-  document.getElementById("date").value = today;
-  showresultbydate();
-  function hideblock() {
-    document.getElementById("advancebet_show").style = "display:none";
-  }
-</script>
-
-</html>
+-fixed advance bet not reseting on time end XD`)
