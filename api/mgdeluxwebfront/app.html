@@ -1415,14 +1415,11 @@ function mobileUIFix() {
 
 function togglePopup(e) {
 
-  if(e===1 && userid==="2060930024")
+  if(e===1)
   {
     loadallpossiblefuturebets();
   }
-  else  if(e===1 && userid!=="2060930024")
-  {
-    return null;
-  }
+  
 
 
   var wrapper = document.querySelector(`[data-id='${e}']`);
