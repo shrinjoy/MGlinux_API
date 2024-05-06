@@ -113,38 +113,49 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
 
     // Navigate using KeyBoard
     const handleKeyPress = (e, rowIndex, colIndex) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft' || e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+        }
+
         if (e.key === 'ArrowRight') {
             if (colIndex < 9) {
                 inputRefs.current[rowIndex][colIndex + 1].focus();
+                inputRefs.current[rowIndex][colIndex + 1].select();
                 setSelectedRow(rowIndex);
                 setSelectedCol(colIndex + 1);
             } else if (rowIndex < 10) {
                 inputRefs.current[rowIndex + 1][0].focus();
+                inputRefs.current[rowIndex + 1][0].select();
                 setSelectedRow(rowIndex + 1);
                 setSelectedCol(0);
             } else {
                 inputRefs.current[0][0].focus();
+                inputRefs.current[0][0].select();
                 setSelectedRow(0);
                 setSelectedCol(0);
             }
         } else if (e.key === 'ArrowLeft') {
             if (colIndex > 0) {
                 inputRefs.current[rowIndex][colIndex - 1].focus();
+                inputRefs.current[rowIndex][colIndex - 1].select();
                 setSelectedRow(rowIndex);
                 setSelectedCol(colIndex - 1);
             } else {
                 if (rowIndex > 0) {
                     inputRefs.current[rowIndex - 1][10].focus();
+                    inputRefs.current[rowIndex - 1][10].select();
                     setSelectedRow(rowIndex - 1);
                     setSelectedCol(10);
                 }
             }
-        } else if (e.key === 'ArrowDown' && rowIndex < 9) {
+        } else if (e.key === 'ArrowDown' && rowIndex < 10) {
             inputRefs.current[rowIndex + 1][colIndex].focus();
+            inputRefs.current[rowIndex + 1][colIndex].select();
             setSelectedRow(rowIndex + 1);
             setSelectedCol(colIndex);
         } else if (e.key === 'ArrowUp' && rowIndex > 0) {
             inputRefs.current[rowIndex - 1][colIndex].focus();
+            inputRefs.current[rowIndex - 1][colIndex].select();
             setSelectedRow(rowIndex - 1);
             setSelectedCol(colIndex);
         }
@@ -156,6 +167,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
             const newInputs = initialInputs.map(row => row.map(() => ''));
             setInputs(newInputs);
             setExtraCellValues(Array.from({ length: 10 }, () => ''));
+            inputRefs.current[0][0].focus();
             onClearAllValues();
         }
     }, [clearTrigger]);
@@ -187,7 +199,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
                             <input
                                 ref={el => inputRefs.current[rowIndex][colIndex] = el}
                                 id={`input-${cellId}`}
-                                type="number"
+                                type="text"
                                 value={value}
                                 onChange={(e) => handleChange(e, rowIndex, colIndex)}
                                 onKeyDown={(e) => handleKeyPress(e, rowIndex, colIndex)}

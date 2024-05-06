@@ -112,6 +112,7 @@ function GameView() {
             if (data && data.message) {
                 setLastBetBarCode(data.barcode);
                 toast.update(toastId, { render: "Bet Placed Successfully!", type: "success", isLoading: false, autoClose: 2000 });
+                setClearTrigger(true);
             } else {
                 toast.update(toastId, { render: "Bet Failed!", type: "error", isLoading: false, autoClose: 2000 });
             }
