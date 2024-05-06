@@ -9,7 +9,7 @@ function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [userId, setUserId] = useState("");
-    const [userMacId, setUserMacId] = useState("f8:0f:41:95:46:b7");
+    const [userMacId, setUserMacId] = useState("");
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ function Login() {
             const res = await window.electronAPI.getMacAddress();
             // const res = await systemServGet('getmac')
             if (res) {
-                // setUserMacId(res);
+                setUserMacId(res);
                 console.log(res);
             }
         }
