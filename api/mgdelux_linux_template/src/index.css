@@ -219,8 +219,8 @@ body {
 
 .gameWrapper .headerRow h1 {
     color: #ce0b00;
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 50px;
+    font-weight: 600;
 }
 
 .gameWrapper .gameRow .col-3 .headerRow label,
@@ -325,7 +325,7 @@ label.totalBet {
 
 .gameRow .imgWrapper {
     width: 260px;
-    height: 275px;
+    height: 260px;
     overflow: hidden;
 }
 

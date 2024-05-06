@@ -190,23 +190,58 @@ function GameView() {
                 >
                     <div className="gameWrapper">
                         <div className="row gameRow gx-2">
+                            <div className="headerRow">
+                                <div className="col-6 d-flex justify-content-center align-items-center">
+                                    <h1>Metro Deluxe</h1>
+                                </div>
+                                <div className="col-2 text-end row align-items-center">
+                                    <div>
+                                        <label className='d-inline-block'> P.No. </label>
+                                        <label id="username" style={{ color: "#ce0b00", marginLeft: 5, display: 'inline-block' }}>
+                                            {userName}
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label id="balance" style={{ color: "#ce0b00" }}>
+                                            {" "}
+                                            00000{" "}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="col-2 ms-auto">
+                                    {/* <label> Time :</label>
+                                        <label id="realtime">&nbsp;&nbsp;{time}</label> */}
+                                    <div className='analogClock d-flex justify-content-center'>
+                                        <Clock value={time} size={85} renderNumbers={true} />
+                                    </div>
+                                </div>
+                                <div className="col-auto text-end">
+                                    {/* <button
+                                            className="text-white border-0"
+                                            style={{ backgroundColor: "red", fontSize: 18 }}
+                                        >
+                                            Change Password
+                                        </button> */}
+                                    <div className='imgWrapper status'>
+                                        <img src={require('../Assets/images/lightbulb.png').default} />
+                                    </div>
+                                </div>
+                            </div>
+
                             <div className="col-4">
                                 <div className="headerRow">
-                                    <div className="col-12 text-center">
-                                        <h1>Metro Deluxe</h1>
-                                    </div>
                                     <div className="col-6 text-center">
-                                        <label>Game Gift Code</label>
+                                        <label style={{ fontSize: 12 }}>Game Gift Code</label>
                                         <label id="gameid" style={{ color: "blue" }}>
                                             {gameId}
                                         </label>
                                     </div>
                                     <div className="col-6 text-center">
-                                        <label> Countdown </label>
+                                        <label style={{ fontSize: 12 }}> Countdown </label>
                                         <label id="timer">{secondsToHMS(gameTime)}</label>
                                     </div>
                                 </div>
-                                <div id="background" className="mt-2" style={{ height: 497 }}>
+                                <div id="background" className="mt-2">
                                     <div className="retardedSpinningShit position-relative">
                                         <div className="imgWrapper mx-auto">
                                             <img src={require('../Assets/images/background.png').default} />
@@ -288,38 +323,6 @@ function GameView() {
                                 </div>
                             </div>
                             <div className="col-8">
-                                <div className="headerRow">
-                                    <div className="col-6 text-end">
-                                        <label className='d-inline-block'> P.No. </label>
-                                        <label id="username" style={{ color: "#ce0b00", marginLeft: 5, display: 'inline-block' }}>
-                                            {userName}
-                                        </label>
-                                        <div>
-                                            <label id="balance" style={{ color: "#ce0b00" }}>
-                                                {" "}
-                                                00000{" "}
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div className="col-3 ms-auto">
-                                        {/* <label> Time :</label>
-                                        <label id="realtime">&nbsp;&nbsp;{time}</label> */}
-                                        <div className='analogClock d-flex justify-content-center'>
-                                            <Clock value={time} size={85} renderNumbers={true} />
-                                        </div>
-                                    </div>
-                                    <div className="col-auto text-end">
-                                        {/* <button
-                                            className="text-white border-0"
-                                            style={{ backgroundColor: "red", fontSize: 18 }}
-                                        >
-                                            Change Password
-                                        </button> */}
-                                        <div className='imgWrapper status'>
-                                            <img src={require('../Assets/images/lightbulb.png').default} />
-                                        </div>
-                                    </div>
-                                </div>
                                 <BetTable onTotalBetChange={handleTotalBetChange} onTotalTicketsChange={handleTotalTicketsChange} clearTrigger={clearTrigger} onClearAllValues={() => setClearTrigger(false)} luckyTrigger={luckyTrigger} onLuckyPick={() => setLuckyTrigger(false)} />
                                 <div className='col-md-11 ms-auto'>
                                     <div className='buttonsRow' style={{ marginTop: '-18px' }}>
