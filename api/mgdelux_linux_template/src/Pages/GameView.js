@@ -9,6 +9,7 @@ import BetInfo from './Components/BetInfo';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import SimpleImageSlider from "react-simple-image-slider";
 
 function GameView() {
     const { userName, setUserName, passWord, gameId, setGameId, lastBetBarCode, setLastBetBarCode } = useContext(DataContext);
@@ -146,12 +147,38 @@ function GameView() {
         setLuckyTrigger(true)
     }
 
+    // Convert Seconds to HH:MM:SS
+    function secondsToHMS(gameTime) {
+        const hours = Math.floor(gameTime / 3600);
+        const minutes = Math.floor((gameTime % 3600) / 60);
+        const remainingSeconds = gameTime % 60;
+
+        // Format hours, minutes, and seconds to ensure they have two digits
+        const formattedHours = String(hours).padStart(2, '0');
+        const formattedMinutes = String(minutes).padStart(2, '0');
+        const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+        return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    }
+
+    // Game Left Side Spinning Shit
+    const images = [
+        { url: require("../Assets/images/1.jpeg").default },
+        { url: require("../Assets/images/2.jpeg").default },
+        { url: require("../Assets/images/3.jpeg").default },
+        { url: require("../Assets/images/4.jpeg").default },
+        { url: require("../Assets/images/5.jpeg").default },
+        { url: require("../Assets/images/6.jpeg").default },
+        { url: require("../Assets/images/7.jpeg").default },
+        { url: require("../Assets/images/8.jpeg").default },
+    ];
+
     // Redirect to Home if userName not available
-    useEffect(() => {
-        if (!userName) {
-            navigate('/main_window');
-        }
-    })
+    // useEffect(() => {
+    //     if (!userName) {
+    //         navigate('/main_window');
+    //     }
+    // })
 
     return (
         <>
@@ -175,7 +202,7 @@ function GameView() {
                                     </div>
                                     <div className="col-6 text-center">
                                         <label> Countdown </label>
-                                        <label id="timer">{gameTime}</label>
+                                        <label id="timer">{secondsToHMS(gameTime)}</label>
                                     </div>
                                 </div>
                                 <div id="background" className="mt-2" style={{ height: 497 }}>
@@ -184,7 +211,17 @@ function GameView() {
                                             <img src={require('../Assets/images/background.png').default} />
                                         </div>
                                         <div className="imgWrapper2">
-                                            <img id="card" src={require('../Assets/images/1.jpeg').default} />
+                                            <SimpleImageSlider
+                                                width={185}
+                                                height={185}
+                                                images={images}
+                                                showBullets={false}
+                                                showNavs={false}
+                                                autoPlay={true}
+                                                slideDuration={0}
+                                                autoPlayDelay={2}
+                                                style={{ animation: 'sizeChange 1s infinite alternate ease-in-out' }}
+                                            />
                                         </div>
                                     </div>
                                     <div id="res_sofar_div">
@@ -203,7 +240,7 @@ function GameView() {
                                                         if (!rows[rowIndex]) rows[rowIndex] = []; // Initialize row if it doesn't exist
                                                         rows[rowIndex].push(
                                                             <td key={key}>{key}</td>,
-                                                            <td key={value} className='text-white'>{value}</td>
+                                                            <td key={value} className='text-white'>NR{value}</td>
                                                         );
                                                         return rows;
                                                     }, []).map((row, index) => (

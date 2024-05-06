@@ -90,7 +90,7 @@ table {
 
 #res_sofar_div {
     width: 100%;
-    height: 165px;
+    height: 180px;
     margin-top: 15px;
     /* background-color: red; */
     /* position: relative;
@@ -102,9 +102,10 @@ table {
     height: 33px;
     text-align: center;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 22px;
     background-color: red;
-    border: 1px solid #454545;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #fff;
 }
 
 body {
@@ -307,6 +308,10 @@ label.totalBet {
     outline: none !important;
 }
 
+/* .gameRow #betinputpanel input.selected {
+    background-color: red !important;
+} */
+
 
 .gameRow #betinputpanel input:focus {
     background-color: red !important;
@@ -319,8 +324,8 @@ label.totalBet {
 }
 
 .gameRow .imgWrapper {
-    width: 300px;
-    height: 300px;
+    width: 260px;
+    height: 275px;
     overflow: hidden;
 }
 
@@ -332,18 +337,19 @@ label.totalBet {
 
 .gameRow .imgWrapper2 {
     position: absolute;
-    top: 5px;
+    top: 15px;
     left: 50%;
     transform: translate(-50%);
-    width: 190px;
+    width: 175px;
     height: 210px;
+    /* animation: sizeChange 1s infinite alternate ease-in-out; */
 }
 
 .gameRow .imgWrapper2 img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    animation: sizeChange 1s infinite alternate ease-in-out;
+    /* animation: sizeChange 1s infinite alternate ease-in-out; */
 }
 
 #stones_table .oldres div {

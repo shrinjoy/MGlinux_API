@@ -9,7 +9,7 @@ function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [userId, setUserId] = useState("");
-    const [userMacId, setUserMacId] = useState("50:28:4a:01:7c:d2");
+    const [userMacId, setUserMacId] = useState("f8:0f:41:95:46:b7");
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -17,10 +17,10 @@ function Login() {
     // Deriving User Mac ID
     useEffect(() => {
         async function getMacAddress() {
-            // const res = await window.electronAPI.getMacAddress();
-            const res = await systemServGet('getmac')
+            const res = await window.electronAPI.getMacAddress();
+            // const res = await systemServGet('getmac')
             if (res) {
-                setUserMacId(res);
+                // setUserMacId(res);
                 console.log(res);
             }
         }
