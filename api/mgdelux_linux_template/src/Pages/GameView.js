@@ -196,15 +196,15 @@ function GameView() {
                                 </div>
                                 <div className="col-2 text-end row align-items-center">
                                     <div>
-                                        <label className='d-inline-block'> P.No. </label>
-                                        <label id="username" style={{ color: "#ce0b00", marginLeft: 5, display: 'inline-block' }}>
-                                            {userName}
+                                        <label id="balance">
+                                            {" "}
+                                            00000{" "}
                                         </label>
                                     </div>
                                     <div>
-                                        <label id="balance" style={{ color: "#ce0b00" }}>
-                                            {" "}
-                                            00000{" "}
+                                        <label className='d-inline-block'> P.No. </label>
+                                        <label id="username" style={{ marginLeft: 5, display: 'inline-block' }}>
+                                            {userName}
                                         </label>
                                     </div>
                                 </div>
