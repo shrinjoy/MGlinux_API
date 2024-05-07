@@ -75,6 +75,30 @@ export async function cancelLastBet(lastBetBarCode) {
         })
 }
 
+//Get Result by Game ID
+export async function getCurrentResult(gameId) {
+    const parsedData = { gameid: gameId }
+    return axiosInstance.post(`/getresultbyid`, parsedData)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return null;
+        })
+}
+
+//Change Password
+export async function changePassword(accId, userName, newPassword) {
+    const parsedData = { accid: accId, username: userName, newpassword: newPassword }
+    return axiosInstance.post(`/changepassword`, parsedData)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return null;
+        })
+}
+
 //Current Time Function
 export function getCurrentTime() {
     const currentDate = new Date();
