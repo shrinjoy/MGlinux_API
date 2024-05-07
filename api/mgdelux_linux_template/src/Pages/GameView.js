@@ -361,7 +361,7 @@ function GameView() {
                                                 Exit(X)
                                             </button>
                                         </div>
-                                        <div className='btnItem' style={{ width: 120 }}>
+                                        <div className='btnItem' style={{ width: 140 }}>
                                             <button className="gamebutton" onClick={() => setReportTrigger(true)}>
                                                 Purchase Details
                                             </button>
