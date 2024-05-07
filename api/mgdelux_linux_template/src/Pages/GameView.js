@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { cancelLastBet, getCurrentTime, getGameResult, getTimeLeft, placeBet } from '../Globals/GlobalFunctions'
+import { cancelLastBet, getCurrentResult, getCurrentTime, getGameResult, getTimeLeft, placeBet } from '../Globals/GlobalFunctions'
 import { DataContext } from '../Context/DataContext';
 import BetTable from './Components/BetTable';
 import Clock from 'react-clock';
@@ -90,8 +90,9 @@ function GameView() {
     }, [isTimerActive]);
 
     const handleTimerReset = () => {
-        setIsTimerActive(true);
+        handleCurrentGameResult();
         // handleGameResults();
+        setIsTimerActive(true);
         // console.log('Sequence Started Again');
     }
 
@@ -99,6 +100,11 @@ function GameView() {
         const data = await getGameResult();
         setGameResult(data);
         // console.log(data);
+    }
+
+    async function handleCurrentGameResult() {
+        const data = await getCurrentResult(gameId);
+        console.log(data);
     }
 
     async function handleBetPlacement() {
@@ -336,7 +342,7 @@ function GameView() {
                                                 {totalBet}
                                             </label>
                                         </div>
-                                        <div className='ms-4 formWrapper align-items-center'>
+                                        <div className='ms-auto formWrapper align-items-center'>
                                             <div>
                                                 <label>F8 Barcode-</label>
                                             </div>
@@ -355,7 +361,7 @@ function GameView() {
                                                 Exit(X)
                                             </button>
                                         </div>
-                                        <div className='btnItem' style={{ width: 120 }}>
+                                        <div className='btnItem' style={{ width: 140 }}>
                                             <button className="gamebutton" onClick={() => setReportTrigger(true)}>
                                                 Purchase Details
                                             </button>
