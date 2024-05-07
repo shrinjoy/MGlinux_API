@@ -14,6 +14,7 @@ var getallresultbydate = require("./getalllastresults_bydate");
 var changepasswordbyuser = require("./changepassword");
 var getreport = require('./getreport');
 var getsalesreport = require('./getsalesreport');
+var claimbybar = require('./claimbybarcode');
 const fastifyCors = require('@fastify/cors');
 /*
 Data Source=103.162.120.114;Initial Catalog=nrdeluxe; User Id=nrdeluxe; Password=Nr@Deluxe@987654321
@@ -55,7 +56,15 @@ app.post('/getresultbyid', async function (req, res) {
         })
 })
 
-
+app.post('/claimbybarcode', async function (req, res) {
+    await claimbybar.claim(sql, req.body)
+        .then((data) => {
+            res.status(200).send(data);
+        })
+        .catch((err) => {
+            res.status(404).send(err);
+        })
+})
 app.post('/cancelbybarcode', function (req, res) {
     cancelticket.cancel(req.body, sql).then((data) => {
 
