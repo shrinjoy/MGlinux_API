@@ -23,6 +23,18 @@ export async function login(userId, loginUsername, password, userMacId) {
         })
 }
 
+//Get UserData Function
+export async function getUserData(userName, passWord) {
+    const parsedData = { username: userName, password: passWord }
+    return axiosInstance.post(`/getalluserdata`, parsedData)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return null;
+        })
+}
+
 //Game Data Function
 export async function getTimeLeft() {
     return axiosInstance.get(`/timeleft`)
@@ -88,9 +100,21 @@ export async function getCurrentResult(gameId) {
 }
 
 //Change Password
-export async function changePassword(accId, userName, newPassword) {
-    const parsedData = { accid: accId, username: userName, newpassword: newPassword }
+export async function changePassword(userName, passWord, newPassword) {
+    const parsedData = { username: userName, password: passWord, newpassword: newPassword }
     return axiosInstance.post(`/changepassword`, parsedData)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return null;
+        })
+}
+
+//Get Report by Date
+export async function getReportByDate(userName, date) {
+    const parsedData = { username: userName, date: date }
+    return axiosInstance.post(`/getreportbydate`, parsedData)
         .then(res => {
             return res.data;
         })
