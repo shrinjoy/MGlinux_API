@@ -23,6 +23,18 @@ export async function login(userId, loginUsername, password, userMacId) {
         })
 }
 
+//Get UserData Function
+export async function getUserData(userName, passWord) {
+    const parsedData = { username: userName, password: passWord }
+    return axiosInstance.post(`/getalluserdata`, parsedData)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            return null;
+        })
+}
+
 //Game Data Function
 export async function getTimeLeft() {
     return axiosInstance.get(`/timeleft`)

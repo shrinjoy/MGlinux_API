@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { cancelLastBet, getCurrentResult, getCurrentTime, getGameResult, getTimeLeft, placeBet } from '../Globals/GlobalFunctions'
+import { cancelLastBet, getCurrentResult, getCurrentTime, getGameResult, getTimeLeft, getUserData, placeBet } from '../Globals/GlobalFunctions'
 import { DataContext } from '../Context/DataContext';
 import BetTable from './Components/BetTable';
 import Clock from 'react-clock';
@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import SimpleImageSlider from "react-simple-image-slider";
 
 function GameView() {
-    const { userName, setUserName, passWord, gameId, setGameId, lastBetBarCode, setLastBetBarCode } = useContext(DataContext);
+    const { userName, setUserName, passWord, gameId, setGameId, userBalance, setUserBalance, lastBetBarCode, setLastBetBarCode } = useContext(DataContext);
     const [time, setTime] = useState(getCurrentTime());
     const [gameTime, setGameTime] = useState(0);
     const [totalBet, setTotalBet] = useState(0);
@@ -33,10 +33,12 @@ function GameView() {
         setReportTrigger(false);
     };
 
+    // Close Bet Info Panel
     const closeBetInfoPanel = () => {
         setBetInfoTrigger(false);
     };
 
+    // Update Game Time
     useEffect(() => {
         const intervalId = setInterval(() => {
             setTime(getCurrentTime());
@@ -44,10 +46,13 @@ function GameView() {
         return () => clearInterval(intervalId);
     }, [])
 
+    // Total Bet Handler
     const handleTotalBetChange = (value) => {
         setTotalBet(value);
+
     };
 
+    // Total Ticket Array Handler
     const handleTotalTicketsChange = (tickets) => {
         setTotalTickets(tickets);
         // console.log(totalTickets);
@@ -57,8 +62,13 @@ function GameView() {
     //     console.log(totalTickets);
     // }, [totalTickets]);
 
+    // Update Game Result & Round Timer
     useEffect(() => {
         handleGameResults();
+        getUserData(userName, passWord)
+            .then(data => {
+                setUserBalance(data.balance);
+            })
         getTimeLeft()
             .then(data => {
                 setGameId(data.gameId);
@@ -74,9 +84,10 @@ function GameView() {
                     if (prevTime < 1) {
                         clearInterval(intervalId);
                         setIsTimerActive(false);
+                        handlePreTimerReset();
                         setTimeout(() => {
                             handleTimerReset();
-                        }, 2000)
+                        }, 4000)
                         console.log('Stage 1 Done');
                         return 0;
                     }
@@ -89,9 +100,12 @@ function GameView() {
         return () => clearInterval(intervalId);
     }, [isTimerActive]);
 
-    const handleTimerReset = () => {
+    const handlePreTimerReset = () => {
         handleCurrentGameResult();
-        // handleGameResults();
+        handleGameResults();
+    }
+
+    const handleTimerReset = () => {
         setIsTimerActive(true);
         // console.log('Sequence Started Again');
     }
@@ -108,7 +122,7 @@ function GameView() {
     }
 
     async function handleBetPlacement() {
-        if (totalBet > 0 && gameTime > 10) {
+        if (totalBet > 0 && gameTime > 10 && userBalance >= totalBet) {
             const toastId = toast.loading('Placing Bet, Please Wait!', {
                 position: "top-center",
                 hideProgressBar: false,
@@ -119,11 +133,26 @@ function GameView() {
                 setLastBetBarCode(data.barcode);
                 toast.update(toastId, { render: "Bet Placed Successfully!", type: "success", isLoading: false, autoClose: 2000 });
                 setClearTrigger(true);
+                setUserBalance(parseInt(userBalance) - parseInt(totalBet));
             } else {
                 toast.update(toastId, { render: "Bet Failed!", type: "error", isLoading: false, autoClose: 2000 });
             }
-        } else {
-            toast.error("Please Input Amount!", {
+        } else if (gameTime < 10) {
+            toast.error("No Time Left!", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                theme: "colored",
+            });
+        } else if (totalBet === 0) {
+            toast.error("Please Input Amount", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                theme: "colored",
+            });
+        } else if (userBalance < totalBet) {
+            toast.error("Not enough balance!", {
                 position: "top-center",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -141,6 +170,10 @@ function GameView() {
         })
         if (data && data.message) {
             toast.update(toastId, { render: "Bet Cancelled Successfully!", type: "success", isLoading: false, autoClose: 2000 });
+            getUserData(userName, passWord)
+                .then(data => {
+                    setUserBalance(data.balance);
+                })
         } else {
             toast.update(toastId, { render: "Bet Cancellation Failed!", type: "error", isLoading: false, autoClose: 2000 });
         }
@@ -203,8 +236,7 @@ function GameView() {
                                 <div className="col-2 text-end row align-items-center">
                                     <div>
                                         <label id="balance">
-                                            {" "}
-                                            00000{" "}
+                                            {userBalance}
                                         </label>
                                     </div>
                                     <div>
@@ -324,6 +356,11 @@ function GameView() {
                                     <div className="btnItem">
                                         <button className="gamebutton" onClick={cancelBet}>
                                             Cancel(F9)
+                                        </button>
+                                    </div>
+                                    <div className="btnItem">
+                                        <button className="gamebutton">
+                                            Last Receipt
                                         </button>
                                     </div>
                                 </div>
