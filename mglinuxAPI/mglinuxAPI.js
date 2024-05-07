@@ -56,8 +56,8 @@ app.post('/getresultbyid', async function (req, res) {
         })
 })
 
-app.post('/claimbybarcode', async function (req, res) {
-    await claimbybar.claim(sql, req.body)
+app.post('/claimbybarcode',  function (req, res) {
+     claimbybar.claim(sql, req.body)
         .then((data) => {
             res.status(200).send(data);
         })
