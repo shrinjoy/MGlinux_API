@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
 
 function Login() {
-    const { userName, setUserName, setPassWord } = useContext(DataContext);
+    const { userName, setUserName, setPassWord, setUserId } = useContext(DataContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [userId, setUserId] = useState("");
-    const [userMacId, setUserMacId] = useState("BFEBFBFF000A0652");
+    const [userIdForm, setUserIdForm] = useState("");
+    const [userMacId, setUserMacId] = useState("");
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -35,13 +35,14 @@ function Login() {
             setError("Password is Missing");
             setTimeout(setError, 2000, "")
         } else {
-            const data = await login(userId, username, password, userMacId);
+            const data = await login(userIdForm, username, password, userMacId);
             if (data && data.data.message.includes('macid_wrong')) {
                 setError("MAC ID Mismatch");
                 setTimeout(setError, 2000, "");
             } else if (data) {
                 setUserName(username);
                 setPassWord(password);
+                setUserId(userIdForm)
                 navigate('/game');
             } else {
                 setError("Incorrect Credentials");
@@ -68,7 +69,7 @@ function Login() {
                                 <label>UserID</label>
                             </div>
                             <div>
-                                <input type="text" className="loginInput" value={userId} onChange={(e) => setUserId(e.target.value)} />
+                                <input type="text" className="loginInput" value={userIdForm} onChange={(e) => setUserIdForm(e.target.value)} />
                             </div>
                         </div>
                     </div>

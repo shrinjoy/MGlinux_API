@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TicketPrinter from './TicketPrinter'
 
-function BetInfo({ onClose }) {
+function StoneInfo({ onClose }) {
+    const [barCodeSearch, setBarCodeSearch] = useState('');
     return (
         <div className='reportPanel'>
             <div className='topPart'>
                 <div className='formWrapper'>
                     <div>
-                        <label>Select</label>
+                        <label>Date</label>
                     </div>
                     <div className='ms-2'>
                         <select>
@@ -17,34 +18,20 @@ function BetInfo({ onClose }) {
                 </div>
                 <div className='formWrapper ms-3'>
                     <div>
+                        <label>Select</label>
+                    </div>
+                    <div className='ms-2'>
+                        <input className="loginInput" type='text' value={barCodeSearch} onChange={(e) => setBarCodeSearch(e.target.value)} />
+                    </div>
+                </div>
+                <div className='formWrapper ms-3'>
+                    <div>
                         <button className='loginButton'>
                             Show
                         </button>
                     </div>
-                </div>
-                <div className='formWrapper mx-auto'>
-                    <div>
-                        <button className='loginButton'>
-                            Re Sync
-                        </button>
-                    </div>
                     <div className='ms-2'>
                         <TicketPrinter title={"Re-Print"} />
-                    </div>
-                    <div className='ms-2'>
-                        <button className='loginButton'>
-                            Cancel
-                        </button>
-                    </div>
-                    <div className='ms-2'>
-                        <button className='loginButton'>
-                            Claim
-                        </button>
-                    </div>
-                    <div className='ms-2'>
-                        <button className='loginButton'>
-                            All Claim
-                        </button>
                     </div>
                 </div>
                 <div className='formWrapper ms-auto'>
@@ -60,22 +47,16 @@ function BetInfo({ onClose }) {
                     <table className='betInfoTable' style={{ height: 'auto' }}>
                         <thead>
                             <tr>
-                                <th>Ticket No.</th>
-                                <th>Date</th>
-                                <th>Drow Time</th>
-                                <th>Entry Time</th>
-                                <th>Total</th>
-                                <th>Status</th>
+                                <th>Game Result</th>
+                                <th>Game Time</th>
+                                <th>Game Event Code</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td className="bg-black text-white text-end" style={{ paddingRight: 5 }}>123456789</td>
-                                <td>01-11-1001</td>
-                                <td>11:11</td>
-                                <td>11:01</td>
-                                <td>111</td>
-                                <td>PENDING</td>
+                                <td className='text-center'>21</td>
+                                <td className='text-center'>01/02/2024 04:20:00 PM</td>
+                                <td className='text-center'>J05</td>
                             </tr>
                         </tbody>
                     </table>
@@ -85,4 +66,4 @@ function BetInfo({ onClose }) {
     )
 }
 
-export default BetInfo
+export default StoneInfo

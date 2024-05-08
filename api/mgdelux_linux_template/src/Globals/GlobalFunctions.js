@@ -87,6 +87,18 @@ export async function cancelLastBet(lastBetBarCode) {
         })
 }
 
+//Cancel Last Bet
+export async function claimBarcode(userId, barCodeSearch) {
+    const parsedData = { userid: userId, barcode: barCodeSearch }
+    return axiosInstance.post(`/claimbybarcode`, parsedData)
+        .then(res => {
+            return res;
+        })
+        .catch(err => {
+            return null;
+        })
+}
+
 //Get Result by Game ID
 export async function getCurrentResult(gameId) {
     const parsedData = { gameid: gameId }

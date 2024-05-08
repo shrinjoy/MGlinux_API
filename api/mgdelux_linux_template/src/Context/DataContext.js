@@ -7,6 +7,9 @@ export const DataProvider = ({ children }) => {
     const [userId, setUserId] = useState("");
     const [passWord, setPassWord] = useState("");
     const [gameId, setGameId] = useState("");
+    const [currentGameResult, setCurrentGameResult] = useState("");
+    const [nextGameTime, setNextGameTime] = useState("");
+    const [nextGameDate, setNextGameDate] = useState("");
     const [date, setDate] = useState("");
     const [serverTime, setServerTime] = useState("");
     const [userAccessLevel, setUserAccessLevel] = useState(0);
@@ -20,7 +23,7 @@ export const DataProvider = ({ children }) => {
 
 
     return (
-        <DataContext.Provider value={{ userName, setUserName, date, setDate, serverTime, setServerTime, userAccessLevel, setUserAccessLevel, userBalance, setUserBalance, urlParam, setUrlParam, agentsTableName, setAgentsTableName, isAdjust, setIsAdjust, userId, setUserId, dashDetailsTable, setDashDetailsTable, agentIDDetail, setAgentIDDetail, gameId, setGameId, passWord, setPassWord, lastBetBarCode, setLastBetBarCode }}>
+        <DataContext.Provider value={{ userName, setUserName, date, setDate, serverTime, setServerTime, userAccessLevel, setUserAccessLevel, userBalance, setUserBalance, urlParam, setUrlParam, agentsTableName, setAgentsTableName, isAdjust, setIsAdjust, userId, setUserId, dashDetailsTable, setDashDetailsTable, agentIDDetail, setAgentIDDetail, gameId, setGameId, passWord, setPassWord, lastBetBarCode, setLastBetBarCode, currentGameResult, setCurrentGameResult, nextGameTime, setNextGameTime, nextGameDate, setNextGameDate }}>
             {children}
         </DataContext.Provider>
     );

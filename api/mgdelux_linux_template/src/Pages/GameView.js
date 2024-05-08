@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { cancelLastBet, getCurrentResult, getCurrentTime, getGameResult, getTimeLeft, getUserData, placeBet } from '../Globals/GlobalFunctions'
+import { cancelLastBet, claimBarcode, getCurrentResult, getCurrentTime, getGameResult, getTimeLeft, getUserData, placeBet } from '../Globals/GlobalFunctions'
 import { DataContext } from '../Context/DataContext';
 import BetTable from './Components/BetTable';
 import Clock from 'react-clock';
@@ -10,9 +10,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import SimpleImageSlider from "react-simple-image-slider";
+import StoneInfo from './Components/StoneInfo';
+import ShowResult from './Components/ShowResult';
+import { toastConfig } from '../Globals/GlobalMetaData';
 
 function GameView() {
-    const { userName, setUserName, passWord, gameId, setGameId, userBalance, setUserBalance, lastBetBarCode, setLastBetBarCode } = useContext(DataContext);
+    const { userName, setUserName, passWord, userId, gameId, setGameId, userBalance, setUserBalance, lastBetBarCode, setLastBetBarCode, setNextGameDate, setNextGameTime } = useContext(DataContext);
     const [time, setTime] = useState(getCurrentTime());
     const [gameTime, setGameTime] = useState(0);
     const [totalBet, setTotalBet] = useState(0);
@@ -20,6 +23,7 @@ function GameView() {
     const [barCodeSearch, setBarCodeSearch] = useState('');
     const [isTimerActive, setIsTimerActive] = useState(true);
     const [gameResult, setGameResult] = useState("");
+    const [showResult, setShowResult] = useState(false);
     const navigate = useNavigate();
     // Simple Buttons
     const [clearTrigger, setClearTrigger] = useState(false);
@@ -27,6 +31,7 @@ function GameView() {
     // Panel Show - Hide
     const [reportTrigger, setReportTrigger] = useState(false);
     const [betInfoTrigger, setBetInfoTrigger] = useState(false);
+    const [stoneInfoTrigger, setStoneInfoTrigger] = useState(false);
 
     // Close Report Panel
     const closeReportPanel = () => {
@@ -36,6 +41,11 @@ function GameView() {
     // Close Bet Info Panel
     const closeBetInfoPanel = () => {
         setBetInfoTrigger(false);
+    };
+
+    // Close Stone Info Panel
+    const closeStoneInfoPanel = () => {
+        setStoneInfoTrigger(false);
     };
 
     // Update Game Time
@@ -65,14 +75,17 @@ function GameView() {
     // Update Game Result & Round Timer
     useEffect(() => {
         handleGameResults();
-        getUserData(userName, passWord)
-            .then(data => {
-                setUserBalance(data.balance);
-            })
+        updateUserData()
         getTimeLeft()
             .then(data => {
                 setGameId(data.gameId);
-                setGameTime(data.gameTime);
+                setNextGameDate(data.nextGameDate);
+                setNextGameTime(data.nextGameTime);
+                if (data.gameTime < 1 && !isTimerActive) {
+                    setGameTime(0);
+                } else {
+                    setGameTime(data.gameTime);
+                }
             })
     }, [isTimerActive]);
 
@@ -81,17 +94,17 @@ function GameView() {
         if (isTimerActive) {
             intervalId = setInterval(() => {
                 setGameTime(prevTime => {
-                    if (prevTime < 1) {
+                    if (prevTime <= 1) {
                         clearInterval(intervalId);
                         setIsTimerActive(false);
                         handlePreTimerReset();
                         setTimeout(() => {
                             handleTimerReset();
-                        }, 4000)
+                        }, 5000)
                         console.log('Stage 1 Done');
                         return 0;
                     }
-                    return prevTime - 1
+                    return Math.max(prevTime - 1, 0);
                 });
             }, 1000);
         } else {
@@ -101,12 +114,14 @@ function GameView() {
     }, [isTimerActive]);
 
     const handlePreTimerReset = () => {
-        handleCurrentGameResult();
+        // handleCurrentGameResult();
+        setShowResult(true);
         handleGameResults();
     }
 
     const handleTimerReset = () => {
         setIsTimerActive(true);
+        setShowResult(false);
         // console.log('Sequence Started Again');
     }
 
@@ -116,17 +131,28 @@ function GameView() {
         // console.log(data);
     }
 
-    async function handleCurrentGameResult() {
-        const data = await getCurrentResult(gameId);
-        console.log(data);
+    async function updateUserData() {
+        const data = await getUserData(userName, passWord)
+        if (data) {
+            setUserBalance(data.balance);
+        }
+        else {
+            toast.error("Error! Failed to load Balance!", toastConfig);
+            setUserBalance(0);
+        }
     }
+
+    // async function handleCurrentGameResult() {
+    //     const data = await getCurrentResult(gameId);
+    //     console.log(data);
+    // }
 
     async function handleBetPlacement() {
         if (totalBet > 0 && gameTime > 10 && userBalance >= totalBet) {
             const toastId = toast.loading('Placing Bet, Please Wait!', {
                 position: "top-center",
                 hideProgressBar: false,
-                theme: "colored",
+                theme: "colored"
             })
             const data = await placeBet(userName, passWord, totalTickets, totalBet, gameId);
             if (data && data.message) {
@@ -138,26 +164,11 @@ function GameView() {
                 toast.update(toastId, { render: "Bet Failed!", type: "error", isLoading: false, autoClose: 2000 });
             }
         } else if (gameTime < 10) {
-            toast.error("No Time Left!", {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                theme: "colored",
-            });
+            toast.error("No Time Left!", toastConfig);
         } else if (totalBet === 0) {
-            toast.error("Please Input Amount", {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                theme: "colored",
-            });
+            toast.error("Please Input Amount", toastConfig);
         } else if (userBalance < totalBet) {
-            toast.error("Not enough balance!", {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                theme: "colored",
-            });
+            toast.error("Not enough balance!", toastConfig);
         }
     }
 
@@ -170,13 +181,26 @@ function GameView() {
         })
         if (data && data.message) {
             toast.update(toastId, { render: "Bet Cancelled Successfully!", type: "success", isLoading: false, autoClose: 2000 });
-            getUserData(userName, passWord)
-                .then(data => {
-                    setUserBalance(data.balance);
-                })
+            updateUserData();
         } else {
             toast.update(toastId, { render: "Bet Cancellation Failed!", type: "error", isLoading: false, autoClose: 2000 });
         }
+    }
+
+    async function handleBarcodeClaim() {
+        const toastId = toast.loading('Claiming Barcode, Please Wait!', {
+            position: "top-center",
+            hideProgressBar: false,
+            theme: "colored"
+        })
+        const data = await claimBarcode(userId, barCodeSearch)
+        if (data && data.amount) {
+            toast.update(toastId, { render: "Barcode Claimed Successfully!", type: "success", isLoading: false, autoClose: 2000 });
+            updateUserData();
+        } else {
+            toast.update(toastId, { render: "Barcode Claim Failed!", type: "error", isLoading: false, autoClose: 2000 });
+        }
+        setBarCodeSearch("")
     }
 
     const handleClearAllValues = () => {
@@ -276,7 +300,7 @@ function GameView() {
                                     </div>
                                     <div className="col-6 text-center">
                                         <label style={{ fontSize: 12 }}> Countdown </label>
-                                        <label id="timer">{secondsToHMS(gameTime)}</label>
+                                        <label id="timer" style={{ color: gameTime < 7 ? 'red' : "" }}>{secondsToHMS(gameTime)}</label>
                                     </div>
                                 </div>
                                 <div id="background" className="mt-2">
@@ -325,7 +349,7 @@ function GameView() {
                                         </table>
                                     </div>
                                 </div>
-                                <div className='buttonsRow b'>
+                                <div className='buttonsRow b justify-content-start'>
                                     <div className='btnItem'>
                                         <button className='gamebutton' onClick={() => setBetInfoTrigger(true)}>
                                             Stone
@@ -334,33 +358,6 @@ function GameView() {
                                     <div className='btnItem'>
                                         <button className='gamebutton' onClick={handleLuckyPik}>
                                             LuckyPik
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className='buttonsRow'>
-                                    <div className="btnItem">
-                                        <button
-                                            className="gamebutton"
-                                            id="buybuttonXD"
-                                            style={{ backgroundColor: "#eac697" }}
-                                            onClick={handleBetPlacement}
-                                        >
-                                            F6-Buy
-                                        </button>
-                                    </div>
-                                    <div className="btnItem">
-                                        <button className="gamebutton" onClick={handleClearAllValues}>
-                                            Clear(ESC)
-                                        </button>
-                                    </div>
-                                    <div className="btnItem">
-                                        <button className="gamebutton" onClick={cancelBet}>
-                                            Cancel(F9)
-                                        </button>
-                                    </div>
-                                    <div className="btnItem">
-                                        <button className="gamebutton">
-                                            Last Receipt
                                         </button>
                                     </div>
                                 </div>
@@ -384,31 +381,60 @@ function GameView() {
                                                 <label>F8 Barcode-</label>
                                             </div>
                                             <div className='ms-2'>
-                                                <input className="loginInput" type='text' value={barCodeSearch} onChange={(e) => setBarCodeSearch(e.target.value)} />
+                                                <input className="loginInput" type='text' value={barCodeSearch} onChange={(e) => setBarCodeSearch(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { handleBarcodeClaim() } }} />
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="buttonsRow justify-content-end">
-                                        <div className="btnItem" style={{ width: 70 }}>
-                                            <button
-                                                onClick={() => window.electronAPI.quitApp()}
-                                                className="gamebutton"
-                                                style={{ backgroundColor: "#ff0000" }}
-                                            >
-                                                Exit(X)
-                                            </button>
-                                        </div>
-                                        <div className='btnItem' style={{ width: 140 }}>
-                                            <button className="gamebutton" onClick={() => setReportTrigger(true)}>
-                                                Purchase Details
-                                            </button>
-                                        </div>
-                                        <div className='btnItem'>
-                                            <button className="gamebutton" onClick={() => setBetInfoTrigger(true)}>
-                                                F7 Stones
-                                            </button>
-                                        </div>
-                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='buttonsRow'>
+                            <div className='d-flex justify-content-between'>
+                                <div className="btnItem">
+                                    <button
+                                        className="gamebutton"
+                                        id="buybuttonXD"
+                                        style={{ backgroundColor: "#eac697" }}
+                                        onClick={handleBetPlacement}
+                                    >
+                                        F6-Buy
+                                    </button>
+                                </div>
+                                <div className="btnItem">
+                                    <button className="gamebutton" onClick={handleClearAllValues}>
+                                        Clear(ESC)
+                                    </button>
+                                </div>
+                                <div className="btnItem">
+                                    <button className="gamebutton" onClick={cancelBet}>
+                                        Cancel(F9)
+                                    </button>
+                                </div>
+                                <div className="btnItem" style={{ width: 100 }}>
+                                    <button className="gamebutton">
+                                        Last Receipt
+                                    </button>
+                                </div>
+                            </div>
+                            <div className='d-flex justify-content-between'>
+                                <div className="btnItem" style={{ width: 70 }}>
+                                    <button
+                                        onClick={() => window.electronAPI.quitApp()}
+                                        className="gamebutton"
+                                        style={{ backgroundColor: "#ff0000" }}
+                                    >
+                                        Exit(X)
+                                    </button>
+                                </div>
+                                <div className='btnItem' style={{ width: 140 }}>
+                                    <button className="gamebutton" onClick={() => setReportTrigger(true)}>
+                                        Purchase Details
+                                    </button>
+                                </div>
+                                <div className='btnItem me-0'>
+                                    <button className="gamebutton" onClick={() => setStoneInfoTrigger(true)}>
+                                        F7 Stones
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -418,6 +444,12 @@ function GameView() {
                     </div>
                     <div className='popupWrapper'>
                         {betInfoTrigger ? <BetInfo onClose={closeBetInfoPanel} /> : ""}
+                    </div>
+                    <div className='popupWrapper'>
+                        {stoneInfoTrigger ? <StoneInfo onClose={closeStoneInfoPanel} /> : ""}
+                    </div>
+                    <div>
+                        {showResult ? <ShowResult /> : ""}
                     </div>
                 </div>
             </section>
