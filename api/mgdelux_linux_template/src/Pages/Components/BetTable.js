@@ -216,11 +216,26 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
     ));
 
     return (
-        <div id="buttonholder">
-            <table id="betinputpanel" className="h-100 col-12">
-                <tbody>{rows}</tbody>
-            </table>
-        </div>
+        <>
+            <div id="buttonholder">
+                <table id="betinputpanel" className="h-100 col-12">
+                    <tbody>{rows}</tbody>
+                </table>
+
+            </div>
+            <div className='col-md-12'>
+                <div className='buttonsRow' style={{ marginTop: '-30px' }}>
+                    <div className="btnItem">
+                        <button
+                            className="gamebutton"
+                            style={{ backgroundColor: "#47e315", width: 135, height: 25, fontSize: 13 }}
+                        >
+                            Stone Group MG
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 }
 

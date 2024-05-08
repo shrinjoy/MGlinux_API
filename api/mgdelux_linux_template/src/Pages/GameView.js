@@ -274,7 +274,7 @@ function GameView() {
                                     {/* <label> Time :</label>
                                         <label id="realtime">&nbsp;&nbsp;{time}</label> */}
                                     <div className='analogClock d-flex justify-content-center'>
-                                        <Clock value={time} size={85} renderNumbers={true} />
+                                        <Clock value={time} size={80} renderNumbers={true} />
                                     </div>
                                 </div>
                                 <div className="col-auto text-end">
@@ -364,8 +364,8 @@ function GameView() {
                             </div>
                             <div className="col-8">
                                 <BetTable onTotalBetChange={handleTotalBetChange} onTotalTicketsChange={handleTotalTicketsChange} clearTrigger={clearTrigger} onClearAllValues={() => setClearTrigger(false)} luckyTrigger={luckyTrigger} onLuckyPick={() => setLuckyTrigger(false)} />
-                                <div className='col-md-11 ms-auto'>
-                                    <div className='buttonsRow' style={{ marginTop: '-18px' }}>
+                                <div className='col-md-10 ms-auto'>
+                                    <div className='buttonsRow' style={{ marginTop: '5px' }}>
                                         <div>
                                             <label className='totalBet'>
                                                 {totalBet}
@@ -427,12 +427,12 @@ function GameView() {
                                     </button>
                                 </div>
                                 <div className='btnItem' style={{ width: 140 }}>
-                                    <button className="gamebutton" onClick={() => setReportTrigger(true)}>
+                                    <button className="gamebutton" onClick={() => setReportTrigger(true)} style={{ backgroundColor: '#ffddb8' }}>
                                         Purchase Details
                                     </button>
                                 </div>
                                 <div className='btnItem me-0'>
-                                    <button className="gamebutton" onClick={() => setStoneInfoTrigger(true)}>
+                                    <button className="gamebutton" onClick={() => setStoneInfoTrigger(true)} style={{ backgroundColor: '#ffddb8' }}>
                                         F7 Stones
                                     </button>
                                 </div>

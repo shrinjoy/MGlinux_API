@@ -20,7 +20,7 @@ function Login() {
             const res = await window.electronAPI.getMacAddress();
             // const res = await systemServGet('getmac')
             if (res) {
-                // setUserMacId(res);
+                setUserMacId(res);
                 console.log(res);
             }
         }

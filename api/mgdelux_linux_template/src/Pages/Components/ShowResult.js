@@ -44,8 +44,8 @@ function ShowResult() {
                 <div><label>MINOR MG</label></div>
                 <div><label>TIME: {nextGameTime}</label></div>
             </div>
-            <div className='resultBox' style={{ backgroundColor: currentGameResult ? "white" : "yellow", color: currentGameResult ? "white" : "red" }}>
-                <h1>MG {currentGameResult ? currentGameResult : randomNumber}</h1>
+            <div className='resultBox' style={{ backgroundColor: currentGameResult ? "red" : "yellow" }}>
+                <h1 style={{ color: currentGameResult ? 'white' : 'red' }}>MG <label>{currentGameResult ? currentGameResult : randomNumber}</label></h1>
             </div>
         </div>
     )
