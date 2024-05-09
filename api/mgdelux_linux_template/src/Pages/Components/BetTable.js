@@ -23,9 +23,9 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
 
 
                 //first get the latest values
-                newInputs[i][col] = parseInt(document.getElementById(`input-NR${i}${col}`).value || 0) + parseInt(document.getElementById(`input-NR${row}${col}`).value || 0);
+                newInputs[i][col] = parseInt(document.getElementById(`input-MD${i}${col}`).value || 0) + parseInt(document.getElementById(`input-MD${row}${col}`).value || 0);
                 //then remove the 
-                newInputs[i][col] -= parseInt(document.getElementById(`input-NR${row}${col}`).getAttribute("data-old") || 0)
+                newInputs[i][col] -= parseInt(document.getElementById(`input-MD${row}${col}`).getAttribute("data-old") || 0)
                 // we check if the value is less than 1 if so then we set it to empty string 
                 if (newInputs[i][col] < 1) {
                     newInputs[i][col] = ""
@@ -40,7 +40,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
             newInputs[10][col] = newValue;
 
             //storing the lastet value for next iteration 
-            document.getElementById(`input-NR${row}${col}`).setAttribute("data-old", newValue);
+            document.getElementById(`input-MD${row}${col}`).setAttribute("data-old", newValue);
             //same rule for the side bet 
         }
 
@@ -49,8 +49,8 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
                 const existingValue = newInputs[row][i] !== '' ? parseFloat(newInputs[row][i]) : 0;
 
 
-                newInputs[row][i] = parseInt(document.getElementById(`input-NR${row}${i}`).value || 0) + parseInt(document.getElementById(`input-NR${row}${col}`).value || 0);
-                newInputs[row][i] -= parseInt(document.getElementById(`input-NR${row}${col}`).getAttribute("data-old") || 0)
+                newInputs[row][i] = parseInt(document.getElementById(`input-MD${row}${i}`).value || 0) + parseInt(document.getElementById(`input-MD${row}${col}`).value || 0);
+                newInputs[row][i] -= parseInt(document.getElementById(`input-MD${row}${col}`).getAttribute("data-old") || 0)
 
                 if (newInputs[i][col] < 1) {
                     newInputs[i][col] = ""
@@ -64,7 +64,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
 
 
 
-            document.getElementById(`input-NR${row}${col}`).setAttribute("data-old", newValue);
+            document.getElementById(`input-MD${row}${col}`).setAttribute("data-old", newValue);
             //
         }
 
@@ -101,7 +101,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
         inputs.forEach((row, rowIndex) => {
             row.forEach((value, colIndex) => {
                 if (rowIndex !== 10 && colIndex !== 10) {
-                    const cellId = `NR${rowIndex}${colIndex}`;
+                    const cellId = `MD${rowIndex}${colIndex}`;
                     if (!isNaN(value) && value !== '') {
                         totalTickets.push(`${cellId}Q${value}`);
                     }
@@ -192,10 +192,10 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
         <tr key={rowIndex}>
             {row.map((value, colIndex) => {
                 if (rowIndex !== 10 || colIndex !== 10) {
-                    const cellId = `NR${rowIndex}${colIndex}`;
+                    const cellId = `MD${rowIndex}${colIndex}`;
                     return (
                         <td key={colIndex}>
-                            <label htmlFor={`input-${cellId}`}>{rowIndex === 10 ? "ALL B" : colIndex === 10 ? `ALL A` : `NR${rowIndex}${colIndex}`}</label>
+                            <label htmlFor={`input-${cellId}`}>{rowIndex === 10 ? "ALL B" : colIndex === 10 ? `ALL A` : `MD${rowIndex}${colIndex}`}</label>
                             <input
                                 ref={el => inputRefs.current[rowIndex][colIndex] = el}
                                 id={`input-${cellId}`}
