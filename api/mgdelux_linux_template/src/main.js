@@ -28,7 +28,7 @@ const createWindow = () => {
   // mainWindow.loadURL('http://193.203.163.194:8082/');
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
 };
 
