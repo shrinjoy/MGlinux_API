@@ -369,7 +369,7 @@ function GameView() {
                             <div className="col-8">
                                 <BetTable onTotalBetChange={handleTotalBetChange} onTotalTicketsChange={handleTotalTicketsChange} clearTrigger={clearTrigger} onClearAllValues={() => setClearTrigger(false)} luckyTrigger={luckyTrigger} onLuckyPick={() => setLuckyTrigger(false)} />
                                 <div className='col-md-10 ms-auto'>
-                                    <div className='buttonsRow' style={{ marginTop: '5px' }}>
+                                    <div className='buttonsRow justify-content-end' style={{ marginTop: '5px' }}>
                                         <div>
                                             <label className='totalBet'>
                                                 {totalBet}
@@ -380,7 +380,7 @@ function GameView() {
                                                 {totalBet}
                                             </label>
                                         </div>
-                                        <div className='ms-auto formWrapper align-items-center'>
+                                        <div className='ms-3 formWrapper align-items-center'>
                                             <div>
                                                 <label>F8 Barcode-</label>
                                             </div>

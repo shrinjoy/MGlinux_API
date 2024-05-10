@@ -57,7 +57,7 @@ export async function getTimeLeft() {
 
 //Get Game Results
 export async function getGameResult() {
-    return axiosInstance.get(`/getallresult`)
+    return axiosInstance.get(`/getallresultsofar`)
         .then(res => {
             return res.data;
         })
