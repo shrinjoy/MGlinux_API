@@ -427,7 +427,7 @@ label.totalBet {
     }
 
     .imgWrapper.status {
-        height: 60px;
+        height: 60px !important;
     }
 
     .gameWrapper .headerRow h1 {
