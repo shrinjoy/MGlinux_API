@@ -335,9 +335,9 @@ label.totalBet {
 
 .gameRow .imgWrapper2 {
     position: absolute;
-    top: 15px;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%);
+    transform: translate(-50%, -50%);
     width: 175px;
     height: 210px;
     /* animation: sizeChange 1s infinite alternate ease-in-out; */

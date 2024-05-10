@@ -57,7 +57,7 @@ export async function getTimeLeft() {
 
 //Get Game Results
 export async function getGameResult() {
-    return axiosInstance.get(`/getallresultsofar`)
+    return axiosInstance.get(`/getallresult`)
         .then(res => {
             return res.data;
         })
@@ -87,7 +87,7 @@ export async function cancelLastBet(lastBetBarCode) {
         })
 }
 
-//Cancel Last Bet
+//Claim Bet
 export async function claimBarcode(userId, barCodeSearch) {
     const parsedData = { userid: userId, barcode: barCodeSearch }
     return axiosInstance.post(`/claimbybarcode`, parsedData)
@@ -105,6 +105,23 @@ export async function getCurrentResult(gameId) {
     return axiosInstance.post(`/getresultbyid`, parsedData)
         .then(res => {
             return res.data;
+        })
+        .catch(err => {
+            return null;
+        })
+}
+
+//F7 Stone Details
+export async function getStoneDetails() {
+    return axiosInstance.get(`/getallresultinfo`)
+        .then(res => {
+            const rawData = res.data;
+            const preparedData = rawData.map((index) => ({
+                gameResult: index.GAMERESULT,
+                gameID: index.GAMENUM,
+                gameTime: index.GAMETIME
+            }))
+            return preparedData;
         })
         .catch(err => {
             return null;

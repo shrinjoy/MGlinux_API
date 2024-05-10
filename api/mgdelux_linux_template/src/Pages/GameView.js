@@ -205,6 +205,10 @@ function GameView() {
 
     const handleClearAllValues = () => {
         setClearTrigger(true)
+        const betFields = document.querySelectorAll('[data-old]');
+        betFields.forEach((item) => {
+            item.setAttribute("data-old", 0);
+        })
     }
 
     const handleLuckyPik = () => {
@@ -338,7 +342,7 @@ function GameView() {
                                                         if (!rows[rowIndex]) rows[rowIndex] = []; // Initialize row if it doesn't exist
                                                         rows[rowIndex].push(
                                                             <td key={key}>{key}</td>,
-                                                            <td key={value} className='text-white'>MD{value}</td>
+                                                            <td key={value} className='text-white'>{value}</td>
                                                         );
                                                         return rows;
                                                     }, []).map((row, index) => (
