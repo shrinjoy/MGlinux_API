@@ -413,6 +413,27 @@ label.totalBet {
         margin-top: 0px;
     }
 
+    .gameRow .imgWrapper {
+        width: 220px;
+    }
+
+    .react-clock__mark__number {
+        font-size: 14px !important;
+    }
+
+    .react-clock {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .imgWrapper.status {
+        height: 60px;
+    }
+
+    .gameWrapper .headerRow h1 {
+        font-size: 36px;
+    }
+
 }
 
 @media only screen and (min-width: 1024px) {
