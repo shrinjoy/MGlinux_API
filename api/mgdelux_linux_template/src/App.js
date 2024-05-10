@@ -11,8 +11,8 @@ function App() {
         <HashRouter>
             <Routes>
                 <Route path="/main_window" element={<Home />} />
-                <Route path='/login' element={<Login />} />
-                <Route path="/game" element={<GameView />} />
+                <Route path='/login' Component={() => { window.location.href = "http://193.203.163.194:8082/#/login"; return null; }} />
+                {/* <Route path="/game" element={<GameView />} /> */}
                 <Route path="*" element={<Navigate to="/main_window" />} />
             </Routes>
         </HashRouter>
