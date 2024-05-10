@@ -11,6 +11,14 @@ function Home() {
     return (
         <main className="homeWrapper">
             <div className="wrapper p-5">
+                <div className='position-absolute' style={{ top: 10, right: 10 }}>
+                    <button
+                        onClick={() => window.electronAPI.quitApp()}
+                        className="homeBtn"
+                    >
+                        Exit
+                    </button>
+                </div>
                 {clickConnect ? <div className="unlockForm">
                     {isConnected ? "" : <div className="formWrapper">
                         <div className="me-2">
