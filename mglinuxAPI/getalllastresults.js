@@ -19,6 +19,25 @@ module.exports =
                 });
         });
     },
+    getlastresultsinfo: function (db) {
+        return new Promise((resolve, reject) => {
+           
+            db.query(`SELECT * FROM [nrdeluxe].[dbo].[RESULT99] WHERE CONVERT(DATE, GAMEDATE) = CONVERT(DATE,GETDATE())  order by INTNUMBER desc`)
+                .then((data) => {
+                    var arraydata = [];
+                    console.log(data.recordset.length);
+                    data.recordset.forEach(element => {
+                        arraydata.push(element);
+                    });
+
+                    resolve(arraydata); // Resolve the JSON object directly
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject({"message": err});
+                });
+        });
+    },
     getlastresults_all: function (db) {
         return new Promise((resolve, reject) => {
             db.query(`SELECT * FROM [nrdeluxe].[dbo].[RESULT] WHERE CONVERT(DATE, GAMEDATE) = CONVERT(DATE, GETDATE());`).then((data) => {
