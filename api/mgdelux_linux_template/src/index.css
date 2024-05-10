@@ -301,7 +301,7 @@ label.totalBet {
 }
 
 .gameRow #betinputpanel input {
-    width: 75%;
+    width: 90%;
     height: 30px;
     border: 1px solid #454545;
     outline: none !important;
@@ -389,6 +389,7 @@ label.totalBet {
     .buttonsRow.stoneGroup {
         margin-top: -30px;
     }
+
 }
 
 @media only screen and (min-width: 800px) and (max-width: 1099px) {
@@ -401,7 +402,6 @@ label.totalBet {
 
     .gameRow #betinputpanel input {
         height: 25px;
-        width: 90%;
     }
 
     #buttonholder {
