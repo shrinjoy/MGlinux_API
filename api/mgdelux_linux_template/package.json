@@ -48,7 +48,6 @@
     "react-dom": "^18.2.0",
     "react-simple-image-slider": "^2.4.1",
     "react-to-print": "^2.15.1",
-    "react-toastify": "^10.0.5",
-    "rpmbuild": "^0.0.23"
+    "react-toastify": "^10.0.5"
   }
 }
