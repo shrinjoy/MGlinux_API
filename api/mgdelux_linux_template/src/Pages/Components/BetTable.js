@@ -224,7 +224,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
 
             </div>
             <div className='col-md-12'>
-                <div className='buttonsRow' style={{ marginTop: '-30px' }}>
+                <div className='buttonsRow' style={{ marginTop: '0px' }}>
                     <div className="btnItem">
                         <button
                             className="gamebutton"
