@@ -355,7 +355,7 @@ label.totalBet {
     border: 1px solid black;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (min-width: 1100px) {
 
     .gameRow .imgWrapper {
         width: 290px;
@@ -374,6 +374,7 @@ label.totalBet {
 
     .gameRow #betinputpanel label {
         font-size: 16px;
+        font-weight: 800;
     }
 
     #res_sofar_div {
@@ -389,9 +390,9 @@ label.totalBet {
     }
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 800px) and (max-width: 1099) {
     .gameRow #betinputpanel label {
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 900;
         width: 100%;
         letter-spacing: -1px;
@@ -412,6 +413,15 @@ label.totalBet {
     }
 
 }
+
+@media only screen and (min-width: 1024px) {
+    .gameRow #betinputpanel label {
+        font-size: 15px;
+        letter-spacing: 0px;
+        font-weight: 900;
+    }
+}
+
 
 .imgWrapper {
     position: relative;
