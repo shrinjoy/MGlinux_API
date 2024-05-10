@@ -383,6 +383,10 @@ label.totalBet {
     #res_sofar_table tr td {
         font-size: 20px;
     }
+
+    .gamebutton .stoneGroup {
+        margin-top: -30px;
+    }
 }
 
 @media only screen and (max-width: 800px) {
@@ -401,6 +405,10 @@ label.totalBet {
     #buttonholder {
         margin-top: 10px;
         transform: inherit;
+    }
+
+    .gamebutton .stoneGroup {
+        margin-top: 0px;
     }
 
 }
