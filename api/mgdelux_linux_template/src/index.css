@@ -383,7 +383,25 @@ label.totalBet {
     #res_sofar_table tr td {
         font-size: 20px;
     }
+}
 
+@media only screen and (max-width: 800px) {
+    .gameRow #betinputpanel label {
+        font-size: 12px;
+        font-weight: 900;
+        width: 100%;
+        letter-spacing: -1px;
+    }
+
+    .gameRow #betinputpanel input {
+        height: 25px;
+        width: 90%;
+    }
+
+    #buttonholder {
+        margin-top: 10px;
+        transform: inherit;
+    }
 
 }
 
