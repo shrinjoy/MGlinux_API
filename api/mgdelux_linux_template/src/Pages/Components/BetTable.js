@@ -224,10 +224,10 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
 
             </div>
             <div className='col-md-12'>
-                <div className='buttonsRow' style={{ marginTop: '0px' }}>
+                <div className='buttonsRow stoneGroup'>
                     <div className="btnItem">
                         <button
-                            className="gamebutton stoneGroup"
+                            className="gamebutton"
                             style={{ backgroundColor: "#47e315", width: 135, height: 25, fontSize: 13 }}
                         >
                             Stone Group MG

@@ -384,7 +384,7 @@ label.totalBet {
         font-size: 20px;
     }
 
-    .gamebutton .stoneGroup {
+    .buttonsRow .stoneGroup {
         margin-top: -30px;
     }
 }
@@ -407,7 +407,7 @@ label.totalBet {
         transform: inherit;
     }
 
-    .gamebutton .stoneGroup {
+    .buttonsRow .stoneGroup {
         margin-top: 0px;
     }
 
