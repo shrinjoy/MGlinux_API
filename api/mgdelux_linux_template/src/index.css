@@ -93,6 +93,7 @@ table {
     width: 100%;
     height: 220px;
     margin-top: 15px;
+    overflow-y: scroll;
     /* background-color: red; */
     /* position: relative;
     top: 40px; */
@@ -100,7 +101,7 @@ table {
 
 #res_sofar_table tr td {
     width: 200px;
-    height: 33px;
+    height: 35px;
     text-align: center;
     font-weight: 700;
     font-size: 22px;
@@ -383,7 +384,7 @@ label.totalBet {
     }
 
     #res_sofar_table tr td {
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .buttonsRow.stoneGroup {
@@ -441,6 +442,24 @@ label.totalBet {
         font-size: 15px;
         letter-spacing: 0px;
         font-weight: 900;
+    }
+
+    .gameWrapper .headerRow label {
+        font-size: 24px;
+        font-weight: 800;
+    }
+
+    .gameRow .imgWrapper {
+        height: 240px;
+    }
+
+    #res_sofar_div {
+        height: 250px;
+    }
+
+    #res_sofar_table tr td {
+        font-size: 28px;
+        font-weight: 800;
     }
 }
 
