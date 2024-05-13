@@ -329,10 +329,8 @@ function GameView() {
                                     <div id="res_sofar_div">
                                         <table
                                             style={{
-                                                height: "100%",
+                                                height: "auto",
                                                 width: "100%",
-                                                overflowY: "scroll",
-                                                display: "block"
                                             }}
                                             id="res_sofar_table">
                                             <tbody>
