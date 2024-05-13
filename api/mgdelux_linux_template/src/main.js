@@ -74,7 +74,7 @@ ipcMain.on('system-shutdown', () => {
   if (os.platform() === 'win32') {
     exec('shutdown /s /t 0');
   } else if (os.platform() === 'linux') {
-    exec('sudo shutdown now');
+    exec('shutdown -h now');
   }
 });
 
@@ -82,7 +82,7 @@ ipcMain.on('system-restart', () => {
   if (os.platform() === 'win32') {
     exec('shutdown /r /t 0');
   } else if (os.platform() === 'linux') {
-    exec('sudo shutdown -r now');
+    exec('shutdown -r now');
   }
 });
 
