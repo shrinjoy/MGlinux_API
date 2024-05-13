@@ -461,13 +461,61 @@ label.totalBet {
         font-size: 28px;
         font-weight: 800;
     }
-}
 
-@media only screen and (min-width: 990px) {
-    .gameRow #betinputpanel label {
+    .gameWrapper .buttonsRow .gamebutton {
         font-size: 15px;
+        font-weight: 800;
     }
 }
+
+@media only screen and (min-width: 1366px) {
+    #buttonholder {
+        margin-top: 0px;
+        transform: scaleY(1);
+    }
+
+    .buttonsRow.stoneGroup {
+        margin-top: 0;
+    }
+
+    .gameRow #betinputpanel tr td {
+        line-height: inherit;
+    }
+
+    .gameRow #betinputpanel label {
+        font-size: 21px;
+        font-weight: 800;
+    }
+
+    .gameRow #betinputpanel input {
+        height: 35px;
+    }
+
+    #res_sofar_div {
+        height: 460px;
+    }
+
+    .gameRow .imgWrapper {
+        height: 280px;
+    }
+
+    .gameWrapper .headerRow h1 {
+        font-size: 60px;
+        font-weight: 700;
+    }
+
+    .gameWrapper .buttonsRow .btnItem {
+        width: auto !important;
+    }
+
+    .gameWrapper .buttonsRow .gamebutton,
+    .buttonsRow.b .gamebutton {
+        font-size: 22px;
+        font-weight: 800;
+        height: 45px;
+    }
+}
+
 
 
 
