@@ -463,13 +463,6 @@ label.totalBet {
     }
 }
 
-@media only screen and (min-width: 990px) {
-    .gameRow #betinputpanel label {
-        font-size: 15px;
-    }
-}
-
-
 
 .imgWrapper {
     position: relative;
