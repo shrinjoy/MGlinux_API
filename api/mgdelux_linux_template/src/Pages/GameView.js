@@ -261,7 +261,7 @@ function GameView() {
                                 <div className="col-6 d-flex justify-content-center align-items-center">
                                     <h1>Metro Deluxe</h1>
                                 </div>
-                                <div className="col-2 text-end row align-items-center">
+                                <div className="col-3 text-end row align-items-center">
                                     <div>
                                         <label id="balance">
                                             {userBalance}
