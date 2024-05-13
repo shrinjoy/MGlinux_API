@@ -20,7 +20,7 @@ function Home() {
                     </button>
                 </div>
                 {clickConnect ? <div className="unlockForm">
-                    {isConnected ? "" : <div className="formWrapper">
+                    {/* {isConnected ? "" : <div className="formWrapper">
                         <div className="me-2">
                             <div>
                                 <label className="py-3">UNLOCK</label>
@@ -38,12 +38,12 @@ function Home() {
                                 <button>desktop</button>
                             </div>
                         </div>
-                    </div>}
+                    </div>} */}
                     {isConnected ? <div className="status">CONNECTED</div> : ""}
                 </div> : ""}
                 <div className="buttonGroup row">
                     <div style={{ width: '20%' }}>
-                        {isConnected ? <button className="homeBtn">Dis-Connect</button> : <button className="homeBtn connect" onClick={() => setClickConnect(true)}>
+                        {isConnected ? <button className="homeBtn" onClick={() => { setClickConnect(false); setIsConnected(false) }}>Dis-Connect</button> : <button className="homeBtn connect" onClick={() => { setClickConnect(true); setIsConnected(true) }}>
                             Connect
                         </button>}
                     </div>
@@ -51,7 +51,7 @@ function Home() {
                         {isConnected ? <button className="homeBtn login" onClick={() => navigate('/login')}>Login</button> : ""}
                     </div>
                     <div style={{ width: '20%' }}>
-                        <button className="homeBtn" onClick={() => window.electronAPI.systemSettings()}>System</button>
+                        <button className="homeBtn" onClick={() => { window.electronAPI.systemSettings(); window.open('http://localhost:631/admin', '_blank') }}>System</button>
                     </div>
                     <div style={{ width: '20%' }}>
                         <button className="homeBtn" onClick={() => systemServGet("restart")}>Restart</button>
