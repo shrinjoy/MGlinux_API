@@ -294,7 +294,7 @@ function GameView() {
                                 </div>
                             </div>
 
-                            <div className="col-4 leftPane pe-2">
+                            <div className="col-4 leftPane">
                                 <div className="headerRow">
                                     <div className="col-6 text-center">
                                         <label style={{ fontSize: 12 }}>Game Gift Code</label>
