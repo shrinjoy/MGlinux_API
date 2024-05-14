@@ -73,15 +73,15 @@ ipcMain.on('quit-app', () => {
 ipcMain.on('system-shutdown', () => {
   if (os.platform() === 'win32') {
     exec('shutdown /s /t 0');
-  } else if (os.platform() === 'linux') {
-    exec('shutdown -h now');
+  } else {
+    exec('shutdown +0');
   }
 });
 
 ipcMain.on('system-restart', () => {
   if (os.platform() === 'win32') {
     exec('shutdown /r /t 0');
-  } else if (os.platform() === 'linux') {
+  } else {
     exec('shutdown -r now');
   }
 });
@@ -89,8 +89,8 @@ ipcMain.on('system-restart', () => {
 ipcMain.on('system-settings', () => {
   if (os.platform() === 'win32') {
     exec('start ms-settings:');
-  } else if (os.platform() === 'linux') {
-    exec('gnome-control-center');
+  } else {
+    exec('enlightenment_settings');
   }
 });
 
