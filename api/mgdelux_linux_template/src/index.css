@@ -400,7 +400,6 @@ label.totalBet {
     .gameRow #betinputpanel label {
         font-size: 13px;
         font-weight: 900;
-        width: 100%;
         letter-spacing: -1px;
     }
 
