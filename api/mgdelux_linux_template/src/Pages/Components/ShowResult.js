@@ -23,7 +23,7 @@ function ShowResult() {
         const updateRandomNumber = () => {
             const newRandomNumber = Math.floor(Math.random() * 90) + 10;
             setRandomNumber(newRandomNumber);
-            setTimeout(updateRandomNumber, 100);
+            setTimeout(updateRandomNumber, 10);
         };
         updateRandomNumber();
 
