@@ -252,11 +252,11 @@ function GameView() {
         <>
             <section id="mc" className="mainContent">
                 <div
-                    className="container-fluid"
+                    className="container-fluid px-0"
                     style={{ borderBottom: "1px solid red" }}
                 >
-                    <div className="gameWrapper">
-                        <div className="row gameRow gx-2">
+                    <div className="gameWrapper w-100">
+                        <div className="row gameRow gx-0 col-12">
                             <div className="headerRow">
                                 <div className="col-6 d-flex justify-content-center align-items-center">
                                     <h1>Metro Deluxe</h1>
@@ -277,7 +277,7 @@ function GameView() {
                                 <div className="col-2 ms-auto">
                                     {/* <label> Time :</label>
                                         <label id="realtime">&nbsp;&nbsp;{time}</label> */}
-                                    <div className='analogClock d-flex justify-content-center'>
+                                    <div className='analogClock d-flex justify-content-end'>
                                         <Clock value={time} size={80} renderNumbers={true} />
                                     </div>
                                 </div>
@@ -294,7 +294,7 @@ function GameView() {
                                 </div>
                             </div>
 
-                            <div className="col-4">
+                            <div className="col-4 leftPane pe-2">
                                 <div className="headerRow">
                                     <div className="col-6 text-center">
                                         <label style={{ fontSize: 12 }}>Game Gift Code</label>
@@ -364,7 +364,7 @@ function GameView() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-8">
+                            <div className="col-8 rightPane">
                                 <BetTable onTotalBetChange={handleTotalBetChange} onTotalTicketsChange={handleTotalTicketsChange} clearTrigger={clearTrigger} onClearAllValues={() => setClearTrigger(false)} luckyTrigger={luckyTrigger} onLuckyPick={() => setLuckyTrigger(false)} />
                                 <div className='col-xl-12 ms-auto'>
                                     <div className='buttonsRow justify-content-end' style={{ marginTop: '5px' }}>
@@ -380,7 +380,7 @@ function GameView() {
                                         </div>
                                         <div className='ms-3 formWrapper align-items-center'>
                                             <div>
-                                                <label>F8 Barcode-</label>
+                                                <label style={{ fontWeight: 800 }}>F8 Barcode-</label>
                                             </div>
                                             <div className='ms-2'>
                                                 <input className="loginInput" type='text' value={barCodeSearch} onChange={(e) => setBarCodeSearch(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { handleBarcodeClaim() } }} />
@@ -412,7 +412,7 @@ function GameView() {
                                         Cancel(F9)
                                     </button>
                                 </div>
-                                <div className="btnItem" style={{ width: 100 }}>
+                                <div className="btnItem" style={{ width: 110 }}>
                                     <button className="gamebutton">
                                         Last Receipt
                                     </button>

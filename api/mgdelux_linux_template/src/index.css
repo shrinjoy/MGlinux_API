@@ -294,11 +294,14 @@ label.totalBet {
     color: #000;
     font-weight: 700;
     /* text-align: center; */
+    width: max-content;
+    margin: auto;
 }
 
 .gameRow #betinputpanel tr td {
+    /* line-height: 22.5px; */
     text-align: center;
-    line-height: 22.5px;
+    width: max-content;
 }
 
 .gameRow #betinputpanel input {
@@ -403,6 +406,7 @@ label.totalBet {
 
     .gameRow #betinputpanel input {
         height: 25px;
+        width: 80%;
     }
 
     #buttonholder {
@@ -423,16 +427,25 @@ label.totalBet {
     }
 
     .react-clock {
-        width: 60px !important;
-        height: 60px !important;
+        width: 70px !important;
+        height: 70px !important;
     }
 
     .imgWrapper.status {
-        height: 60px !important;
+        height: 70px !important;
     }
 
     .gameWrapper .headerRow h1 {
         font-size: 36px;
+    }
+
+    /* Stupid Shit */
+    .gameWrapper .leftPane {
+        width: 40%;
+    }
+
+    .gameWrapper .rightPane {
+        width: 60%;
     }
 
 }
