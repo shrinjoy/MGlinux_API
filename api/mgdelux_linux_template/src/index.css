@@ -99,6 +99,10 @@ table {
     top: 40px; */
 }
 
+#res_sofar_div::-webkit-scrollbar {
+    display: none;
+}
+
 #res_sofar_table tr td {
     width: 200px;
     height: 35px;
