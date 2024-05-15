@@ -104,5 +104,34 @@ async function fetchMacAddress() {
   }
 }
 
+// Printing Focus Window
+ipcMain.handle('print-focus-window', printFocusWindow)
+
+var options = {
+  silent: false,
+  printBackground: true,
+  color: false,
+  margin: {
+    marginType: 'printableArea'
+  },
+  landscape: false,
+  pagesPerSheet: 1,
+  collate: false,
+  copies: 1,
+  header: 'Header of the Page',
+  footer: 'Footer of the Page'
+}
+
+async function printFocusWindow() {
+  let win = BrowserWindow.getFocusedWindow();
+  win.webContents.print(options, (success, failureReason) => {
+    if (!success) {
+      console.log(failureReason)
+    } else {
+      console.log('Print Start');
+    }
+  })
+}
+
 
 

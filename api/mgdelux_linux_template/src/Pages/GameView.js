@@ -260,9 +260,13 @@ function GameView() {
         const data = await generateTicketByBarcode(lastBetBarCode);
         if (data) {
             setTicketData(data);
-            setTimeout(() => {
-                window.print();
-            }, 1000)
+            // setTimeout(() => {
+            //     window.print();
+            // }, 1000)
+            const res = await window.electronAPI.printFocusWindow();
+            if (res) {
+                console.log(res)
+            }
         } else {
             toast.error("Error! Failed to load Ticket!", toastConfig);
         }
