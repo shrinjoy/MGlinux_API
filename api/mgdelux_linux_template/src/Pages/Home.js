@@ -32,7 +32,7 @@ function Home() {
                 </div>
                 <div className="unlockForm">
                     {isConnected ? <div className="status">CONNECTED</div> : ""}
-                    {networkError ? <div className="status text-danger">NETWORK ERROR</div> : ""}</div>
+                    {networkError ? <div className="status text-warning">NETWORK ERROR</div> : ""}</div>
                 <div className="buttonGroup row">
                     <div style={{ width: '20%' }}>
                         {isConnected ? <button className="homeBtn" onClick={() => { setIsConnected(false) }}>Dis-Connect</button> : <button className="homeBtn connect" onClick={() => checkInternetConnection()}>
