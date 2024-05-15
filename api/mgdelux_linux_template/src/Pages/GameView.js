@@ -246,18 +246,18 @@ function GameView() {
 
     // Game Left Side Spinning Shit
     const images = [
-        { url: require("../Assets/images/1.jpeg").default },
-        { url: require("../Assets/images/2.jpeg").default },
-        { url: require("../Assets/images/3.jpeg").default },
-        { url: require("../Assets/images/4.jpeg").default },
-        { url: require("../Assets/images/5.jpeg").default },
-        { url: require("../Assets/images/6.jpeg").default },
-        { url: require("../Assets/images/7.jpeg").default },
-        { url: require("../Assets/images/8.jpeg").default },
+        { url: require("../Assets/images/1.jpeg") },
+        { url: require("../Assets/images/2.jpeg") },
+        { url: require("../Assets/images/3.jpeg") },
+        { url: require("../Assets/images/4.jpeg") },
+        { url: require("../Assets/images/5.jpeg") },
+        { url: require("../Assets/images/6.jpeg") },
+        { url: require("../Assets/images/7.jpeg") },
+        { url: require("../Assets/images/8.jpeg") },
     ];
 
     async function handleTicketPrint() {
-        const data = await generateTicketByBarcode("5812821040430");
+        const data = await generateTicketByBarcode(lastBetBarCode);
         if (data) {
             setTicketData(data);
             const res = await window.electronAPI.printFocusWindow();
@@ -315,7 +315,7 @@ function GameView() {
                                             Change Password
                                         </button> */}
                                     <div className='imgWrapper status'>
-                                        <img src={require('../Assets/images/lightbulb.png').default} />
+                                        <img src={require('../Assets/images/lightbulb.png')} />
                                     </div>
                                 </div>
                             </div>
@@ -336,7 +336,7 @@ function GameView() {
                                 <div id="background" className="mt-2">
                                     <div className="retardedSpinningShit position-relative">
                                         <div className="imgWrapper mx-auto">
-                                            <img src={require('../Assets/images/background.png').default} />
+                                            <img src={require('../Assets/images/background.png')} />
                                         </div>
                                         <div className="imgWrapper2">
                                             <SimpleImageSlider
