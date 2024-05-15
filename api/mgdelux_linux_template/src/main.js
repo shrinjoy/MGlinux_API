@@ -108,7 +108,7 @@ async function fetchMacAddress() {
 ipcMain.handle('print-focus-window', printFocusWindow)
 
 var options = {
-  silent: false,
+  silent: true,
   printBackground: true,
   color: false,
   margin: {
@@ -118,8 +118,6 @@ var options = {
   pagesPerSheet: 1,
   collate: false,
   copies: 1,
-  header: 'Header of the Page',
-  footer: 'Footer of the Page'
 }
 
 async function printFocusWindow() {
