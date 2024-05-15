@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { cancelLastBet, claimBarcode, getCurrentResult, getCurrentTime, getGameResult, getTimeLeft, getUserData, placeBet } from '../Globals/GlobalFunctions'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { cancelLastBet, claimBarcode, generateTicketByBarcode, getCurrentTime, getGameResult, getTimeLeft, getUserData, placeBet } from '../Globals/GlobalFunctions'
 import { DataContext } from '../Context/DataContext';
 import BetTable from './Components/BetTable';
 import Clock from 'react-clock';
@@ -13,9 +13,11 @@ import SimpleImageSlider from "react-simple-image-slider";
 import StoneInfo from './Components/StoneInfo';
 import ShowResult from './Components/ShowResult';
 import { toastConfig } from '../Globals/GlobalMetaData';
+import TicketToPrint from './Components/TicketToPrint';
+import { useReactToPrint } from 'react-to-print';
 
 function GameView() {
-    const { userName, setUserName, passWord, userId, gameId, setGameId, userBalance, setUserBalance, lastBetBarCode, setLastBetBarCode, setNextGameDate, setNextGameTime } = useContext(DataContext);
+    const { userName, setUserName, passWord, userId, gameId, setGameId, userBalance, setUserBalance, lastBetBarCode, setLastBetBarCode, setNextGameDate, setNextGameTime, ticketData, setTicketData } = useContext(DataContext);
     const [time, setTime] = useState(getCurrentTime());
     const [gameTime, setGameTime] = useState(0);
     const [totalBet, setTotalBet] = useState(0);
@@ -25,6 +27,7 @@ function GameView() {
     const [gameResult, setGameResult] = useState("");
     const [showResult, setShowResult] = useState(false);
     const navigate = useNavigate();
+    const ticketPrintRef = useRef();
     // Simple Buttons
     const [clearTrigger, setClearTrigger] = useState(false);
     const [luckyTrigger, setLuckyTrigger] = useState(false);
@@ -119,18 +122,21 @@ function GameView() {
         handleGameResults();
     }
 
+    // Timer Reset Function
     const handleTimerReset = () => {
         setIsTimerActive(true);
         setShowResult(false);
         // console.log('Sequence Started Again');
     }
 
+    // Update Game Result Function
     async function handleGameResults() {
         const data = await getGameResult();
         setGameResult(data);
         // console.log(data);
     }
 
+    // Update User Balance Function
     async function updateUserData() {
         const data = await getUserData(userName, passWord)
         if (data) {
@@ -147,6 +153,7 @@ function GameView() {
     //     console.log(data);
     // }
 
+    // Bet Place Function
     async function handleBetPlacement() {
         if (totalBet > 0 && gameTime > 10 && userBalance >= totalBet) {
             const toastId = toast.loading('Placing Bet, Please Wait!', {
@@ -160,6 +167,7 @@ function GameView() {
                 toast.update(toastId, { render: "Bet Placed Successfully!", type: "success", isLoading: false, autoClose: 2000 });
                 setClearTrigger(true);
                 setUserBalance(parseInt(userBalance) - parseInt(totalBet));
+                handleTicketPrint();
             } else {
                 toast.update(toastId, { render: "Bet Failed!", type: "error", isLoading: false, autoClose: 2000 });
             }
@@ -172,6 +180,7 @@ function GameView() {
         }
     }
 
+    // Cancel Bet Function
     async function cancelBet() {
         const data = await cancelLastBet(lastBetBarCode);
         const toastId = toast.loading('Cancelling Bet, Please Wait!', {
@@ -187,6 +196,7 @@ function GameView() {
         }
     }
 
+    // Barcode Claim Function
     async function handleBarcodeClaim() {
         const toastId = toast.loading('Claiming Barcode, Please Wait!', {
             position: "top-center",
@@ -203,6 +213,7 @@ function GameView() {
         setBarCodeSearch("")
     }
 
+    // Clear Bet Table Function
     const handleClearAllValues = () => {
         setClearTrigger(true)
         const betFields = document.querySelectorAll('[data-old]');
@@ -211,6 +222,7 @@ function GameView() {
         })
     }
 
+    // Random Bet Place Function
     const handleLuckyPik = () => {
         setLuckyTrigger(true)
     }
@@ -231,15 +243,28 @@ function GameView() {
 
     // Game Left Side Spinning Shit
     const images = [
-        { url: require("../Assets/images/1.jpeg").default },
-        { url: require("../Assets/images/2.jpeg").default },
-        { url: require("../Assets/images/3.jpeg").default },
-        { url: require("../Assets/images/4.jpeg").default },
-        { url: require("../Assets/images/5.jpeg").default },
-        { url: require("../Assets/images/6.jpeg").default },
-        { url: require("../Assets/images/7.jpeg").default },
-        { url: require("../Assets/images/8.jpeg").default },
+        { url: require("../Assets/images/1.jpeg") },
+        { url: require("../Assets/images/2.jpeg") },
+        { url: require("../Assets/images/3.jpeg") },
+        { url: require("../Assets/images/4.jpeg") },
+        { url: require("../Assets/images/5.jpeg") },
+        { url: require("../Assets/images/6.jpeg") },
+        { url: require("../Assets/images/7.jpeg") },
+        { url: require("../Assets/images/8.jpeg") },
     ];
+
+    async function handleTicketPrint() {
+        const data = await generateTicketByBarcode(lastBetBarCode);
+        if (data) {
+            setTicketData(data);
+            setTimeout(() => {
+                window.print();
+            }, 1000)
+        } else {
+            toast.error("Error! Failed to load Ticket!", toastConfig);
+        }
+        // console.log(data)
+    }
 
     // Redirect to Home if userName not available
     // useEffect(() => {
@@ -289,7 +314,7 @@ function GameView() {
                                             Change Password
                                         </button> */}
                                     <div className='imgWrapper status'>
-                                        <img src={require('../Assets/images/lightbulb.png').default} />
+                                        <img src={require('../Assets/images/lightbulb.png')} />
                                     </div>
                                 </div>
                             </div>
@@ -310,7 +335,7 @@ function GameView() {
                                 <div id="background" className="mt-2">
                                     <div className="retardedSpinningShit position-relative">
                                         <div className="imgWrapper mx-auto">
-                                            <img src={require('../Assets/images/background.png').default} />
+                                            <img src={require('../Assets/images/background.png')} />
                                         </div>
                                         <div className="imgWrapper2">
                                             <SimpleImageSlider
@@ -413,7 +438,7 @@ function GameView() {
                                     </button>
                                 </div>
                                 <div className="btnItem" style={{ width: 110 }}>
-                                    <button className="gamebutton">
+                                    <button className="gamebutton" onClick={handleTicketPrint}>
                                         Last Receipt
                                     </button>
                                 </div>
@@ -455,6 +480,7 @@ function GameView() {
                     </div>
                 </div>
             </section>
+            <div className='ticketWrapper'>{ticketData ? <TicketToPrint ref={ticketPrintRef} /> : ""}</div>
             <ToastContainer />
         </>
     )

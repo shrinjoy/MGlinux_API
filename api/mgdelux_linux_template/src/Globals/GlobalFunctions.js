@@ -104,7 +104,19 @@ export async function generateTicketByBarcode(barcode) {
     const parsedData = { barcode: barcode }
     return axiosInstance.post(`/getticketbybarcode`, parsedData)
         .then(res => {
-            return res;
+            const rawData = res.data.data[0][0];
+            const preparedData = {
+                "drawTime": rawData.DROWTIME,
+                "gameID": rawData.GAMEID,
+                "posID": rawData.TARMINALID,
+                "ticketNumbers": rawData.TICKETDETAILS,
+                "gameDate": rawData.GAMEDATE,
+                "gameTime": rawData.GAMETIME,
+                "barcode": rawData.TICKETNUMBER,
+                "gameResult": rawData.GAMERESULT,
+                "totalQty": rawData.TICKETTOTALRS,
+            }
+            return preparedData;
         })
         .catch(err => {
             return null;
