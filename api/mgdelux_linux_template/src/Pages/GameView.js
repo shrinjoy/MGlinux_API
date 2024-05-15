@@ -156,6 +156,7 @@ function GameView() {
 
     // Bet Place Function
     async function handleBetPlacement() {
+        setIsClaim(false)
         if (totalBet > 0 && gameTime > 10 && userBalance >= totalBet) {
             const toastId = toast.loading('Placing Bet, Please Wait!', {
                 position: "top-center",
@@ -256,7 +257,6 @@ function GameView() {
     ];
 
     async function handleTicketPrint() {
-        setIsClaim(false)
         const data = await generateTicketByBarcode(lastBetBarCode);
         if (data) {
             setTicketData(data);
