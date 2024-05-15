@@ -104,8 +104,6 @@ async function fetchMacAddress() {
   }
 }
 
-<<<<<<< Updated upstream
-=======
 // Printing Focus Window
 ipcMain.handle('print-focus-window', printFocusWindow)
 
@@ -133,6 +131,5 @@ async function printFocusWindow() {
   })
 }
 
->>>>>>> Stashed changes
 
 
