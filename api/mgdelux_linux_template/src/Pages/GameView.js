@@ -205,6 +205,8 @@ function GameView() {
         })
         const data = await claimBarcode(userId, barCodeSearch)
         if (data && data.amount) {
+            setLastBetBarCode(barCodeSearch);
+            handleTicketPrint();
             toast.update(toastId, { render: "Barcode Claimed Successfully!", type: "success", isLoading: false, autoClose: 2000 });
             updateUserData();
         } else {
