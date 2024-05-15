@@ -104,5 +104,35 @@ async function fetchMacAddress() {
   }
 }
 
+<<<<<<< Updated upstream
+=======
+// Printing Focus Window
+ipcMain.handle('print-focus-window', printFocusWindow)
+
+var options = {
+  silent: true,
+  printBackground: true,
+  color: false,
+  margin: {
+    marginType: 'printableArea'
+  },
+  landscape: false,
+  pagesPerSheet: 1,
+  collate: false,
+  copies: 1,
+}
+
+async function printFocusWindow() {
+  let win = BrowserWindow.getFocusedWindow();
+  win.webContents.print(options, (success, failureReason) => {
+    if (!success) {
+      console.log(failureReason)
+    } else {
+      console.log('Print Start');
+    }
+  })
+}
+
+>>>>>>> Stashed changes
 
 
