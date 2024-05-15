@@ -115,6 +115,7 @@ export async function generateTicketByBarcode(barcode) {
                 "barcode": rawData.TICKETNUMBER,
                 "gameResult": rawData.GAMERESULT,
                 "totalQty": rawData.TICKETTOTALRS,
+                "winPoints": rawData.WINRS,
             }
             return preparedData;
         })
