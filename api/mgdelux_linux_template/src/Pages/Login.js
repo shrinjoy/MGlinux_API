@@ -45,7 +45,7 @@ function Login() {
                 setUserId(userIdForm)
                 navigate('/game');
             } else {
-                setError("Incorrect Credentials");
+                setError("Network Error!");
                 setTimeout(setError, 2000, "");
             }
         }

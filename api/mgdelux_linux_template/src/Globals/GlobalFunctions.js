@@ -99,6 +99,18 @@ export async function claimBarcode(userId, barCodeSearch) {
         })
 }
 
+//Ticket Generate
+export async function generateTicketByBarcode(barcode) {
+    const parsedData = { barcode: barcode }
+    return axiosInstance.post(`/getticketbybarcode`, parsedData)
+        .then(res => {
+            return res;
+        })
+        .catch(err => {
+            return null;
+        })
+}
+
 //Get Result by Game ID
 export async function getCurrentResult(gameId) {
     const parsedData = { gameid: gameId }
