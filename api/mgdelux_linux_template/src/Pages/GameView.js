@@ -26,6 +26,7 @@ function GameView() {
     const [isTimerActive, setIsTimerActive] = useState(true);
     const [gameResult, setGameResult] = useState("");
     const [showResult, setShowResult] = useState(false);
+    const [isClaim, setIsClaim] = useState(false);
     const navigate = useNavigate();
     const ticketPrintRef = useRef();
     // Simple Buttons
@@ -198,6 +199,7 @@ function GameView() {
 
     // Barcode Claim Function
     async function handleBarcodeClaim() {
+        setIsClaim(true)
         const toastId = toast.loading('Claiming Barcode, Please Wait!', {
             position: "top-center",
             hideProgressBar: false,
@@ -254,6 +256,7 @@ function GameView() {
     ];
 
     async function handleTicketPrint() {
+        setIsClaim(false)
         const data = await generateTicketByBarcode(lastBetBarCode);
         if (data) {
             setTicketData(data);
@@ -480,7 +483,7 @@ function GameView() {
                     </div>
                 </div>
             </section>
-            <div className='ticketWrapper'>{ticketData ? <TicketToPrint ref={ticketPrintRef} /> : ""}</div>
+            <div className='ticketWrapper'>{ticketData ? <TicketToPrint ref={ticketPrintRef} isClaim={isClaim} /> : ""}</div>
             <ToastContainer />
         </>
     )
