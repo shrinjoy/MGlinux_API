@@ -1,9 +1,10 @@
 {
   "files": {
     "main.css": "/static/css/main.ae1cfa24.css",
-    "main.js": "/static/js/main.84440bbc.js",
+    "main.js": "/static/js/main.3f58c4c9.js",
     "static/js/453.5bfe0648.chunk.js": "/static/js/453.5bfe0648.chunk.js",
     "static/media/background.png": "/static/media/background.463fcc03d8e538d27350.png",
+    "static/media/back.jpeg": "/static/media/back.b078d836c23e542b57f3.jpeg",
     "static/media/1.jpeg": "/static/media/1.6a2449fd4461e513177a.jpeg",
     "static/media/8.jpeg": "/static/media/8.721ef9c93df1a7f1af34.jpeg",
     "static/media/5.jpeg": "/static/media/5.470d93f8a91792dafb97.jpeg",
@@ -12,14 +13,15 @@
     "static/media/7.jpeg": "/static/media/7.374e9ff374184d248d73.jpeg",
     "static/media/2.jpeg": "/static/media/2.94e1969040277b6e55b8.jpeg",
     "static/media/6.jpeg": "/static/media/6.8be556e6ef25857965b4.jpeg",
-    "static/media/lightbulb.png": "/static/media/lightbulb.53258b821e35ea1040d3.png",
+    "static/media/back_image.png": "/static/media/back_image.f0fe9777a77f08f668a5.png",
+    "static/media/lightbulbGreen.png": "/static/media/lightbulbGreen.53258b821e35ea1040d3.png",
     "index.html": "/index.html",
     "main.ae1cfa24.css.map": "/static/css/main.ae1cfa24.css.map",
-    "main.84440bbc.js.map": "/static/js/main.84440bbc.js.map",
+    "main.3f58c4c9.js.map": "/static/js/main.3f58c4c9.js.map",
     "453.5bfe0648.chunk.js.map": "/static/js/453.5bfe0648.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ae1cfa24.css",
-    "static/js/main.84440bbc.js"
+    "static/js/main.3f58c4c9.js"
   ]
 }
