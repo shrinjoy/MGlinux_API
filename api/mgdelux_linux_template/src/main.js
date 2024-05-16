@@ -109,7 +109,7 @@ ipcMain.handle('print-focus-window', printFocusWindow)
 
 var options = {
   silent: false,
-  printBackground: false,
+  printBackground: true,
   color: false,
   margin: {
     marginType: 'printableArea'
