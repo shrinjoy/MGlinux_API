@@ -46,10 +46,10 @@ function Home() {
                         <button className="homeBtn" onClick={() => { window.electronAPI.systemSettings(); window.open('http://localhost:631/admin', '_blank') }}>System</button>
                     </div>
                     <div style={{ width: '20%' }}>
-                        <button className="homeBtn" onClick={() => systemServGet("restart")}>Restart</button>
+                        <button className="homeBtn" onClick={() => window.electronAPI.systemRestart()}>Restart</button>
                     </div>
                     <div style={{ width: '20%' }}>
-                        <button className="homeBtn" onClick={() => systemServGet("shutdown")}>PowerOff</button>
+                        <button className="homeBtn" onClick={() => window.electronAPI.systemShutdown()}>PowerOff</button>
                     </div>
                 </div>
             </div>
