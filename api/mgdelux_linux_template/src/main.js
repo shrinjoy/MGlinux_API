@@ -90,7 +90,7 @@ ipcMain.on('system-settings', () => {
   if (os.platform() === 'win32') {
     exec('start ms-settings:');
   } else {
-    exec('enlightenment_settings');
+    exec('gnome-control-center');
   }
 });
 
