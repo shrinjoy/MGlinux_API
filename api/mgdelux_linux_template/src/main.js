@@ -89,11 +89,7 @@ ipcMain.on('system-restart', () => {
 ipcMain.on('system-settings', () => {
   if (os.platform() === 'win32') {
     exec('start ms-settings:');
-<<<<<<< Updated upstream
-  } else if (os.platform() === 'linux') {
-=======
   } else {
->>>>>>> Stashed changes
     exec('gnome-control-center');
   }
 });
