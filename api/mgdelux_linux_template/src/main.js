@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const { exec } = require('child_process');
+const { updateElectronApp } = require('update-electron-app');
 const os = require('os');
 const path = require('node:path');
 const getmac = require('getmac')
@@ -36,7 +37,9 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  // ipcMain.handle('get-mac-address', fetchMacAddress)
+
+  updateElectronApp();
+
   createWindow();
 
   // On OS X it's common to re-create a window in the app when the
