@@ -13,6 +13,7 @@ function Home() {
         const isOnline = navigator.onLine;
         if (isOnline) {
             setIsConnected(true);
+            setNetworkError(false);
         } else {
             setNetworkError(true);
             setIsConnected(false);
