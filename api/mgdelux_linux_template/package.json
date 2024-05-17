@@ -54,6 +54,7 @@
     "react-clock": "^4.6.0",
     "react-dom": "^18.2.0",
     "react-simple-image-slider": "^2.4.1",
+    "react-spinners": "^0.13.8",
     "react-to-print": "^2.15.1",
     "react-toastify": "^10.0.5",
     "update-electron-app": "^3.0.0"

@@ -3,6 +3,7 @@ import { verNo } from '../Globals/GlobalMetaData';
 import { login, systemServGet } from '../Globals/GlobalFunctions';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
+import { FadeLoader } from 'react-spinners';
 
 function Login() {
     const { userName, setUserName, setPassWord, setUserId } = useContext(DataContext);
@@ -11,8 +12,17 @@ function Login() {
     const [userIdForm, setUserIdForm] = useState("");
     const [userMacId, setUserMacId] = useState("");
     const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
+
 
     const navigate = useNavigate();
+
+    // Loader
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 2500)
+    })
 
     // Deriving User Mac ID
     useEffect(() => {
@@ -52,66 +62,67 @@ function Login() {
     }
 
     return (
-        <main className='loginWrapper'>
-            <div className='position-absolute top-0 col-12 d-flex justify-content-between px-2'>
-                <div>
-                    <label className='fw-bold'>Ver {verNo}</label>
-                </div>
-                <div>
-                    <label className='fw-bold'>0000ACADGNRLNKNPRK</label>
-                </div>
-            </div>
-            <div className='wrapper p-5'>
-                <div className='formWrapper'>
-                    <div className='col-12 '>
-                        <div className='d-flex justify-content-center'>
-                            <div className='col-1 me-2'>
-                                <label>UserID</label>
-                            </div>
-                            <div>
-                                <input type="text" className="loginInput" value={userIdForm} onChange={(e) => setUserIdForm(e.target.value)} />
-                            </div>
-                        </div>
+        isLoading ? <div className='loader'><FadeLoader color='#454545' /></div> :
+            <main className='loginWrapper'>
+                <div className='position-absolute top-0 col-12 d-flex justify-content-between px-2'>
+                    <div>
+                        <label className='fw-bold'>Ver {verNo}</label>
                     </div>
-                    <div className='col-12 mt-2'>
-                        <div className='d-flex justify-content-center'>
-                            <div className='col-1 me-2'>
-                                <label>Username</label>
-                            </div>
-                            <div>
-                                <input type="text" className="loginInput" value={username} onChange={(e) => setUsername(e.target.value)} />
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-12 mt-2'>
-                        <div className='d-flex justify-content-center'>
-                            <div className='col-1 me-2'>
-                                <label>Password</label>
-                            </div>
-                            <div>
-                                <input type="password" className="loginInput" value={password} onChange={(e) => setPassword(e.target.value)} />
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-12 text-center text-danger fw-bold'>
-                        {error ? error : ""}
-                    </div>
-                    <div className='col-2 offset-1 mt-2'>
-                        <div className='d-flex justify-content-between'>
-                            <div>
-                                <button className='loginButton' onClick={checkLogin}>Login</button>
-                            </div>
-                            <div>
-                                <button className='loginButton'>Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-12 text-center mt-3'>
-                        <label>Welcome to Lottery Terminal</label>
+                    <div>
+                        <label className='fw-bold'>0000ACADGNRLNKNPRK</label>
                     </div>
                 </div>
-            </div>
-        </main>
+                <div className='wrapper p-5'>
+                    <div className='formWrapper'>
+                        <div className='col-12 '>
+                            <div className='d-flex justify-content-center'>
+                                <div className='col-1 me-2'>
+                                    <label>UserID</label>
+                                </div>
+                                <div>
+                                    <input type="text" className="loginInput" value={userIdForm} onChange={(e) => setUserIdForm(e.target.value)} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-12 mt-2'>
+                            <div className='d-flex justify-content-center'>
+                                <div className='col-1 me-2'>
+                                    <label>Username</label>
+                                </div>
+                                <div>
+                                    <input type="text" className="loginInput" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-12 mt-2'>
+                            <div className='d-flex justify-content-center'>
+                                <div className='col-1 me-2'>
+                                    <label>Password</label>
+                                </div>
+                                <div>
+                                    <input type="password" className="loginInput" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-12 text-center text-danger fw-bold'>
+                            {error ? error : ""}
+                        </div>
+                        <div className='col-2 offset-1 mt-2'>
+                            <div className='d-flex justify-content-between'>
+                                <div>
+                                    <button className='loginButton' onClick={checkLogin}>Login</button>
+                                </div>
+                                <div>
+                                    <button className='loginButton'>Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-12 text-center mt-3'>
+                            <label>Welcome to Lottery Terminal</label>
+                        </div>
+                    </div>
+                </div>
+            </main>
     )
 }
 
