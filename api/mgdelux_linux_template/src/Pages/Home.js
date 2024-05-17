@@ -4,7 +4,7 @@ import { systemServGet } from '../Globals/GlobalFunctions';
 
 function Home() {
     const [clickConnect, setClickConnect] = useState(false);
-    const [isConnected, setIsConnected] = useState(false); networkError
+    const [isConnected, setIsConnected] = useState(false);
     const [networkError, setNetworkError] = useState(false);
 
     const navigate = useNavigate();
@@ -54,6 +54,7 @@ function Home() {
                     </div>
                 </div>
             </div>
+
         </main >
 
     )

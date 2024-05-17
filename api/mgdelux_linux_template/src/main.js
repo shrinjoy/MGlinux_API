@@ -36,6 +36,7 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+
   createWindow();
 
   // On OS X it's common to re-create a window in the app when the
@@ -72,15 +73,15 @@ ipcMain.on('quit-app', () => {
 ipcMain.on('system-shutdown', () => {
   if (os.platform() === 'win32') {
     exec('shutdown /s /t 0');
-  } else if (os.platform() === 'linux') {
-    exec('shutdown -h now');
+  } else {
+    exec('shutdown +0');
   }
 });
 
 ipcMain.on('system-restart', () => {
   if (os.platform() === 'win32') {
     exec('shutdown /r /t 0');
-  } else if (os.platform() === 'linux') {
+  } else {
     exec('shutdown -r now');
   }
 });
@@ -108,7 +109,7 @@ ipcMain.handle('print-focus-window', printFocusWindow)
 
 var options = {
   silent: false,
-  printBackground: false,
+  printBackground: true,
   color: false,
   margin: {
     marginType: 'printableArea'
