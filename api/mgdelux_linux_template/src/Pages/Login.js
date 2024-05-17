@@ -4,7 +4,6 @@ import { login, systemServGet } from '../Globals/GlobalFunctions';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
 import { FadeLoader } from 'react-spinners';
-import { useHistory } from "react-router-dom";
 
 function Login() {
     const { userName, setUserName, setPassWord, setUserId } = useContext(DataContext);
@@ -17,7 +16,6 @@ function Login() {
 
 
     const navigate = useNavigate();
-    let history = useHistory();
 
     // Loader
     useEffect(() => {
