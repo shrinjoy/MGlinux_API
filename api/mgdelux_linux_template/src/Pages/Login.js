@@ -4,6 +4,7 @@ import { login, systemServGet } from '../Globals/GlobalFunctions';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
 import { FadeLoader } from 'react-spinners';
+import { useHistory } from "react-router-dom";
 
 function Login() {
     const { userName, setUserName, setPassWord, setUserId } = useContext(DataContext);
@@ -16,6 +17,7 @@ function Login() {
 
 
     const navigate = useNavigate();
+    let history = useHistory();
 
     // Loader
     useEffect(() => {
@@ -59,6 +61,10 @@ function Login() {
                 setTimeout(setError, 2000, "");
             }
         }
+    }
+
+    const handleCancelLogin = () => {
+        navigate('http://localhost:3000/main_window#/main_window');
     }
 
     return (
@@ -113,7 +119,7 @@ function Login() {
                                     <button className='loginButton' onClick={checkLogin}>Login</button>
                                 </div>
                                 <div>
-                                    <button className='loginButton'>Cancel</button>
+                                    <button className='loginButton' onClick={history.goBack()}>Cancel</button>
                                 </div>
                             </div>
                         </div>
