@@ -5,12 +5,14 @@ import Home from './Pages/Home';
 import '../src/Assets/bootstrap/bootstrap.min.css'
 import './index.css'
 import GameView from './Pages/GameView';
+import Loader from './Pages/Loader';
 
 function App() {
     return (
         <HashRouter>
             <Routes>
-                <Route path="/main_window" element={<Home />} />
+                <Route path="/main_window" element={<Loader />} />
+                <Route path="/home" element={<Home />} />
                 <Route path='/login' Component={() => { window.location.href = "http://193.203.163.194:8082/#/login"; return null; }} />
                 {/* <Route path='/login' element={<Login />} /> */}
                 {/* <Route path="/game" element={<GameView />} /> */}
