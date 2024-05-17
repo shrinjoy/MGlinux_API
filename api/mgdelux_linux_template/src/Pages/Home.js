@@ -44,7 +44,7 @@ function Home() {
                         {isConnected ? <button className="homeBtn login" onClick={() => navigate('/login')}>Login</button> : ""}
                     </div>
                     <div style={{ width: '20%' }}>
-                        <button className="homeBtn" onClick={() => { window.electronAPI.systemSettings(); window.open('http://localhost:631/admin', '_blank') }}>System</button>
+                        <button className="homeBtn" onClick={() => { window.electronAPI.systemSettings() }}>System</button>
                     </div>
                     <div style={{ width: '20%' }}>
                         <button className="homeBtn" onClick={() => window.electronAPI.systemRestart()}>Restart</button>
