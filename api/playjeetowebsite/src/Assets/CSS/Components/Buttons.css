@@ -1,0 +1,9 @@
+.redThickBtn {
+    background-color: var(--btn-red-color);
+    color: var(--std-text-color);
+    font-size: 18px;
+    padding: 7px 30px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-family: Poppins;
+}
