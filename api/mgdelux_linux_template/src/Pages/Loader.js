@@ -16,13 +16,13 @@ function Loader() {
                 }
                 return newValue;
             });
-        }, 500);
+        }, 1000);
         return () => clearInterval(intervalId);
     }, []);
 
     const divs = Array.from({ length: value / 10 }, (_, index) => <div key={index}></div>)
     return (
-        <div className='bg-dark' style={{ width: '100vw', height: '100vh' }}>
+        <div style={{ width: '100vw', height: '100vh', backgroundColor: '#000' }}>
             <div className='spinner'>
                 {divs}
                 <label>{value}%</label>
