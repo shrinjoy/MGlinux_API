@@ -8,6 +8,9 @@ module.exports = {
       target: 'deb',
       arch: 'ia32',
     },
+    windows:{
+      arch: 'ia32'
+    },
     icon: './icons/icon'
   },
   rebuildConfig: {},
