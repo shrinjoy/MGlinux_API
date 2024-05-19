@@ -1,0 +1,27 @@
+h1 {
+    font-family: Roboto
+}
+
+p {
+    font-family: Poppins;
+}
+
+span {
+    font-family: Poppins;
+}
+
+.content span {
+    color: var(--std-text-color);
+    font-weight: 200;
+    letter-spacing: 3px;
+}
+
+.content h1 {
+    color: var(--std-text-color);
+    font-weight: 700;
+}
+
+.content p {
+    color: var(--std-text-color);
+    font-weight: 300;
+}
