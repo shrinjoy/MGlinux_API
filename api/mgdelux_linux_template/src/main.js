@@ -86,13 +86,22 @@ ipcMain.on('system-restart', () => {
   }
 });
 
-ipcMain.on('system-settings', () => {
+ipcMain.on('print-driver-settings', () => {
   if (os.platform() === 'win32') {
     exec('start ms-settings:');
   } else {
     exec('gnome-control-center');
   }
 });
+
+ipcMain.on('system-settings', () => {
+  if (os.platform() === 'win32') {
+    exec('start ms-settings:');
+  } else {
+    exec('gnome-terminal -- /etc/profile.d/driver_app/driver.sh');
+  }
+});
+
 
 // Deriving User Mac ID
 ipcMain.handle('get-mac-address', fetchMacAddress)

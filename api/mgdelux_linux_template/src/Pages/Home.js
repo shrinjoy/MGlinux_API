@@ -20,6 +20,11 @@ function Home() {
         }
     }
 
+    const triggerDriverChecker = () => {
+        window.electronAPI.printDriver();
+        console.log('test');
+    }
+
     return (
         <main className="homeWrapper">
             <div className="wrapper p-5">
@@ -44,7 +49,7 @@ function Home() {
                         {isConnected ? <button className="homeBtn login" onClick={() => navigate('/login')}>Login</button> : ""}
                     </div>
                     <div style={{ width: '20%' }}>
-                        <button className="homeBtn" onClick={() => { window.electronAPI.systemSettings() }}>System</button>
+                        <button className="homeBtn" onClick={() => { window.electronAPI.systemSettings();}}>System</button>
                     </div>
                     <div style={{ width: '20%' }}>
                         <button className="homeBtn" onClick={() => window.electronAPI.systemRestart()}>Restart</button>

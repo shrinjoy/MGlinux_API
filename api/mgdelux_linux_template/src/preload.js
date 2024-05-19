@@ -16,6 +16,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
     systemSettings: () => {
         ipcRenderer.send('system-settings');
     },
+    printDriver: () => {
+        ipcRenderer.send('print-driver-settings');
+    },
     getMacAddress: () => ipcRenderer.invoke('get-mac-address'),
     printFocusWindow: () => ipcRenderer.invoke('print-focus-window')
 });
