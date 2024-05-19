@@ -27,6 +27,7 @@ function GameView() {
     const [gameResult, setGameResult] = useState("");
     const [showResult, setShowResult] = useState(false);
     const [isClaim, setIsClaim] = useState(false);
+    const [isOnline, setIsOnline] = useState(navigator.onLine);
     const navigate = useNavigate();
     const ticketPrintRef = useRef();
     // Simple Buttons
@@ -36,6 +37,24 @@ function GameView() {
     const [reportTrigger, setReportTrigger] = useState(false);
     const [betInfoTrigger, setBetInfoTrigger] = useState(false);
     const [stoneInfoTrigger, setStoneInfoTrigger] = useState(false);
+
+    useEffect(() => {
+        const handleOnline = () => {
+            setIsOnline(true);
+        };
+
+        const handleOffline = () => {
+            setIsOnline(false);
+        };
+
+        window.addEventListener('online', handleOnline);
+        window.addEventListener('offline', handleOffline);
+
+        return () => {
+            window.removeEventListener('online', handleOnline);
+            window.removeEventListener('offline', handleOffline);
+        };
+    }, []);
 
     // Close Report Panel
     const closeReportPanel = () => {
