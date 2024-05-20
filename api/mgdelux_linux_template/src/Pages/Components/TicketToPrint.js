@@ -29,7 +29,7 @@ const TicketToPrint = forwardRef((props, ref) => {
                     <div className='listType'>
                         <ul>
                             {ticketArr ? ticketArr.map((item, index) => (
-                                <li key={index}>MG{item.slice(0, 2)} * Q{item.slice(3)}</li>
+                                <li key={index}>{item.slice(0, 4)} * {item.slice(5)}</li>
                             )) : ""}
                         </ul>
                     </div>
@@ -37,7 +37,7 @@ const TicketToPrint = forwardRef((props, ref) => {
                         <label>Qty: {ticketData.totalQty} Total Pts: {ticketData.totalQty} {new Date(ticketData.drawTime).toLocaleTimeString('en-US', { timeZone: 'UTC' })}</label>
                     </div>
                     <div className='text-center'>
-                        <Barcode value={ticketData.barcode} />
+                        <Barcode value={ticketData.barcode} height={60} width={1} />
                     </div>
                 </div> :
                     <div className='row'>
