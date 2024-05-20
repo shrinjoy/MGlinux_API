@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 function Home() {
     return (
         <main>
-            <Navbar />
+            {/* <Navbar /> */}
             <section className="HomeBanner">
                 <div className='container'>
                     <div className='row g-3'>
