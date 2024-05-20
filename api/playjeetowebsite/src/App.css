@@ -9,12 +9,18 @@
 @import url('./Assets/CSS/Components/HomeBanner.css');
 @import url('./Assets/CSS/Components/Buttons.css');
 @import url('./Assets/CSS/Components/freeDemo.css');
+@import url('./Assets/CSS/Components/ForYou.css');
+@import url('./Assets/CSS/Components/BaseCTA.css');
+@import url('./Assets/CSS/Components/Footer.css');
 
 :root {
     --bg-color: #020202;
     --btn-red-color: rgb(234, 1, 29);
+    --text-highlight: rgb(255, 35, 61);
+    --text-highlight2: rgb(255, 35, 127);
     --std-border-radius: 15px;
-    --std-text-color: #fff
+    --std-text-color: #fff;
+    --base-border-color: #5c5c5c;
 }
 
 body {

@@ -7,3 +7,35 @@
     text-decoration: none;
     font-family: Poppins;
 }
+
+.baseBtn {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 30px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-family: Poppins;
+    background-color: var(--std-text-color);
+    color: var(--bg-color);
+    border: 1px solid transparent;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.baseBtn:hover {
+    background-color: transparent;
+    color: var(--std-text-color);
+    border: 1px solid var(--std-text-color);
+}
+
+.baseBtn.trans {
+    background-color: transparent;
+    color: var(--std-text-color);
+    border: 1px solid var(--std-text-color);
+}
+
+.baseBtn.trans:hover {
+    background-color: var(--std-text-color);
+    color: var(--bg-color);
+    border: 1px solid var(--std-text-color);
+}
