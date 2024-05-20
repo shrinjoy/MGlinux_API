@@ -767,10 +767,15 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .ticketWrapper {
-    display: none;
+    display: block;
 }
 
 @media print {
+    @page {
+        size: 58mm auto;
+        margin: 1cm;
+    }
+
     .mainContent * {
         display: none;
     }
