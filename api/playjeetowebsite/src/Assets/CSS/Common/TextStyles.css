@@ -25,7 +25,6 @@ span {
 }
 
 .content h3 {
-    color: var(--std-text-color);
     font-weight: 500;
     margin-bottom: 0;
 }

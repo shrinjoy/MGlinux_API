@@ -1,6 +1,22 @@
 .featuredGames {
     background-color: #161616;
-    padding: 50px 0;
+    padding: 20px 0;
+}
+
+.featuredGames .wrapper {
+    border-bottom: 1px solid var(--base-border-color);
+    position: relative;
+}
+
+.featuredGames .wrapper::after {
+    content: '\f0a9';
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    font-size: 35px;
+    font-weight: 100;
+    font-family: 'Font Awesome 6 Sharp';
+    color: var(--base-border-color);
 }
 
 .featuredGames .wrapper .imgWrapper {
@@ -18,17 +34,9 @@
 
 .featuredGames .content {
     padding: 25px 0 10px;
-    border-bottom: 1px solid var(--base-border-color);
     position: relative;
 }
 
-.featuredGames .content::after {
-    content: '\f0a9';
-    position: absolute;
-    bottom: 7px;
-    right: 0;
-    font-size: 35px;
-    font-weight: 100;
-    font-family: 'Font Awesome 6 Sharp';
-    color: var(--base-border-color);
+.featuredGames .content h3 {
+    color: var(--std-text-color);
 }
