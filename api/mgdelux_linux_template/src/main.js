@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain , shell } = require('electron');
 const { exec } = require('child_process');
 const os = require('os');
 const path = require('node:path');
@@ -88,7 +88,7 @@ ipcMain.on('system-restart', () => {
 
 ipcMain.on('print-driver-settings', () => {
   if (os.platform() === 'win32') {
-    exec('start ms-settings:');
+    shell.openPath('/home/driver/');
   } else {
     exec('gnome-open /home/driver/');
   }
