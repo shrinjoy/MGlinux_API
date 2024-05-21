@@ -90,7 +90,7 @@ ipcMain.on('print-driver-settings', () => {
   if (os.platform() === 'win32') {
     exec('start ms-settings:');
   } else {
-    exec('gnome-control-center');
+    exec('gnome-open /home/driver/');
   }
 });
 
