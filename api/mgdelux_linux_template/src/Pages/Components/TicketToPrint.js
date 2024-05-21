@@ -11,6 +11,13 @@ const TicketToPrint = forwardRef((props, ref) => {
         const tempTicketArr = tempArr.trim().split(',');
         setTicketArr(tempTicketArr);
     }, [])
+
+    const dateTimeTicketFormatter = (date, time) => {
+        const ogdate = date;
+        const ogtime = time;
+
+
+    }
     return (
         <div ref={ref} className='ticket'>
             <div className='container'>
@@ -19,7 +26,7 @@ const TicketToPrint = forwardRef((props, ref) => {
                         <h3>Metro Deluxe</h3>
                     </div>
                     <div className='col-6 text-start'>
-                        <div><label>Ack: {ticketData.barcode}</label></div>
+                        <div><label>Ack: {ticketData.barcode.slice(0, 6)}</label></div>
                         <div><label>{ticketData.gameID}: {new Date(ticketData.gameDate).toLocaleDateString()}-{new Date(ticketData.gameTime).toLocaleTimeString('en-US', { timeZone: 'UTC' })}</label></div>
                     </div>
                     <div className='col-6 text-end'>

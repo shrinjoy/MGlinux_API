@@ -30,6 +30,7 @@ function GameView() {
     const [isOnline, setIsOnline] = useState(navigator.onLine);
     const navigate = useNavigate();
     const ticketPrintRef = useRef();
+    const barCodeSearchRef = useRef(null);
     // Simple Buttons
     const [clearTrigger, setClearTrigger] = useState(false);
     const [luckyTrigger, setLuckyTrigger] = useState(false);
@@ -55,6 +56,19 @@ function GameView() {
             window.removeEventListener('offline', handleOffline);
         };
     }, []);
+
+    // BarCode Scanner
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            if (event.key === 'b' || event.key === 'B') {
+                event.preventDefault();
+                if (barCodeSearchRef.current) {
+                    barCodeSearchRef.current.focus();
+                }
+            }
+            document.addEventListener('keydown', handleKeyPress);
+        }
+    }, [])
 
     // Close Report Panel
     const closeReportPanel = () => {
@@ -428,7 +442,7 @@ function GameView() {
                                                 <label style={{ fontWeight: 800 }}>F8 Barcode-</label>
                                             </div>
                                             <div className='ms-2'>
-                                                <input className="loginInput" type='text' value={barCodeSearch} onChange={(e) => setBarCodeSearch(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { handleBarcodeClaim() } }} />
+                                                <input className="loginInput" type='text' ref={barCodeSearchRef} value={`B${barCodeSearch}`} onChange={(e) => { setBarCodeSearch(e.target.value); setTimeout(() => handleBarcodeClaim(), 100) }} onKeyDown={(e) => { if (e.key === 'Enter') { handleBarcodeClaim() } }} />
                                             </div>
                                         </div>
                                     </div>
