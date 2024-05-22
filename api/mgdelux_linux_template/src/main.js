@@ -98,7 +98,7 @@ ipcMain.on('system-settings', () => {
   if (os.platform() === 'win32') {
     exec('start ms-settings:');
   } else {
-    exec('gnome-terminal -- /etc/profile.d/driver_app/driver.sh');
+    exec('gnome-control-center');
   }
 });
 
