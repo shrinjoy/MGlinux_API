@@ -75,12 +75,12 @@ table {
     transition: 0.3s;
 }
 
-.homeBtn.transparent:hover{
+.homeBtn.transparent:hover {
     background-color: #fff;
     border: 1px solid #454545;
 }
 
-.homeBtn.transparent:hover::after{
+.homeBtn.transparent:hover::after {
     background-color: #07e2ff;
     border: 1px solid #454545;
 }
@@ -801,7 +801,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .ticketWrapper {
-    display: block;
+    display: none;
 }
 
 @media print {

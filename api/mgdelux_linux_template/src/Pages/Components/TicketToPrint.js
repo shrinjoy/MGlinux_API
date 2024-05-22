@@ -24,6 +24,10 @@ const TicketToPrint = forwardRef((props, ref) => {
         setTicketArr(tempTicketArr);
     }, [])
 
+    useEffect(() => {
+        console.log('ticketArr', ticketArr)
+    }, [ticketArr])
+
     return (
         <div ref={ref} className='ticket'>
             <div className='container'>
@@ -37,7 +41,7 @@ const TicketToPrint = forwardRef((props, ref) => {
                     </div>
                     <div className='col-6 text-end'>
                         <div><label>PosID: {ticketData?.posID}</label></div>
-                        <div><label>STONE GROUP: MG</label></div>
+                        <div><label>STONE GROUP: {ticketArr ? ticketArr[0].slice(0, 2) : "MG"}</label></div>
                     </div>
                     <div className='listType'>
                         <ul>
