@@ -88,7 +88,7 @@ function Login() {
                         <label className='fw-bold'>Ver {verNo}</label>
                     </div>
                     <div>
-                        <label className='fw-bold'>{userMacId.replace(/:/g, '').toUpperCase()}</label>
+                        <label className='fw-bold'>{userMacId ? userMacId.replace(/:/g, '').toUpperCase() : "Mac ID Not Found!"}</label>
                     </div>
                 </div>
                 <div className='wrapper p-5'>

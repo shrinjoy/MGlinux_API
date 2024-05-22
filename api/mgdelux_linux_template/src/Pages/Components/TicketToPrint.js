@@ -63,7 +63,7 @@ const TicketToPrint = forwardRef((props, ref) => {
                         </div>
                         <div className='col-12 text-start'>
                             <div><label>Metro Deluxe {dateTimeTicketFormatter(ticketData?.gameTime).combinedDateTime}</label></div>
-                            <div><label>{ticketData?.posID} Bar: {ticketData?.barcode}</label></div>
+                            <div><label>{ticketData?.posID} Bar: {ticketData?.barcode.slice(0, 6)}</label></div>
                         </div>
                         <div className='col-6'>
                             <div><label>Prize Claim Points</label></div>
