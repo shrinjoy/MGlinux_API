@@ -297,7 +297,7 @@ function GameView() {
         } else {
             toast.error("Error! Failed to load Ticket!", toastConfig);
         }
-        // console.log(data)
+        // console.log("B2519329103379140e0f2")
     }
 
     // Redirect to Home if userName not available
