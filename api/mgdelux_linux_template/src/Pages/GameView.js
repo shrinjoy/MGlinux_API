@@ -202,7 +202,7 @@ function GameView() {
                 toast.update(toastId, { render: "Bet Placed Successfully!", type: "success", isLoading: false, autoClose: 2000 });
                 handleClearAllValues();
                 setUserBalance(parseInt(userBalance) - parseInt(totalBet));
-                handleTicketPrint();
+                setTimeout(() => {handleTicketPrint()},100)
             } else {
                 toast.update(toastId, { render: "Bet Failed!", type: "error", isLoading: false, autoClose: 2000 });
             }
