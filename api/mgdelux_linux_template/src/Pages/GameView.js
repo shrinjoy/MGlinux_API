@@ -200,7 +200,7 @@ function GameView() {
             if (data && data.message) {
                 setLastBetBarCode(data.barcode);
                 toast.update(toastId, { render: "Bet Placed Successfully!", type: "success", isLoading: false, autoClose: 2000 });
-                setClearTrigger(true);
+                handleClearAllValues();
                 setUserBalance(parseInt(userBalance) - parseInt(totalBet));
                 handleTicketPrint();
             } else {
