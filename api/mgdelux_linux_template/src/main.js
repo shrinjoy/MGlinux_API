@@ -90,7 +90,7 @@ ipcMain.on('print-driver-settings', () => {
   if (os.platform() === 'win32') {
     shell.openPath('/home/driver/');
   } else {
-    exec('gnome-open /home/driver/');
+    exec('nautilus /home/driver/');
   }
 });
 
