@@ -41,7 +41,7 @@ function Login() {
     // Check UserID
     async function handleUserId() {
         if (!userIdForm.trim()) {
-            setError("Username is Missing");
+            setError("UserID is Missing");
             setTimeout(setError, 2000, "")
         } else {
             const data = await checkUserId(userIdForm);
@@ -107,7 +107,7 @@ function Login() {
                             <div className='col-2 offset-1 mt-2'>
                                 <div className='d-flex justify-content-between'>
                                     <div>
-                                        <button className='loginButton' onClick={checkLogin}>Submit</button>
+                                        <button className='loginButton' onClick={handleUserId}>Submit</button>
                                     </div>
                                 </div>
                             </div>
