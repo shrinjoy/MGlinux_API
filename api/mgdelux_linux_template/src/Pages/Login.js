@@ -12,7 +12,8 @@ function Login() {
     const [userIdForm, setUserIdForm] = useState("");
     const [userMacId, setUserMacId] = useState("");
     const [error, setError] = useState("");
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isUserId, setIsUserId] = useState(true);
 
 
     const navigate = useNavigate();
@@ -37,6 +38,20 @@ function Login() {
         getMacAddress();
     }, [userMacId])
 
+    // Check UserID
+    async function handleUserId() {
+        if (!userIdForm.trim()) {
+            setError("Username is Missing");
+            setTimeout(setError, 2000, "")
+        } else {
+            const data = await checkUserId(userIdForm);
+            if (data) {
+                setIsUserId(true);
+            }
+        }
+    }
+
+    // Handle Login
     async function checkLogin() {
         if (!username.trim()) {
             setError("Username is Missing");
@@ -77,54 +92,77 @@ function Login() {
                     </div>
                 </div>
                 <div className='wrapper p-5'>
-                    <div className='formWrapper'>
-                        <div className='col-12 '>
-                            <div className='d-flex justify-content-center'>
-                                <div className='col-1 me-2'>
-                                    <label>UserID</label>
+                    {!isUserId ? (<div className='d-flex align-items-center h-100'>
+                        <div className='formWrapper'>
+                            <div className='col-12'>
+                                <div className='d-flex justify-content-center'>
+                                    <div className='col-1 me-2'>
+                                        <label>UserID</label>
+                                    </div>
+                                    <div>
+                                        <input type="text" className="loginInput" value={userIdForm} onChange={(e) => setUserIdForm(e.target.value)} />
+                                    </div>
                                 </div>
-                                <div>
-                                    <input type="text" className="loginInput" value={userIdForm} onChange={(e) => setUserIdForm(e.target.value)} />
+                            </div>
+                            <div className='col-2 offset-1 mt-2'>
+                                <div className='d-flex justify-content-between'>
+                                    <div>
+                                        <button className='loginButton' onClick={checkLogin}>Submit</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className='col-12 mt-2'>
-                            <div className='d-flex justify-content-center'>
-                                <div className='col-1 me-2'>
-                                    <label>Username</label>
+                    </div>) :
+                        (<div className='d-flex align-items-center h-100'>
+                            <div className='formWrapper'>
+                                <div className='col-12 '>
+                                    <div className='d-flex justify-content-center'>
+                                        <div className='col-1 me-2'>
+                                            <label>UserID</label>
+                                        </div>
+                                        <div>
+                                            <input type="text" className="loginInput" value={userIdForm} onChange={(e) => setUserIdForm(e.target.value)} />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <input type="text" className="loginInput" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                <div className='col-12 mt-2'>
+                                    <div className='d-flex justify-content-center'>
+                                        <div className='col-1 me-2'>
+                                            <label>Username</label>
+                                        </div>
+                                        <div>
+                                            <input type="text" className="loginInput" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-12 mt-2'>
+                                    <div className='d-flex justify-content-center'>
+                                        <div className='col-1 me-2'>
+                                            <label>Password</label>
+                                        </div>
+                                        <div>
+                                            <input type="password" className="loginInput" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-12 text-center text-danger fw-bold'>
+                                    {error ? error : ""}
+                                </div>
+                                <div className='col-2 offset-1 mt-2'>
+                                    <div className='d-flex justify-content-between'>
+                                        <div>
+                                            <button className='loginButton' onClick={checkLogin}>Login</button>
+                                        </div>
+                                        <div>
+                                            <button className='loginButton' onClick={handleCancelLogin}>Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-12 text-center mt-3'>
+                                    <label>Welcome to Lottery Terminal</label>
                                 </div>
                             </div>
-                        </div>
-                        <div className='col-12 mt-2'>
-                            <div className='d-flex justify-content-center'>
-                                <div className='col-1 me-2'>
-                                    <label>Password</label>
-                                </div>
-                                <div>
-                                    <input type="password" className="loginInput" value={password} onChange={(e) => setPassword(e.target.value)} />
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-12 text-center text-danger fw-bold'>
-                            {error ? error : ""}
-                        </div>
-                        <div className='col-2 offset-1 mt-2'>
-                            <div className='d-flex justify-content-between'>
-                                <div>
-                                    <button className='loginButton' onClick={checkLogin}>Login</button>
-                                </div>
-                                <div>
-                                    <button className='loginButton' onClick={history.goBack()}>Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-12 text-center mt-3'>
-                            <label>Welcome to Lottery Terminal</label>
-                        </div>
-                    </div>
+                        </div>)}
                 </div>
             </main>
     )
