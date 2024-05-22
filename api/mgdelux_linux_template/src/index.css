@@ -929,3 +929,10 @@ input[type="number"]::-webkit-inner-spin-button {
     align-items: center;
     /* border: 1px solid #fff; */
 }
+.gameWrapper .rightPane .loginInput{
+    color: #fff;
+}
+
+.gameWrapper .rightPane .loginInput:focus{
+    color: #000;
+}
