@@ -9,6 +9,18 @@ const axiosInstance = axios.create({
     headers: { 'Content-Type': 'application/json' },
 });
 
+//Check User ID Function
+export async function checkUserId(userId) {
+    const parsedData = { userid: userId }
+    return axiosInstance.post(`/checkuserid`, parsedData)
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            return null
+        })
+}
+
 //login function
 export async function login(userId, loginUsername, password, userMacId) {
     const parsedData = { userid: userId, username: loginUsername, password: password, macid: userMacId };
