@@ -10,8 +10,8 @@ const axiosInstance = axios.create({
 });
 
 //Check User ID Function
-export async function checkUserId(userId) {
-    const parsedData = { userid: userId }
+export async function checkUserId(userId, userMacId) {
+    const parsedData = { userid: userId, macid: userMacId }
     return axiosInstance.post(`/checkuserid`, parsedData)
         .then(res => {
             return res

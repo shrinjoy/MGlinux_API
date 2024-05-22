@@ -44,7 +44,7 @@ function Login() {
             setError("UserID is Missing");
             setTimeout(setError, 2000, "")
         } else {
-            const data = await checkUserId(userIdForm);
+            const data = await checkUserId(userIdForm, userMacId);
             if (data) {
                 setIsUserId(true);
             }
@@ -88,7 +88,7 @@ function Login() {
                         <label className='fw-bold'>Ver {verNo}</label>
                     </div>
                     <div>
-                        <label className='fw-bold'>0000ACADGNRLNKNPRK</label>
+                        <label className='fw-bold'>{userMacId.replace(/:/g, '').toUpperCase()}</label>
                     </div>
                 </div>
                 <div className='wrapper p-5'>
