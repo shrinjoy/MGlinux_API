@@ -77,7 +77,7 @@ function Login() {
     }
 
     const handleCancelLogin = () => {
-        navigate('http://localhost:3000/main_window#/main_window');
+        navigate('http://localhost:3000');
     }
 
     return (
