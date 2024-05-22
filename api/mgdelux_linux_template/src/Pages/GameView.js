@@ -202,7 +202,7 @@ function GameView() {
                 toast.update(toastId, { render: "Bet Placed Successfully!", type: "success", isLoading: false, autoClose: 2000 });
                 handleClearAllValues();
                 setUserBalance(parseInt(userBalance) - parseInt(totalBet));
-                setTimeout(() => {handleTicketPrint()},100)
+                handleTicketPrint();
             } else {
                 toast.update(toastId, { render: "Bet Failed!", type: "error", isLoading: false, autoClose: 2000 });
             }
@@ -295,7 +295,8 @@ function GameView() {
             setTicketData(data);
             const res = await window.electronAPI.printFocusWindow();
         } else {
-            toast.error("Error! Failed to load Ticket!", toastConfig);
+            return null
+            // toast.error("Error! Failed to load Ticket!", toastConfig);
         }
         // console.log("B2519329103379140e0f2")
     }
