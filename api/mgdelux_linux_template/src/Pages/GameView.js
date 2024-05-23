@@ -62,10 +62,10 @@ function GameView() {
         const handleKeyPress = (event) => {
             if (event.key === 'b' || event.key === 'B') {
                 event.preventDefault();
-                if (barCodeSearchRef.current){
+                if (barCodeSearchRef.current) {
                     barCodeSearchRef.current.focus()
                 }
-            }  
+            }
         }
         document.addEventListener('keydown', handleKeyPress);
     }, [])
@@ -104,10 +104,6 @@ function GameView() {
         setTotalTickets(tickets);
         // console.log(totalTickets);
     };
-
-    // useEffect(() => {
-    //     console.log(totalTickets);
-    // }, [totalTickets]);
 
     // Update Game Result & Round Timer
     useEffect(() => {
@@ -202,7 +198,7 @@ function GameView() {
                 toast.update(toastId, { render: "Bet Placed Successfully!", type: "success", isLoading: false, autoClose: 2000 });
                 handleClearAllValues();
                 setUserBalance(parseInt(userBalance) - parseInt(totalBet));
-                handleTicketPrint();
+                handleTicketPrint(data.barcode);
             } else {
                 toast.update(toastId, { render: "Bet Failed!", type: "error", isLoading: false, autoClose: 2000 });
             }
@@ -289,8 +285,8 @@ function GameView() {
         { url: require("../Assets/images/8.jpeg").default },
     ];
 
-    async function handleTicketPrint() {
-        const data = await generateTicketByBarcode(lastBetBarCode);
+    async function handleTicketPrint(barcode) {
+        const data = await generateTicketByBarcode(barcode);
         if (data) {
             setTicketData(data);
             const res = await window.electronAPI.printFocusWindow();
@@ -473,7 +469,7 @@ function GameView() {
                                     </button>
                                 </div>
                                 <div className="btnItem" style={{ width: 110 }}>
-                                    <button className="gamebutton" onClick={handleTicketPrint}>
+                                    <button className="gamebutton" onClick={() => handleTicketPrint(lastBetBarCode)}>
                                         Last Receipt
                                     </button>
                                 </div>
