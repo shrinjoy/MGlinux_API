@@ -44,6 +44,10 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
             //same rule for the side bet 
         }
 
+        if (row === 11) {
+            console.log('ALL C Here')
+        }
+
         if (col === 10) {
             for (let i = 0; i < newInputs[row].length - 1; i++) {
                 const existingValue = newInputs[row][i] !== '' ? parseFloat(newInputs[row][i]) : 0;
@@ -61,11 +65,7 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
             }
             newInputs[row][10] = newValue;
 
-
-
-
             document.getElementById(`input-MD${row}${col}`).setAttribute("data-old", newValue);
-            //
         }
 
         if ((row === 10 && newValue === '') || (col === 10 && newValue === '')) {
@@ -191,11 +191,11 @@ function BetTable({ onTotalBetChange, onTotalTicketsChange, clearTrigger, onClea
     const rows = inputs.map((row, rowIndex) => (
         <tr key={rowIndex}>
             {row.map((value, colIndex) => {
-                if (rowIndex !== 10 || colIndex !== 10) {
+                if ((rowIndex !== 10 || colIndex !== 10) && (rowIndex !== 11 || colIndex !== 10)) {
                     const cellId = `MD${rowIndex}${colIndex}`;
                     return (
                         <td key={colIndex}>
-                            <label htmlFor={`input-${cellId}`}>{rowIndex === 10 ? "ALL B" : colIndex === 10 ? `ALL A` : `MD${rowIndex}${colIndex}`}</label>
+                            <label htmlFor={`input-${cellId}`}>{rowIndex === 10 ? "ALL B" : colIndex === 10 ? `ALL A` : rowIndex === 11 ? `ALL C` : `MD${rowIndex}${colIndex}`}</label>
                             <input
                                 ref={el => inputRefs.current[rowIndex][colIndex] = el}
                                 id={`input-${cellId}`}

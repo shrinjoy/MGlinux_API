@@ -358,6 +358,7 @@ label.totalBet {
     font-weight: 400;
 }
 
+.gameRow #betinputpanel tr:nth-child(11) td input,
 .gameRow #betinputpanel tr td:last-child input,
 .gameRow #betinputpanel tr:last-child td input {
     background-color: coral;
@@ -929,10 +930,11 @@ input[type="number"]::-webkit-inner-spin-button {
     align-items: center;
     /* border: 1px solid #fff; */
 }
-.gameWrapper .rightPane .loginInput{
+
+.gameWrapper .rightPane .loginInput {
     color: #fff;
 }
 
-.gameWrapper .rightPane .loginInput:focus{
+.gameWrapper .rightPane .loginInput:focus {
     color: #000;
 }

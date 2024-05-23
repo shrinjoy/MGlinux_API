@@ -13,7 +13,7 @@ function ShowResult() {
             const data = await getCurrentResult(gameId);
             if (isMounted) {
                 if (data && !data.result || !data) {
-                    intervalId = setTimeout(handleCurrentGameResult, 250);
+                    setTimeout(handleCurrentGameResult, 250);
                 } else {
                     setCurrentGameResult(data.result.substr(2))
                 }
