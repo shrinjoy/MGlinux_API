@@ -39,23 +39,18 @@ function GameView() {
     const [betInfoTrigger, setBetInfoTrigger] = useState(false);
     const [stoneInfoTrigger, setStoneInfoTrigger] = useState(false);
 
+    // Internet Checker
     useEffect(() => {
-        const handleOnline = () => {
-            setIsOnline(true);
-        };
-
-        const handleOffline = () => {
-            setIsOnline(false);
-        };
-
-        window.addEventListener('online', handleOnline);
-        window.addEventListener('offline', handleOffline);
-
-        return () => {
-            window.removeEventListener('online', handleOnline);
-            window.removeEventListener('offline', handleOffline);
-        };
-    }, []);
+        async function checkInternetConnection() {
+            const res = await window.electronAPI.checkInternet();
+            if (res) {
+                setIsOnline(true);
+            } else {
+                setIsOnline(false);
+            }
+        }
+        checkInternetConnection();
+    }, [isOnline, time]);
 
     // BarCode Scanner
     useEffect(() => {

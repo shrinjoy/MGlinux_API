@@ -142,17 +142,21 @@ async function printFocusWindow() {
 }
 
 // Check Internet Function
-ipcMain.handle('check-internet', internetChecker)
+ipcMain.handle('check-internet', async () => {
+  return await internetChecker();
+})
 
 async function internetChecker() {
-  internetAvailable({
-    timeout: 4000,
-    retries: 10,
-  }).then(() => {
+  try {
+    await internetAvailable({
+      timeout: 4000,
+      retries: 10,
+    });
     return true;
-  }).catch(() => {
-    return false;
-  });
+  }
+  catch (error) {
+    return false
+  }
 }
 
 
