@@ -8,18 +8,22 @@ function ShowResult() {
 
     //Current Game Result
     useEffect(() => {
-        let intervalId;
+        let isMounted = true;
         async function handleCurrentGameResult() {
             const data = await getCurrentResult(gameId);
-            if (data && !data.result || !data) {
-                intervalId = setTimeout(handleCurrentGameResult, 250);
-            } else {
-                setCurrentGameResult(data.result.substr(2))
+            if (isMounted) {
+                if (data && !data.result || !data) {
+                    intervalId = setTimeout(handleCurrentGameResult, 250);
+                } else {
+                    setCurrentGameResult(data.result.substr(2))
+                }
             }
         }
         handleCurrentGameResult()
+
         return () => {
-            clearTimeout(intervalId);
+            isMounted = false;
+            clearTimeout(handleCurrentGameResult);
         }
     }, [])
 
