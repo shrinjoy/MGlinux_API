@@ -8,15 +8,19 @@ function ShowResult() {
 
     //Current Game Result
     useEffect(() => {
+        let intervalId;
         async function handleCurrentGameResult() {
             const data = await getCurrentResult(gameId);
             if (data && !data.result || !data) {
-                setTimeout(handleCurrentGameResult, 250);
+                intervalId = setTimeout(handleCurrentGameResult, 250);
             } else {
                 setCurrentGameResult(data.result.substr(2))
             }
         }
         handleCurrentGameResult()
+        return () => {
+            clearTimeout(intervalId);
+        }
     }, [])
 
     useEffect(() => {
