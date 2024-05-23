@@ -1,8 +1,9 @@
-const { app, BrowserWindow, ipcMain , shell } = require('electron');
+const { app, BrowserWindow, ipcMain, shell } = require('electron');
 const { exec } = require('child_process');
 const os = require('os');
 const path = require('node:path');
-const getmac = require('getmac')
+const getmac = require('getmac');
+var internetAvailable = require("internet-available");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -138,6 +139,20 @@ async function printFocusWindow() {
       console.log('Print Start');
     }
   })
+}
+
+// Check Internet Function
+ipcMain.handle('check-internet', internetChecker)
+
+async function internetChecker() {
+  internetAvailable({
+    timeout: 4000,
+    retries: 10,
+  }).then(() => {
+    return true;
+  }).catch(() => {
+    return false;
+  });
 }
 
 

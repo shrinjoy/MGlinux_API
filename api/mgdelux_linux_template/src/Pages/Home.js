@@ -9,14 +9,14 @@ function Home() {
 
     const navigate = useNavigate();
 
-    function checkInternetConnection() {
-        const isOnline = navigator.onLine;
-        if (isOnline) {
+    async function checkInternetConnection() {
+        const res = await window.electronAPI.checkInternet();
+        if (res) {
             setIsConnected(true);
             setNetworkError(false);
         } else {
-            setNetworkError(true);
             setIsConnected(false);
+            setNetworkError(true);
         }
     }
 
@@ -49,7 +49,7 @@ function Home() {
                         {isConnected ? <button className="homeBtn login transparent" onClick={() => navigate('/login')}>Login</button> : ""}
                     </div>
                     <div style={{ width: '16%' }}>
-                        <button className="homeBtn transparent" onClick={() => { window.electronAPI.systemSettings()}}>System</button>
+                        <button className="homeBtn transparent" onClick={() => { window.electronAPI.systemSettings() }}>System</button>
                     </div>
                     <div style={{ width: '16%' }}>
                         <button onClick={() => window.electronAPI.printDriver()} className="homeBtn transparent">Driver</button>

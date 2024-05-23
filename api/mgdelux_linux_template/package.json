@@ -51,6 +51,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^6.1.8",
     "getmac": "^6.6.0",
+    "internet-available": "^1.0.0",
     "react": "^18.2.0",
     "react-barcode": "^1.5.1",
     "react-clock": "^4.6.0",
