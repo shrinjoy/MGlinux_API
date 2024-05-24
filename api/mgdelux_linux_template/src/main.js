@@ -17,6 +17,7 @@ const createWindow = () => {
     width: 1024,
     height: 768,
     icon: '../icons/icon.ico',
+    show: false,
     frame: false,
     webPreferences: {
       nodeIntegration: true,
@@ -31,6 +32,11 @@ const createWindow = () => {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.maximize();
+    mainWindow.show(); // Show the window after maximizing.
+  });
 
 };
 
