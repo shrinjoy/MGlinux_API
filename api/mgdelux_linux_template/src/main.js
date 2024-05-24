@@ -6,8 +6,6 @@ const path = require('node:path');
 const getmac = require('getmac');
 var internetAvailable = require("internet-available");
 
-const flagFilePath = path.join(app.getPath('userData'), 'first-run-flag.txt');
-
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -166,6 +164,8 @@ async function internetChecker() {
     return false
   }
 }
+
+const flagFilePath = path.join(app.getPath('userData'), 'first-run-flag.txt');
 
 // Virgin Flag Checker
 function isFirstStartup() {
