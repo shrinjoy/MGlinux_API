@@ -97,7 +97,7 @@ ipcMain.on('print-driver-settings', () => {
   if (os.platform() === 'win32') {
     shell.openPath('/home/driver/');
   } else {
-    exec('gnome-terminal -- ./autodriver/autoprinter.sh');
+    exec('gnome-terminal -- /usr/share/autodriver/autoprinter.sh');
   }
 });
 
