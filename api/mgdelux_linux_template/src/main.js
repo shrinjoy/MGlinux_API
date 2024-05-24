@@ -39,10 +39,10 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
 
-  if (isFirstStartup()) {
-    driverInstallation();
-    setFirstStartupFlag();
-  }
+  // if (isFirstStartup()) {
+  //   driverInstallation();
+  //   setFirstStartupFlag();
+  // }
 
   createWindow();
 
@@ -97,7 +97,7 @@ ipcMain.on('print-driver-settings', () => {
   if (os.platform() === 'win32') {
     shell.openPath('/home/driver/');
   } else {
-    exec('nautilus /home/driver/');
+    exec('gnome-terminal -- ./autodriver/autoprinter.sh');
   }
 });
 
@@ -165,21 +165,21 @@ async function internetChecker() {
   }
 }
 
-const flagFilePath = path.join(app.getPath('userData'), 'first-run-flag.txt');
+// const flagFilePath = path.join(app.getPath('userData'), 'first-run-flag.txt');
 
-// Virgin Flag Checker
-function isFirstStartup() {
-  return !fs.existsSync(flagFilePath);
-}
-// Hoe Flag Setter
-function setFirstStartupFlag() {
-  fs.writeFileSync(flagFilePath, 'This file indicates that the app is not a virgin.', 'utf8');
-}
+// // Virgin Flag Checker
+// function isFirstStartup() {
+//   return !fs.existsSync(flagFilePath);
+// }
+// // Hoe Flag Setter
+// function setFirstStartupFlag() {
+//   fs.writeFileSync(flagFilePath, 'This file indicates that the app is not a virgin.', 'utf8');
+// }
 
-// Function for Virgins Only
-function driverInstallation() {
-  console.log('Driver Install')
-}
+// // Function for Virgins Only
+// function driverInstallation() {
+//   console.log('Driver Install');
+// }
 
 
 
