@@ -73,11 +73,13 @@ table {
     font-weight: 700;
     border: 1px solid transparent;
     transition: 0.3s;
+    border-radius: 50px;
 }
 
 .homeBtn.transparent:hover {
     background-color: #fff;
     border: 1px solid #454545;
+    border-radius: 3px;
 }
 
 .homeBtn.transparent:hover::after {

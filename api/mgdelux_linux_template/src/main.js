@@ -1,9 +1,12 @@
 const { app, BrowserWindow, ipcMain, shell } = require('electron');
 const { exec } = require('child_process');
 const os = require('os');
+const fs = require('fs');
 const path = require('node:path');
 const getmac = require('getmac');
 var internetAvailable = require("internet-available");
+
+const flagFilePath = path.join(app.getPath('userData'), 'first-run-flag.txt');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -37,6 +40,11 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+
+  if (isFirstStartup()) {
+    driverInstallation();
+    setFirstStartupFlag();
+  }
 
   createWindow();
 
@@ -157,6 +165,20 @@ async function internetChecker() {
   catch (error) {
     return false
   }
+}
+
+// Virgin Flag Checker
+function isFirstStartup() {
+  return !fs.existsSync(flagFilePath);
+}
+// Hoe Flag Setter
+function setFirstStartupFlag() {
+  fs.writeFileSync(flagFilePath, 'This file indicates that the app is not a virgin.', 'utf8');
+}
+
+// Function for Virgins Only
+function driverInstallation() {
+  console.log('Driver Install')
 }
 
 
