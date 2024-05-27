@@ -28,6 +28,7 @@ function GameView() {
     const [gameResult, setGameResult] = useState("");
     const [showResult, setShowResult] = useState(false);
     const [showWinScreen, setShowWinScreen] = useState(false);
+    const [isWin, setIsWin] = useState(false);
     const [isClaim, setIsClaim] = useState(false);
     const [isOnline, setIsOnline] = useState(navigator.onLine);
     const navigate = useNavigate();
@@ -299,7 +300,7 @@ function GameView() {
 
     const handleWinScreen = () => {
         setShowWinScreen(true);
-        
+        setIsWin(true)
         setTimeout(() => setShowWinScreen(false),2500)
     }
 
@@ -516,7 +517,7 @@ function GameView() {
                         {showResult ? <ShowResult /> : ""}
                     </div>
                     <div>
-                       {showWinScreen ? <WinScreen/> :""}
+                       {showWinScreen ? <WinScreen isWin={isWin}/> :""}
                     </div>
                 </div>
             </section>
