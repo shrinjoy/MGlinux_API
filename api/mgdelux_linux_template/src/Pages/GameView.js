@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import SimpleImageSlider from "react-simple-image-slider";
 import StoneInfo from './Components/StoneInfo';
 import ShowResult from './Components/ShowResult';
+import WinScreen from './Components/WinScreen';
 import { toastConfig } from '../Globals/GlobalMetaData';
 import TicketToPrint from './Components/TicketToPrint';
 import { useReactToPrint } from 'react-to-print';
@@ -26,6 +27,7 @@ function GameView() {
     const [isTimerActive, setIsTimerActive] = useState(true);
     const [gameResult, setGameResult] = useState("");
     const [showResult, setShowResult] = useState(false);
+    const [showWinScreen, setShowWinScreen] = useState(false);
     const [isClaim, setIsClaim] = useState(false);
     const [isOnline, setIsOnline] = useState(navigator.onLine);
     const navigate = useNavigate();
@@ -237,6 +239,9 @@ function GameView() {
         } else {
             toast.update(toastId, { render: "Barcode Claim Failed!", type: "error", isLoading: false, autoClose: 2000 });
         }
+        if (data && data.amount > 1){
+            handleWinScreen();
+        }
         setBarCodeSearch("")
     }
 
@@ -290,6 +295,12 @@ function GameView() {
             // toast.error("Error! Failed to load Ticket!", toastConfig);
         }
         // console.log("B2519329103379140e0f2")
+    }
+
+    const handleWinScreen = () => {
+        setShowWinScreen(true);
+        
+        setTimeout(() => setShowWinScreen(false),2500)
     }
 
     // Redirect to Home if userName not available
@@ -503,6 +514,9 @@ function GameView() {
                     </div>
                     <div>
                         {showResult ? <ShowResult /> : ""}
+                    </div>
+                    <div>
+                       {showWinScreen ? <WinScreen/> :""}
                     </div>
                 </div>
             </section>
