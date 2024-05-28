@@ -10,7 +10,7 @@ function TicketPrinter({ title }) {
     return (
         <div>
             <button onClick={handlePrint} className='loginButton'>{title}</button>
-            <div className='d-none'><TicketToPrint ref={componentRef} /></div>
+            {/* <div className='d-none'><TicketToPrint ref={componentRef} /></div> */}
         </div>
     )
 }

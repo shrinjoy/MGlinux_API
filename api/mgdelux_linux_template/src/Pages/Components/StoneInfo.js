@@ -65,7 +65,7 @@ function StoneInfo({ onClose }) {
                         </button>
                     </div>
                     <div className='ms-2'>
-                        <TicketPrinter title={"Re-Print"} />
+                        {/* <TicketPrinter title={"Re-Print"} /> */}
                     </div>
                 </div>
                 <div className='formWrapper ms-auto'>

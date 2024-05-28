@@ -18,7 +18,7 @@ import TicketToPrint from './Components/TicketToPrint';
 import { useReactToPrint } from 'react-to-print';
 
 function GameView() {
-    const { userName, setUserName, passWord, userId, gameId, setGameId, userBalance, setUserBalance, lastBetBarCode, setLastBetBarCode, setNextGameDate, setNextGameTime, ticketData, setTicketData } = useContext(DataContext);
+    const { userName, setUserName, passWord, userId, gameId, setGameId, userBalance, setUserBalance, lastBetBarCode, setLastBetBarCode, setNextGameDate, setNextGameTime, ticketData, setTicketData, claimData, setClaimData } = useContext(DataContext);
     const [time, setTime] = useState(getCurrentTime());
     const [gameTime, setGameTime] = useState(0);
     const [totalBet, setTotalBet] = useState(0);
@@ -236,12 +236,23 @@ function GameView() {
         const data = await claimBarcode(userId, barCodeSearch)
         if (data && data.amount) {
             toast.update(toastId, { render: "Barcode Claimed Successfully!", type: "success", isLoading: false, autoClose: 2000 });
-            updateUserData();
+            // updateUserData();
+            setClaimData(data);
+            handleTicketPrint(barCodeSearch);
+
+            // Win Screen Conditions
+            if (data.amount > 1) {
+                setIsWin(true);
+                handleWinScreen();
+            } else if (data.amount > 900) {
+                setIsWin(true);
+                handleWinScreen();
+            } else {
+                setIsWin(false)
+                handleWinScreen();
+            }
         } else {
             toast.update(toastId, { render: "Barcode Claim Failed!", type: "error", isLoading: false, autoClose: 2000 });
-        }
-        if (data && data.amount > 1){
-            handleWinScreen();
         }
         setBarCodeSearch("")
     }
@@ -300,8 +311,6 @@ function GameView() {
 
     const handleWinScreen = () => {
         setShowWinScreen(true);
-        setIsWin(true)
-        setTimeout(() => setShowWinScreen(false),2500)
     }
 
     // Redirect to Home if userName not available
@@ -517,7 +526,7 @@ function GameView() {
                         {showResult ? <ShowResult /> : ""}
                     </div>
                     <div>
-                       {showWinScreen ? <WinScreen isWin={isWin}/> :""}
+                        {showWinScreen ? <WinScreen isWin={isWin} onUpdateUser={updateUserData} showWinScreen={showWinScreen} setShowWinScreen={setShowWinScreen} /> : ""}
                     </div>
                 </div>
             </section>
