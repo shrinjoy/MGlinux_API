@@ -38,6 +38,17 @@ const createWindow = () => {
     mainWindow.show(); // Show the window after maximizing.
   });
 
+  // Back To Home Function
+  ipcMain.handle('back-home', async () => {
+    return await backToHome();
+  })
+
+  async function backToHome() {
+    if (mainWindow) {
+      mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+    }
+  }
+
 };
 
 // This method will be called when Electron has finished

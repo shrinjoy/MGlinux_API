@@ -154,7 +154,7 @@ function Login() {
                                             <button className='loginButton' onClick={checkLogin}>Login</button>
                                         </div>
                                         <div>
-                                            <button className='loginButton' onClick={handleCancelLogin}>Cancel</button>
+                                            <button className='loginButton' onClick={() => navigate('/home')}>Cancel</button>
                                         </div>
                                     </div>
                                 </div>

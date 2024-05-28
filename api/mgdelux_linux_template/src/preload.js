@@ -21,6 +21,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     },
     getMacAddress: () => ipcRenderer.invoke('get-mac-address'),
     printFocusWindow: () => ipcRenderer.invoke('print-focus-window'),
-    checkInternet: () => ipcRenderer.invoke('check-internet')
+    checkInternet: () => ipcRenderer.invoke('check-internet'),
+    backToHome: () => ipcRenderer.invoke('back-home')
 });
 

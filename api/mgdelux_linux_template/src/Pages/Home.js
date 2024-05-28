@@ -28,14 +28,14 @@ function Home() {
     return (
         <main className="homeWrapper">
             <div className="wrapper p-5">
-                <div className='position-absolute' style={{ top: 10, right: 50 }}>
+                {/* <div className='position-absolute' style={{ top: 10, right: 50 }}>
                     <button
                         onClick={() => window.electronAPI.quitApp()}
                         className="homeBtn"
                     >
                         Exit
                     </button>
-                </div>
+                </div> */}
                 <div className="unlockForm">
                     {isConnected ? <div className="status">CONNECTED</div> : ""}
                     {networkError ? <div className="status text-danger">NETWORK ERROR</div> : ""}</div>
@@ -52,7 +52,7 @@ function Home() {
                         <button className="homeBtn transparent" onClick={() => window.electronAPI.systemSettings()}>System</button>
                     </div>
                     <div style={{ width: '16%' }}>
-                        <button className="homeBtn transparent" onClick={() => window.electronAPI.printDriver()}>Driver</button>
+                        <button className="homeBtn transparent" onClick={() => window.electronAPI.printDriver()}>Init</button>
                     </div>
                     <div style={{ width: '16%' }}>
                         <button className="homeBtn transparent" onClick={() => window.electronAPI.systemRestart()}>Restart</button>
