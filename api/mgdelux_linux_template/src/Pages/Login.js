@@ -92,12 +92,13 @@ function Login() {
                     </div>
                 </div>
                 <div className='wrapper p-5'>
-                    {!isUserId ? (<div className='d-flex align-items-center h-100'>
+                    {!isUserId ? (<div className='d-flex justify-content-center align-items-center h-100'>
                         <div className='formWrapper'>
+                            <div className='loginHeading'>TERMINAL REGISTRATION</div>
                             <div className='col-12'>
                                 <div className='d-flex justify-content-center'>
-                                    <div className='col-1 me-2'>
-                                        <label>UserID</label>
+                                    <div className='col-auto me-2'>
+                                        <label>UserID: </label>
                                     </div>
                                     <div>
                                         <input type="text" className="loginInput" value={userIdForm} onChange={(e) => setUserIdForm(e.target.value)} />

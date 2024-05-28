@@ -55,7 +55,8 @@ table {
 
 .homeWrapper .unlockForm .status {
     color: black;
-    font-weight: 700;
+    font-weight: 800;
+    font-size: 20px;
 }
 
 .homeBtn {
@@ -66,6 +67,7 @@ table {
     border: 1px solid #454545;
     border-radius: 3px;
     outline: none;
+    font-size: 18px;
 }
 
 .homeBtn.transparent {
@@ -970,4 +972,10 @@ input[type="number"]::-webkit-inner-spin-button {
     padding: 10px;
     background-color: #1976d2;
     color: #fff;
+}
+
+.loginHeading{
+    font-size: 18px;
+    font-weight: 800;
+    padding-bottom: 30px;
 }
