@@ -44,8 +44,10 @@ const createWindow = () => {
   })
 
   async function backToHome() {
-    if (mainWindow) {
+    if (mainWindow && false) {
       mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+    } else {
+      mainWindow.loadFile(path.join(__dirname, 'index.html'));
     }
   }
 

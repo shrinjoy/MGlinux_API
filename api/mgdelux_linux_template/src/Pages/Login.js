@@ -155,7 +155,7 @@ function Login() {
                                             <button className='loginButton' onClick={checkLogin}>Login</button>
                                         </div>
                                         <div>
-                                            <button className='loginButton' onClick={() => navigate('/home')}>Cancel</button>
+                                            <button className='loginButton' onClick={() => window.electronAPI.backToHome()}>Cancel</button>
                                         </div>
                                     </div>
                                 </div>

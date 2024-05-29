@@ -51,6 +51,7 @@ table {
 .formWrapper label {
     color: black;
     font-weight: 700;
+    font-size: 18px;
 }
 
 .homeWrapper .unlockForm .status {
@@ -974,7 +975,7 @@ input[type="number"]::-webkit-inner-spin-button {
     color: #fff;
 }
 
-.loginHeading{
+.loginHeading {
     font-size: 18px;
     font-weight: 800;
     padding-bottom: 30px;
