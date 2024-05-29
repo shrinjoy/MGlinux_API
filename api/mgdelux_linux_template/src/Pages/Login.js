@@ -76,10 +76,6 @@ function Login() {
         }
     }
 
-    const handleCancelLogin = () => {
-        navigate('http://localhost:3000');
-    }
-
     return (
         isLoading ? <div className='loader'><FadeLoader color='#454545' /></div> :
             <main className='loginWrapper'>

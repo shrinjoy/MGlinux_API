@@ -44,11 +44,7 @@ const createWindow = () => {
   })
 
   async function backToHome() {
-    if (mainWindow && false) {
-      mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
-    } else {
-      mainWindow.loadFile(path.join(__dirname, 'index.html'));
-    }
+    mainWindow.loadURL(`file://${path.resolve(__dirname, 'resources/app.asar/.webpack/renderer/main_window/index.html')}#/home`);
   }
 
 };
@@ -183,6 +179,11 @@ async function internetChecker() {
     return false
   }
 }
+
+ipcMain.handle('get-current-url', () => {
+  let win = BrowserWindow.getFocusedWindow();
+  return win.webContents.getURL();
+})
 
 // const flagFilePath = path.join(app.getPath('userData'), 'first-run-flag.txt');
 

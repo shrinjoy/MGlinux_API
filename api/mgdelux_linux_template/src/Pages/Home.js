@@ -6,6 +6,7 @@ function Home() {
     const [clickConnect, setClickConnect] = useState(false);
     const [isConnected, setIsConnected] = useState(false);
     const [networkError, setNetworkError] = useState(false);
+    const [error, setError] = useState(false);
 
     const navigate = useNavigate();
 
@@ -25,6 +26,15 @@ function Home() {
         console.log('test');
     }
 
+    const handleLoginNavigation = () => {
+        if (isConnected && !networkError) {
+            navigate('/login')
+        } else {
+            setError(true);
+            setTimeout(() => setError(false), 2500)
+        }
+    }
+
     return (
         <main className="homeWrapper">
             <div className="wrapper p-5">
@@ -37,6 +47,7 @@ function Home() {
                     </button>
                 </div> */}
                 <div className="unlockForm">
+                    {error ? <div className="status">PLEASE CONNECT FIRST</div> : ""}
                     {isConnected ? <div className="status">CONNECTED</div> : ""}
                     {networkError ? <div className="status text-danger">NETWORK ERROR</div> : ""}</div>
                 <div className="buttonGroup row">
@@ -46,7 +57,7 @@ function Home() {
                         </button>}
                     </div>
                     <div style={{ width: '16%' }}>
-                        {isConnected ? <button className="homeBtn login transparent" onClick={() => navigate('/login')}>Login</button> : ""}
+                        <button className="homeBtn login transparent" onClick={handleLoginNavigation}>Login</button>
                     </div>
                     <div style={{ width: '16%' }}>
                         <button className="homeBtn transparent" onClick={() => window.electronAPI.systemSettings()}>System</button>
