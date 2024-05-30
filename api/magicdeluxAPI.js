@@ -20,7 +20,7 @@ const fastifyCors = require('@fastify/cors');
 app.register(fastifyCors);
 const sqlConfig = {
     user: 'playjeeto',
-    password: 'Playjeeto@2023',
+    password: 'playjeeto',
     database: 'playjeeto',
     server: '103.162.120.115',
     pool: {
