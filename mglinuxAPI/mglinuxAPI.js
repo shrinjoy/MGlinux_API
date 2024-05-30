@@ -22,9 +22,9 @@ Data Source=103.162.120.114;Initial Catalog=nrdeluxe; User Id=nrdeluxe; Password
 // Enable CORS
 app.register(fastifyCors);
 const sqlConfig = {
-    user: 'nrdeluxe',
-    password: 'Nr@Deluxe@987654321',
-    database: 'nrdeluxe',
+    user: 'playjeeto',
+    password: 'playjeeto',
+    database: 'playjeeto',
     server: '103.162.120.115',
     pool: {
         max: 10,
