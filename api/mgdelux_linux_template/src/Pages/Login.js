@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { verNo } from '../Globals/GlobalMetaData';
-import { login, systemServGet } from '../Globals/GlobalFunctions';
+import { checkMacId, login, updateMacId } from '../Globals/GlobalFunctions';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../Context/DataContext';
 import { FadeLoader } from 'react-spinners';
@@ -13,7 +13,7 @@ function Login() {
     const [userMacId, setUserMacId] = useState("");
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [isUserId, setIsUserId] = useState(true);
+    const [isMacId, setIsMacId] = useState(true);
 
 
     const navigate = useNavigate();
@@ -36,17 +36,35 @@ function Login() {
             }
         }
         getMacAddress();
+        checkMacIdAuth();
     }, [userMacId])
 
-    // Check UserID
-    async function handleUserId() {
-        if (!userIdForm.trim()) {
-            setError("UserID is Missing");
+    // Check Mac ID
+    async function checkMacIdAuth() {
+        if (!userMacId) {
+            setError("MacID is Missing");
+            setTimeout(setError, 2000, "");
+            checkMacIdAuth();
+        } else {
+            const data = await checkMacId(username);
+            if (data && data.message.includes('no mac found')) {
+                setIsMacId(false);
+            } else {
+                setIsMacId(true);
+            }
+        }
+    }
+
+
+    // Update Mac ID
+    async function handleMacIdAuth() {
+        if (!username.trim()) {
+            setError("Username is Missing");
             setTimeout(setError, 2000, "")
         } else {
-            const data = await checkUserId(userIdForm, userMacId);
-            if (data) {
-                setIsUserId(true);
+            const data = await updateMacId(username, userMacId);
+            if (data && data.message.includes('updated mac id')) {
+                setIsMacId(true);
             }
         }
     }
@@ -88,23 +106,23 @@ function Login() {
                     </div>
                 </div>
                 <div className='wrapper p-5'>
-                    {!isUserId ? (<div className='d-flex justify-content-center align-items-center h-100'>
+                    {!isMacId ? (<div className='d-flex justify-content-center align-items-center h-100'>
                         <div className='formWrapper'>
                             <div className='loginHeading'>TERMINAL REGISTRATION</div>
                             <div className='col-12'>
                                 <div className='d-flex justify-content-center'>
                                     <div className='col-auto me-2'>
-                                        <label>UserID: </label>
+                                        <label>Username: </label>
                                     </div>
                                     <div>
-                                        <input type="text" className="loginInput" value={userIdForm} onChange={(e) => setUserIdForm(e.target.value)} />
+                                        <input type="text" className="loginInput" value={username} onChange={(e) => setUsername(e.target.value)} />
                                     </div>
                                 </div>
                             </div>
                             <div className='col-2 offset-1 mt-2'>
                                 <div className='d-flex justify-content-between'>
                                     <div>
-                                        <button className='loginButton' onClick={handleUserId}>Submit</button>
+                                        <button className='loginButton' onClick={handleMacIdAuth}>Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +130,7 @@ function Login() {
                     </div>) :
                         (<div className='d-flex align-items-center h-100'>
                             <div className='formWrapper'>
-                                <div className='col-12 '>
+                                {/* <div className='col-12 '>
                                     <div className='d-flex justify-content-center'>
                                         <div className='col-1 me-2'>
                                             <label>UserID</label>
@@ -121,7 +139,7 @@ function Login() {
                                             <input type="text" className="loginInput" value={userIdForm} onChange={(e) => setUserIdForm(e.target.value)} />
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className='col-12 mt-2'>
                                     <div className='d-flex justify-content-center'>
                                         <div className='col-1 me-2'>
