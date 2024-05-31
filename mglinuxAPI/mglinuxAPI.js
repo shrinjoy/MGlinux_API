@@ -15,10 +15,11 @@ var changepasswordbyuser = require("./changepassword");
 var getreport = require('./getreport');
 var getsalesreport = require('./getsalesreport');
 var claimbybar = require('./claimbybarcode');
+var firstlogin = require('./firstlogin')
 const fastifyCors = require('@fastify/cors');
 /*
 Data Source=103.162.120.114;Initial Catalog=nrdeluxe; User Id=nrdeluxe; Password=Nr@Deluxe@987654321
-*/ 
+*/
 // Enable CORS
 app.register(fastifyCors);
 const sqlConfig = {
@@ -45,6 +46,27 @@ try {
 
 console.log("connected to database ");
 
+app.post('/checkifuserhasmac', async function (req, res) {
+
+    await firstlogin.checkifmacthere(sql, req.body).then((data) => {
+        res.status(200).send(data);
+    })
+        .catch((err) => {
+            res.status(404).send(err);
+        })
+
+})
+app.post('/forcesetmac', async function (req, res) {
+
+    await firstlogin.forcesetmacid(sql, req.body).then((data) => {
+        res.status(200).send(data);
+    })
+        .catch((err) => {
+            res.status(404).send(err);
+        })
+
+})
+
 
 app.post('/getresultbyid', async function (req, res) {
     await getresultbyid.getresultbyidofanygame(sql, req.body)
@@ -56,8 +78,8 @@ app.post('/getresultbyid', async function (req, res) {
         })
 })
 
-app.post('/claimbybarcode',  function (req, res) {
-     claimbybar.claim(sql, req.body)
+app.post('/claimbybarcode', function (req, res) {
+    claimbybar.claim(sql, req.body)
         .then((data) => {
             res.status(200).send(data);
         })
@@ -233,7 +255,7 @@ app.get('/', function (req, res) {
 app.get('/timeleft', async function (req, res) {
     try {
         var data = await sql.query(`SELECT GAMEID,TARMINALDATE AS NEXTGAMEDATE,TARMINALTIME AS NEXTGAMETIME,NEXTDRAW,DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
-        res.status(200).send({ "time": data.recordset[0].timer-12, "gameid": data.recordset[0].GAMEID, "nextgamedate": data.recordset[0].NEXTGAMEDATE, "nextgametime": data.recordset[0].NEXTGAMETIME })
+        res.status(200).send({ "time": data.recordset[0].timer - 12, "gameid": data.recordset[0].GAMEID, "nextgamedate": data.recordset[0].NEXTGAMEDATE, "nextgametime": data.recordset[0].NEXTGAMETIME })
 
     } catch (err) {
         res.status(400).send({ "message": "failed to get time because -" + err })
