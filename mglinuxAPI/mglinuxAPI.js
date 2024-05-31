@@ -56,6 +56,16 @@ app.post('/checkifuserhasmac', async function (req, res) {
         })
 
 })
+app.post('/checkifuserhasmac_bymac', async function (req, res) {
+
+    await firstlogin.checkifmacthere_bymac(sql, req.body).then((data) => {
+        res.status(200).send(data);
+    })
+        .catch((err) => {
+            res.status(404).send(err);
+        })
+
+})
 app.post('/forcesetmac', async function (req, res) {
 
     await firstlogin.forcesetmacid(sql, req.body).then((data) => {
