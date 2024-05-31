@@ -9,12 +9,24 @@ const axiosInstance = axios.create({
     headers: { 'Content-Type': 'application/json' },
 });
 
-//Check User ID Function
-export async function checkUserId(userId, userMacId) {
-    const parsedData = { userid: userId, macid: userMacId }
+//Check Mac ID Function
+export async function checkMacId(loginUsername) {
+    const parsedData = { username: loginUsername }
     return axiosInstance.post(`/checkuserid`, parsedData)
         .then(res => {
-            return res
+            return res.data;
+        })
+        .catch(err => {
+            return null
+        })
+}
+
+//Update Mac ID Function
+export async function updateMacId(loginUsername, userMacId) {
+    const parsedData = { username: loginUsername, macid: userMacId }
+    return axiosInstance.post(`/checkuserid`, parsedData)
+        .then(res => {
+            return res.data;
         })
         .catch(err => {
             return null
