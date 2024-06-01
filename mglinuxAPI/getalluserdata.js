@@ -2,7 +2,7 @@ module.exports = {
     getdata:function (db,request)
     {
         return new Promise((resolve, reject) => {
-            db.query(`SELECT * from [nrdeluxe].[dbo].[CLIENTLOGIN] where CLIENTUSERNAME ='${request["username"]}' and CLIENTPASSWORD='${request["password"]}'`).then((data)=>{
+            db.query(`SELECT * from [CLIENTLOGIN] where CLIENTUSERNAME ='${request["username"]}' and CLIENTPASSWORD='${request["password"]}'`).then((data)=>{
                 if(data.recordset.length<1)
                 {
                     reject({"message":"unable to find user with the provided creds"})

@@ -2,7 +2,7 @@ module.exports = {
     canlogin:function (db,request)
     {
         return new Promise((resolve ,reject)=>{
-           db.query(`SELECT * from [nrdeluxe].[dbo].[CLIENTLOGIN] where CLIENTID ='${request["userid"]}' and CLIENTUSERNAME ='${request["username"]}' and CLIENTPASSWORD='${request["password"]}'`).then((data)=>{
+           db.query(`SELECT * from [CLIENTLOGIN] where CLIENTID ='${request["userid"]}' and CLIENTUSERNAME ='${request["username"]}' and CLIENTPASSWORD='${request["password"]}'`).then((data)=>{
                if(data.recordset.length<1)
                {
                    reject({"message":"no user found with the provided creds"});
@@ -23,8 +23,8 @@ module.exports = {
     canlogin_macid:function (db,request)
     {
         return new Promise((resolve ,reject)=>{
-           // console.log(`SELECT * from [nrdeluxe].[dbo].[CLIENTLOGIN] where CLIENTID ='${request["userid"]}' and CLIENTUSERNAME ='${request["username"]}' and CLIENTPASSWORD='${request["password"]}'`)
-           db.query(`SELECT * from [nrdeluxe].[dbo].[CLIENTLOGIN] where CLIENTUSERNAME ='${request["username"]}' and CLIENTPASSWORD='${request["password"]}'`).then((data)=>{
+           // console.log(`SELECT * from [CLIENTLOGIN] where CLIENTID ='${request["userid"]}' and CLIENTUSERNAME ='${request["username"]}' and CLIENTPASSWORD='${request["password"]}'`)
+           db.query(`SELECT * from [CLIENTLOGIN] where CLIENTUSERNAME ='${request["username"]}' and CLIENTPASSWORD='${request["password"]}'`).then((data)=>{
                
             
             
@@ -38,7 +38,7 @@ module.exports = {
 
                 if(data.recordset[0]["CLIENTMAC"]!==request["macid"])
                 {
-                    db.query(`UPDATE [nrdeluxe].[dbo].[CLIENTLOGIN] set requestedmac = '${request["macid"]}' where  CLIENTUSERNAME ='${request["username"]}' and CLIENTPASSWORD='${request["password"]}'`)
+                    db.query(`UPDATE [CLIENTLOGIN] set requestedmac = '${request["macid"]}' where  CLIENTUSERNAME ='${request["username"]}' and CLIENTPASSWORD='${request["password"]}'`)
 
 
                     resolve({"message": "macid_wrong"})
