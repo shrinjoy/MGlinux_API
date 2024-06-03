@@ -23,6 +23,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     printFocusWindow: () => ipcRenderer.invoke('print-focus-window'),
     checkInternet: () => ipcRenderer.invoke('check-internet'),
     backToHome: () => ipcRenderer.invoke('back-home'),
-    getCurrentURL: () => ipcRenderer.invoke('get-current-url')
+    getCurrentURL: () => ipcRenderer.invoke('get-current-url'),
+    checkHardMac:() => ipcRenderer.invoke('check-mac')
 });
 

@@ -24,7 +24,7 @@ export async function checkMacId(loginUsername) {
 //Update Mac ID Function
 export async function updateMacId(loginUsername, userMacId) {
     const parsedData = { username: loginUsername, macid: userMacId }
-    return axiosInstance.post(`/checkuserid`, parsedData)
+    return axiosInstance.post(`/forcesetmac`, parsedData)
         .then(res => {
             return res.data;
         })
