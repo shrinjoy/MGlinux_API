@@ -57,7 +57,7 @@ function Login() {
             setError("Username is Missing");
             setTimeout(setError, 2000, "")
         } else {
-            const data = await updateMacId(username, userMacId);
+            const data = await updateMacId(username, userMacId.toString());
             if (data && data.message.includes('updated mac id')) {
                 setIsMacId(true);
             }
@@ -73,7 +73,7 @@ function Login() {
             setError("Password is Missing");
             setTimeout(setError, 2000, "")
         } else {
-            const data = await login(userIdForm, username, password, userMacId);
+            const data = await login(userIdForm, username, password, userMacId.toString());
             if (data && data.data.message.includes('macid_wrong')) {
                 setError("MAC ID Mismatch");
                 setTimeout(setError, 2000, "");
