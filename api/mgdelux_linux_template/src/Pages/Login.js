@@ -13,7 +13,7 @@ function Login() {
     const [userMacId, setUserMacId] = useState("");
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [isMacId, setIsMacId] = useState(true);
+    const [isMacId, setIsMacId] = useState(false);
 
 
     const navigate = useNavigate();
@@ -37,21 +37,16 @@ function Login() {
         }
         getMacAddress();
         checkMacIdAuth();
-    }, [userMacId])
+    }, [])
 
     // Check Mac ID
     async function checkMacIdAuth() {
-        if (!userMacId) {
-            setError("MacID is Missing");
-            setTimeout(setError, 2000, "");
-            checkMacIdAuth();
-        } else {
-            const data = await checkMacId(username);
-            if (data && data.message.includes('no mac found')) {
-                setIsMacId(false);
-            } else {
-                setIsMacId(true);
-            }
+        const data = await window.electronAPI.checkHardMac();
+        console.log(data);
+        if (data === true){
+            setIsMacId(true);
+        } else{
+            setIsMacId(false);
         }
     }
 
@@ -62,7 +57,7 @@ function Login() {
             setError("Username is Missing");
             setTimeout(setError, 2000, "")
         } else {
-            const data = await updateMacId(username, userMacId);
+            const data = await updateMacId(username, userMacId.toString());
             if (data && data.message.includes('updated mac id')) {
                 setIsMacId(true);
             }
@@ -78,7 +73,7 @@ function Login() {
             setError("Password is Missing");
             setTimeout(setError, 2000, "")
         } else {
-            const data = await login(userIdForm, username, password, userMacId);
+            const data = await login(userIdForm, username, password, userMacId.toString());
             if (data && data.data.message.includes('macid_wrong')) {
                 setError("MAC ID Mismatch");
                 setTimeout(setError, 2000, "");

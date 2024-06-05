@@ -3,8 +3,8 @@ module.exports = {
         return new Promise((resolve, reject) => {
 
            
-            console.log(`SELECT ${jsondata["gameid"]} as result FROM [nrdeluxe].[dbo].[RESULT] WHERE GAMEDATE = FORMAT(GETDATE(), 'yyyy-MM-dd')`)
-            db.query(`SELECT ${jsondata["gameid"]} as result FROM [nrdeluxe].[dbo].[RESULT] WHERE GAMEDATE = FORMAT(GETDATE(), 'yyyy-MM-dd')`)
+            console.log(`SELECT ${jsondata["gameid"]} as result FROM [RESULT] WHERE GAMEDATE = FORMAT(GETDATE(), 'yyyy-MM-dd')`)
+            db.query(`SELECT ${jsondata["gameid"]} as result FROM [RESULT] WHERE GAMEDATE = FORMAT(GETDATE(), 'yyyy-MM-dd')`)
                 .then((data) => {
                     if(data.recordset[0]["result"]===null||data.recordset[0].length <1 ||data.recordset[0]["result"]==="null"||data.recordset[0]["result"]==='null')
                     {

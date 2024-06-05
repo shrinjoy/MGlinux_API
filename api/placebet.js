@@ -28,7 +28,7 @@ module.exports = {
                         console.log("time left:" + data.recordset[0].timer - 10)
                         userdata = db
                             .query(
-                                `SELECT * from [playjeeto].[dbo].[CLIENTLOGIN] where CLIENTUSERNAME ='${req["username"]}' and CLIENTPASSWORD='${req["password"]}'`
+                                `SELECT * from [CLIENTLOGIN] where CLIENTUSERNAME ='${req["username"]}' and CLIENTPASSWORD='${req["password"]}'`
                             )
                             .then((data) => {
                                 console.log("user found")
@@ -36,7 +36,7 @@ module.exports = {
                                 if (data.recordset[0].CLIENTBALANCE > req["totalbet"]) {
                                     //deduct balance from user wallet
                                     db.query(
-                                        `UPDATE [playjeeto].[dbo].[CLIENTLOGIN]  set CLIENTBALANCE  = CLIENTBALANCE -${req["totalbet"]} where CLIENTUSERNAME ='${req["username"]}' and CLIENTPASSWORD='${req["password"]}'`
+                                        `UPDATE [CLIENTLOGIN]  set CLIENTBALANCE  = CLIENTBALANCE -${req["totalbet"]} where CLIENTUSERNAME ='${req["username"]}' and CLIENTPASSWORD='${req["password"]}'`
                                     )
                                         .then((data) => {
                                             console.log("deducted client balance");
@@ -45,7 +45,7 @@ module.exports = {
                                                 .then((data) => {
                                                     var barcodedata = "B" + data.recordset[0]["barcode"]+generateRandomNoise(3);
 
-                                                    var querystring = `INSERT INTO [playjeeto].[dbo].[TICKET99] (TICKETNUMBER,TICKETDETAILS,TICKETRS,TICKETTOTALRS,GAMEDATE,GAMETIME,TARMINALID,GAMEID) 
+                                                    var querystring = `INSERT INTO [TICKET99] (TICKETNUMBER,TICKETDETAILS,TICKETRS,TICKETTOTALRS,GAMEDATE,GAMETIME,TARMINALID,GAMEID) 
                                     VALUES ('${barcodedata}','${req["tickets"]}',1,${req["totalbet"]},FORMAT(GETDATE(), 'yyyy-MM-dd'),FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss'),'${req["username"]}','${req["gameid"]}');`;
                                                     db.query(querystring)
                                                         .then((data) => {

@@ -24,7 +24,31 @@ module.exports = {
                 });
         });
     },
+    checkifmacthere_bymac: function (sql, body) {
+        return new Promise((resolve, reject) => {
+            sql.query(`SELECT * from CLIENTLOGIN where CLIENTMAC ='${body["mac"]}'`)
+                .then((data) => {
+                    if (data && data.recordset && data.recordset.length > 0) {
+                        console.log(data.recordset[0]["CLIENTMAC"]);
 
+                        if (data.recordset[0]["CLIENTMAC"].trim().length > 0) {
+                            resolve({ "message": data.recordset[0] });
+                        }
+                        else {
+                            reject({ "message": "no mac found" });
+
+
+                        }
+
+                    } else {
+                        reject({ "message": "no mac found" });
+                    }
+                })
+                .catch((err) => {
+                    reject({ "message": "failed to check mac id reason" + err });
+                });
+        });
+    },
     forcesetmacid: function (sql, body) {
         return new Promise((resolve, reject) => {
             sql.query(`UPDATE CLIENTLOGIN SET CLIENTMAC = '${body["mac"]}' where CLIENTUSERNAME ='${body["username"]}'`)
