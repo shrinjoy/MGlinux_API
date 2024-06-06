@@ -1,6 +1,8 @@
 module.exports = {
     checkifmacthere: function (sql, body) {
+
         return new Promise((resolve, reject) => {
+            try{
             sql.query(`SELECT CLIENTMAC from CLIENTLOGIN where CLIENTUSERNAME ='${body["username"]}'`)
                 .then((data) => {
                     if (data && data.recordset && data.recordset.length > 0) {
@@ -22,10 +24,17 @@ module.exports = {
                 .catch((err) => {
                     reject({ "message": "failed to check mac id reason" + err });
                 });
+            }
+            catch(err)
+            {
+                reject({ "message": "no mac found" });
+
+            }
         });
     },
     checkifmacthere_bymac: function (sql, body) {
         return new Promise((resolve, reject) => {
+            try{
             sql.query(`SELECT * from CLIENTLOGIN where CLIENTMAC ='${body["mac"]}'`)
                 .then((data) => {
                     if (data && data.recordset && data.recordset.length > 0) {
@@ -47,10 +56,17 @@ module.exports = {
                 .catch((err) => {
                     reject({ "message": "failed to check mac id reason" + err });
                 });
+            }
+            catch(err)
+            {
+                reject({ "message": "failed to check mac id reason" + err });
+
+            }
         });
     },
     forcesetmacid: function (sql, body) {
         return new Promise((resolve, reject) => {
+            try{
             sql.query(`UPDATE CLIENTLOGIN SET CLIENTMAC = '${body["mac"]}' where CLIENTUSERNAME ='${body["username"]}'`)
                 .then((data) => {
                     if (data && data.rowsAffected && data.rowsAffected.length > 0 && data.rowsAffected[0] > 0) {
@@ -62,6 +78,11 @@ module.exports = {
                 .catch((err) => {
                     reject({ "message": "failed to update mac id reason" + err });
                 });
+            }
+            catch(err){
+
+                    reject({ "message": "failed to update mac id reason" + err });
+            }
         });
     }
 };
