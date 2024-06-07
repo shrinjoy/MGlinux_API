@@ -19,7 +19,7 @@ function Login() {
   const [userMacId, setUserMacId] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isMacId, setIsMacId] = useState(false);
+  const [isMacId, setIsMacId] = useState(true);
 
   const navigate = useNavigate();
 
@@ -149,7 +149,9 @@ function Login() {
             </div>
           </div>
         ) : (
-          <div className="d-flex align-items-center h-100">
+          <div
+            className={isMacId ? "d-flex align-items-center h-100" : "d-none"}
+          >
             <div className="formWrapper">
               {/* <div className='col-12 '>
                                     <div className='d-flex justify-content-center'>
