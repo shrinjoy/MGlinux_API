@@ -298,6 +298,7 @@ function GameView() {
     ];
 
     async function handleTicketPrint(barcode) {
+        setTicketData(null);
         const data = await generateTicketByBarcode(barcode);
         if (data) {
             setTicketData(data);
