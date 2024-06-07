@@ -9,8 +9,8 @@ const axiosInstance = axios.create({
 });
 
 //Check Mac ID by Mac Function
-export async function checkMacIdByMac(loginUsername) {
-  const parsedData = { username: loginUsername };
+export async function checkMacIdByMac(userMacId) {
+  const parsedData = { macid: userMacId };
   return axiosInstance
     .post(`/checkifuserhasmac_bymac`, parsedData)
     .then((res) => {

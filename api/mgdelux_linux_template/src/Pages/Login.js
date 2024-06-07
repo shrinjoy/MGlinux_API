@@ -42,11 +42,11 @@ function Login() {
     }
     getMacAddress();
     checkMacIdAuth();
-  }, []);
+  }, [userMacId]);
 
   // Check Mac ID
   async function checkMacIdAuth() {
-    const data = await checkMacIdByMac(userMacId.toString());
+    const data = await checkMacIdByMac(userMacId);
     // const data = await window.electronAPI.checkHardMac();
     // console.log(data);
     if (data) {
