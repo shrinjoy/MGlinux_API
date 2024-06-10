@@ -3,7 +3,7 @@ module.exports =
     getlastresults_all_sofar: function (db) {
         return new Promise((resolve, reject) => {
            
-            db.query(`SELECT * FROM [RESULT99] WHERE CONVERT(DATE, GAMEDATE) = CONVERT(DATE,GETDATE())  order by INTNUMBER desc`)
+            db.query(`SELECT * FROM [RESULT99] WHERE CONVERT(DATE, GAMEDATE) = CONVERT(DATE,GETDATE())  order by INTNUMBER asc`)
                 .then((data) => {
                     var arraydata = {};
                     console.log(data.recordset.length);
