@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { systemServGet } from "../Globals/GlobalFunctions";
 
@@ -34,6 +34,42 @@ function Home() {
       setTimeout(() => setError(false), 2500);
     }
   };
+
+  useEffect(() => {
+    const buttons = document.querySelectorAll('.homeBtn');
+    let currentIndex = 0;
+
+    // Function to update the active button
+    function updateActiveButton(index) {
+      buttons.forEach((button, i) => {
+        if (i === index) {
+          button.classList.add('active');
+        } else {
+          button.classList.remove('active');
+        }
+      });
+    }
+
+    // Initial active button
+    updateActiveButton(currentIndex);
+
+    // Event listener for keydown events
+    const handleKeyDown = (event) => {
+      if (event.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % buttons.length;
+      } else if (event.key === 'ArrowLeft') {
+        currentIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+      }
+      updateActiveButton(currentIndex);
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <main className="homeWrapper">

@@ -79,18 +79,21 @@ table {
     border-radius: 50px;
 }
 
-.homeBtn.transparent:hover {
+.homeBtn.transparent:hover,
+.homeBtn.transparent.active {
     background-color: #fff;
     border: 1px solid #454545;
     border-radius: 3px;
 }
 
-.homeBtn.transparent:hover::after {
+.homeBtn.transparent:hover::after,
+.homeBtn.transparent.active::after {
     background-color: #07e2ff;
     border: 1px solid #454545;
 }
 
-.homeBtn.transparent::after {
+.homeBtn.transparent::after,
+.homeBtn.transparent.active::after {
     content: '';
     width: 15px;
     height: 15px;
