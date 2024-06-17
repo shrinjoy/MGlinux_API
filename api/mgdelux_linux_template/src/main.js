@@ -139,7 +139,7 @@ async function fetchMacAddress() {
 ipcMain.handle('print-focus-window', printFocusWindow)
 
 var options = {
-  silent: false,
+  silent: true,
   printBackground: true,
   color: false,
   margin: {
