@@ -39,13 +39,13 @@ function Home() {
     <main className="homeWrapper">
       <div className="wrapper p-5">
         {/* <div className='position-absolute' style={{ top: 10, right: 50 }}>
-                    <button
-                        onClick={() => window.electronAPI.quitApp()}
-                        className="homeBtn"
-                    >
-                        Exit
-                    </button>
-                </div> */}
+            <button
+                onClick={() => window.electronAPI.quitApp()}
+                className="homeBtn"
+            >
+                Exit
+            </button>
+        </div> */}
         <div className="unlockForm">
           {error ? <div className="status">PLEASE CONNECT FIRST</div> : ""}
           {isConnected ? <div className="status">CONNECTED</div> : ""}
@@ -68,7 +68,7 @@ function Home() {
               </button>
             ) : (
               <button
-                className="homeBtn connect"
+                className="homeBtn connect transparent"
                 onClick={() => checkInternetConnection()}
               >
                 Connect
