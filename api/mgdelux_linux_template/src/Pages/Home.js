@@ -71,6 +71,29 @@ function Home() {
     };
   }, []);
 
+  // useEffect for handling mouseover to remove 'active' class
+  useEffect(() => {
+    const buttons = document.querySelectorAll('.homeBtn');
+
+    const handleMouseOver = () => {
+      buttons.forEach(button => {
+        button.classList.remove('active');
+      });
+    };
+
+    // Attach mouseover event listeners to each button
+    buttons.forEach(button => {
+      button.addEventListener('mouseover', handleMouseOver);
+    });
+
+    // Cleanup mouseover event listeners on component unmount
+    return () => {
+      buttons.forEach(button => {
+        button.removeEventListener('mouseover', handleMouseOver);
+      });
+    };
+  }, []); // Empty dependency array ensures this effect runs only once on mount
+
   return (
     <main className="homeWrapper">
       <div className="wrapper p-5">
