@@ -4,6 +4,8 @@
 /* Common */
 @import url('./Assets/CSS/Common/Wrappers.css');
 @import url('./Assets/CSS/Common/TextStyles.css');
+@import url('./Assets/CSS/Common/navbar.css');
+@import url('./Assets/CSS/Common/misc.css');
 
 /* Components */
 @import url('./Assets/CSS/Components/HomeBanner.css');
@@ -21,6 +23,8 @@
     --std-border-radius: 15px;
     --std-text-color: #fff;
     --base-border-color: #5c5c5c;
+    --heading: Roboto;
+    --paragraph: Poppins;
 }
 
 body {

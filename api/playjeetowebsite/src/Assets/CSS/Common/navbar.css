@@ -1,0 +1,28 @@
+nav {
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+nav ul li {
+    margin-right: 25px;
+    padding: 5px 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-family: var(--heading);
+}
+
+nav ul li.active {
+    border-bottom: 2px solid #fff;
+}

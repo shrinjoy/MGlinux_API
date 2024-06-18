@@ -1,13 +1,12 @@
 import React from 'react'
-import Navbar from './Components/Navbar.js'
+import Navbar from './Layouts/Navbar.js'
 import MarqueeText from "react-marquee-text"
 import "react-marquee-text/dist/styles.css"
 import { Link } from 'react-router-dom'
 
 function Home() {
     return (
-        <main>
-            {/* <Navbar /> */}
+        <>
             <section className="HomeBanner">
                 <div className='container'>
                     <div className='row g-3'>
@@ -166,16 +165,7 @@ function Home() {
                     </div>
                 </div>
             </section>
-            <section className='footer'>
-                <div className='container'>
-                    <div className='row'>
-                        <div className='content'>
-                            <p><Link to='/'>PlayJeeto</Link> © {new Date().getFullYear()}. All rights reserved.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
+        </>
     )
 }
 
