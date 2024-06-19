@@ -22,6 +22,7 @@ const createWindow = () => {
     webPreferences: {
       nodeIntegration: true,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      zoomFactor: 1.0
     },
   });
 
@@ -34,7 +35,7 @@ const createWindow = () => {
   // mainWindow.webContents.openDevTools();
 
   mainWindow.once('ready-to-show', () => {
-    mainWindow.maximize();
+    // mainWindow.maximize();
     mainWindow.show(); // Show the window after maximizing.
   });
 
