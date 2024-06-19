@@ -35,7 +35,7 @@ const createWindow = () => {
   // mainWindow.webContents.openDevTools();
 
   mainWindow.once('ready-to-show', () => {
-    mainWindow.maximize();
+    // mainWindow.maximize();
     mainWindow.show(); // Show the window after maximizing.
   });
 
