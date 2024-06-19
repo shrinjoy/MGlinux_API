@@ -107,7 +107,7 @@ function Home() {
         </div> */}
         <div className="unlockForm">
           {error ? <div className="status">PLEASE CONNECT FIRST</div> : ""}
-          {isConnected ? <div className="status">CONNECTED</div> : ""}
+          {isConnected ? <div className="status text-danger">CONNECTED</div> : ""}
           {networkError ? (
             <div className="status text-danger">ERROR 1001</div>
           ) : (
@@ -118,7 +118,7 @@ function Home() {
           <div style={{ width: "16%" }}>
             {isConnected ? (
               <button
-                className="homeBtn"
+                className="homeBtn connect transparent"
                 onClick={() => {
                   setIsConnected(false);
                 }}
