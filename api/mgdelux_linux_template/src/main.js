@@ -145,11 +145,7 @@ var options = {
   printBackground: true,
   color: false,
   margin: {
-    marginType: "default",
-  },
-  pageSize: {
-    width: "80mm",
-    height: "auto",
+    marginType: "printableArea",
   },
   landscape: false,
   pagesPerSheet: 1,
