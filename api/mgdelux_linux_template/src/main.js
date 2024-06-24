@@ -147,6 +147,10 @@ var options = {
   margin: {
     marginType: "default",
   },
+  pageSize: {
+    width: "80mm",
+    height: "auto",
+  },
   landscape: false,
   pagesPerSheet: 1,
   collate: false,
