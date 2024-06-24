@@ -145,7 +145,7 @@ var options = {
   printBackground: true,
   color: false,
   margin: {
-    marginType: "printableArea",
+    marginType: "default",
   },
   landscape: false,
   pagesPerSheet: 1,
