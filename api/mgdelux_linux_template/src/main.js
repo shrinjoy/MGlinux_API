@@ -45,7 +45,7 @@ const createWindow = () => {
   })
 
   async function backToHome() {
-    mainWindow.loadURL(`file://${path.resolve(__dirname, 'resources/app.asar/.webpack/renderer/main_window/index.html')}#/home`);
+    mainWindow.loadURL(`file://${path.resolve(__dirname, 'resources/app.asar/.webpack/renderer/main_window/index.html')}`);
   }
 
 };
