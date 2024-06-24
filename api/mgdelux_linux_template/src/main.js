@@ -144,9 +144,9 @@ var options = {
   silent: false,
   printBackground: true,
   color: false,
-  // margin: {
-  //   marginType: 'printableArea'
-  // },
+  margin: {
+    marginType: "printableArea",
+  },
   landscape: false,
   pagesPerSheet: 1,
   collate: false,
