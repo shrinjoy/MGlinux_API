@@ -10,7 +10,7 @@ function Loader() {
         const intervalId = setInterval(() => {
             setValue(prevValue => {
                 const newValue = prevValue + 10;
-                if (newValue > 85) {
+                if (newValue > 100) {
                     clearInterval(intervalId);
                     navigate('/home')
                 }
