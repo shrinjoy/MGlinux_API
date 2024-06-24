@@ -1,13 +1,13 @@
-const { app, BrowserWindow, ipcMain, shell } = require('electron');
-const { exec } = require('child_process');
-const os = require('os');
-const fs = require('fs');
-const path = require('node:path');
-const getmac = require('getmac');
+const { app, BrowserWindow, ipcMain, shell } = require("electron");
+const { exec } = require("child_process");
+const os = require("os");
+const fs = require("fs");
+const path = require("node:path");
+const getmac = require("getmac");
 var internetAvailable = require("internet-available");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
+if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
@@ -16,7 +16,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
-    icon: '../icons/icon.ico',
+    icon: "../icons/icon.ico",
     show: false,
     frame: false,
     webPreferences: {
@@ -33,27 +33,30 @@ const createWindow = () => {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 
-  mainWindow.once('ready-to-show', () => {
+  mainWindow.once("ready-to-show", () => {
     mainWindow.maximize();
     mainWindow.show(); // Show the window after maximizing.
   });
 
   // Back To Home Function
-  ipcMain.handle('back-home', async () => {
+  ipcMain.handle("back-home", async () => {
     return await backToHome();
-  })
+  });
 
   async function backToHome() {
-    mainWindow.loadURL(`file://${path.resolve(__dirname, 'resources/app.asar/.webpack/renderer/main_window/index.html')}#/home`);
+    mainWindow.loadURL(
+      `file://${path.resolve(
+        __dirname,
+        "resources/app.asar/.webpack/renderer/main_window/index.html"
+      )}#/home`
+    );
   }
-
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-
   if (isFirstStartup()) {
     // handleForceMacId();
     setFirstStartupFlag();
@@ -63,7 +66,7 @@ app.whenReady().then(() => {
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  app.on('activate', () => {
+  app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
@@ -73,8 +76,8 @@ app.whenReady().then(() => {
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });
@@ -82,51 +85,50 @@ app.on('window-all-closed', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
-// Start app on windows startup 
+// Start app on windows startup
 // app.setLoginItemSettings({
-//   openAtLogin: true    
+//   openAtLogin: true
 // })
 
 // System Commands from App
-ipcMain.on('quit-app', () => {
+ipcMain.on("quit-app", () => {
   app.quit();
 });
 
-ipcMain.on('system-shutdown', () => {
-  if (os.platform() === 'win32') {
-    exec('shutdown /s /t 0');
+ipcMain.on("system-shutdown", () => {
+  if (os.platform() === "win32") {
+    exec("shutdown /s /t 0");
   } else {
-    exec('shutdown +0');
+    exec("shutdown +0");
   }
 });
 
-ipcMain.on('system-restart', () => {
-  if (os.platform() === 'win32') {
-    exec('shutdown /r /t 0');
+ipcMain.on("system-restart", () => {
+  if (os.platform() === "win32") {
+    exec("shutdown /r /t 0");
   } else {
-    exec('shutdown -r now');
+    exec("shutdown -r now");
   }
 });
 
-ipcMain.on('print-driver-settings', () => {
-  if (os.platform() === 'win32') {
-    shell.openPath('/home/driver/');
+ipcMain.on("print-driver-settings", () => {
+  if (os.platform() === "win32") {
+    shell.openPath("/home/driver/");
   } else {
-    exec('gnome-terminal -- /usr/share/autodriver/autoprinter.sh');
+    exec("gnome-terminal -- /usr/share/autodriver/autoprinter.sh");
   }
 });
 
-ipcMain.on('system-settings', () => {
-  if (os.platform() === 'win32') {
-    exec('start ms-settings:');
+ipcMain.on("system-settings", () => {
+  if (os.platform() === "win32") {
+    exec("start ms-settings:");
   } else {
-    exec('gnome-control-center');
+    exec("gnome-control-center");
   }
 });
-
 
 // Deriving User Mac ID
-ipcMain.handle('get-mac-address', fetchMacAddress)
+ipcMain.handle("get-mac-address", fetchMacAddress);
 
 async function fetchMacAddress() {
   const macAddress = await getmac.default();
@@ -136,36 +138,36 @@ async function fetchMacAddress() {
 }
 
 // Printing Focus Window
-ipcMain.handle('print-focus-window', printFocusWindow)
+ipcMain.handle("print-focus-window", printFocusWindow);
 
 var options = {
   silent: false,
   printBackground: true,
   color: false,
-  margin: {
-    marginType: 'printableArea'
-  },
+  // margin: {
+  //   marginType: 'printableArea'
+  // },
   landscape: false,
   pagesPerSheet: 1,
   collate: false,
   copies: 1,
-}
+};
 
 async function printFocusWindow() {
   let win = BrowserWindow.getFocusedWindow();
   win.webContents.print(options, (success, failureReason) => {
     if (!success) {
-      console.log(failureReason)
+      console.log(failureReason);
     } else {
-      console.log('Print Start');
+      console.log("Print Start");
     }
-  })
+  });
 }
 
 // Check Internet Function
-ipcMain.handle('check-internet', async () => {
+ipcMain.handle("check-internet", async () => {
   return await internetChecker();
-})
+});
 
 async function internetChecker() {
   try {
@@ -174,18 +176,17 @@ async function internetChecker() {
       retries: 10,
     });
     return true;
-  }
-  catch (error) {
-    return false
+  } catch (error) {
+    return false;
   }
 }
 
-ipcMain.handle('get-current-url', () => {
+ipcMain.handle("get-current-url", () => {
   let win = BrowserWindow.getFocusedWindow();
   return win.webContents.getURL();
-})
+});
 
-const flagFilePath = path.join(app.getPath('userData'), 'first-run-flag.txt');
+const flagFilePath = path.join(app.getPath("userData"), "first-run-flag.txt");
 
 // Virgin Flag Checker
 function isFirstStartup() {
@@ -193,9 +194,11 @@ function isFirstStartup() {
 }
 // Hoe Flag Setter
 function setFirstStartupFlag() {
-  fs.writeFileSync(flagFilePath, 'This file indicates that the app is not a virgin.', 'utf8');
+  fs.writeFileSync(
+    flagFilePath,
+    "This file indicates that the app is not a virgin.",
+    "utf8"
+  );
 }
 
-ipcMain.handle('check-mac', isFirstStartup)
-
-
+ipcMain.handle("check-mac", isFirstStartup);
