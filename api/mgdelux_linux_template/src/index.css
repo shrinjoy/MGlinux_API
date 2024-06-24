@@ -813,8 +813,8 @@ input[type="number"]::-webkit-inner-spin-button {
 
 @media print {
   @page {
-    /* size: 80mm auto; */
-    margin: 100cm;
+    size: 80mm auto;
+    margin: 0cm;
   }
 
   .mainContent * {
