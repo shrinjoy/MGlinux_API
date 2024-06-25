@@ -8,6 +8,7 @@ function Home() {
   const [networkError, setNetworkError] = useState(false);
   const [error, setError] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPointerLocked, setIsPointerLocked] = useState(false);
 
   const buttonRefs = useRef([]);
   buttonRefs.current = [];
@@ -19,6 +20,8 @@ function Home() {
   };
 
   const handleKeyDown = (event) => {
+    document.body.requestPointerLock();
+    setIsPointerLocked(true);
     if (event.key === "ArrowLeft") {
       setActiveIndex(
         (prevIndex) =>
@@ -31,14 +34,22 @@ function Home() {
       );
     }
   };
+  const handleMouse = () => {
+    if (isPointerLocked) {
+      document.exitPointerLock();
+      setIsPointerLocked(false);
+    }
+  };
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousemove", handleMouse);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousemove", handleMouse);
     };
-  }, []);
+  }, [isPointerLocked]);
 
   useEffect(() => {
     buttonRefs.current.forEach((button, index) => {

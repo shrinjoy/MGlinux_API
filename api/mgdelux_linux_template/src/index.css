@@ -89,7 +89,6 @@ table {
   transition: 0.3s;
   border-radius: 50px;
 }
-
 .homeBtn.transparent:hover {
   background-color: #fff;
   border: 1px solid #454545;
