@@ -84,7 +84,7 @@ table {
   border-radius: 3px;
 }
 
-.homeBtn.transparent:hover::after {
+/* .homeBtn.transparent:hover::after {
   background-color: #07e2ff;
   border: 1px solid #454545;
 }
@@ -99,7 +99,7 @@ table {
   top: 12px;
   left: 5px;
   transition: 0.3s;
-}
+} */
 
 .stdBtn {
   background-color: #fff;

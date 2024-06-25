@@ -59,7 +59,7 @@ function Home() {
           <div style={{ width: "16%" }}>
             {isConnected ? (
               <button
-                className="homeBtn"
+                className="homeBtn transparent"
                 onClick={() => {
                   setIsConnected(false);
                 }}
@@ -68,7 +68,7 @@ function Home() {
               </button>
             ) : (
               <button
-                className="homeBtn connect"
+                className="homeBtn transparent"
                 onClick={() => checkInternetConnection()}
               >
                 Connect
@@ -77,7 +77,7 @@ function Home() {
           </div>
           <div style={{ width: "16%" }}>
             <button
-              className="homeBtn login transparent"
+              className="homeBtn transparent"
               onClick={handleLoginNavigation}
             >
               Login
