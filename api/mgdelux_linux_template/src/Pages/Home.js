@@ -7,60 +7,6 @@ function Home() {
   const [isConnected, setIsConnected] = useState(false);
   const [networkError, setNetworkError] = useState(false);
   const [error, setError] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPointerLocked, setIsPointerLocked] = useState(false);
-
-  const buttonRefs = useRef([]);
-  buttonRefs.current = [];
-
-  const addToRefs = (el) => {
-    if (el && !buttonRefs.current.includes(el)) {
-      buttonRefs.current.push(el);
-    }
-  };
-
-  const handleKeyDown = (event) => {
-    document.body.requestPointerLock();
-    setIsPointerLocked(true);
-    if (event.key === "ArrowLeft") {
-      setActiveIndex(
-        (prevIndex) =>
-          (prevIndex - 1 + buttonRefs.current.length) %
-          buttonRefs.current.length
-      );
-    } else if (event.key === "ArrowRight") {
-      setActiveIndex(
-        (prevIndex) => (prevIndex + 1) % buttonRefs.current.length
-      );
-    }
-  };
-  const handleMouse = () => {
-    if (isPointerLocked) {
-      document.exitPointerLock();
-      setIsPointerLocked(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("mousemove", handleMouse);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("mousemove", handleMouse);
-    };
-  }, [isPointerLocked]);
-
-  useEffect(() => {
-    buttonRefs.current.forEach((button, index) => {
-      if (index === activeIndex) {
-        button.classList.add("active");
-        button.focus();
-      } else {
-        button.classList.remove("active");
-      }
-    });
-  }, [activeIndex]);
 
   const navigate = useNavigate();
 
@@ -113,7 +59,6 @@ function Home() {
           <div style={{ width: "16%" }}>
             {isConnected ? (
               <button
-                ref={addToRefs}
                 className="homeBtn transparent"
                 onClick={() => {
                   setIsConnected(false);
@@ -123,7 +68,6 @@ function Home() {
               </button>
             ) : (
               <button
-                ref={addToRefs}
                 className="homeBtn transparent"
                 onClick={() => checkInternetConnection()}
               >
@@ -133,7 +77,6 @@ function Home() {
           </div>
           <div style={{ width: "16%" }}>
             <button
-              ref={addToRefs}
               className="homeBtn transparent"
               onClick={handleLoginNavigation}
             >
@@ -142,7 +85,6 @@ function Home() {
           </div>
           <div style={{ width: "16%" }}>
             <button
-              ref={addToRefs}
               className="homeBtn transparent"
               onClick={() => window.electronAPI.systemSettings()}
             >
@@ -151,7 +93,6 @@ function Home() {
           </div>
           <div style={{ width: "16%" }}>
             <button
-              ref={addToRefs}
               className="homeBtn transparent"
               onClick={() => window.electronAPI.printDriver()}
             >
@@ -160,7 +101,6 @@ function Home() {
           </div>
           <div style={{ width: "16%" }}>
             <button
-              ref={addToRefs}
               className="homeBtn transparent"
               onClick={() => window.electronAPI.systemRestart()}
             >
@@ -169,7 +109,6 @@ function Home() {
           </div>
           <div style={{ width: "16%" }}>
             <button
-              ref={addToRefs}
               className="homeBtn transparent"
               onClick={() => window.electronAPI.systemShutdown()}
             >
