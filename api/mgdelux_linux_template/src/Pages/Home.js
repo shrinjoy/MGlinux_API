@@ -50,7 +50,7 @@ function Home() {
           {error ? <div className="status">PLEASE CONNECT FIRST</div> : ""}
           {isConnected ? <div className="status">CONNECTED</div> : ""}
           {networkError ? (
-            <div className="status text-danger">ERROR 1001</div>
+            <div className="status text-danger">ERROR 1004</div>
           ) : (
             ""
           )}
