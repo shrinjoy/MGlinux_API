@@ -264,7 +264,18 @@ app.get('/', function (req, res) {
 })
 app.get('/timeleft', async function (req, res) {
     try {
-        var data = await sql.query(`SELECT GAMEID,TARMINALDATE AS NEXTGAMEDATE,TARMINALTIME AS NEXTGAMETIME,NEXTDRAW,DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
+        var data = await sql.query(`SELECT 
+    [INTNUMBER],
+    [TARMINALDATE],
+    [TARMINALTIME],
+    [TARMINALCLS],
+    [NEXTDRAW],
+    [GAMEID],
+    [tim],
+    [tim2],
+    DATEDIFF(SECOND, CONVERT(DATETIME, [TARMINALDATE] + ' ' + [TARMINALTIME], 113), CONVERT(DATETIME, [NEXTDRAW], 109)) AS timer
+FROM 
+    [NRDELUXE].[dbo].[TARMINALTIMEZONE]`)
         res.status(200).send({ "time": data.recordset[0].timer , "gameid": data.recordset[0].GAMEID, "nextgamedate": data.recordset[0].NEXTGAMEDATE, "nextgametime": data.recordset[0].NEXTGAMETIME })
 
     } catch (err) {
