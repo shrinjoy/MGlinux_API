@@ -24,7 +24,7 @@ module.exports = {
             db.query(`SELECT DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
                 .then((data) => {
 
-                    if ((data.recordset[0].timer - 10) > 12) {
+                    if ((data.recordset[0].timer - 3) > 12) {
                         console.log("time left:" + data.recordset[0].timer - 10)
                         userdata = db
                             .query(
