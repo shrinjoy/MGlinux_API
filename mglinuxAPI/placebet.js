@@ -21,7 +21,18 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.query(`SELECT "GAMENUM" FROM "RESULT99" WHERE "GAMEDATE"=CONVERT(varchar, getdate(), 23) AND "GAMENUM"='${req["gameid"]}';`).then((data)=>{
             if(data.recordset.length <1){
-            db.query(`SELECT DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
+            db.query(`SELECT 
+    [INTNUMBER],
+    [TARMINALDATE],
+    [TARMINALTIME],
+    [TARMINALCLS],
+    [NEXTDRAW],
+    [GAMEID],
+    [tim],
+    [tim2],
+    DATEDIFF(SECOND, CONVERT(DATETIME, [TARMINALDATE] + ' ' + [TARMINALTIME], 113), CONVERT(DATETIME, [NEXTDRAW], 109)) AS timer
+FROM 
+    [NRDELUXE].[dbo].[TARMINALTIMEZONE]`)
                 .then((data) => {
 
                     if ((data.recordset[0].timer - 3) > 12) {
