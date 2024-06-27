@@ -131,7 +131,15 @@ app.post('/getsalesreport', async function (req, res) {
 
 })
 
+app.post('/getsalesdetails', async function (req, res) {
+    await getsalesreport.getsalesdetails(sql, req.body).then((data) => {
+        res.status(200).send(data);
+    })
+        .catch((err) => {
+            res.status(400).send({ err });
+        })
 
+})
 app.post('/getallresultbydate', async function (req, res) {
     await getallresultbydate.getlastresults_all_bydate(sql, req.body).then((data) => {
         res.status(200).send(data);
