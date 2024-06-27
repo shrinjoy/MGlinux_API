@@ -16,7 +16,7 @@ module.exports = {
                             var username = balancedata.recordset[0]["TARMINALID"];
                             sql.query(`UPDATE [CLIENTLOGIN] set CLIENTBALANCE  = CLIENTBALANCE+${balancetoadd} where CLIENTUSERNAME='${username}'`).then((data) => {
                                 console.log("added this balance:" + balancedata);
-                                sql.query(`DELETE [TICKET99] WHERE TICKETNUMBER= '${req["barcode"]}' `).then((d2)=>{
+                                sql.query(`UPDATE [TICKET99] set TARMINALCLS = 'CANCEL' where TICKETNUMBER= '${req["barcode"]}'`).then((d2)=>{
                                 resolve({ "message": "canceled bet" });
 
                                 })
