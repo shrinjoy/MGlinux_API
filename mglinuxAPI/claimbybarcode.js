@@ -12,7 +12,14 @@ module.exports = {
                             .then(() => {
                                 sql.query(`UPDATE "CLIENTLOGIN" SET CLIENTBALANCE = CLIENTBALANCE+${parseInt(winrs) || 0} where "CLIENTID"='${req["userid"]}'`)
                                     .then(() => {
-                                        resolve({ "message": "added balance", "amount": winrs, "userid": `${req["userid"]}` });
+                                        sql.query(`SELECT * FROM "TICKET99" where "TICKETNUMBER"='${req["barcode"]}' and TARMINALID='${req["userid"]}'`)
+                                        .then((data)=>{
+                                            resolve(data);
+                                        }).
+                                        catch((err)=>{
+                                            reject(err)
+                                        })
+                                        //resolve({ "message": "added balance", "amount": winrs, "userid": `${req["userid"]}` });
                                     })
                                     .catch((err) => {
                                         console.log("failed to update client balance", err);
