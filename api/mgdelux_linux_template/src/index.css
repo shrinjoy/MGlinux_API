@@ -632,7 +632,7 @@ button {
   overflow: hidden;
 }
 
-button:before {
+/* button:before {
   content: "";
   position: absolute;
   width: 100px;
@@ -646,8 +646,7 @@ button:before {
   top: 0;
   left: -100px;
   animation: shine 3s infinite linear;
-  /* Animation */
-}
+} */
 
 @keyframes shine {
   0% {
