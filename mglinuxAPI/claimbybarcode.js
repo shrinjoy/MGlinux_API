@@ -14,7 +14,7 @@ module.exports = {
                                     .then(() => {
                                         sql.query(`SELECT * FROM "TICKET99" where "TICKETNUMBER"='${req["barcode"]}' and TARMINALID='${req["userid"]}'`)
                                         .then((data)=>{
-                                            resolve(data);
+                                            resolve(data.recordset[0]);
                                         }).
                                         catch((err)=>{
                                             reject(err)
