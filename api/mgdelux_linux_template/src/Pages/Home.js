@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { systemServGet } from "../Globals/GlobalFunctions";
 
@@ -7,60 +7,6 @@ function Home() {
   const [isConnected, setIsConnected] = useState(false);
   const [networkError, setNetworkError] = useState(false);
   const [error, setError] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPointerLocked, setIsPointerLocked] = useState(false);
-
-  const buttonRefs = useRef([]);
-  buttonRefs.current = [];
-
-  const addToRefs = (el) => {
-    if (el && !buttonRefs.current.includes(el)) {
-      buttonRefs.current.push(el);
-    }
-  };
-
-  const handleKeyDown = (event) => {
-    document.body.requestPointerLock();
-    setIsPointerLocked(true);
-    if (event.key === "ArrowLeft") {
-      setActiveIndex(
-        (prevIndex) =>
-          (prevIndex - 1 + buttonRefs.current.length) %
-          buttonRefs.current.length
-      );
-    } else if (event.key === "ArrowRight") {
-      setActiveIndex(
-        (prevIndex) => (prevIndex + 1) % buttonRefs.current.length
-      );
-    }
-  };
-  const handleMouse = () => {
-    if (isPointerLocked) {
-      document.exitPointerLock();
-      setIsPointerLocked(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("mousemove", handleMouse);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("mousemove", handleMouse);
-    };
-  }, [isPointerLocked]);
-
-  useEffect(() => {
-    buttonRefs.current.forEach((button, index) => {
-      if (index === activeIndex) {
-        button.classList.add("active");
-        button.focus();
-      } else {
-        button.classList.remove("active");
-      }
-    });
-  }, [activeIndex]);
 
   const navigate = useNavigate();
 
@@ -89,22 +35,81 @@ function Home() {
     }
   };
 
+  useEffect(() => {
+    const buttons = document.querySelectorAll('.homeBtn');
+    let currentIndex = 0;
+
+    // Function to update the active button
+    function updateActiveButton(index) {
+      buttons.forEach((button, i) => {
+        if (i === index) {
+          button.classList.add('active');
+        } else {
+          button.classList.remove('active');
+        }
+      });
+    }
+
+    // Initial active button
+    updateActiveButton(currentIndex);
+
+    // Event listener for keydown events
+    const handleKeyDown = (event) => {
+      if (event.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % buttons.length;
+      } else if (event.key === 'ArrowLeft') {
+        currentIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+      }
+      updateActiveButton(currentIndex);
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  // useEffect for handling mouseover to remove 'active' class
+  useEffect(() => {
+    const buttons = document.querySelectorAll('.homeBtn');
+
+    const handleMouseOver = () => {
+      buttons.forEach(button => {
+        button.classList.remove('active');
+      });
+    };
+
+    // Attach mouseover event listeners to each button
+    buttons.forEach(button => {
+      button.addEventListener('mouseover', handleMouseOver);
+    });
+
+    // Cleanup mouseover event listeners on component unmount
+    return () => {
+      buttons.forEach(button => {
+        button.removeEventListener('mouseover', handleMouseOver);
+      });
+    };
+  }, []); // Empty dependency array ensures this effect runs only once on mount
+
   return (
     <main className="homeWrapper">
       <div className="wrapper p-5">
         {/* <div className='position-absolute' style={{ top: 10, right: 50 }}>
-                    <button
-                        onClick={() => window.electronAPI.quitApp()}
-                        className="homeBtn"
-                    >
-                        Exit
-                    </button>
-                </div> */}
+            <button
+                onClick={() => window.electronAPI.quitApp()}
+                className="homeBtn"
+            >
+                Exit
+            </button>
+        </div> */}
         <div className="unlockForm">
           {error ? <div className="status">PLEASE CONNECT FIRST</div> : ""}
           {isConnected ? <div className="status">CONNECTED</div> : ""}
           {networkError ? (
-            <div className="status text-danger">ERROR 1004</div>
+            <div className="status text-danger">ERROR 1001</div>
           ) : (
             ""
           )}
@@ -113,7 +118,6 @@ function Home() {
           <div style={{ width: "16%" }}>
             {isConnected ? (
               <button
-                ref={addToRefs}
                 className="homeBtn transparent"
                 onClick={() => {
                   setIsConnected(false);
@@ -123,8 +127,7 @@ function Home() {
               </button>
             ) : (
               <button
-                ref={addToRefs}
-                className="homeBtn transparent"
+                className="homeBtn connect transparent"
                 onClick={() => checkInternetConnection()}
               >
                 Connect
@@ -133,8 +136,7 @@ function Home() {
           </div>
           <div style={{ width: "16%" }}>
             <button
-              ref={addToRefs}
-              className="homeBtn transparent"
+              className="homeBtn login transparent"
               onClick={handleLoginNavigation}
             >
               Login
@@ -142,7 +144,6 @@ function Home() {
           </div>
           <div style={{ width: "16%" }}>
             <button
-              ref={addToRefs}
               className="homeBtn transparent"
               onClick={() => window.electronAPI.systemSettings()}
             >
@@ -151,7 +152,6 @@ function Home() {
           </div>
           <div style={{ width: "16%" }}>
             <button
-              ref={addToRefs}
               className="homeBtn transparent"
               onClick={() => window.electronAPI.printDriver()}
             >
@@ -160,7 +160,6 @@ function Home() {
           </div>
           <div style={{ width: "16%" }}>
             <button
-              ref={addToRefs}
               className="homeBtn transparent"
               onClick={() => window.electronAPI.systemRestart()}
             >
@@ -169,7 +168,6 @@ function Home() {
           </div>
           <div style={{ width: "16%" }}>
             <button
-              ref={addToRefs}
               className="homeBtn transparent"
               onClick={() => window.electronAPI.systemShutdown()}
             >
