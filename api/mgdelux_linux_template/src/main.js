@@ -173,8 +173,8 @@ ipcMain.handle("check-internet", async () => {
 async function internetChecker() {
   try {
     await internetAvailable({
-      timeout: 4000,
-      retries: 10,
+      timeout: 1000,
+      retries: 2,
     });
     return true;
   } catch (error) {
