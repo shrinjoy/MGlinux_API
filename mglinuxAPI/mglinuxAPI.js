@@ -284,7 +284,10 @@ app.get('/timeleft', async function (req, res) {
     DATEDIFF(SECOND, CONVERT(DATETIME, [TARMINALDATE] + ' ' + [TARMINALTIME], 113), CONVERT(DATETIME, [NEXTDRAW], 109)) AS timer
 FROM 
     [NRDELUXE].[dbo].[TARMINALTIMEZONE]`)
-        res.status(200).send({ "time": data.recordset[0].timer , "gameid": data.recordset[0].GAMEID, "nextgamedate": data.recordset[0].NEXTGAMEDATE, "nextgametime": data.recordset[0].NEXTGAMETIME })
+        res.status(200).send({ "time": data.recordset[0].timer , 
+            "gameid": data.recordset[0].GAMEID, 
+            "nextgamedate": data.recordset[0].NEXTDRAW,
+             "nextgametime": data.recordset[0].NEXTDRAW })
 
     } catch (err) {
         res.status(400).send({ "message": "failed to get time because -" + err })
