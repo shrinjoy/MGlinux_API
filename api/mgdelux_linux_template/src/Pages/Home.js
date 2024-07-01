@@ -55,10 +55,13 @@ function Home() {
 
     // Event listener for keydown events
     const handleKeyDown = (event) => {
+      const button = document.querySelector('.homeBtn.active');
       if (event.key === 'ArrowRight') {
         currentIndex = (currentIndex + 1) % buttons.length;
       } else if (event.key === 'ArrowLeft') {
         currentIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+      } else if ((event.code === 'Space' || event.key === 'Enter' || event.code === 'space' || event.key === 'enter') && button) {
+        button.click()
       }
       updateActiveButton(currentIndex);
     };
