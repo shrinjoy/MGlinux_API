@@ -160,7 +160,7 @@ async function printFocusWindow() {
     if (!success) {
       console.log(failureReason);
     } else {
-      console.log("Print Start");
+      return true;
     }
   });
 }
