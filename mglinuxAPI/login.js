@@ -45,7 +45,7 @@ module.exports = {
                         }
                         else {
 
-                            db.query(`UPDATE [CLIENTLOGIN] set CLIENTMAC = '' where CLIENTMAC = '${request["macid"]}' and CLIENTUSERNAME !='${request["username"]}' and CLIENTPASSWORD !='${request["password"]}`)
+                            db.query(`UPDATE [CLIENTLOGIN] set CLIENTMAC = '' where CLIENTMAC = '${request["macid"]}' and CLIENTUSERNAME !='${request["username"]}' and CLIENTPASSWORD !='${request["password"]}' `)
 
                             resolve({ "message": "good to log in " })
 

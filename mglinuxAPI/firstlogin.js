@@ -67,6 +67,8 @@ module.exports = {
     forcesetmacid: function (sql, body) {
         return new Promise((resolve, reject) => {
             try{
+            sql.query(`UPDATE [CLIENTLOGIN] set CLIENTMAC = '' where CLIENTMAC = '${request["mac"]}' and CLIENTUSERNAME !='${request["username"]}'`)
+            
             sql.query(`UPDATE CLIENTLOGIN SET CLIENTMAC = '${body["mac"]}' where CLIENTUSERNAME ='${body["username"]}'`)
                 .then((data) => {
                     if (data && data.rowsAffected && data.rowsAffected.length > 0 && data.rowsAffected[0] > 0) {
