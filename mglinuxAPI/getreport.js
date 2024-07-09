@@ -39,7 +39,7 @@ module.exports = {
       db.query(`Select  *,ISNULL(TARMINALCLS,'NOGO') as status from ticket99 where TICKETNUMBER='${sql['barcode']}' and TARMINALID='${sql['userid']}' order by INTNUMBER DESC`).then((data) => {
         arraydata = []
         data.recordsets.forEach(element => {
-          if(element["status"]==="PENDING")
+          if(element["TARMINALCLS"]==="PENDING")
           {
             element["status"]="NOGO"
 
