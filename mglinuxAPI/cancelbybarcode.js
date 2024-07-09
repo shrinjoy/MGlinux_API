@@ -1,62 +1,54 @@
 module.exports = {
     cancel: function (req, sql) {
-
         return new Promise((resolve, reject) => {
-
-            sql.query(`UPDATE [TICKET99] set TARMINALCLS = 'CANCEL' where TICKETNUMBER= '${req["barcode"]}' and TARMINALCLS !='NOTWIN' and TARMINALCLS !='WIN' and  TARMINALCLS !='CANCEL' `)
-                .then((data) => {
-
-
-                    console.log(`SELECT * FROM [TICKET99] where TICKETNUMBER ='${req["barcode"]}'`);
-                    sql.query(`SELECT * FROM [TICKET99] where TICKETNUMBER ='${req["barcode"]}'`).then((balancedata) => {
+            // Update query to cancel the bet if it's currently 'NOTWIN' or 'WIN'
+            sql.query(`
+                UPDATE [TICKET99]
+                SET TARMINALCLS = 'CANCEL'
+                WHERE TICKETNUMBER = '${req["barcode"]}'
+                AND TARMINALCLS IN ('NOTWIN', 'WIN')
+            `)
+            .then((updateResult) => {
+                // Check if any rows were updated
+                if (updateResult.rowsAffected > 0) {
+                    // Fetch the updated ticket data
+                    sql.query(`
+                        SELECT * FROM [TICKET99]
+                        WHERE TICKETNUMBER = '${req["barcode"]}'
+                    `)
+                    .then((balancedata) => {
+                        // Check if ticket data was found
                         if (balancedata.recordset.length > 0) {
-                            console.log(data);
+                            // Extract balance to add and username
                             var balancetoadd = balancedata.recordset[0]["TICKETTOTALRS"];
-                            console.log("adding this balance:" + balancedata);
                             var username = balancedata.recordset[0]["TARMINALID"];
-                            sql.query(`UPDATE [CLIENTLOGIN] set CLIENTBALANCE  = CLIENTBALANCE+${balancetoadd} where CLIENTUSERNAME='${username}'`).then((data) => {
-                                console.log("added this balance:" + balancedata);
-                                sql.query(`UPDATE [TICKET99] set TARMINALCLS = 'CANCEL' where TICKETNUMBER= '${req["barcode"]}'`).then((d2)=>{
+                            
+                            // Update CLIENTLOGIN with the refunded balance
+                            sql.query(`
+                                UPDATE [CLIENTLOGIN]
+                                SET CLIENTBALANCE = CLIENTBALANCE + ${balancetoadd}
+                                WHERE CLIENTUSERNAME = '${username}'
+                            `)
+                            .then(() => {
                                 resolve({ "message": "canceled bet" });
-
-                                })
-                                .catch((err) => {
-                                    reject({ "error": "failed to add balance back due to :" + err })
-                                })
                             })
-                                .catch((err) => {
-                                    reject({ "error": "failed to add balance back due to :" + err })
-                                })
+                            .catch((err) => {
+                                reject({ "error": "failed to add balance back due to :" + err });
+                            });
+                        } else {
+                            reject({ "error": "failed to find ticket data" });
                         }
-
-                        else {
-
-
-                            console.log("no user found");
-                            reject({ "error": "failed to find userid " })
-
-                        }
-
-
                     })
-                        .catch((err) => {
-
-                            reject({ "error": "failed to retrive balance of player due  to :" + err })
-
-                        })
-
-                })
-                .catch((err) => {
-                    reject({ "error": "failed to cancel bet  due  to :" + err })
-
-                })
-
-
-        })
-
-
-
+                    .catch((err) => {
+                        reject({ "error": "failed to retrieve ticket data: " + err });
+                    });
+                } else {
+                    reject({ "error": "bet was not canceled, possibly already canceled" });
+                }
+            })
+            .catch((err) => {
+                reject({ "error": "failed to cancel bet: " + err });
+            });
+        });
     }
-
-
 }
