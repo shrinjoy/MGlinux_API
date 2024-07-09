@@ -56,8 +56,8 @@ FROM
                                                         .then((data) => {
                                                             var barcodedata = "B" + generateRandomNoise(6)+ data.recordset[0]["barcode"];
                                                             barcodedata = barcodedata.slice(0,16);
-                                                            var querystring = `INSERT INTO [TICKET99] (TICKETNUMBER,TICKETDETAILS,TICKETRS,TICKETTOTALRS,GAMEDATE,GAMETIME,TARMINALID,GAMEID) 
-                                    VALUES ('${barcodedata}','${req["tickets"]}',1,${req["totalbet"]},FORMAT(GETDATE(), 'yyyy-MM-dd'),FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss'),'${req["username"]}','${req["gameid"]}');`;
+                                                            var querystring = `INSERT INTO [TICKET99] (TICKETNUMBER,TICKETDETAILS,TICKETRS,TICKETTOTALRS,GAMEDATE,GAMETIME,TARMINALID,GAMEID,TARMINALCLS) 
+                                    VALUES ('${barcodedata}','${req["tickets"]}',1,${req["totalbet"]},FORMAT(GETDATE(), 'yyyy-MM-dd'),FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss'),'${req["username"]}','${req["gameid"]}','PENDING');`;
                                                             db.query(querystring)
                                                                 .then((data) => {
                                                                     resolve({ "barcode": barcodedata, "message": "placed bet " });
