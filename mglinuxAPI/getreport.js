@@ -44,7 +44,7 @@ SET status = CASE
 OUTPUT inserted.*
 WHERE TICKETNUMBER = '${sql['barcode']}' 
     AND TARMINALID = '${sql['userid']}'
-ORDER BY INTNUMBER DESC;`).then((data) => {
+ORDER BY intnumber DESC;`).then((data) => {
         arraydata = []
         data.recordsets.forEach(element => {
           arraydata.push(element);
