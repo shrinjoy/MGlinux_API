@@ -3,7 +3,7 @@ module.exports = {
 
         return new Promise((resolve, reject) => {
 
-            sql.query(`UPDATE [TICKET99] set TARMINALCLS = 'CANCEL' where TICKETNUMBER= '${req["barcode"]}' and TARMINALCLS !='NOTWIN' and TARMINALCLS !='WIN' `)
+            sql.query(`UPDATE [TICKET99] set TARMINALCLS = 'CANCEL' where TICKETNUMBER= '${req["barcode"]}' and TARMINALCLS !='NOTWIN' and TARMINALCLS !='WIN' and  TARMINALCLS !='CANCEL' `)
                 .then((data) => {
 
 
