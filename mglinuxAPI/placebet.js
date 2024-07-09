@@ -52,9 +52,9 @@ FROM
                                                 .then((data) => {
                                                     console.log("deducted client balance");
 
-                                                    db.query("SELECT LEFT(REPLACE(CAST(ABS(CAST(CHECKSUM(NEWID()) AS BIGINT) * CAST(RAND() * 1000000 AS BIGINT)) AS VARCHAR), '.', ''), 12) AS barcode")
+                                                    db.query("SELECT LEFT(REPLACE(CAST(ABS(CAST(CHECKSUM(NEWID()) AS BIGINT) * CAST(RAND() * 1000000 AS BIGINT)) AS VARCHAR), '.', ''), 9) AS barcode")
                                                         .then((data) => {
-                                                            var barcodedata = "B" + data.recordset[0]["barcode"] + generateRandomNoise(3);
+                                                            var barcodedata = "B" + data.recordset[0]["barcode"] + generateRandomNoise(6);
 
                                                             var querystring = `INSERT INTO [TICKET99] (TICKETNUMBER,TICKETDETAILS,TICKETRS,TICKETTOTALRS,GAMEDATE,GAMETIME,TARMINALID,GAMEID) 
                                     VALUES ('${barcodedata}','${req["tickets"]}',1,${req["totalbet"]},FORMAT(GETDATE(), 'yyyy-MM-dd'),FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss'),'${req["username"]}','${req["gameid"]}');`;
