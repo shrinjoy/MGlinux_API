@@ -52,7 +52,7 @@ FROM
                                                 .then((data) => {
                                                     console.log("deducted client balance");
 
-                                                    db.query("SELECT REPLACE(CAST(ABS(CAST(CHECKSUM(NEWID()) AS BIGINT) * CAST(RAND() * 1000000 AS BIGINT)) AS VARCHAR), '.', '') as barcode")
+                                                    db.query("SELECT LEFT(REPLACE(CAST(ABS(CAST(CHECKSUM(NEWID()) AS BIGINT) * CAST(RAND() * 1000000 AS BIGINT)) AS VARCHAR), '.', ''), 12) AS barcode")
                                                         .then((data) => {
                                                             var barcodedata = "B" + data.recordset[0]["barcode"] + generateRandomNoise(3);
 
