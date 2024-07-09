@@ -36,7 +36,7 @@ module.exports = {
   },
   getticketbybarcode: function (db, sql) {
     return new Promise((resolve, reject) => {
-      db.query(`Select  *,ISNULL(TARMINALCLS,'NOGO') as status from ticket99 where TICKETNUMBER='${sql['barcode']}'  order by INTNUMBER DESC`).then((data) => {
+      db.query(`Select  *,ISNULL(TARMINALCLS,'NOGO') as status from ticket99 where TICKETNUMBER='${sql['barcode']}' and TARMINALID='${sql['userid']}' order by INTNUMBER DESC`).then((data) => {
         arraydata = []
         data.recordsets.forEach(element => {
           arraydata.push(element);
