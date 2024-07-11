@@ -118,7 +118,7 @@ function Home() {
           )}
         </div>
         <div className="buttonGroup row">
-          <div style={{ width: "16%" }}>
+          <div style={{ width: "20%" }}>
             {isConnected ? (
               <button
                 className="homeBtn transparent"
@@ -137,7 +137,7 @@ function Home() {
               </button>
             )}
           </div>
-          <div style={{ width: "16%" }}>
+          <div style={{ width: "20%" }}>
             <button
               className="homeBtn login transparent"
               onClick={handleLoginNavigation}
@@ -145,7 +145,7 @@ function Home() {
               Login
             </button>
           </div>
-          <div style={{ width: "16%" }}>
+          <div style={{ width: "20%" }}>
             <button
               className="homeBtn transparent"
               onClick={() => window.electronAPI.systemSettings()}
@@ -153,15 +153,15 @@ function Home() {
               System
             </button>
           </div>
-          <div style={{ width: "16%" }}>
+          {/* <div style={{ width: "16%" }}>
             <button
               className="homeBtn transparent"
               onClick={() => window.electronAPI.printDriver()}
             >
               Init
             </button>
-          </div>
-          <div style={{ width: "16%" }}>
+          </div> */}
+          <div style={{ width: "20%" }}>
             <button
               className="homeBtn transparent"
               onClick={() => window.electronAPI.systemRestart()}
@@ -169,7 +169,7 @@ function Home() {
               Restart
             </button>
           </div>
-          <div style={{ width: "16%" }}>
+          <div style={{ width: "20%" }}>
             <button
               className="homeBtn transparent"
               onClick={() => window.electronAPI.systemShutdown()}
