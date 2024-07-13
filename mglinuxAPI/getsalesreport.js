@@ -39,8 +39,8 @@ module.exports = {
                 "netpoint": salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"],
                 "claimpoints": claimpoints,
                 "optpoints": (salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) - claimpoints,
-                "discountpoints": discountpoints,
-                "netplaypoints": netplay
+                "discountpoints": Math.floor(discountpoints),
+                "netplaypoints": Math.floor(netplay)
             };
     
             return finaldata;
