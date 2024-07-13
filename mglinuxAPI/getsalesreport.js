@@ -15,7 +15,9 @@ module.exports = {
     
             console.log(salesData);
     
-          
+            const clientData = await db.query(`
+                SELECT * FROM [NRDELUXE].[dbo].[CLIENTLOGIN] WHERE CLIENTUSERNAME = '${req['userid']}'
+            `);
     
             // Query to get claimpoints
             const claimData = await db.query(`
