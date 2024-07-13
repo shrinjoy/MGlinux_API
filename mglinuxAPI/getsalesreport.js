@@ -1,58 +1,56 @@
 module.exports = {
-    getsalesdetails: function (db, req) {
-        return new Promise((resolve, reject) => {
-            db.query(`SELECT 
-        ISNULL(SUM([TICKETTOTALRS]), 0) AS playpoint,
-        ISNULL(SUM(CASE WHEN [TARMINALCLS] = 'CANCEL' THEN [TICKETTOTALRS] ELSE 0 END), 0) AS cancelpoint,
-
-        ISNULL(SUM([TICKETTOTALRS]), 0)
-        - ISNULL(SUM(CASE WHEN [TARMINALCLS] = 'CANCEL' THEN [TICKETTOTALRS] ELSE 0 END), 0) AS netpoint,
-        ISNULL(SUM(CASE WHEN [TARMINALCLS] = 'CLAIMED' THEN [WINRS] ELSE 0 END), 0) AS claimpoints,
-        ISNULL(SUM([TICKETTOTALRS]), 0)
-        - ISNULL(SUM(CASE WHEN [TARMINALCLS] = 'CANCEL' THEN [TICKETTOTALRS] ELSE 0 END), 0)
-        - ISNULL(SUM(CASE WHEN [TARMINALCLS] = 'CLAIMED' THEN [WINRS] ELSE 0 END), 0) AS optpoints
-        FROM TICKET99
-        WHERE 
-        TARMINALID = '${req['userid']}' 
-        AND GAMEDATE BETWEEN '${req['startdate']}'  AND '${req['enddate']}' ;`)
-                .then((data) => {
-
-
-                    db.query(`SELECT * FROM [NRDELUXE].[dbo].[CLIENTLOGIN] where CLIENTUSERNAME = '${req['userid']}' `).then((data2)=>{
-
-
-                        var discountpoints= data.recordset[0]["optpoints"] * (data2.recordset[0]["CLIENTPARSENT"]/100);
-                   
-                        var netplay = data.recordset[0]["optpoints"]-discountpoints;
-                        var finaldata = {
-                            "playpoint": data.recordset[0]["playpoint"],
-                            "cancelpoint":data.recordset[0]["cancelpoint"],
-                            "netpoint": data.recordset[0]["netpoint"],
-                            "claimpoints": data.recordset[0]["claimpoints"],
-                            "optpoints": data.recordset[0]["optpoints"],
-                            "discountpoints":Math.floor(discountpoints),
-                            "netplaypoints":Math.floor(netplay)
-                          }
+    //userid,startdate,enddate
     
-                        resolve(finaldata);
-
-
-                    })
-                    .catch((err) => {
-
-                        reject(err);
+    getsalesdetails: async function(db, req) {
+        try {
+            // Query to get playpoint and cancelpoint
+            const salesData = await db.query(`
+                SELECT 
+                    ISNULL(SUM(CASE WHEN TICKET99.TARMINALCLS <> 'CANCEL' THEN TICKETTOTALRS ELSE 0 END), 0) AS playpoint,
+                    ISNULL(SUM(CASE WHEN TICKET99.TARMINALCLS = 'CANCEL' THEN TICKETTOTALRS ELSE 0 END), 0) AS cancelpoint
+                FROM TICKET99
+                WHERE TICKET99.TARMINALID = '${req["userid"]}'
+                  AND TICKET99.GAMEDATE BETWEEN '${req["startdate"]}' AND '${req["enddate"]}'
+            `);
     
-                    })
-                    
-
-                })
-                .catch((err) => {
-
-                    reject(err);
-
-                })
-        });
-    },
+            console.log(salesData);
+    
+            // Query to get CLIENTLOGIN data
+            const clientData = await db.query(`
+                SELECT * FROM [NRDELUXE].[dbo].[CLIENTLOGIN] WHERE CLIENTUSERNAME = '${req['userid']}'
+            `);
+    
+            // Query to get claimpoints
+            const claimData = await db.query(`
+                SELECT ISNULL(SUM(WINRS), 0) AS claimpoint
+                FROM TICKET99
+                WHERE TARMINALID = '${req['userid']}'
+                  AND claimdate BETWEEN '${req["startdate"]}' AND '${req["enddate"]}'
+            `);
+    
+            const claimpoints = claimData.recordset[0]["claimpoint"] || 0;
+    
+            // Calculate discountpoints, netplay, and prepare finaldata object
+            const discountpoints = ((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) - claimpoints) * (clientData.recordset[0]["CLIENTPARSENT"] / 100);
+            const netplay = ((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) - claimpoints) - discountpoints;
+    
+            const finaldata = {
+                "playpoint": salesData.recordset[0]["playpoint"],
+                "cancelpoint": salesData.recordset[0]["cancelpoint"],
+                "netpoint": salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"],
+                "claimpoints": claimpoints,
+                "optpoints": (salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) - claimpoints,
+                "discountpoints": Math.floor(discountpoints),
+                "netplaypoints": Math.floor(netplay)
+            };
+    
+            return finaldata;
+        } catch (err) {
+            console.error(err);
+            throw err; // Re-throw the error to handle it further up the call stack
+        }
+    }
+    ,
     getsalesreport: function (db, request) {
         return new Promise((resolve, reject) => {
             db.query(`SELECT  SUM(TICKETTOTALRS) as played,SUM(WINRS) as win ,(SUM(TICKETTOTALRS)-SUM(WINRS)) as endamount  from TICKET99 WHERE  GAMEDATE  BETWEEN  '${request["startdate"]}'and '${request["enddate"]}' and TARMINALID ='${request["username"]}'`).then((data) => {
