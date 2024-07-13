@@ -15,17 +15,14 @@ module.exports = {
     
             console.log(salesData);
     
-            // Query to get CLIENTLOGIN data
-            const clientData = await db.query(`
-                SELECT * FROM [NRDELUXE].[dbo].[CLIENTLOGIN] WHERE CLIENTUSERNAME = '${req['userid']}'
-            `);
+          
     
             // Query to get claimpoints
             const claimData = await db.query(`
                 SELECT ISNULL(SUM(WINRS), 0) AS claimpoint
                 FROM TICKET99
                 WHERE TARMINALID = '${req['userid']}'
-                  AND claimdate BETWEEN '${req["startdate"]}' AND '${req["enddate"]}'
+                  AND claimdate BETWEEN '${req["startdate"]}' AND '${req["enddate"]} '
             `);
     
             const claimpoints = claimData.recordset[0]["claimpoint"] || 0;
