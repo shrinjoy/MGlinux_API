@@ -6,7 +6,7 @@ module.exports = {
             // Query to get playpoint and cancelpoint
             const salesData = await db.query(`
                 SELECT 
-                    ISNULL(SUM(CASE WHEN TICKET99.TARMINALCLS <> 'CANCEL' THEN TICKETTOTALRS ELSE 0 END), 0) AS playpoint,
+                    ISNULL(SUM(CASE WHEN TICKET99.TARMINALCLS <> '' THEN TICKETTOTALRS ELSE 0 END), 0) AS playpoint,
                     ISNULL(SUM(CASE WHEN TICKET99.TARMINALCLS = 'CANCEL' THEN TICKETTOTALRS ELSE 0 END), 0) AS cancelpoint
                 FROM TICKET99
                 WHERE TICKET99.TARMINALID = '${req["userid"]}'
