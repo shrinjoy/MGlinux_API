@@ -30,7 +30,7 @@ module.exports = {
             const claimpoints = claimData.recordset[0]["claimpoint"] || 0;
     
             // Calculate discountpoints, netplay, and prepare finaldata object
-            const discountpoints = ((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) - claimpoints) * (clientData.recordset[0]["CLIENTPARSENT"] / 100);
+            const discountpoints = ((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) ) * (clientData.recordset[0]["CLIENTPARSENT"] / 100);
             const netplay = ((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) - claimpoints) - discountpoints;
     
             const finaldata = {
