@@ -285,7 +285,7 @@ app.get('/timeleft', async function (req, res) {
 FROM 
     [NRDELUXE].[dbo].[TARMINALTIMEZONE]`)
         res.status(200).send({ "time": data.recordset[0].timer , 
-            "gameid": data.recordset[0].GAMEID[0], 
+            "gameid": data.recordset[0].GAMEID, 
             "nextgamedate": data.recordset[0].NEXTDRAW,
              "nextgametime": data.recordset[0].NEXTDRAW })
 
