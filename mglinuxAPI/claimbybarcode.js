@@ -8,7 +8,7 @@ module.exports = {
                     }
                     else {
                         const winrs = data.recordset[0]["WINRS"];
-                        sql.query(`UPDATE "TICKET99" SET "TARMINALCLS"='CLAIMED' where "TICKETNUMBER"='${req["barcode"]}' and TARMINALID='${req["userid"]}'`)
+                        sql.query(`UPDATE "TICKET99" SET "TARMINALCLS"='CLAIMED' ,claimdate =GETDATE() where "TICKETNUMBER"='${req["barcode"]}' and TARMINALID='${req["userid"]}'`)
                             .then(() => {
                                 sql.query(`UPDATE "CLIENTLOGIN" SET CLIENTBALANCE = CLIENTBALANCE+${parseInt(winrs) || 0} where "CLIENTID"='${req["userid"]}'`)
                                     .then(() => {
