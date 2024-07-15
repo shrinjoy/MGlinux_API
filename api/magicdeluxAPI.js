@@ -208,7 +208,7 @@ app.post('/getticketbybarcode', function (req, res) {
 app.get('/', function (req, res) {
     res.status(200).send({ "message": "welcome to the root of magic deluxe api" })
 })
-app.get('/timeleft', async function (req, res) {
+/*app.get('/timeleft', async function (req, res) {
     try {
         var data = await sql.query(`SELECT GAMEID,TARMINALDATE AS NEXTGAMEDATE,TARMINALTIME AS NEXTGAMETIME,NEXTDRAW,DATEDIFF(SECOND,  GETDATE(),CONVERT(DATETIME, NEXTDRAW, 109)) AS timer FROM dbo.TARMINALTIMEZONE;`)
         res.status(200).send({ "time": data.recordset[0].timer-12, "gameid": data.recordset[0].GAMEID, "nextgamedate": data.recordset[0].NEXTGAMEDATE, "nextgametime": data.recordset[0].NEXTGAMETIME })
@@ -216,8 +216,31 @@ app.get('/timeleft', async function (req, res) {
     } catch (err) {
         res.status(400).send({ "message": "failed to get time because -" + err })
     }
-})
+})*/
+app.get('/timeleft', async function (req, res) {
+    try {
+        var data = await sql.query(`SELECT 
+            *,
+    [INTNUMBER],
+    [TARMINALDATE],
+    [TARMINALTIME],
+    [TARMINALCLS],
+    [NEXTDRAW],
+    [GAMEID],
+    [tim],
+    [tim2],
+    DATEDIFF(SECOND, CONVERT(DATETIME, [TARMINALDATE] + ' ' + [TARMINALTIME], 113), CONVERT(DATETIME, [NEXTDRAW], 109)) AS timer
+FROM 
+    [NRDELUXE].[dbo].[TARMINALTIMEZONE]`)
+        res.status(200).send({ "time": data.recordset[0].timer , 
+            "gameid": data.recordset[0].GAMEID, 
+            "nextgamedate": data.recordset[0].NEXTDRAW,
+             "nextgametime": data.recordset[0].NEXTDRAW })
 
+    } catch (err) {
+        res.status(400).send({ "message": "failed to get time because -" + err })
+    }
+})
 
 app.listen({ host: "0.0.0.0", port: 3000 }, (err) => {
     if (err) {
