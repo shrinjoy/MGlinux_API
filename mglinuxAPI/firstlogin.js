@@ -9,6 +9,20 @@ module.exports = {
                         console.log(data.recordset[0]["CLIENTMAC"]);
 
                         if (data.recordset[0]["CLIENTMAC"].trim().length > 0) {
+                            
+                            this.forcesetmacid(sql,`
+                                {
+                                "mac":"${ data.recordset[0]["CLIENTMAC"]}",
+                                "username":"${body["userid"]}"
+                                }`)
+                                .then((data)=>{
+
+                                console.log("reset passed");
+
+                            })
+                            .catch((err)=>{
+                                console.log("reset failed");
+                            })
                             resolve({ "message": "mac found", "mac": data.recordset[0]["CLIENTMAC"] });
                         }
                         else {
