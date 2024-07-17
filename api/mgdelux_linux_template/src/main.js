@@ -134,8 +134,8 @@ ipcMain.on("system-settings", () => {
 ipcMain.handle("get-mac-address", fetchMacAddress);
 
 async function fetchMacAddress() {
-  // const macAddress = await getmac.default();
-  const macAddress = await getSerialNumber();
+  const macAddress = await getmac.default();
+  // const macAddress = await getSerialNumber();
   if (macAddress) {
     return macAddress;
   }
