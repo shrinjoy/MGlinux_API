@@ -5,6 +5,8 @@ const fs = require("fs");
 const path = require("node:path");
 const getmac = require("getmac");
 var internetAvailable = require("internet-available");
+var serialNumber = require('serial-number');
+serialNumber.preferUUID = true;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -29,7 +31,7 @@ const createWindow = () => {
   // and load the index.html of the app.
 
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
-  // mainWindow.loadURL('http://193.203.163.194:8082/');
+  // mainWindow.loadURL('http://192.168.1.86:3000/');
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
@@ -132,10 +134,23 @@ ipcMain.on("system-settings", () => {
 ipcMain.handle("get-mac-address", fetchMacAddress);
 
 async function fetchMacAddress() {
-  const macAddress = await getmac.default();
+  // const macAddress = await getmac.default();
+  const macAddress = await getSerialNumber();
   if (macAddress) {
     return macAddress;
   }
+}
+
+function getSerialNumber() {
+  return new Promise((resolve, reject) => {
+    serialNumber((err, value) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(value);
+      }
+    });
+  });
 }
 
 // Printing Focus Window
