@@ -11,7 +11,7 @@ function App() {
     return (
         <HashRouter>
             <Routes>
-                <Route path="/main_window" element={<Loader />} />
+                <Route path="/main_window" element={<Home />} />
                 <Route path="/home" element={<Home />} />
                 <Route path='/login' Component={() => { window.location.href = "http://77.37.47.190:8083/#/login"; return null; }} />
                 {/* <Route path='/login' element={<Login />} /> */}
