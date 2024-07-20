@@ -1,6 +1,6 @@
 {
-  "name": "MGDeluxe",
-  "productName": "MGDeluxe",
+  "name": "SmartWin",
+  "productName": "SmartWin",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
