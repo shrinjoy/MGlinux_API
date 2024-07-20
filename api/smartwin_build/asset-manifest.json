@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.67537ff6.css",
-    "main.js": "/static/js/main.14346abe.js",
+    "main.css": "/static/css/main.8f94c8a1.css",
+    "main.js": "/static/js/main.33440e4d.js",
     "static/js/453.5bfe0648.chunk.js": "/static/js/453.5bfe0648.chunk.js",
     "static/media/background.png": "/static/media/background.463fcc03d8e538d27350.png",
     "static/media/back.jpeg": "/static/media/back.b078d836c23e542b57f3.jpeg",
@@ -20,12 +20,12 @@
     "static/media/gameScreenLogo.webp": "/static/media/gameScreenLogo.3d0e95643a39d3da7d56.webp",
     "static/media/online.webp": "/static/media/online.a8ff3831ed39cc0e8084.webp",
     "index.html": "/index.html",
-    "main.67537ff6.css.map": "/static/css/main.67537ff6.css.map",
-    "main.14346abe.js.map": "/static/js/main.14346abe.js.map",
+    "main.8f94c8a1.css.map": "/static/css/main.8f94c8a1.css.map",
+    "main.33440e4d.js.map": "/static/js/main.33440e4d.js.map",
     "453.5bfe0648.chunk.js.map": "/static/js/453.5bfe0648.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.67537ff6.css",
-    "static/js/main.14346abe.js"
+    "static/css/main.8f94c8a1.css",
+    "static/js/main.33440e4d.js"
   ]
 }
