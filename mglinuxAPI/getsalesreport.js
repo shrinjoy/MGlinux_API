@@ -18,7 +18,7 @@ module.exports = {
             const clientData = await db.query(`
                 SELECT * FROM [NRDELUXE].[dbo].[CLIENTLOGIN] WHERE CLIENTUSERNAME = '${req['userid']}'
             `);
-    
+                console.log(`SELECT * FROM [NRDELUXE].[dbo].[CLIENTLOGIN] WHERE CLIENTUSERNAME = '${req['userid']}'`);
             // Query to get claimpoints
             const claimData = await db.query(`
                 SELECT ISNULL(SUM(WINRS), 0) AS claimpoint
@@ -28,9 +28,10 @@ module.exports = {
             `);
     
             const claimpoints = claimData.recordset[0]["claimpoint"] || 0;
-    
+            var percetange =(clientData.recordset[0]["CLIENTPARSENT"] / 100);
             // Calculate discountpoints, netplay, and prepare finaldata object
-            const discountpoints = ((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) ) * (clientData.recordset[0]["CLIENTPARSENT"] / 100);
+        
+            const discountpoints = ((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) ) * percetange;
             const netplay = ((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) - claimpoints) - discountpoints;
     
             const finaldata = {
@@ -39,8 +40,8 @@ module.exports = {
                 "netpoint": salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"],
                 "claimpoints": claimpoints,
                 "optpoints": (salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) - claimpoints,
-                "discountpoints": Math.floor(discountpoints),
-                "netplaypoints": Math.floor(netplay)
+                "discountpoints": discountpoints,
+                "netplaypoints":netplay
             };
     
             return finaldata;
