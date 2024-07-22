@@ -3,12 +3,26 @@ module.exports = {
 
         return new Promise((resolve, reject) => {
             try{
-            sql.query(`SELECT CLIENTMAC from CLIENTLOGIN where CLIENTUSERNAME ='${body["username"]}'`)
+            sql.query(`SELECT CLIENTMAC from CLIENTLOGIN where CLIENTUSERNAME ='${body["userid"]}'`)
                 .then((data) => {
                     if (data && data.recordset && data.recordset.length > 0) {
                         console.log(data.recordset[0]["CLIENTMAC"]);
 
                         if (data.recordset[0]["CLIENTMAC"].trim().length > 0) {
+                            
+                            this.forcesetmacid(sql,`
+                                {
+                                "mac":"${ data.recordset[0]["CLIENTMAC"]}",
+                                "username":"${body["userid"]}"
+                                }`)
+                                .then((data)=>{
+
+                                console.log("reset passed");
+
+                            })
+                            .catch((err)=>{
+                                console.log("reset failed");
+                            })
                             resolve({ "message": "mac found", "mac": data.recordset[0]["CLIENTMAC"] });
                         }
                         else {
@@ -35,7 +49,7 @@ module.exports = {
     checkifmacthere_bymac: function (sql, body) {
         return new Promise((resolve, reject) => {
             try{
-            sql.query(`SELECT * from CLIENTLOGIN where CLIENTMAC ='${body["mac"]}' and CLIENTUSERNAME ='${body["userid"]}`)
+            sql.query(`SELECT * from CLIENTLOGIN where CLIENTMAC ='${body["mac"]}' `)
                 .then((data) => {
                     if (data && data.recordset && data.recordset.length > 0) {
                         console.log(data.recordset[0]["CLIENTMAC"]);
