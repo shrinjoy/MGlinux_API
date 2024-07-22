@@ -25,6 +25,7 @@ const createWindow = () => {
       zoomFactor: 1.0,
       nodeIntegration: true,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      devTools: !app.isPackaged,
     },
   });
 
