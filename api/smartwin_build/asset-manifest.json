@@ -1,33 +1,39 @@
 {
   "files": {
-    "main.css": "/static/css/main.e4485d11.css",
-    "main.js": "/static/js/main.e0c8faed.js",
+    "main.css": "/static/css/main.d9d55fd1.css",
+    "main.js": "/static/js/main.49dbdb78.js",
     "static/js/453.5bfe0648.chunk.js": "/static/js/453.5bfe0648.chunk.js",
     "static/media/smnartwinlogin.png": "/static/media/smnartwinlogin.4a9ac67bd01f705d55d4.png",
     "static/media/background.png": "/static/media/background.463fcc03d8e538d27350.png",
+    "static/media/lobbyWrapper.png": "/static/media/lobbyWrapper.2eacf47c38e356938d59.png",
     "static/media/back.jpeg": "/static/media/back.b078d836c23e542b57f3.jpeg",
     "static/media/1.jpeg": "/static/media/1.6a2449fd4461e513177a.jpeg",
     "static/media/8.jpeg": "/static/media/8.721ef9c93df1a7f1af34.jpeg",
     "static/media/5.jpeg": "/static/media/5.470d93f8a91792dafb97.jpeg",
     "static/media/4.jpeg": "/static/media/4.b4d55dc38e0d4bca8285.jpeg",
     "static/media/3.jpeg": "/static/media/3.39815e21194a62c08a24.jpeg",
+    "static/media/gamelogologin.png": "/static/media/gamelogologin.10e7ea8acfa0fb90bd63.png",
     "static/media/7.jpeg": "/static/media/7.374e9ff374184d248d73.jpeg",
     "static/media/2.jpeg": "/static/media/2.94e1969040277b6e55b8.jpeg",
+    "static/media/2figit2thumbnail.png": "/static/media/2figit2thumbnail.c9c88c5fa4aaae483d86.png",
     "static/media/6.jpeg": "/static/media/6.8be556e6ef25857965b4.jpeg",
-    "static/media/restart.png": "/static/media/restart.ebb3e919be0de1226eaa.png",
     "static/media/back_image.png": "/static/media/back_image.f0fe9777a77f08f668a5.png",
     "static/media/lightbulbGreen.png": "/static/media/lightbulbGreen.53258b821e35ea1040d3.png",
     "static/media/bigLogo.webp": "/static/media/bigLogo.a9efb96b9018b8a8ce1e.webp",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
     "static/media/blueMsg.webp": "/static/media/blueMsg.82c42d1b701c17659f0a.webp",
     "static/media/gameScreenLogo.webp": "/static/media/gameScreenLogo.3d0e95643a39d3da7d56.webp",
     "static/media/online.webp": "/static/media/online.a8ff3831ed39cc0e8084.webp",
     "index.html": "/index.html",
-    "main.e4485d11.css.map": "/static/css/main.e4485d11.css.map",
-    "main.e0c8faed.js.map": "/static/js/main.e0c8faed.js.map",
+    "main.d9d55fd1.css.map": "/static/css/main.d9d55fd1.css.map",
+    "main.49dbdb78.js.map": "/static/js/main.49dbdb78.js.map",
     "453.5bfe0648.chunk.js.map": "/static/js/453.5bfe0648.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e4485d11.css",
-    "static/js/main.e0c8faed.js"
+    "static/css/main.d9d55fd1.css",
+    "static/js/main.49dbdb78.js"
   ]
 }
