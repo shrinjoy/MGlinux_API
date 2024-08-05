@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "./static/css/main.1379c228.css",
-    "main.js": "./static/js/main.115dde31.js",
+    "main.js": "./static/js/main.eb49c22c.js",
     "static/js/453.1ab6a817.chunk.js": "./static/js/453.1ab6a817.chunk.js",
     "static/media/bold.ttf": "./static/media/bold.506249c98341196b206a.ttf",
     "static/media/Dosis-Regular.otf": "./static/media/Dosis-Regular.b6316eb4930d9b72d856.otf",
@@ -9,11 +9,11 @@
     "static/media/bg.png": "./static/media/bg.6f4d0f629145e3a40afb.png",
     "index.html": "./index.html",
     "main.1379c228.css.map": "./static/css/main.1379c228.css.map",
-    "main.115dde31.js.map": "./static/js/main.115dde31.js.map",
+    "main.eb49c22c.js.map": "./static/js/main.eb49c22c.js.map",
     "453.1ab6a817.chunk.js.map": "./static/js/453.1ab6a817.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1379c228.css",
-    "static/js/main.115dde31.js"
+    "static/js/main.eb49c22c.js"
   ]
 }
