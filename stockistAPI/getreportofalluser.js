@@ -10,9 +10,9 @@ SELECT
 	SUM(TICKET99.WINRS) AS won,
 	( SUM(TICKET99.TICKETTOTALRS)-SUM(TICKET99.WINRS)) as revenue
 FROM
-    [playjeeto].[dbo].[CLIENTLOGIN]
+     [CLIENTLOGIN]
 JOIN
-    [playjeeto].[dbo].[TICKET99]
+     [TICKET99]
 ON 
     CLIENTLOGIN.CLIENTUSERNAME = TICKET99.TARMINALID
 	where  CLIENTLOGIN.CLIENTDIST='spark' and TICKET99.GAMEDATE='2024/06/26'
@@ -42,9 +42,9 @@ module.exports=
            SUM(TICKET99.WINRS) AS won,
            ( SUM(TICKET99.TICKETTOTALRS)-SUM(TICKET99.WINRS)) as revenue
        FROM
-           [playjeeto].[dbo].[CLIENTLOGIN]
+            [CLIENTLOGIN]
        JOIN
-           [playjeeto].[dbo].[TICKET99]
+            [TICKET99]
        ON 
            CLIENTLOGIN.CLIENTUSERNAME = TICKET99.TARMINALID
            where  (CLIENTLOGIN.CLIENTDIST='${json["username"]}' or CLIENTLOGIN.CLIENTSUPDIST='${json["username"]}' or CLIENTLOGIN.CLIENTADMIN='${json["username"]}') 

@@ -4,13 +4,13 @@ module.exports = {
         userid password targetuserid amount
         */
         return new Promise((resolve, reject) => {
-            db.query(`SELECT * FROM [playjeeto].[dbo].[CLIENTLOGIN] where CLIENTID='${json["userid"]}' and CLIENTPASSWORD=${json["password"]}`).then((data) => {
+            db.query(`SELECT * FROM  [CLIENTLOGIN] where CLIENTID='${json["userid"]}' and CLIENTPASSWORD=${json["password"]}`).then((data) => {
                 if (data.recordset.length < 1) {
                     reject({ "error": "no user found" });
                 }
                 else {
                     if (parseInt(data.recordset[0]["CLIENTBALANCE"]) >= parseInt( Math.abs(json["amount"]))) {
-                        db.query(`SELECT * FROM [playjeeto].[dbo].[CLIENTLOGIN] where CLIENTID='${json["targetid"]}' and (CLIENTDIST='${json["username"]}' or CLIENTSUPDIST='${json["username"]}' or CLIENTADMIN='${json["username"]}')`)
+                        db.query(`SELECT * FROM  [CLIENTLOGIN] where CLIENTID='${json["targetid"]}' and (CLIENTDIST='${json["username"]}' or CLIENTSUPDIST='${json["username"]}' or CLIENTADMIN='${json["username"]}')`)
                             .then((data) => {
                                 if (data.recordset.length < 1) {
                                     reject({ "error": "nigga who?" });
@@ -19,8 +19,8 @@ module.exports = {
                                 else {
                                     console.log(json["amount"])
                                     //user have enough balance
-                                    db.query(`UPDATE [playjeeto].[dbo].[CLIENTLOGIN] set CLIENTBALANCE = CLIENTBALANCE+${ Math.abs(json["amount"])}  where CLIENTID='${json["targetid"]}' and (CLIENTDIST='${json["username"]}' or CLIENTSUPDIST='${json["username"]}' or CLIENTADMIN='${json["username"]}')`).then((data) => {
-                                        db.query(`UPDATE [playjeeto].[dbo].[CLIENTLOGIN] set CLIENTBALANCE = CLIENTBALANCE - ${ Math.abs(json["amount"])}  where CLIENTID='${json["userid"]}'  `).then((data) => {
+                                    db.query(`UPDATE  [CLIENTLOGIN] set CLIENTBALANCE = CLIENTBALANCE+${ Math.abs(json["amount"])}  where CLIENTID='${json["targetid"]}' and (CLIENTDIST='${json["username"]}' or CLIENTSUPDIST='${json["username"]}' or CLIENTADMIN='${json["username"]}')`).then((data) => {
+                                        db.query(`UPDATE  [CLIENTLOGIN] set CLIENTBALANCE = CLIENTBALANCE - ${ Math.abs(json["amount"])}  where CLIENTID='${json["userid"]}'  `).then((data) => {
                                             resolve({ "message": "amount transfer successfull" });
                                         })
                                     })
@@ -48,13 +48,13 @@ module.exports = {
         userid password targetuserid amount
         */
         return new Promise((resolve, reject) => {
-            db.query(`SELECT * FROM [playjeeto].[dbo].[CLIENTLOGIN] where CLIENTID='${json["userid"]}' and CLIENTPASSWORD=${json["password"]}`).then((data) => {
+            db.query(`SELECT * FROM  [CLIENTLOGIN] where CLIENTID='${json["userid"]}' and CLIENTPASSWORD=${json["password"]}`).then((data) => {
                 if (data.recordset.length < 1) {
                     reject({ "error": "no user found" });
                 }
                 else {
 
-                    db.query(`SELECT * FROM [playjeeto].[dbo].[CLIENTLOGIN] where CLIENTID='${json["targetid"]}' and (CLIENTDIST='${json["username"]}' or CLIENTSUPDIST='${json["username"]}' or CLIENTADMIN='${json["username"]}')`)
+                    db.query(`SELECT * FROM  [CLIENTLOGIN] where CLIENTID='${json["targetid"]}' and (CLIENTDIST='${json["username"]}' or CLIENTSUPDIST='${json["username"]}' or CLIENTADMIN='${json["username"]}')`)
                         .then((data) => {
 
 
@@ -68,8 +68,8 @@ module.exports = {
 
                                     console.log(json["amount"])
                                     //user have enough balance
-                                    db.query(`UPDATE [playjeeto].[dbo].[CLIENTLOGIN] set CLIENTBALANCE = CLIENTBALANCE-${ Math.abs(json["amount"])}  where CLIENTID='${json["targetid"]}' and (CLIENTDIST='${json["username"]}' or CLIENTSUPDIST='${json["username"]}' or CLIENTADMIN='${json["username"]}')`).then((data) => {
-                                        db.query(`UPDATE [playjeeto].[dbo].[CLIENTLOGIN] set CLIENTBALANCE = CLIENTBALANCE + ${ Math.abs(json["amount"])}  where CLIENTID='${json["userid"]}'  `).then((data) => {
+                                    db.query(`UPDATE  [CLIENTLOGIN] set CLIENTBALANCE = CLIENTBALANCE-${ Math.abs(json["amount"])}  where CLIENTID='${json["targetid"]}' and (CLIENTDIST='${json["username"]}' or CLIENTSUPDIST='${json["username"]}' or CLIENTADMIN='${json["username"]}')`).then((data) => {
+                                        db.query(`UPDATE  [CLIENTLOGIN] set CLIENTBALANCE = CLIENTBALANCE + ${ Math.abs(json["amount"])}  where CLIENTID='${json["userid"]}'  `).then((data) => {
                                             resolve({ "message": "amount transfer successfull" });
                                         })
                                     })
