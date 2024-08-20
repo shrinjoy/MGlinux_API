@@ -35,7 +35,7 @@ module.exports = {
 
                         if (data.recordset[0]["CLIENTMAC"] !== request["macid"]) {
                           
-                            db.query(`UPDATE [CLIENTLOGIN] set CLIENTMAC = '' where CLIENTMAC = '${request["macid"]}'`)
+                          //  db.query(`UPDATE [CLIENTLOGIN] set CLIENTMAC = '' where CLIENTMAC = '${request["macid"]}'`)
                             
                             db.query(`UPDATE [CLIENTLOGIN] set requestedmac = '${request["macid"]}' where  CLIENTUSERNAME ='${request["username"]}' and CLIENTPASSWORD='${request["password"]}'`)
 
