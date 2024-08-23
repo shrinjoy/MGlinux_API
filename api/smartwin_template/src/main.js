@@ -61,10 +61,10 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  // if (isFirstStartup()) {
-  //   // handleForceMacId();
-  //   setFirstStartupFlag();
-  // }
+  if (isFirstStartup()) {
+    // handleForceMacId();
+    setFirstStartupFlag();
+  }
 
   createWindow();
 
@@ -117,7 +117,7 @@ ipcMain.on("system-restart", () => {
 
 ipcMain.on("print-driver-settings", () => {
   if (os.platform() === "win32") {
-    shell.openPath("/");
+    shell.openPath("/home/driver/");
   } else {
     exec("gnome-terminal -- /usr/share/autodriver/autoprinter.sh");
   }
