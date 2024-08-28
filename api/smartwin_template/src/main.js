@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("node:path");
 const getmac = require("getmac");
 var internetAvailable = require("internet-available");
-var serialNumber = require('serial-number');
+var serialNumber = require("serial-number");
 serialNumber.preferUUID = true;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -31,8 +31,8 @@ const createWindow = () => {
 
   // and load the index.html of the app.
 
-  // mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
-  mainWindow.loadURL('http://77.37.47.190:8084/');
+  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  // mainWindow.loadURL('http://77.37.47.190:8084/');
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
