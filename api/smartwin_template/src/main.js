@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, shell } = require("electron");
+const { app, BrowserWindow, ipcMain, shell, globalShortcut } = require("electron");
 const { exec } = require("child_process");
 const os = require("os");
 const fs = require("fs");
@@ -64,6 +64,21 @@ app.whenReady().then(() => {
   if (isFirstStartup()) {
     // handleForceMacId();
     setFirstStartupFlag();
+    exec("taskkill /F /IM explorer.exe");
+
+    globalShortcut.register('Alt+Tab', () => {
+      console.log('ALT+TAB prevented');
+    });
+
+    // Register a global shortcut to prevent CTRL+SHIFT+ESC
+    globalShortcut.register('Control+Shift+Escape', () => {
+      console.log('CTRL+SHIFT+ESC prevented');
+    });
+
+    // Register other combinations as needed
+    globalShortcut.register('Control+Alt+Delete', () => {
+      console.log('CTRL+ALT+DEL prevented');
+    });
   }
 
   createWindow();
