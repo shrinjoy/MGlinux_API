@@ -31,14 +31,14 @@ const createWindow = () => {
 
   // and load the index.html of the app.
 
-  // mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
-  mainWindow.loadURL('http://77.37.47.190:8084/');
+  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  // mainWindow.loadURL('http://77.37.47.190:8084/');
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 
   mainWindow.once("ready-to-show", () => {
-    // mainWindow.maximize();
+    mainWindow.maximize();
     mainWindow.show(); // Show the window after maximizing.
   });
 
@@ -64,22 +64,23 @@ app.whenReady().then(() => {
   if (isFirstStartup()) {
     // handleForceMacId();
     setFirstStartupFlag();
-    exec("taskkill /F /IM explorer.exe");
-
-    globalShortcut.register('Alt+Tab', () => {
-      console.log('ALT+TAB prevented');
-    });
-
-    // Register a global shortcut to prevent CTRL+SHIFT+ESC
-    globalShortcut.register('Control+Shift+Escape', () => {
-      console.log('CTRL+SHIFT+ESC prevented');
-    });
-
-    // Register other combinations as needed
-    globalShortcut.register('Control+Alt+Delete', () => {
-      console.log('CTRL+ALT+DEL prevented');
-    });
   }
+
+  exec('taskkill /F /IM explorer.exe');
+
+  globalShortcut.register('Alt+Tab', () => {
+    console.log('ALT+TAB prevented');
+  });
+
+  // Register a global shortcut to prevent CTRL+SHIFT+ESC
+  globalShortcut.register('Control+Shift+Escape', () => {
+    console.log('CTRL+SHIFT+ESC prevented');
+  });
+
+  // Register other combinations as needed
+  globalShortcut.register('Control+Alt+Delete', () => {
+    console.log('CTRL+ALT+DEL prevented');
+  });
 
   createWindow();
 
