@@ -20,6 +20,7 @@
   },
   "build": {
     "appId": "com.electron.smartwin",
+    "asar": true,
     "mac": {
       "category": "multigame"
     },
