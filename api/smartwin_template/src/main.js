@@ -40,7 +40,15 @@ const createWindow = () => {
   mainWindow.once("ready-to-show", () => {
     mainWindow.maximize();
     mainWindow.show(); // Show the window after maximizing.
+    mainWindow.setAlwaysOnTop(true);
+    mainWindow.focus();
   });
+  mainWindow.on("show", () => {
+    setTimeout(() => {
+      mainWindow.focus();
+    }, 200);
+  });
+
 
   // Back To Home Function
   ipcMain.handle("back-home", async () => {
