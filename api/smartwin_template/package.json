@@ -11,7 +11,7 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\"",
     "package-linux": "electron-packager . --platform=linux --arch=ia32 --icon=icons/icon256.png --out=release-builds",
-    "make-win": "electron-forge make -- --arch=ia32,x64",
+    "make-win": "npx electron-forge make --arch=ia32",
     "electron-build": "electron-builder build --win"
   },
   "repository": {
