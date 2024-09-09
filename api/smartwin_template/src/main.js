@@ -21,6 +21,7 @@ const createWindow = () => {
     icon: "../icons/icon.ico",
     show: false,
     frame: false,
+    titleBarStyle: 'hidden', // watch this line
     webPreferences: {
       zoomFactor: 1.0,
       nodeIntegration: true,
@@ -114,9 +115,9 @@ app.on("window-all-closed", () => {
 // code. You can also put them in separate files and import them here.
 
 // Start app on windows startup
-// app.setLoginItemSettings({
-//   openAtLogin: true
-// })
+app.setLoginItemSettings({
+  openAtLogin: true
+})
 
 // System Commands from App
 ipcMain.on("quit-app", () => {
