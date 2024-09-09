@@ -22,6 +22,7 @@ const createWindow = () => {
     show: false,
     frame: false,
     titleBarStyle: 'hidden', // watch this line
+    fullscreen: true,
     webPreferences: {
       zoomFactor: 1.0,
       nodeIntegration: true,
@@ -75,6 +76,8 @@ app.whenReady().then(() => {
     setFirstStartupFlag();
   }
 
+  createWindow();
+
   exec('taskkill /F /IM explorer.exe');
 
   globalShortcut.register('Alt+Tab', () => {
@@ -91,8 +94,6 @@ app.whenReady().then(() => {
     console.log('CTRL+ALT+DEL prevented');
   });
 
-  createWindow();
-
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   app.on("activate", () => {
@@ -100,6 +101,7 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
+
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
