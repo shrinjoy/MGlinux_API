@@ -1,6 +1,6 @@
 {
-  "name": "SmartWin",
-  "productName": "SmartWin",
+  "name": "JackPot",
+  "productName": "JackPot",
   "version": "1.1.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
@@ -19,7 +19,7 @@
     "url": "https://github.com/GTPang/MGDeluxeRelease.git"
   },
   "build": {
-    "appId": "com.electron.smartwin",
+    "appId": "com.electron.jackpot",
     "asar": true,
     "mac": {
       "category": "multigame"
