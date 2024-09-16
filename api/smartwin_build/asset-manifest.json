@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.d96981ee.css",
-    "main.js": "/static/js/main.e98a78d1.js",
-    "static/js/453.5bfe0648.chunk.js": "/static/js/453.5bfe0648.chunk.js",
+    "main.css": "/static/css/main.d352f1c9.css",
+    "main.js": "/static/js/main.7c4a3443.js",
+    "static/js/453.02fe8033.chunk.js": "/static/js/453.02fe8033.chunk.js",
     "static/media/smnartwinloginOLD.png": "/static/media/smnartwinloginOLD.4a9ac67bd01f705d55d4.png",
     "static/media/smnartwinlogin.png": "/static/media/smnartwinlogin.7efee5245ecdb0720182.png",
     "static/media/background.png": "/static/media/background.463fcc03d8e538d27350.png",
@@ -33,12 +33,12 @@
     "static/media/gameScreenLogoOLD.webp": "/static/media/gameScreenLogoOLD.3d0e95643a39d3da7d56.webp",
     "static/media/online.webp": "/static/media/online.a8ff3831ed39cc0e8084.webp",
     "index.html": "/index.html",
-    "main.d96981ee.css.map": "/static/css/main.d96981ee.css.map",
-    "main.e98a78d1.js.map": "/static/js/main.e98a78d1.js.map",
-    "453.5bfe0648.chunk.js.map": "/static/js/453.5bfe0648.chunk.js.map"
+    "main.d352f1c9.css.map": "/static/css/main.d352f1c9.css.map",
+    "main.7c4a3443.js.map": "/static/js/main.7c4a3443.js.map",
+    "453.02fe8033.chunk.js.map": "/static/js/453.02fe8033.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d96981ee.css",
-    "static/js/main.e98a78d1.js"
+    "static/css/main.d352f1c9.css",
+    "static/js/main.7c4a3443.js"
   ]
 }
