@@ -295,7 +295,7 @@ FROM
 })
 
 
-app.listen({ host: "0.0.0.0", port: 3020 }, (err) => {
+app.listen({ host: "0.0.0.0", port: 3025 }, (err) => {
     if (err) {
         console.log("error occured:" + err);
     }
