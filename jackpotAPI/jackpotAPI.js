@@ -266,7 +266,22 @@ app.post('/getticketbybarcode', function (req, res) {
             res.status(400).send({ err });
         })
 })
-
+app.get('/getallresultwithmultiplier', function (req, res) {
+    getallresult.getallresultwithmultiplier(sql).then((data) => {
+        res.status(200).send({ data });
+    })
+        .catch((err) => {
+            res.status(400).send({ err });
+        })
+})
+app.post('/getlastresultwithmultiplier', function (req, res) {
+    getallresult.getlastresultwithmultiplier(sql, req.body).then((data) => {
+        res.status(200).send({ data });
+    })
+        .catch((err) => {
+            res.status(400).send({ err });
+        })
+})
 app.get('/', function (req, res) {
     res.status(200).send({ "message": "welcome to the root of magic deluxe api:jackpot :D feel free to hack or crash the server lololz" })
 })

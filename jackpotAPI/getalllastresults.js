@@ -100,5 +100,45 @@ module.exports =
 
                 })
         })
+    },
+    getlastresultwithmultiplier:function(db,jsondata)
+    {
+        return new Promise((resolve, reject) => {
+           
+            db.query(`SELECT * FROM [XRESULT] WHERE CONVERT(DATE, GDATE) = CONVERT(DATE,GETDATE())  and GDETAILS='${jsondata["gameid"]}'`)
+                .then((data) => {
+                    var arraydata = [];
+                    console.log(data.recordset.length);
+                    data.recordset.forEach(element => {
+                        arraydata.push(element);
+                    });
+
+                    resolve(arraydata); // Resolve the JSON object directly
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject({"message": err});
+                });
+        });
+    },
+    getallresultwithmultiplier:function(db)
+    {
+        return new Promise((resolve, reject) => {
+           //GDATE
+            db.query(`SELECT * FROM [XRESULT] WHERE CONVERT(DATE, GDATE) = CONVERT(DATE,GETDATE())`)
+                .then((data) => {
+                    var arraydata = [];
+                    console.log(data.recordset.length);
+                    data.recordset.forEach(element => {
+                        arraydata.push(element);
+                    });
+
+                    resolve(arraydata); // Resolve the JSON object directly
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject({"message": err});
+                });
+        });
     }
 }
