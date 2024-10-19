@@ -101,6 +101,47 @@ module.exports =
                 })
         })
     },
+
+
+
+    //comibes the reuslt and muliplier and returns it only gives the result with current gamedate 
+    getonlylastresultwithmultiplier:function(db,jsondata)
+    {
+        return new Promise(async (resolve, reject) => {
+           var multiplier=0;
+           var result=0;
+           await db.query(`SELECT * FROM [XRESULT] WHERE CONVERT(DATE, GDATE) = CONVERT(DATE,GETDATE())  and GDETAILS='${jsondata["gameid"]}'`)
+                .then((data) => {
+                   if(data.recordset.length>0)
+                   {
+                    console.log(data.recordset[0]);
+                        multiplier = data.recordset[0].XDETAILS;
+                        console.log("multiplier value:"+multiplier)
+                   }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject({"message": err});
+                });
+                await   db.query(`SELECT * FROM [RESULT99] WHERE CONVERT(DATE, GAMEDATE) = CONVERT(DATE,GETDATE()) and GAMENUM='${jsondata["gameid"]}' order by INTNUMBER desc`)
+                .then((data) => {
+                    if(data.recordset.length>0)
+                        {
+                           
+                            result = data.recordset[0].GAMERESULT;
+                            console.log("result value:"+result)
+     
+                        }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject({"message": err});
+                });    
+                resolve({"muliplier":`${multiplier}`,"result":`${result}`});
+            
+        });
+    },
+
     getlastresultwithmultiplier:function(db,jsondata)
     {
         return new Promise((resolve, reject) => {

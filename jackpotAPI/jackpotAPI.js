@@ -282,6 +282,14 @@ app.post('/getlastresultwithmultiplier', function (req, res) {
             res.status(400).send({ err });
         })
 })
+app.post('/result_multiplier_last', function (req, res) {
+    getallresult.getonlylastresultwithmultiplier(sql, req.body).then((data) => {
+        res.status(200).send({ data });
+    })
+        .catch((err) => {
+            res.status(400).send({ err });
+        })
+})
 app.get('/', function (req, res) {
     res.status(200).send({ "message": "welcome to the root of magic deluxe api:jackpot :D feel free to hack or crash the server lololz" })
 })
