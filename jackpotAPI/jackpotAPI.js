@@ -302,11 +302,9 @@ app.get('/timeleft', async function (req, res) {
     [TARMINALCLS],
     [NEXTDRAW],
     [GAMEID],
-    [tim],
-    [tim2],
     DATEDIFF(SECOND, CONVERT(DATETIME, [TARMINALDATE] + ' ' + [TARMINALTIME], 113), CONVERT(DATETIME, [NEXTDRAW], 109)) AS timer
 FROM 
-    [NRDELUXE].[dbo].[TARMINALTIMEZONE]`)
+    [TARMINALTIMEZONE]`)
         res.status(200).send({ "time": data.recordset[0].timer , 
             "gameid": data.recordset[0].GAMEID, 
             "nextgamedate": data.recordset[0].NEXTDRAW,
