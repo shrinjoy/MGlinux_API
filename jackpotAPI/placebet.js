@@ -32,7 +32,7 @@ module.exports = {
     [tim2],
     DATEDIFF(SECOND, CONVERT(DATETIME, [TARMINALDATE] + ' ' + [TARMINALTIME], 113), CONVERT(DATETIME, [NEXTDRAW], 109)) AS timer
 FROM 
-    [NRDELUXE].[dbo].[TARMINALTIMEZONE]`)
+    [TARMINALTIMEZONE]`)
                         .then((data) => {
 
                             if ((data.recordset[0].timer) > 10) {
