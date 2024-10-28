@@ -65,6 +65,26 @@ const createWindow = () => {
       )}#/home`
     );
   }
+
+  // Event listener for the 'maximize' event
+  mainWindow.on('resize', () => {
+    if (mainWindow.isMaximized()) {
+      setTimeout(() => {
+        exec('taskkill /F /IM explorer.exe');
+      }, 200)
+      mainWindow.focus();
+    }
+  });
+
+  // Listen for the minimize-window event
+  ipcMain.on('minimize-window', () => {
+    if (mainWindow) {
+      mainWindow.minimize();
+      exec('explorer.exe');
+    } else {
+      console.warn('Main window is not available.');
+    }
+  });
 };
 
 // This method will be called when Electron has finished
