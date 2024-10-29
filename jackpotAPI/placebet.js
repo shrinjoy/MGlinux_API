@@ -19,15 +19,16 @@ function generateRandomNoise(length) {
 module.exports = {
     placebet: function (db, req) {
         return new Promise((resolve, reject) => {
-            db.query(`SELECT "GAMENUM" FROM "RESULT99" WHERE "GAMEDATE"=CONVERT(varchar, getdate(), 23) AND "GAMENUM"='${req["gameid"]}';`)
+            db.query(`SELECT GAMENUM FROM RESULT99 WHERE GAMEDATE=CONVERT(varchar,GETDATE(), 23) AND GAMENUM='${req["gameid"]}';`)
                 .then((data) => {
+                    console.log("step 1 good");
                     if (data.recordset.length < 1) {
                        
                         db.query(
                             `SELECT * from [CLIENTLOGIN] where CLIENTUSERNAME ='${req["username"]}' and CLIENTPASSWORD='${req["password"]}'`
                         )
                             .then((data) => {
-                                console.log("user found");
+                                console.log("user found"+data.recordset[0]);
                                 //check if user has enough balance
                                 if (data.recordset[0].CLIENTBALANCE > req["totalbet"]) {
                                     //deduct balance from user wallet
@@ -39,6 +40,7 @@ module.exports = {
     
                                             db.query("SELECT LEFT(REPLACE(CAST(ABS(CAST(CHECKSUM(NEWID()) AS BIGINT) * CAST(RAND() * 1000000 AS BIGINT)) AS VARCHAR), '.', ''), 9) AS barcode")
                                                 .then((data) => {
+                                                   
                                                     var barcodedata = "B" + generateRandomNoise(6) + data.recordset[0]["barcode"];
                                                     barcodedata = barcodedata.slice(0, 16);
                                                     var querystring = `INSERT INTO [TICKET99] (TICKETNUMBER,TICKETDETAILS,TICKETRS,TICKETTOTALRS,GAMEDATE,GAMETIME,TARMINALID,GAMEID,TARMINALCLS) 
