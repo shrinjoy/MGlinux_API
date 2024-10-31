@@ -40,11 +40,14 @@ module.exports =
     },
     getlastresults_all: function (db) {
         return new Promise((resolve, reject) => {
-            db.query(`SELECT * FROM [RESULT] WHERE CONVERT(DATE, GAMEDATE) = CONVERT(DATE, GETDATE());`).then((data) => {
-                if (data.recordset.length < 0) {
-                    reject({ "error": "no data found" });
+            console.log("forshur");
+            //GETDATE()
+            db.query(`SELECT * FROM [RESULT] WHERE CONVERT(DATE, GAMEDATE) = CONVERT(DATE,GETDATE());`).then((data) => {
+                if (data.recordset.length < 1) {
+                    reject({ "error": "please add column with todays date to retrive data from data base" });
                 }
                 else if (data.recordset.length > 0) {
+
                     var alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N']
                     try {
                         var filteredresultdata = "{"
