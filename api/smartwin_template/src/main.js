@@ -70,7 +70,7 @@ const createWindow = () => {
   mainWindow.on('resize', () => {
     if (mainWindow.isMaximized()) {
       setTimeout(() => {
-        exec('taskkill /F /IM explorer.exe');
+        // exec('taskkill /F /IM explorer.exe'); UNCOMMENT IN PRODUCTION
       }, 200)
       mainWindow.focus();
     }
@@ -98,7 +98,7 @@ app.whenReady().then(() => {
 
   createWindow();
 
-  exec('taskkill /F /IM explorer.exe');
+  // exec('taskkill /F /IM explorer.exe'); UNCOMMENT IN PRODUCTION
 
   globalShortcut.register('Alt+Tab', () => {
     console.log('ALT+TAB prevented');
