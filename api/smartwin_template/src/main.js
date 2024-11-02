@@ -118,7 +118,6 @@ app.whenReady().then(() => {
     globalShortcut.register('Control+Alt+Delete', () => {
       console.log('CTRL+ALT+DEL prevented');
     });
-
   }
 
   // On OS X it's common to re-create a window in the app when the
