@@ -7,6 +7,7 @@ const getmac = require("getmac");
 var internetAvailable = require("internet-available");
 var serialNumber = require("serial-number");
 serialNumber.preferUUID = true;
+const isProduction = 0;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -70,7 +71,9 @@ const createWindow = () => {
   mainWindow.on('resize', () => {
     if (mainWindow.isMaximized()) {
       setTimeout(() => {
-        // exec('taskkill /F /IM explorer.exe'); UNCOMMENT IN PRODUCTION
+        if (isProduction === 1) {
+          exec('taskkill /F /IM explorer.exe');
+        }
       }, 200)
       mainWindow.focus();
     }
@@ -98,21 +101,25 @@ app.whenReady().then(() => {
 
   createWindow();
 
-  // exec('taskkill /F /IM explorer.exe'); UNCOMMENT IN PRODUCTION
+  if (isProduction === 1) {
+    exec('taskkill /F /IM explorer.exe');
 
-  globalShortcut.register('Alt+Tab', () => {
-    console.log('ALT+TAB prevented');
-  });
+    // Register a global shortcut to prevent ALT+TAB
+    globalShortcut.register('Alt+Tab', () => {
+      console.log('ALT+TAB prevented');
+    });
 
-  // Register a global shortcut to prevent CTRL+SHIFT+ESC
-  globalShortcut.register('Control+Shift+Escape', () => {
-    console.log('CTRL+SHIFT+ESC prevented');
-  });
+    // Register a global shortcut to prevent CTRL+SHIFT+ESC
+    globalShortcut.register('Control+Shift+Escape', () => {
+      console.log('CTRL+SHIFT+ESC prevented');
+    });
 
-  // Register other combinations as needed
-  globalShortcut.register('Control+Alt+Delete', () => {
-    console.log('CTRL+ALT+DEL prevented');
-  });
+    // Register other combinations as needed
+    globalShortcut.register('Control+Alt+Delete', () => {
+      console.log('CTRL+ALT+DEL prevented');
+    });
+
+  }
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
