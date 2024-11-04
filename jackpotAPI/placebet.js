@@ -18,34 +18,38 @@ function generateRandomNoise(length) {
 
 module.exports = {
     placebet: function (db, req) {
-        return new Promise((resolve, reject) => {
-            db.query(`SELECT GAMENUM FROM RESULT99 WHERE GAMEDATE=CONVERT(varchar,GETDATE(), 23) AND GAMENUM='${req["gameid"]}';`)
-                .then((data) => {
+        return new Promise(async (resolve, reject) => {
+
+            var timedata =await this.gettime(db);
+
+            console.log(timedata);
+           await db.query(`SELECT GAMENUM FROM RESULT99 WHERE GAMEDATE=CONVERT(varchar,GETDATE(), 23) AND GAMENUM='${req["gameid"]}';`)
+                .then(async (data) => {
                     console.log("step 1 good");
                     if (data.recordset.length < 1) {
                        
-                        db.query(
+                    await    db.query(
                             `SELECT * from [CLIENTLOGIN] where CLIENTUSERNAME ='${req["username"]}' and CLIENTPASSWORD='${req["password"]}'`
                         )
-                            .then((data) => {
+                            .then(async(data) => {
                                 console.log("user found"+data.recordset[0]);
                                 //check if user has enough balance
                                 if (data.recordset[0].CLIENTBALANCE > req["totalbet"]) {
                                     //deduct balance from user wallet
-                                    db.query(
+                                await    db.query(
                                         `UPDATE [CLIENTLOGIN] set CLIENTBALANCE = CLIENTBALANCE -${req["totalbet"]} where CLIENTUSERNAME ='${req["username"]}' and CLIENTPASSWORD='${req["password"]}'`
                                     )
-                                        .then(() => {
+                                        .then(async () => {
                                             console.log("deducted client balance");
     
-                                            db.query("SELECT LEFT(REPLACE(CAST(ABS(CAST(CHECKSUM(NEWID()) AS BIGINT) * CAST(RAND() * 1000000 AS BIGINT)) AS VARCHAR), '.', ''), 9) AS barcode")
-                                                .then((data) => {
+                                         await   db.query("SELECT LEFT(REPLACE(CAST(ABS(CAST(CHECKSUM(NEWID()) AS BIGINT) * CAST(RAND() * 1000000 AS BIGINT)) AS VARCHAR), '.', ''), 9) AS barcode")
+                                                .then(async(data) => {
                                                    
                                                     var barcodedata = "B" + generateRandomNoise(6) + data.recordset[0]["barcode"];
                                                     barcodedata = barcodedata.slice(0, 16);
-                                                    var querystring = `INSERT INTO [TICKET99] (TICKETNUMBER,TICKETDETAILS,TICKETRS,TICKETTOTALRS,GAMEDATE,GAMETIME,TARMINALID,GAMEID,TARMINALCLS) 
-                                                    VALUES ('${barcodedata}','${req["tickets"]}',1,${req["totalbet"]},FORMAT(GETDATE(), 'yyyy-MM-dd'),FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss'),'${req["username"]}','${req["gameid"]}','PENDING');`;
-                                                    db.query(querystring)
+                                                    var querystring = `INSERT INTO [TICKET99] (TICKETNUMBER,TICKETDETAILS,TICKETRS,TICKETTOTALRS,GAMEDATE,GAMETIME,TARMINALID,GAMEID,TARMINALCLS,DROWTIME) 
+                                                    VALUES ('${barcodedata}','${req["tickets"]}',1,${req["totalbet"]},FORMAT(GETDATE(), 'yyyy-MM-dd'),FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss'),'${req["username"]}','${req["gameid"]}','PENDING','${timedata.nextgametime}');`;
+                                                  await  db.query(querystring)
                                                         .then(() => {
                                                             resolve({ "barcode": barcodedata, "message": "placed bet" });
                                                             console.log("placed bet");
@@ -77,8 +81,30 @@ module.exports = {
                     reject({ message: "times up " + err });
                 });
         });
+    },
+    gettime: function(sql){
+        return new Promise(async (resolve,reject)=>{
+            try {
+                var data = await sql.query(`SELECT 
+            [INTNUMBER],
+            [TARMINALDATE],
+            [TARMINALTIME],
+            [TARMINALCLS],
+            [NEXTDRAW],
+            [GAMEID],
+            DATEDIFF(SECOND, CONVERT(DATETIME, [TARMINALDATE] + ' ' + [TARMINALTIME], 113), CONVERT(DATETIME, [NEXTDRAW], 109)) AS timer
+        FROM 
+            [TARMINALTIMEZONE]`);
+                resolve({ "time": data.recordset[0].timer , 
+                    "gameid": data.recordset[0].GAMEID, 
+                    "nextgamedate": data.recordset[0].NEXTDRAW,
+                     "nextgametime": data.recordset[0].NEXTDRAW });
+        
+            } catch (err) {
+                reject({ "message": "failed to get time because -" + err });
+            }
+        })
     }
-    
 
 
 }
