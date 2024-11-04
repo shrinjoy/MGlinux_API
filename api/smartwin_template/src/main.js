@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, shell, globalShortcut } = require("electron");
+const { app, BrowserWindow, ipcMain, shell, globalShortcut, dialog } = require("electron");
 const { exec } = require("child_process");
 const os = require("os");
 const fs = require("fs");
@@ -43,7 +43,9 @@ const createWindow = () => {
   mainWindow.once("ready-to-show", () => {
     mainWindow.maximize();
     mainWindow.show(); // Show the window after maximizing.
-    mainWindow.setAlwaysOnTop(true);
+    if (isProduction === 1) {
+      mainWindow.setAlwaysOnTop(true);
+    }
     mainWindow.focus();
   });
   mainWindow.on("show", () => {
@@ -154,7 +156,16 @@ ipcMain.on("quit-app", () => {
 
 ipcMain.on("system-shutdown", () => {
   if (os.platform() === "win32") {
-    exec("shutdown /s /t 0");
+    dialog.showMessageBox({
+      type: 'question',
+      title: 'Confirmation',
+      message: "Are you sure you want to shut down?",
+      buttons: ['Yes', 'No']
+    }).then((result) => {
+      if (result.response === 0) {
+        exec("shutdown /s /t 0");
+      }
+    });
   } else {
     exec("shutdown +0");
   }
@@ -162,7 +173,16 @@ ipcMain.on("system-shutdown", () => {
 
 ipcMain.on("system-restart", () => {
   if (os.platform() === "win32") {
-    exec("shutdown /r /t 0");
+    dialog.showMessageBox({
+      type: 'question',
+      title: 'Confirmation',
+      message: "Are you sure you want to restart?",
+      buttons: ['Yes', 'No']
+    }).then((result) => {
+      if (result.response === 0) {
+        exec("shutdown /r /t 0");
+      }
+    });
   } else {
     exec("shutdown -r now");
   }
