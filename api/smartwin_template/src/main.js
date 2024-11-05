@@ -152,6 +152,9 @@ app.setLoginItemSettings({
 // System Commands from App
 ipcMain.on("quit-app", () => {
   app.quit();
+  if (os.platform() === "win32") {
+    exec('explorer.exe');
+  }
 });
 
 ipcMain.on("system-shutdown", (event) => {
