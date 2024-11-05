@@ -7,7 +7,7 @@ const getmac = require("getmac");
 var internetAvailable = require("internet-available");
 var serialNumber = require("serial-number");
 serialNumber.preferUUID = true;
-const isProduction = 0;
+const isProduction = 1;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -154,13 +154,16 @@ ipcMain.on("quit-app", () => {
   app.quit();
 });
 
-ipcMain.on("system-shutdown", () => {
+ipcMain.on("system-shutdown", (event) => {
+  const mainWindow = BrowserWindow.fromWebContents(event.sender);
   if (os.platform() === "win32") {
-    dialog.showMessageBox({
-      type: 'question',
-      title: 'Confirmation',
-      message: "Are you sure you want to shut down?",
-      buttons: ['Yes', 'No']
+    dialog.showMessageBox(mainWindow, {
+      type: 'warning',
+      title: 'Message',
+      message: "Do You Want to Shutdown?",
+      buttons: ['Yes', 'No'],
+      noLink: true,
+      modal: true
     }).then((result) => {
       if (result.response === 0) {
         exec("shutdown /s /t 0");
@@ -171,13 +174,16 @@ ipcMain.on("system-shutdown", () => {
   }
 });
 
-ipcMain.on("system-restart", () => {
+ipcMain.on("system-restart", (event) => {
+  const mainWindow = BrowserWindow.fromWebContents(event.sender);
   if (os.platform() === "win32") {
-    dialog.showMessageBox({
-      type: 'question',
-      title: 'Confirmation',
-      message: "Are you sure you want to restart?",
-      buttons: ['Yes', 'No']
+    dialog.showMessageBox(mainWindow, {
+      type: 'warning',
+      title: 'Message',
+      message: "Do You Want to Restart?",
+      buttons: ['Yes', 'No'],
+      noLink: true,
+      modal: true
     }).then((result) => {
       if (result.response === 0) {
         exec("shutdown /r /t 0");
