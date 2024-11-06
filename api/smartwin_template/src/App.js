@@ -22,7 +22,7 @@ function App() {
         <Route
           path="/login"
           Component={() => {
-            window.location.href = "http://77.37.47.190:8086/#/login";
+            window.location.href = "http://192.168.1.86:3001/#/login";
             return null;
           }}
         />
