@@ -8,7 +8,6 @@ var internetAvailable = require("internet-available");
 var serialNumber = require("serial-number");
 serialNumber.preferUUID = true;
 const isProduction = 1;
-let isMaximized = 1;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -25,7 +24,6 @@ const createWindow = () => {
     frame: false,
     titleBarStyle: 'hidden', // watch this line
     fullscreen: true,
-    kiosk: true,
     webPreferences: {
       zoomFactor: 1.0,
       nodeIntegration: true,
@@ -73,32 +71,19 @@ const createWindow = () => {
 
   // Event listener for the 'maximize' event
   mainWindow.on('resize', () => {
-    if (mainWindow.isMaximized()) {
-      isMaximized = 1;
-      mainWindow.focus();
-    }
-  });
-
-  // Event listener for AltTab
-  mainWindow.on('blur', () => {
-    if (isMaximized === 1) {
-      mainWindow.focus();
-    }
-  });
-  mainWindow.on('restore', () => {
-    if (isMaximized === 1) {
-      mainWindow.focus();
-    }
+    setTimeout(() => {
+      if (isProduction === 1) {
+        exec('taskkill /F /IM explorer.exe');
+      }
+    }, 200)
+    mainWindow.focus();
   });
 
   // Listen for the minimize-window event
   ipcMain.on('minimize-window', () => {
     if (mainWindow) {
-      isMaximized = 0;
-      setTimeout(() => {
-        mainWindow.minimize();
-      }, 200)
-      // exec('explorer.exe');
+      mainWindow.minimize();
+      exec('explorer.exe');
     } else {
       console.warn('Main window is not available.');
     }
@@ -117,7 +102,7 @@ app.whenReady().then(() => {
   createWindow();
 
   if (isProduction === 1) {
-    // exec('taskkill /F /IM explorer.exe');
+    exec('taskkill /F /IM explorer.exe');
 
     // Register a global shortcut to prevent ALT+TAB
     globalShortcut.register('Alt+Tab', () => {
