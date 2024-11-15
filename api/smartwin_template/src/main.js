@@ -70,20 +70,24 @@ const createWindow = () => {
   }
 
   // Event listener for the 'maximize' event
-  mainWindow.on('resize', () => {
+  mainWindow.on('focus', () => {
+    mainWindow.focus();
     setTimeout(() => {
       if (isProduction === 1) {
         exec('taskkill /F /IM explorer.exe');
       }
     }, 200)
-    mainWindow.focus();
   });
 
   // Listen for the minimize-window event
   ipcMain.on('minimize-window', () => {
     if (mainWindow) {
-      mainWindow.minimize();
-      exec('explorer.exe');
+      exec('explorer.exe', (error, stdout, stderr) =>{
+        if (stderr || error){
+          exec('explorer.exe')
+        } 
+      });
+      mainWindow.minimize();    
     } else {
       console.warn('Main window is not available.');
     }
@@ -149,9 +153,13 @@ app.setLoginItemSettings({
 
 // System Commands from App
 ipcMain.on("quit-app", () => {
-  app.quit();
   if (os.platform() === "win32") {
-    exec('explorer.exe');
+    exec('explorer.exe', (error, stdout, stderr) =>{
+      if (stderr || error){
+        exec('explorer.exe')
+      }
+    });
+    app.quit();
   }
 });
 
