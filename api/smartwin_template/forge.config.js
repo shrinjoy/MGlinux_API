@@ -8,7 +8,7 @@ module.exports = {
       target: 'deb',
       arch: 'ia32',
     },
-    windows:{
+    windows: {
       arch: 'ia32'
     },
     icon: './icons/icon'
@@ -22,6 +22,13 @@ module.exports = {
         description: 'An example Electron app',
         setupIcon: './icons/icon.ico'
       },
+    },
+    {
+      name: '@electron-forge/maker-wix',
+      config: {
+        language: 1033,
+        manufacturer: 'PlayJeeto'
+      }
     },
     {
       name: '@electron-forge/maker-zip',
