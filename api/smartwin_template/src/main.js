@@ -74,7 +74,7 @@ const createWindow = () => {
     mainWindow.focus();
     setTimeout(() => {
       if (isProduction === 1) {
-        exec('taskkill /F /IM explorer.exe');
+        // exec('taskkill /F /IM explorer.exe');
       }
     }, 200)
   });
@@ -82,11 +82,11 @@ const createWindow = () => {
   // Listen for the minimize-window event
   ipcMain.on('minimize-window', () => {
     if (mainWindow) {
-      exec('explorer.exe', (error, stdout, stderr) =>{
-        if (stderr || error){
-          exec('explorer.exe')
-        } 
-      });
+      // exec('explorer.exe', (error, stdout, stderr) =>{
+      //   if (stderr || error){
+      //     exec('explorer.exe')
+      //   } 
+      // });
       mainWindow.minimize();    
     } else {
       console.warn('Main window is not available.');
@@ -106,7 +106,7 @@ app.whenReady().then(() => {
   createWindow();
 
   if (isProduction === 1) {
-    exec('taskkill /F /IM explorer.exe');
+    // exec('taskkill /F /IM explorer.exe');
 
     // Register a global shortcut to prevent ALT+TAB
     globalShortcut.register('Alt+Tab', () => {
@@ -154,11 +154,11 @@ app.setLoginItemSettings({
 // System Commands from App
 ipcMain.on("quit-app", () => {
   if (os.platform() === "win32") {
-    exec('explorer.exe', (error, stdout, stderr) =>{
-      if (stderr || error){
-        exec('explorer.exe')
-      }
-    });
+    // exec('explorer.exe', (error, stdout, stderr) =>{
+    //   if (stderr || error){
+    //     exec('explorer.exe')
+    //   }
+    // });
     app.quit();
   }
 });
