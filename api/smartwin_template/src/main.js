@@ -122,6 +122,12 @@ app.whenReady().then(() => {
     globalShortcut.register('Control+Alt+Delete', () => {
       console.log('CTRL+ALT+DEL prevented');
     });
+  
+    // Register other combinations as needed
+    globalShortcut.register('Alt+Control+Delete', () => {
+      console.log('ALT+CTRL+DEL prevented');
+    });
+
   }
 
   // On OS X it's common to re-create a window in the app when the
@@ -147,9 +153,9 @@ app.on("window-all-closed", () => {
 // code. You can also put them in separate files and import them here.
 
 // Start app on windows startup
-app.setLoginItemSettings({
-  openAtLogin: true
-})
+// app.setLoginItemSettings({
+//   openAtLogin: true
+// })
 
 // System Commands from App
 ipcMain.on("quit-app", () => {
