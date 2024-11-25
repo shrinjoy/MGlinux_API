@@ -26,7 +26,7 @@ const sqlConfig = {
     user: 'nrdeluxex',
     password: 'Nr@Deluxe@987654321',
     database: 'nrdeluxe',
-    server: '103.162.120.114',
+    server: '103.162.120.116',
     pool: {
         max: 10,
         min: 0,
@@ -286,6 +286,7 @@ FROM
     [NRDELUXE].[dbo].[TARMINALTIMEZONE]`)
         res.status(200).send({ "time": data.recordset[0].timer , 
             "gameid": data.recordset[0].GAMEID, 
+            "currenttime":data.recordset[0].TARMINALTIME,
             "nextgamedate": data.recordset[0].NEXTDRAW,
              "nextgametime": data.recordset[0].NEXTDRAW })
 

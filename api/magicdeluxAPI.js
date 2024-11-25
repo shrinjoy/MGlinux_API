@@ -22,7 +22,7 @@ const sqlConfig = {
     user: 'nrdeluxex',
     password: 'Nr@Deluxe@987654321',
     database: 'nrdeluxe',
-    server: '103.162.120.114',
+    server: '103.162.120.116',
     pool: {
         max: 10,
         min: 0,

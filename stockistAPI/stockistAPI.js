@@ -9,10 +9,10 @@ var getalluserdata= require('./getalluserdata');
 var getreportofalluser = require('./getreportofalluser')
 app.register(fastifyCors);
 const sqlConfig = {
-    user: 'playjeeto',
-    password: 'Playjeeto@2023',
-    database: 'playjeeto',
-    server: '103.162.120.114',
+     user: 'nrdeluxex',
+    password: 'Nr@Deluxe@987654321',
+    database: 'nrdeluxe',
+    server: '103.162.120.116',
     pool: {
         max: 10,
         min: 0,

@@ -7,6 +7,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     quitApp: () => {
         ipcRenderer.send('quit-app');
     },
+    minimizeWindow: () => ipcRenderer.send('minimize-window'),
     systemShutdown: () => {
         ipcRenderer.send('system-shutdown');
     },
@@ -24,6 +25,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     checkInternet: () => ipcRenderer.invoke('check-internet'),
     backToHome: () => ipcRenderer.invoke('back-home'),
     getCurrentURL: () => ipcRenderer.invoke('get-current-url'),
-    checkHardMac:() => ipcRenderer.invoke('check-mac')
+    checkHardMac: () => ipcRenderer.invoke('check-mac'),
+    saveCredentials: (username, password) => ipcRenderer.invoke('save-credentials', { username, password }),
+    fetchCredentials: () => ipcRenderer.invoke('fetch-credentials'),
 });
 

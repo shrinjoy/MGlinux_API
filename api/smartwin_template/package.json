@@ -1,7 +1,7 @@
 {
   "name": "SmartWin",
   "productName": "SmartWin",
-  "version": "1.0.0",
+  "version": "1.7.2",
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {
@@ -10,11 +10,32 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\"",
-    "package-linux": "electron-packager . --platform=linux --arch=ia32 --icon=icons/icon256.png --out=release-builds"
+    "package-linux": "electron-packager . --platform=linux --arch=ia32 --icon=icons/icon256.png --out=release-builds",
+    "make-win": "npx electron-forge make --arch=ia32",
+    "electron-build": "electron-builder build --win"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/GTPang/MGDeluxeRelease.git"
+  },
+  "build": {
+    "appId": "com.electron.smartwin",
+    "asar": true,
+    "mac": {
+      "category": "multigame"
+    },
+    "icon": "icon.ico",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",
@@ -24,6 +45,7 @@
     "@electron-forge/maker-deb": "^7.4.0",
     "@electron-forge/maker-rpm": "^7.4.0",
     "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-wix": "^7.5.0",
     "@electron-forge/maker-zip": "^7.4.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",
@@ -33,12 +55,16 @@
     "@vercel/webpack-asset-relocator-loader": "^1.7.3",
     "babel-loader": "^9.1.3",
     "css-loader": "^6.11.0",
-    "electron": "30.0.1",
+    "electron": "22.3.9",
+    "electron-builder": "^24.13.3",
     "electron-packager": "^17.1.2",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^6.1.8",
     "file-loader": "^6.2.0",
     "node-loader": "^2.0.0",
     "react-router-dom": "^6.22.3",
-    "style-loader": "^3.3.4"
+    "style-loader": "^3.3.4",
+    "update-electron-app": "^3.0.0"
   },
   "keywords": [],
   "author": {
@@ -48,8 +74,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^1.6.8",
-    "electron-squirrel-startup": "^1.0.0",
-    "electron-updater": "^6.1.8",
+    "electron-store": "^10.0.0",
     "getmac": "^6.6.0",
     "internet-available": "^1.0.0",
     "react": "^18.2.0",
@@ -60,7 +85,6 @@
     "react-spinners": "^0.13.8",
     "react-to-print": "^2.15.1",
     "react-toastify": "^10.0.5",
-    "serial-number": "^1.3.0",
-    "update-electron-app": "^3.0.0"
+    "serial-number": "^1.3.0"
   }
 }
