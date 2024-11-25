@@ -6,8 +6,11 @@ const path = require("node:path");
 const getmac = require("getmac");
 var internetAvailable = require("internet-available");
 var serialNumber = require("serial-number");
+import Store from "electron-store";
 serialNumber.preferUUID = true;
 const isProduction = 1;
+
+const store = new Store();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -87,7 +90,7 @@ const createWindow = () => {
       //     exec('explorer.exe')
       //   } 
       // });
-      mainWindow.minimize();    
+      mainWindow.minimize();
     } else {
       console.warn('Main window is not available.');
     }
@@ -122,7 +125,7 @@ app.whenReady().then(() => {
     globalShortcut.register('Control+Alt+Delete', () => {
       console.log('CTRL+ALT+DEL prevented');
     });
-  
+
     // Register other combinations as needed
     globalShortcut.register('Alt+Control+Delete', () => {
       console.log('ALT+CTRL+DEL prevented');
@@ -313,3 +316,18 @@ function setFirstStartupFlag() {
 }
 
 ipcMain.handle("check-mac", isFirstStartup);
+
+ipcMain.handle("save-credentials", (event, { username, password }) => {
+  store.set("username", username);
+  store.set("password", password);
+})
+
+ipcMain.handle("fetch-credentials", () => {
+  const username = store.get("username");
+  const password = store.get("password");
+  if (!username || !password) {
+    return false;
+  } else {
+    return { username, password };
+  }
+})

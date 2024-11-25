@@ -1,7 +1,7 @@
 {
   "name": "SmartWin",
   "productName": "SmartWin",
-  "version": "1.7.0",
+  "version": "1.7.2",
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {
@@ -74,6 +74,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^1.6.8",
+    "electron-store": "^10.0.0",
     "getmac": "^6.6.0",
     "internet-available": "^1.0.0",
     "react": "^18.2.0",

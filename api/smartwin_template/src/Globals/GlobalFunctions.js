@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const baseName = "http://77.37.47.190:3020";
+const baseName = "http://77.37.47.190:3025/";
+// const baseName = "https://cors-anywhere.herokuapp.com/http://77.37.47.190:3025";
 const systemBaseName = "http://127.0.0.1:3000";
+let audioInstance = null;
 
 const axiosInstance = axios.create({
   baseURL: baseName,
@@ -23,7 +25,7 @@ export async function checkMacIdByMac(userMacId) {
 
 //Update Mac ID Function
 export async function updateMacId(loginUsername, userMacId) {
-  const parsedData = { username: loginUsername, macid: userMacId };
+  const parsedData = { username: loginUsername, mac: userMacId };
   return axiosInstance
     .post(`/forcesetmac`, parsedData)
     .then((res) => {
@@ -35,9 +37,8 @@ export async function updateMacId(loginUsername, userMacId) {
 }
 
 //login function
-export async function login(userId, loginUsername, password, userMacId) {
+export async function login(loginUsername, password, userMacId) {
   const parsedData = {
-    userid: userId,
     username: loginUsername,
     password: password,
     macid: userMacId,
@@ -263,6 +264,41 @@ export async function systemServPost(endpoint, sysCommand) {
     .get(`${systemBaseName}/${endpoint}`, parsedData)
     .then((res) => {
       return res;
+    })
+    .catch((err) => {
+      return null;
+    });
+}
+
+// Audio Controller
+export function audioPlayer(param, src) {
+  if (!audioInstance || audioInstance.src !== src) {
+    audioInstance = new Audio(`/sounds/${src}.ogg`);
+  }
+
+  if (param === 1) {
+    if (audioInstance.paused) {
+      audioInstance
+        .play()
+        .catch((error) => console.error("Error playing audio:", error));
+    } else {
+      audioInstance.currentTime = 0; // Reset to start and play
+      audioInstance
+        .play()
+        .catch((error) => console.error("Error playing audio:", error));
+    }
+  } else {
+    audioInstance.pause();
+  }
+}
+
+//Check if Mac ID exists Function
+export async function checkMacIdExist(userId) {
+  const parsedData = { userid: userId };
+  return axiosInstance
+    .post(`/checkifuserhasmac`, parsedData)
+    .then((res) => {
+      return res.data.mac;
     })
     .catch((err) => {
       return null;
