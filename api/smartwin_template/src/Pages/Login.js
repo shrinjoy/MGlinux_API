@@ -177,7 +177,7 @@ function Login() {
           window.location.href = "http://77.37.47.190:8086/#/games/2digit1";
         }
       } else {
-        setError("Wrong Credentials");
+        setError("Network Error");
         setTimeout(setError, 2000, "");
         setPassword("");
       }
