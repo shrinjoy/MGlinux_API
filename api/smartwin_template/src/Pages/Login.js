@@ -261,12 +261,6 @@ function Login() {
     <>
       <style>
         {`
-        .loginWrapper {
-          background: url(${require(`../Assets/images/smnartwinlogin${brand === "JackPot" ? "JACK" : ""
-          }.png`).default}) !important;
-          background-position: center center !important;
-          background-size: cover !important;
-        }
         body {
           margin: 0;
           background-color: rgb(255, 255, 255) !important;
@@ -285,6 +279,7 @@ function Login() {
       `}
       </style>
       <main className="loginWrapper">
+        <img src={require(`../Assets/images/smnartwinlogin${brand === "JackPot" ? "JACK" : ""}.png`).default} className="loginImage"/>
         <div
           className="position-absolute col-11 d-flex justify-content-between px-2"
           style={{ top: "0px", left: "50%", transform: "translate(-50%)" }}

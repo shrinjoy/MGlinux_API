@@ -16,12 +16,14 @@
   object-fit: cover;
 }
 
-.loginWrapper {
+.loginWrapper .loginImage{
   width: 100%;
   height: 100vh;
-  background: url("../src/Assets/images/smnartwinlogin.png");
-  background-position: center center;
-  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+
 }
 
 .loginFormWrapper {
