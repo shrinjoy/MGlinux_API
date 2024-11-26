@@ -47,7 +47,7 @@ const createWindow = () => {
     mainWindow.maximize();
     mainWindow.show(); // Show the window after maximizing.
     if (isProduction === 1) {
-      mainWindow.setAlwaysOnTop(true);
+      mainWindow.setAlwaysOnTop(true, 'screen-saver');
     }
     mainWindow.focus();
   });
