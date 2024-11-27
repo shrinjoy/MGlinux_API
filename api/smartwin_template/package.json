@@ -1,6 +1,6 @@
 {
-  "name": "SmartWin",
-  "productName": "SmartWin",
+  "name": "JackPot",
+  "productName": "JackPot",
   "version": "2.0.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
