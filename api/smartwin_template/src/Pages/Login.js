@@ -135,6 +135,7 @@ function Login() {
     if (data) {
       navigate("/");
       localStorage.clear();
+      window.electronAPI.deleteCredentials();
     }
   }
 

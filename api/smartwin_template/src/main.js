@@ -331,3 +331,8 @@ ipcMain.handle("fetch-credentials", () => {
     return { username, password };
   }
 })
+
+ipcMain.handle("delete-credentials", () => {
+  store.delete("username");
+  store.delete("password");
+})
