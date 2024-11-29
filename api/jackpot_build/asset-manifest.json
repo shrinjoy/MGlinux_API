@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.7654262c.css",
-    "main.js": "/static/js/main.4628c1fe.js",
+    "main.js": "/static/js/main.25016951.js",
     "static/js/453.02fe8033.chunk.js": "/static/js/453.02fe8033.chunk.js",
     "static/media/smnartwinlogin.png": "/static/media/smnartwinlogin.4a9ac67bd01f705d55d4.png",
     "static/media/smnartwinloginJACK.png": "/static/media/smnartwinloginJACK.7efee5245ecdb0720182.png",
@@ -18,7 +18,7 @@
     "static/media/bigLogoJACK.webp": "/static/media/bigLogoJACK.ee3013f29ca67719eec7.webp",
     "static/media/lightbulbGreen.png": "/static/media/lightbulbGreen.53258b821e35ea1040d3.png",
     "static/media/bigLogo.webp": "/static/media/bigLogo.a9efb96b9018b8a8ce1e.webp",
-    "static/media/gameScreenLogoJACK.webp": "/static/media/gameScreenLogoJACK.ee8cadfe6f11de877141.webp",
+    "static/media/gameScreenLogoJACK.webp": "/static/media/gameScreenLogoJACK.239b36314039c5d1af4e.webp",
     "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
@@ -29,11 +29,11 @@
     "static/media/online.webp": "/static/media/online.a8ff3831ed39cc0e8084.webp",
     "index.html": "/index.html",
     "main.7654262c.css.map": "/static/css/main.7654262c.css.map",
-    "main.4628c1fe.js.map": "/static/js/main.4628c1fe.js.map",
+    "main.25016951.js.map": "/static/js/main.25016951.js.map",
     "453.02fe8033.chunk.js.map": "/static/js/453.02fe8033.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7654262c.css",
-    "static/js/main.4628c1fe.js"
+    "static/js/main.25016951.js"
   ]
 }
