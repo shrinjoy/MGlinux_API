@@ -1,0 +1,44 @@
+* {
+  --webkit-tap-highlight-color: transparent;
+  --moz-tap-highlight-color: transparent;
+  --ms-tap-highlight-color: transparent;
+}
+body {
+  color: #444444 !important;
+}
+header {
+  color: white;
+  background: linear-gradient(
+    -45deg,
+    rgba(0, 255, 100, 1),
+    rgba(0, 180, 255, 1)
+  );
+}
+.page-title {
+  text-shadow: 2px 2px 2px black;
+}
+.main {
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 200, 255, 1),
+    rgba(255, 255, 150, 1)
+  );
+}
+.product-title-text {
+  color: #444444;
+}
+.product-content-brand .item-icon span {
+  color: #5289ba;
+}
+.tools {
+  background-color: rgba(0, 120, 200, 1);
+}
+.tools-content-item {
+  color: white;
+}
+footer {
+  background-color: #202020;
+}
+.footer-text {
+  color: #868686;
+}
