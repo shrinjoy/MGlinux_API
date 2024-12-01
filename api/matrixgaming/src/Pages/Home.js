@@ -51,7 +51,7 @@ function Home() {
                   className="item-icon"
                   onClick={() =>
                     navigate(
-                      "https://drive.google.com/uc?export=download&id=1QK2WIHfrTFb-3oJQ1YTMYzw98ew2g3zMhttps://drive.google.com/uc?export=download&id=1QK2WIHfrTFb-3oJQ1YTMYzw98ew2g3zM"
+                      "https://drive.google.com/uc?export=download&id=1QK2WIHfrTFb-3oJQ1YTMYzw98ew2g3zM"
                     )
                   }
                 >
@@ -75,7 +75,11 @@ function Home() {
             <p
               className="clickable name"
               data-type="download"
-              data-target="tools/Thermal.rar"
+              onClick={() =>
+                navigate(
+                  "https://drive.google.com/uc?export=download&id=1ENZMsZDp16JCfEW8lKlclEN5rYqetVAL"
+                )
+              }
             >
               Printer Driver
             </p>
@@ -88,7 +92,11 @@ function Home() {
             <p
               className="clickable name"
               data-type="download"
-              data-target="tools/NetFx20SP2_x86.rar"
+              onClick={() =>
+                navigate(
+                  "https://drive.google.com/uc?export=download&id=1RgWOSP09h1jP8sBulJmLquDkt_6MNTWG"
+                )
+              }
             >
               .Net 2.0 SP2
             </p>
@@ -101,7 +109,9 @@ function Home() {
             <p
               className="clickable name"
               data-type="download"
-              data-target="https://anydesk.com/en/downloads/windows"
+              onClick={() =>
+                navigate("https://anydesk.com/en/downloads/windows")
+              }
             >
               AnyDesk
             </p>
@@ -114,7 +124,11 @@ function Home() {
             <p
               className="clickable name"
               data-type="download"
-              data-target="https://www.win-rar.com/predownload.html?&L=0&Version=32bit"
+              onClick={() =>
+                navigate(
+                  "https://www.win-rar.com/predownload.html?&L=0&Version=32bit"
+                )
+              }
             >
               WinRAR
             </p>
@@ -124,7 +138,7 @@ function Home() {
       <footer>
         <div className="container">
           <span className="footer-text clickable" data-type="">
-            Fortun Play © All Right Reserved
+            Matrix Gaming © All Right Reserved
           </span>
         </div>
       </footer>
