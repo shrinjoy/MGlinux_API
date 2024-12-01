@@ -1,13 +1,11 @@
 import React from "react";
-import "../Assets/second.css";
-import "../Assets/third.css";
 
 function Home() {
   return (
     <>
       <header>
-        <div classNameName="page-title">
-          <span classNameName="page-title-text clickable" data-type="self">
+        <div className="page-title">
+          <span className="page-title-text clickable" data-type="self">
             Matrix Gaming
           </span>
         </div>
