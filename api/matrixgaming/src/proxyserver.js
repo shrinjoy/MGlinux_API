@@ -1,11 +1,11 @@
 const http = require("http");
 
-// Your VPS IP address
-const serverIp = "77.37.47.190";
+// Your domain name
+const domainName = "matrixgaming.in";
 
 // Create an HTTP server
 const server = http.createServer((req, res) => {
-  const redirectUrl = `http://${serverIp}:8087${req.url}`;
+  const redirectUrl = `http://${domainName}:8087${req.url}`;
 
   // Set HTTP status code to 301 (permanent redirect) or 302 (temporary redirect)
   res.writeHead(301, { Location: redirectUrl });
