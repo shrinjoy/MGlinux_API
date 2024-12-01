@@ -1,7 +1,7 @@
 const http = require("http");
 
 // Your VPS IP address
-const serverIp = "77.37.47.190"; // Replace with your VPS IP
+const serverIp = "77.37.47.190";
 
 // Create an HTTP server
 const server = http.createServer((req, res) => {
