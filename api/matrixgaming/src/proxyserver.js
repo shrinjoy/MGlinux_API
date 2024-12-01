@@ -5,7 +5,7 @@ const httpProxy = require("http-proxy");
 const proxy = httpProxy.createProxyServer({});
 
 // Set the target server (port 8087)
-const target = "http://127.0.0.1:8087";
+const target = "http://77.37.47.190:8087";
 
 // Create the HTTP server to listen on port 80
 const server = http.createServer((req, res) => {
@@ -25,7 +25,7 @@ proxy.on("error", (err, req, res) => {
 
 // Start listening on port 80
 server.listen(80, () => {
-  console.log("Proxy server is running on http://mydomainname.com (port 80)");
+  console.log("Proxy server is running on http://matrixgaming.in (port 80)");
   console.log(`Forwarding requests to ${target}`);
 });
 const http = require("http");
@@ -35,7 +35,7 @@ const httpProxy = require("http-proxy");
 const proxy = httpProxy.createProxyServer({});
 
 // Set the target server (port 8087)
-const target = "http://127.0.0.1:8087";
+const target = "http://77.37.47.190:8087";
 
 // Create the HTTP server to listen on port 80
 const server = http.createServer((req, res) => {
@@ -55,6 +55,6 @@ proxy.on("error", (err, req, res) => {
 
 // Start listening on port 80
 server.listen(80, () => {
-  console.log("Proxy server is running on http://mydomainname.com (port 80)");
+  console.log("Proxy server is running on http://matrixgaming.in (port 80)");
   console.log(`Forwarding requests to ${target}`);
 });
