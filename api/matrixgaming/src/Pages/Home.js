@@ -29,9 +29,8 @@ function Home() {
                 <div
                   className="item-icon"
                   onClick={() =>
-                    navigate(
-                      "https://drive.google.com/uc?export=download&id=1xDaQ9csCvwwIE5z3EEJR8DVsx1xACdSJ"
-                    )
+                    (window.location.href =
+                      "https://drive.google.com/uc?export=download&id=1xDaQ9csCvwwIE5z3EEJR8DVsx1xACdSJ")
                   }
                 >
                   <i
@@ -50,9 +49,8 @@ function Home() {
                 <div
                   className="item-icon"
                   onClick={() =>
-                    navigate(
-                      "https://drive.google.com/uc?export=download&id=1QK2WIHfrTFb-3oJQ1YTMYzw98ew2g3zM"
-                    )
+                    (window.location.href =
+                      "https://drive.google.com/uc?export=download&id=1QK2WIHfrTFb-3oJQ1YTMYzw98ew2g3zM")
                   }
                 >
                   <i
@@ -76,9 +74,8 @@ function Home() {
               className="clickable name"
               data-type="download"
               onClick={() =>
-                navigate(
-                  "https://drive.google.com/uc?export=download&id=1ENZMsZDp16JCfEW8lKlclEN5rYqetVAL"
-                )
+                (window.location.href =
+                  "https://drive.google.com/uc?export=download&id=1ENZMsZDp16JCfEW8lKlclEN5rYqetVAL")
               }
             >
               Printer Driver
@@ -93,9 +90,8 @@ function Home() {
               className="clickable name"
               data-type="download"
               onClick={() =>
-                navigate(
-                  "https://drive.google.com/uc?export=download&id=1RgWOSP09h1jP8sBulJmLquDkt_6MNTWG"
-                )
+                (window.location.href =
+                  "https://drive.google.com/uc?export=download&id=1RgWOSP09h1jP8sBulJmLquDkt_6MNTWG")
               }
             >
               .Net 2.0 SP2
@@ -110,7 +106,8 @@ function Home() {
               className="clickable name"
               data-type="download"
               onClick={() =>
-                navigate("https://anydesk.com/en/downloads/windows")
+                (window.location.href =
+                  "https://anydesk.com/en/downloads/windows")
               }
             >
               AnyDesk
@@ -125,9 +122,8 @@ function Home() {
               className="clickable name"
               data-type="download"
               onClick={() =>
-                navigate(
-                  "https://www.win-rar.com/predownload.html?&L=0&Version=32bit"
-                )
+                (window.location.href =
+                  "https://www.win-rar.com/predownload.html?&L=0&Version=32bit")
               }
             >
               WinRAR
