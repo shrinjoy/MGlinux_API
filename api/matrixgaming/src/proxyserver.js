@@ -1,60 +1,19 @@
 const http = require("http");
-const httpProxy = require("http-proxy");
 
-// Create a proxy server instance
-const proxy = httpProxy.createProxyServer({});
+// Your VPS IP address
+const serverIp = '77.37.47.190"'; // Replace with your VPS IP
 
-// Set the target server (port 8087)
-const target = "http://77.37.47.190:8087";
-
-// Create the HTTP server to listen on port 80
+// Create an HTTP server
 const server = http.createServer((req, res) => {
-  proxy.web(req, res, { target }, (err) => {
-    console.error("Proxy error:", err);
-    res.writeHead(502, { "Content-Type": "text/plain" });
-    res.end("Bad Gateway");
-  });
+  const redirectUrl = `http://${serverIp}:8087${req.url}`;
+
+  // Set HTTP status code to 301 (permanent redirect) or 302 (temporary redirect)
+  res.writeHead(301, { Location: redirectUrl });
+  res.end(); // End the response
+  console.log(`Redirected request to ${redirectUrl}`);
 });
 
-// Handle proxy errors gracefully
-proxy.on("error", (err, req, res) => {
-  console.error("Proxy server error:", err);
-  res.writeHead(502, { "Content-Type": "text/plain" });
-  res.end("Bad Gateway");
-});
-
-// Start listening on port 80
+// Listen on port 80
 server.listen(80, () => {
-  console.log("Proxy server is running on http://matrixgaming.in (port 80)");
-  console.log(`Forwarding requests to ${target}`);
-});
-const http = require("http");
-const httpProxy = require("http-proxy");
-
-// Create a proxy server instance
-const proxy = httpProxy.createProxyServer({});
-
-// Set the target server (port 8087)
-const target = "http://77.37.47.190:8087";
-
-// Create the HTTP server to listen on port 80
-const server = http.createServer((req, res) => {
-  proxy.web(req, res, { target }, (err) => {
-    console.error("Proxy error:", err);
-    res.writeHead(502, { "Content-Type": "text/plain" });
-    res.end("Bad Gateway");
-  });
-});
-
-// Handle proxy errors gracefully
-proxy.on("error", (err, req, res) => {
-  console.error("Proxy server error:", err);
-  res.writeHead(502, { "Content-Type": "text/plain" });
-  res.end("Bad Gateway");
-});
-
-// Start listening on port 80
-server.listen(80, () => {
-  console.log("Proxy server is running on http://matrixgaming.in (port 80)");
-  console.log(`Forwarding requests to ${target}`);
+  console.log("Redirect server running on port 80...");
 });
