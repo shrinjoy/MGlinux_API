@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
   return (
     <>
       <header>
@@ -24,7 +26,14 @@ function Home() {
               </div>
               <p className="brand-name">SmartWin</p>
               <div className="brand-links">
-                <div className="item-icon">
+                <div
+                  className="item-icon"
+                  onClick={() =>
+                    navigate(
+                      "https://drive.google.com/uc?export=download&id=1xDaQ9csCvwwIE5z3EEJR8DVsx1xACdSJ"
+                    )
+                  }
+                >
                   <i
                     class="fa-brands fa-windows"
                     style={{ color: "rgb(0 100 150)" }}
@@ -38,7 +47,14 @@ function Home() {
               </div>
               <p className="brand-name">JackPot</p>
               <div className="brand-links">
-                <div className="item-icon">
+                <div
+                  className="item-icon"
+                  onClick={() =>
+                    navigate(
+                      "https://drive.google.com/uc?export=download&id=1QK2WIHfrTFb-3oJQ1YTMYzw98ew2g3zMhttps://drive.google.com/uc?export=download&id=1QK2WIHfrTFb-3oJQ1YTMYzw98ew2g3zM"
+                    )
+                  }
+                >
                   <i
                     class="fa-brands fa-windows"
                     style={{ color: "rgb(0 100 150)" }}
