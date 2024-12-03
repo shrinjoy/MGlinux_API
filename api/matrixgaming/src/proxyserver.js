@@ -5,7 +5,7 @@ const domainName = "matrixgaming.in";
 
 // Create an HTTP server
 const server = http.createServer((req, res) => {
-  const redirectUrl = `http://${domainName}:8087${req.url}`;
+  const redirectUrl = `http://${domainName}${req.url}`;
 
   // Set HTTP status code to 301 (permanent redirect) or 302 (temporary redirect)
   res.writeHead(301, { Location: redirectUrl });
