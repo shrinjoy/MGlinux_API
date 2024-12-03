@@ -22,7 +22,7 @@ function Home() {
           <div className="product-content">
             <div className="product-content-brand">
               <div className="brand-pic">
-                <img src={require("../Assets/icon.ico")} alt="Smartwin" />
+                <img src={require("../Assets/smartwin.png")} alt="Smartwin" />
               </div>
               <p className="brand-name">SmartWin</p>
               <div className="brand-links">
@@ -42,7 +42,7 @@ function Home() {
             </div>
             <div className="product-content-brand">
               <div className="brand-pic">
-                <img src={require("../Assets/iconJACK.ico")} alt="JackPot" />
+                <img src={require("../Assets/jackpot.png")} alt="JackPot" />
               </div>
               <p className="brand-name">JackPot</p>
               <div className="brand-links">
@@ -62,7 +62,7 @@ function Home() {
             </div>
             <div className="product-content-brand">
               <div className="brand-pic">
-                <img src={require("../Assets/iconMGDLX.ico")} alt="MGDeluxe" />
+                <img src={require("../Assets/mgdelux.png")} alt="MGDeluxe" />
               </div>
               <p className="brand-name">MG Deluxe</p>
               <div className="brand-links">
