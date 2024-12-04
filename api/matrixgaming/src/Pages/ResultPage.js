@@ -56,7 +56,7 @@ function ResultPage() {
             <section className='resultPage'>
                 <div className='container'>
                     <div className='row'>
-                        <div className="header">Jackpot</div>
+                        <div className="header">{window.location.pathname === "/jackpotresult" ? "Jackpot" : "SmartWin"}</div>
                         <div className='searchPanel'>
                             <div className='col-4'>
                                 <input type='date' value={searchDate} onChange={(e) => setSearchDate(e.target.value)} />
@@ -64,7 +64,8 @@ function ResultPage() {
                             <div className='col-4'>
                                 <select value={searchGame} onChange={(e) => setSearchGame(e.target.value)}>
                                     <option >Select Game</option>
-                                    <option value={"2Digit2"}>2 Digit 2</option>
+
+                                    <option value={`2Digit${window.location.pathname === "/jackpotresult" ? "2" : "1"}`}>2 Digit {window.location.pathname === "/jackpotresult" ? "2" : "1"}</option>
                                 </select>
                             </div>
                             <div className='col-4'>

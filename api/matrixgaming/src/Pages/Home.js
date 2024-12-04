@@ -59,11 +59,11 @@ function Home() {
                   ></i>
                 </div>
                 <div
-                  className="item-icon"
+                  className="item-icon ms-3"
                   onClick={() => navigate('/jackpotresult')}
                 >
                   <i
-                    class="fa-brands fa-globe"
+                    class="fa-solid fa-globe"
                     style={{ color: "rgb(0 100 150)" }}
                   ></i>
                 </div>

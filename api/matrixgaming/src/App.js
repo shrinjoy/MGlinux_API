@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path={`/jackpotresult`} element={<ResultPage />} />
+        <Route path={`/smartwinresult`} element={<ResultPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
