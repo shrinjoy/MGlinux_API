@@ -38,6 +38,15 @@ function Home() {
                     style={{ color: "rgb(0 100 150)" }}
                   ></i>
                 </div>
+                <div
+                  className="item-icon ms-3"
+                  onClick={() => navigate('/smartwinresult')}
+                >
+                  <i
+                    class="fa-solid fa-globe"
+                    style={{ color: "rgb(0 100 150)" }}
+                  ></i>
+                </div>
               </div>
             </div>
             <div className="product-content-brand">

@@ -59,7 +59,7 @@ function ResultPage() {
                         <div className="header">{window.location.pathname === "/jackpotresult" ? "Jackpot" : "SmartWin"}</div>
                         <div className='searchPanel'>
                             <div className='col-4'>
-                                <input type='date' value={searchDate} onChange={(e) => setSearchDate(e.target.value)} />
+                                <input type='date' value={searchDate} onChange={(e) => setSearchDate(e.target.value)} disabled />
                             </div>
                             <div className='col-4'>
                                 <select value={searchGame} onChange={(e) => setSearchGame(e.target.value)}>
