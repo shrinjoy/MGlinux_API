@@ -1,19 +1,27 @@
-const http = require("http");
+const http = require('http');
+const httpProxy = require('http-proxy');
 
-// Your domain name
-const domainName = "matrixgaming.in";
+// Create a proxy server
+const proxy = httpProxy.createProxyServer({});
 
-// Create an HTTP server
+// Main server logic
 const server = http.createServer((req, res) => {
-  const redirectUrl = `http://${domainName}${req.url}`;
+  const host = req.headers.host; // Get the requested domain
 
-  // Set HTTP status code to 301 (permanent redirect) or 302 (temporary redirect)
-  res.writeHead(301, { Location: redirectUrl });
-  res.end(); // End the response
-  console.log(`Redirected request to ${redirectUrl}`);
+  if (host === 'matrixgaming.in') {
+    // Forward to the app running on port 3000
+    proxy.web(req, res, { target: 'http://localhost:80' });
+  } else if (host === 'jackpotresult.live') {
+    // Forward to the app running on port 4000
+    proxy.web(req, res, { target: 'http://localhost:81' });
+  } else {
+    // Default response for unknown domains
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Domain not found');
+  }
 });
 
-// Listen on port 80
+// Start server on port 80
 server.listen(80, () => {
-  console.log("Redirect server running on port 80...");
+  console.log('Proxy server running on port 80');
 });
