@@ -58,6 +58,15 @@ function Home() {
                     style={{ color: "rgb(0 100 150)" }}
                   ></i>
                 </div>
+                <div
+                  className="item-icon"
+                  onClick={() => navigate('/jackpotresult')}
+                >
+                  <i
+                    class="fa-brands fa-globe"
+                    style={{ color: "rgb(0 100 150)" }}
+                  ></i>
+                </div>
               </div>
             </div>
             <div className="product-content-brand">

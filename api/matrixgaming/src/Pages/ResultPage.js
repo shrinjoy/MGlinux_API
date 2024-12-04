@@ -1,17 +1,28 @@
-import React, { useState } from 'react'
-import { convertGameIdToTime, getStoneDetails } from './Globals/globalFunction';
+import React, { useEffect, useState } from 'react'
+import { convertGameIdToTime, getGameResultWithMulti, getStoneDetails } from './Globals/globalFunction';
 
 function ResultPage() {
     const [searchDate, setSearchDate] = useState();
     const [searchGame, setSearchGame] = useState();
 
-    const [stoneDetails, setStoneDetails] = useState({});
+    const [stoneDetails, setStoneDetails] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
+    const [gameResultMulti, setGameResultMulti] = useState([]);
+
+    async function handleGetAllResult() {
+        if (searchDate && searchGame) {
+            getStoneDetails().then((data) => {
+                setStoneDetails(data);
+            });
+            const multiData = await getGameResultWithMulti();
+            setGameResultMulti(multiData.data.sort((a, b) => b.INTNUMBER - a.INTNUMBER));
+        }
+    }
 
     useEffect(() => {
-        getStoneDetails().then((data) => {
-            setStoneDetails(data);
-        });
+        // getStoneDetails().then((data) => {
+        //     setStoneDetails(data);
+        // });
 
         const getFormattedDate = (date) => {
             const d = new Date(date);
@@ -24,42 +35,59 @@ function ResultPage() {
     }, []);
 
     useEffect(() => {
-        if (stoneDetails) {
-            setFilteredData(Object.values(stoneDetails));
+        if (stoneDetails && gameResultMulti) {
+            setFilteredData(stoneDetails.map((item, index) => ({
+                ...item,
+                multiplier: gameResultMulti[index]?.XDETAILS || 0
+            })));
         }
-    }, [stoneDetails]);
+    }, [stoneDetails, gameResultMulti]);
 
 
     return (
         <>
+            <style>
+                {`
+                body{
+                    background-color: rgba(20, 20, 20, 1.0);
+                }   
+            `}
+            </style>
             <section className='resultPage'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='d-flex'>
-                            <div className='col-6'>
+                        <div className="header">Jackpot</div>
+                        <div className='searchPanel'>
+                            <div className='col-4'>
                                 <input type='date' value={searchDate} onChange={(e) => setSearchDate(e.target.value)} />
                             </div>
-                            <div className='col-6'>
+                            <div className='col-4'>
                                 <select value={searchGame} onChange={(e) => setSearchGame(e.target.value)}>
+                                    <option >Select Game</option>
                                     <option value={"2Digit2"}>2 Digit 2</option>
                                 </select>
                             </div>
+                            <div className='col-4'>
+                                <button onClick={handleGetAllResult}>Search</button>
+                            </div>
                         </div>
-                        <table>
+                        <table className='table table-bordered table-condensed'>
                             <thead>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Result</th>
-                                <th>Bonus</th>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Result</th>
+                                    <th>Bonus</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 {filteredData
                                     ? filteredData.map((item, index) => (
                                         <tr key={index}>
-                                            <td className="text-center">{convertGameIdToTime(item?.gameID)}</td>
-                                            <td className="text-center">{item?.gameTime}</td>
+                                            <td className="text-center">{item?.gameTime.split(" ")[0]}</td>
+                                            <td className="text-center">{item?.gameTime.split(" ")[1]}</td>
                                             <td className="text-center">{item?.gameResult}</td>
-                                            <td className="text-center">{item?.gameMultiplier}</td>
+                                            <td className="text-center">{item?.multiplier > 0 ? <span>{item?.multiplier}B</span> : ""}</td>
                                         </tr>
                                     ))
                                     : "Loading..."}

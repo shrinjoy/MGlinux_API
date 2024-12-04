@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path={`/result/${urlParam}`} element={<ResultPage />} />
+        <Route path={`/jackpotresult`} element={<ResultPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

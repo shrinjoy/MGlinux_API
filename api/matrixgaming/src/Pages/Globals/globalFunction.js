@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const jackURL = 'http://77.37.47.190:3025/'
+// const jackURL = "https://cors-anywhere.herokuapp.com/http://77.37.47.190:3025";
 
 const axiosInstance = axios.create({
     baseURL: jackURL,
@@ -23,6 +24,12 @@ export async function getStoneDetails() {
         .catch((err) => {
             return null;
         });
+}
+
+export async function getGameResultWithMulti() {
+    return axiosInstance.get(`/getallresultwithmultiplier`).then((res) => {
+        return res.data;
+    });
 }
 
 export function convertGameIdToTime(param) {
