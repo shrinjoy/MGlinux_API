@@ -8,6 +8,8 @@ const proxy = httpProxy.createProxyServer({});
 const server = http.createServer((req, res) => {
   const host = req.headers.host; // Get the requested domain
 
+  console.log(host)
+
   if (host === 'matrixgaming.in') {
     // Forward to the app running on port 3000
     proxy.web(req, res, { target: 'http://77.37.47.190:80' });
