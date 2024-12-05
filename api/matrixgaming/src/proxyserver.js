@@ -10,10 +10,10 @@ const server = http.createServer((req, res) => {
 
   if (host === 'matrixgaming.in') {
     // Forward to the app running on port 3000
-    proxy.web(req, res, { target: 'http://localhost:80' });
+    proxy.web(req, res, { target: 'http://77.37.47.190:80' });
   } else if (host === 'jackpotresult.live') {
     // Forward to the app running on port 4000
-    proxy.web(req, res, { target: 'http://localhost:81' });
+    proxy.web(req, res, { target: 'http://77.37.47.190:81' });
   } else {
     // Default response for unknown domains
     res.writeHead(404, { 'Content-Type': 'text/plain' });
