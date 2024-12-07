@@ -1,5 +1,6 @@
 const https = require('https');
 const http = require('http');
+const httpProxy = require('http-proxy');
 const fs = require('fs');
 
 // Load SSL certificate and key
@@ -8,7 +9,10 @@ const options = {
   cert: fs.readFileSync('./ssl/cert.pem') // Path to your certificate
 };
 
-// Domain-to-target mapping (HTTP URLs)
+// Create a proxy server
+const proxy = httpProxy.createProxyServer({});
+
+// Domain-to-target mapping
 const domainMap = {
   'matrixgaming.in': 'http://77.37.47.190:82',
   'jackpotresult.live': 'http://77.37.47.190:81',
@@ -35,15 +39,29 @@ const httpsServer = https.createServer(options, (req, res) => {
   }
 });
 
+// HTTP Server to serve actual content
+const httpServer = http.createServer((req, res) => {
+  const host = normalizeHost(req.headers.host); // Get the requested domain
+  const target = domainMap[host];
+
+  if (target) {
+    proxy.web(req, res, { target });
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Domain not found');
+  }
+});
+
+// Error handling for the proxy
+proxy.on('error', (err, req, res) => {
+  console.error('Proxy error:', err);
+  res.writeHead(500, { 'Content-Type': 'text/plain' });
+  res.end('Internal Server Error');
+});
+
 // Start HTTPS redirection server on port 443
 httpsServer.listen(443, () => {
   console.log('HTTPS-to-HTTP redirection server running on port 443');
-});
-
-// HTTP server (optional, for testing purposes)
-const httpServer = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('You have reached the HTTP server');
 });
 
 // Start HTTP server on port 80
