@@ -113,6 +113,7 @@ footer {
   -webkit-animation: gradientDance 2s ease infinite;
   -moz-animation: gradientDance 2s ease infinite;
   animation: gradientDance 2s ease infinite;
+  height: 100vh;
 }
 
 @-webkit-keyframes gradientDance {
