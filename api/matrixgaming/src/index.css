@@ -58,6 +58,7 @@ footer {
   /* background-color: rgba(100, 0, 0, 1); */
   background-color: rgba(0, 80, 20, 1.0);
   font-size: 32px;
+  margin-top: 10px;
 }
 
 .resultPage .searchPanel {
@@ -102,4 +103,56 @@ footer {
   white-space: nowrap;
   /*background-color:#000000;*/
   background-color: rgba(0, 0, 0, 0.5)
+}
+
+
+.resultPage {
+  background: linear-gradient(324deg, #e611b9, #4e11e6, #ffab00, #00a3ff);
+  background-size: 800% 800%;
+
+  -webkit-animation: gradientDance 2s ease infinite;
+  -moz-animation: gradientDance 2s ease infinite;
+  animation: gradientDance 2s ease infinite;
+}
+
+@-webkit-keyframes gradientDance {
+  0% {
+    background-position: 33% 0%
+  }
+
+  50% {
+    background-position: 68% 100%
+  }
+
+  100% {
+    background-position: 33% 0%
+  }
+}
+
+@-moz-keyframes gradientDance {
+  0% {
+    background-position: 33% 0%
+  }
+
+  50% {
+    background-position: 68% 100%
+  }
+
+  100% {
+    background-position: 33% 0%
+  }
+}
+
+@keyframes gradientDance {
+  0% {
+    background-position: 33% 0%
+  }
+
+  50% {
+    background-position: 68% 100%
+  }
+
+  100% {
+    background-position: 33% 0%
+  }
 }
