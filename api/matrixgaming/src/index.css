@@ -1,0 +1,159 @@
+* {
+  --webkit-tap-highlight-color: transparent;
+  --moz-tap-highlight-color: transparent;
+  --ms-tap-highlight-color: transparent;
+}
+
+body {
+  color: #444444 !important;
+}
+
+header {
+  color: white;
+  background: linear-gradient(-45deg,
+      rgba(0, 255, 100, 1),
+      rgba(0, 180, 255, 1));
+}
+
+.page-title {
+  text-shadow: 2px 2px 2px black;
+}
+
+.main {
+  background: linear-gradient(-45deg,
+      rgba(255, 200, 255, 1),
+      rgba(255, 255, 150, 1));
+}
+
+.product-title-text {
+  color: #444444;
+}
+
+.product-content-brand .item-icon span {
+  color: #5289ba;
+}
+
+.tools {
+  background-color: rgba(0, 120, 200, 1);
+}
+
+.tools-content-item {
+  color: white;
+}
+
+footer {
+  background-color: #202020;
+}
+
+.footer-text {
+  color: #868686;
+}
+
+.resultPage .header {
+  color: #fff;
+  text-align: center;
+  font-family: Tahoma;
+  white-space: nowrap;
+  /* background-color: #f00; */
+  /* background-color: rgba(100, 0, 0, 1); */
+  background-color: rgba(0, 80, 20, 1.0);
+  font-size: 32px;
+  margin-top: 10px;
+}
+
+.resultPage .searchPanel {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.resultPage .searchPanel input,
+.resultPage .searchPanel select,
+.resultPage .searchPanel button {
+  width: 100%;
+  float: left;
+  text-align: left;
+  padding-left: 5px;
+  font-family: Tahoma;
+  white-space: nowrap;
+  display: block;
+  background-color: #fff;
+  border: none;
+  height: 35px;
+  border: 1px solid #454545;
+}
+
+.resultPage table>thead>tr>th {
+  color: #fff;
+  font-weight: bold;
+  text-justify: auto;
+  text-align: center;
+  font-family: roboto;
+  white-space: nowrap;
+  /*background-color:#007fff;*/
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.resultPage table>tbody>tr>td {
+  color: #fff;
+  font-weight: bold;
+  text-justify: auto;
+  text-align: center;
+  font-family: roboto;
+  white-space: nowrap;
+  /*background-color:#000000;*/
+  background-color: rgba(0, 0, 0, 0.5)
+}
+
+
+.resultPage {
+  background: linear-gradient(324deg, #e611b9, #4e11e6, #ffab00, #00a3ff);
+  background-size: 800% 800%;
+
+  -webkit-animation: gradientDance 2s ease infinite;
+  -moz-animation: gradientDance 2s ease infinite;
+  animation: gradientDance 2s ease infinite;
+  height: 100vh;
+}
+
+@-webkit-keyframes gradientDance {
+  0% {
+    background-position: 33% 0%
+  }
+
+  50% {
+    background-position: 68% 100%
+  }
+
+  100% {
+    background-position: 33% 0%
+  }
+}
+
+@-moz-keyframes gradientDance {
+  0% {
+    background-position: 33% 0%
+  }
+
+  50% {
+    background-position: 68% 100%
+  }
+
+  100% {
+    background-position: 33% 0%
+  }
+}
+
+@keyframes gradientDance {
+  0% {
+    background-position: 33% 0%
+  }
+
+  50% {
+    background-position: 68% 100%
+  }
+
+  100% {
+    background-position: 33% 0%
+  }
+}

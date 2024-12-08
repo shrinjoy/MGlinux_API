@@ -6,8 +6,11 @@ const path = require("node:path");
 const getmac = require("getmac");
 var internetAvailable = require("internet-available");
 var serialNumber = require("serial-number");
+import Store from "electron-store";
 serialNumber.preferUUID = true;
 const isProduction = 1;
+
+const store = new Store();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -44,7 +47,7 @@ const createWindow = () => {
     mainWindow.maximize();
     mainWindow.show(); // Show the window after maximizing.
     if (isProduction === 1) {
-      mainWindow.setAlwaysOnTop(true);
+      mainWindow.setAlwaysOnTop(true, 'screen-saver');
     }
     mainWindow.focus();
   });
@@ -70,20 +73,24 @@ const createWindow = () => {
   }
 
   // Event listener for the 'maximize' event
-  mainWindow.on('resize', () => {
+  mainWindow.on('focus', () => {
+    mainWindow.focus();
     setTimeout(() => {
       if (isProduction === 1) {
-        exec('taskkill /F /IM explorer.exe');
+        // exec('taskkill /F /IM explorer.exe');
       }
     }, 200)
-    mainWindow.focus();
   });
 
   // Listen for the minimize-window event
   ipcMain.on('minimize-window', () => {
     if (mainWindow) {
+      // exec('explorer.exe', (error, stdout, stderr) =>{
+      //   if (stderr || error){
+      //     exec('explorer.exe')
+      //   } 
+      // });
       mainWindow.minimize();
-      exec('explorer.exe');
     } else {
       console.warn('Main window is not available.');
     }
@@ -102,7 +109,7 @@ app.whenReady().then(() => {
   createWindow();
 
   if (isProduction === 1) {
-    exec('taskkill /F /IM explorer.exe');
+    // exec('taskkill /F /IM explorer.exe');
 
     // Register a global shortcut to prevent ALT+TAB
     globalShortcut.register('Alt+Tab', () => {
@@ -118,6 +125,12 @@ app.whenReady().then(() => {
     globalShortcut.register('Control+Alt+Delete', () => {
       console.log('CTRL+ALT+DEL prevented');
     });
+
+    // Register other combinations as needed
+    globalShortcut.register('Alt+Control+Delete', () => {
+      console.log('ALT+CTRL+DEL prevented');
+    });
+
   }
 
   // On OS X it's common to re-create a window in the app when the
@@ -143,15 +156,19 @@ app.on("window-all-closed", () => {
 // code. You can also put them in separate files and import them here.
 
 // Start app on windows startup
-app.setLoginItemSettings({
-  openAtLogin: true
-})
+// app.setLoginItemSettings({
+//   openAtLogin: true
+// })
 
 // System Commands from App
 ipcMain.on("quit-app", () => {
-  app.quit();
   if (os.platform() === "win32") {
-    exec('explorer.exe');
+    // exec('explorer.exe', (error, stdout, stderr) =>{
+    //   if (stderr || error){
+    //     exec('explorer.exe')
+    //   }
+    // });
+    app.quit();
   }
 });
 
@@ -299,3 +316,23 @@ function setFirstStartupFlag() {
 }
 
 ipcMain.handle("check-mac", isFirstStartup);
+
+ipcMain.handle("save-credentials", (event, { username, password }) => {
+  store.set("username", username);
+  store.set("password", password);
+})
+
+ipcMain.handle("fetch-credentials", () => {
+  const username = store.get("username");
+  const password = store.get("password");
+  if (!username || !password) {
+    return false;
+  } else {
+    return { username, password };
+  }
+})
+
+ipcMain.handle("delete-credentials", () => {
+  store.delete("username");
+  store.delete("password");
+})

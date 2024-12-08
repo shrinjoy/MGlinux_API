@@ -44,11 +44,13 @@ function Loader() {
   }, []);
 
   return (
-    <div style={{ width: "100vw", height: "100vh", backgroundColor: "#000" }}>
-      <div className="loader">
-        <img src={require("../Assets/images/skint.png").default} />
+    <>
+      <div style={{ width: "100vw", height: "100vh", backgroundColor: "#000" }}>
+        <div className="loader">
+          <img src={require("../Assets/images/skint.png").default} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
