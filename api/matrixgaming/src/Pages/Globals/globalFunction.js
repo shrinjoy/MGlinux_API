@@ -59,7 +59,7 @@ export function getResultByDateWithMulti(searchDate) {
   return axiosInstance
     .post("/getallresultwithxbydate", parsedData)
     .then((res) => {
-      return res;
+      return res.data;
     })
     .catch((err) => {
       return null;
