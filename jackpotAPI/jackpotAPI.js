@@ -152,6 +152,19 @@ app.post('/getallresultbydate', async function (req, res) {
 
 })
 
+app.post('/getallresultwithxbydate', async function (req, res) {
+    await getallresultbydate.getlastresultswithx_all_bydate(sql, req.body).then((data) => {
+        res.status(200).send(data);
+
+    })
+        .catch((err) => {
+            res.status(400).send({ err });
+
+        })
+
+})
+
+
 app.post('/getreportfromdatetodate', async function (req, res) {
     await getreport.getreportfromdatetilldate(sql, req.body).then((data) => {
         res.status(200).send(data);
