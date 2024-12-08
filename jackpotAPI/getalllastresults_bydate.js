@@ -41,7 +41,7 @@ module.exports = {
                        
                             x+=1;
                             console.log({"result":element["gameresult"]!=null?element["gameresult"]:"NA","xresult":element["xresult"]!=null?element["xresult"]:"NA"});
-                            arraydata.push( {"result":element["gameresult"]!=null?element["gameresult"]:"NA","xresult":element["xresult"]!=null?element["xresult"]:"NA"});
+                            arraydata.push( {"gameid":element["gameid"]!=null?element["gameid"]:"NA","result":element["gameresult"]!=null?element["gameresult"]:"NA","xresult":element["xresult"]!=null?element["xresult"]:"NA","date_time":element["gametime"]!=null?element["gametime"]:"NA"});
                         });
 
                         resolve(arraydata); // Resolve the JSON object directly
