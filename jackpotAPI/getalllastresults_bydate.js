@@ -40,7 +40,7 @@ module.exports = {
                         data.recordset.forEach(element => {
                        
                             x+=1;
-                            console.log({"result":element["gameresult"]!=null?element["gameresult"]:"NA","xresult":element["xresult"]!=null?element["xresult"]:"NA"});
+                           // console.log({"result":element["gameresult"]!=null?element["gameresult"]:"NA","xresult":element["xresult"]!=null?element["xresult"]:"NA"});
                             arraydata.push( {"gameid":element["gameid"]!=null?element["gameid"]:"NA","result":element["gameresult"]!=null?element["gameresult"]:"NA","xresult":element["xresult"]!=null?element["xresult"]:"NA","date_time":element["gametime"]!=null?element["gametime"]:"NA"});
                         });
 
