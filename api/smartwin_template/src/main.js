@@ -1,4 +1,11 @@
-const { app, BrowserWindow, ipcMain, shell, globalShortcut, dialog } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  shell,
+  globalShortcut,
+  dialog,
+} = require("electron");
 const { exec } = require("child_process");
 const os = require("os");
 const fs = require("fs");
@@ -25,7 +32,7 @@ const createWindow = () => {
     icon: "../icons/icon.ico",
     show: false,
     frame: false,
-    titleBarStyle: 'hidden', // watch this line
+    titleBarStyle: "hidden", // watch this line
     fullscreen: true,
     webPreferences: {
       zoomFactor: 1.0,
@@ -47,7 +54,7 @@ const createWindow = () => {
     mainWindow.maximize();
     mainWindow.show(); // Show the window after maximizing.
     if (isProduction === 1) {
-      mainWindow.setAlwaysOnTop(true, 'screen-saver');
+      mainWindow.setAlwaysOnTop(true, "screen-saver");
     }
     mainWindow.focus();
   });
@@ -56,7 +63,6 @@ const createWindow = () => {
       mainWindow.focus();
     }, 200);
   });
-
 
   // Back To Home Function
   ipcMain.handle("back-home", async () => {
@@ -73,26 +79,26 @@ const createWindow = () => {
   }
 
   // Event listener for the 'maximize' event
-  mainWindow.on('focus', () => {
+  mainWindow.on("focus", () => {
     mainWindow.focus();
     setTimeout(() => {
       if (isProduction === 1) {
         // exec('taskkill /F /IM explorer.exe');
       }
-    }, 200)
+    }, 200);
   });
 
   // Listen for the minimize-window event
-  ipcMain.on('minimize-window', () => {
+  ipcMain.on("minimize-window", () => {
     if (mainWindow) {
       // exec('explorer.exe', (error, stdout, stderr) =>{
       //   if (stderr || error){
       //     exec('explorer.exe')
-      //   } 
+      //   }
       // });
       mainWindow.minimize();
     } else {
-      console.warn('Main window is not available.');
+      console.warn("Main window is not available.");
     }
   });
 };
@@ -112,25 +118,24 @@ app.whenReady().then(() => {
     // exec('taskkill /F /IM explorer.exe');
 
     // Register a global shortcut to prevent ALT+TAB
-    globalShortcut.register('Alt+Tab', () => {
-      console.log('ALT+TAB prevented');
+    globalShortcut.register("Alt+Tab", () => {
+      console.log("ALT+TAB prevented");
     });
 
     // Register a global shortcut to prevent CTRL+SHIFT+ESC
-    globalShortcut.register('Control+Shift+Escape', () => {
-      console.log('CTRL+SHIFT+ESC prevented');
+    globalShortcut.register("Control+Shift+Escape", () => {
+      console.log("CTRL+SHIFT+ESC prevented");
     });
 
     // Register other combinations as needed
-    globalShortcut.register('Control+Alt+Delete', () => {
-      console.log('CTRL+ALT+DEL prevented');
+    globalShortcut.register("Control+Alt+Delete", () => {
+      console.log("CTRL+ALT+DEL prevented");
     });
 
     // Register other combinations as needed
-    globalShortcut.register('Alt+Control+Delete', () => {
-      console.log('ALT+CTRL+DEL prevented');
+    globalShortcut.register("Alt+Control+Delete", () => {
+      console.log("ALT+CTRL+DEL prevented");
     });
-
   }
 
   // On OS X it's common to re-create a window in the app when the
@@ -140,7 +145,6 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
-
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -175,18 +179,20 @@ ipcMain.on("quit-app", () => {
 ipcMain.on("system-shutdown", (event) => {
   const mainWindow = BrowserWindow.fromWebContents(event.sender);
   if (os.platform() === "win32") {
-    dialog.showMessageBox(mainWindow, {
-      type: 'warning',
-      title: 'Message',
-      message: "Do You Want to Shutdown?",
-      buttons: ['Yes', 'No'],
-      noLink: true,
-      modal: true
-    }).then((result) => {
-      if (result.response === 0) {
-        exec("shutdown /s /t 0");
-      }
-    });
+    dialog
+      .showMessageBox(mainWindow, {
+        type: "warning",
+        title: "Message",
+        message: "Do You Want to Shutdown?",
+        buttons: ["Yes", "No"],
+        noLink: true,
+        modal: true,
+      })
+      .then((result) => {
+        if (result.response === 0) {
+          exec("shutdown /s /t 0");
+        }
+      });
   } else {
     exec("shutdown +0");
   }
@@ -195,18 +201,20 @@ ipcMain.on("system-shutdown", (event) => {
 ipcMain.on("system-restart", (event) => {
   const mainWindow = BrowserWindow.fromWebContents(event.sender);
   if (os.platform() === "win32") {
-    dialog.showMessageBox(mainWindow, {
-      type: 'warning',
-      title: 'Message',
-      message: "Do You Want to Restart?",
-      buttons: ['Yes', 'No'],
-      noLink: true,
-      modal: true
-    }).then((result) => {
-      if (result.response === 0) {
-        exec("shutdown /r /t 0");
-      }
-    });
+    dialog
+      .showMessageBox(mainWindow, {
+        type: "warning",
+        title: "Message",
+        message: "Do You Want to Restart?",
+        buttons: ["Yes", "No"],
+        noLink: true,
+        modal: true,
+      })
+      .then((result) => {
+        if (result.response === 0) {
+          exec("shutdown /r /t 0");
+        }
+      });
   } else {
     exec("shutdown -r now");
   }
@@ -232,8 +240,8 @@ ipcMain.on("system-settings", () => {
 ipcMain.handle("get-mac-address", fetchMacAddress);
 
 async function fetchMacAddress() {
-  const macAddress = await getmac.default();
-  // const macAddress = await getSerialNumber();
+  // const macAddress = await getmac.default();
+  const macAddress = await getSerialNumber();
   if (macAddress) {
     return macAddress;
   }
@@ -320,7 +328,7 @@ ipcMain.handle("check-mac", isFirstStartup);
 ipcMain.handle("save-credentials", (event, { username, password }) => {
   store.set("username", username);
   store.set("password", password);
-})
+});
 
 ipcMain.handle("fetch-credentials", () => {
   const username = store.get("username");
@@ -330,9 +338,9 @@ ipcMain.handle("fetch-credentials", () => {
   } else {
     return { username, password };
   }
-})
+});
 
 ipcMain.handle("delete-credentials", () => {
   store.delete("username");
   store.delete("password");
-})
+});
