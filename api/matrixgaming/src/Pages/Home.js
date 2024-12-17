@@ -26,18 +26,20 @@ function Home() {
               </div>
               <p className="brand-name">SmartWin</p>
               <div className="brand-links">
-                <div
+                <a
                   className="item-icon"
-                  onClick={() =>
-                    (window.location.href =
-                      "https://drive.google.com/file/d/1D1z6fTroyHyu0JpMTbr1yRn3gfx3RTBP/view?usp=sharing")
-                  }
+                  href="/SmartWin-2.1.0-Setup.exe"
+                  target="_blank"
+                // onClick={() =>
+                //   (window.location.href =
+                //     "https://drive.google.com/file/d/1D1z6fTroyHyu0JpMTbr1yRn3gfx3RTBP/view?usp=sharing")
+                // }
                 >
                   <i
                     class="fa-brands fa-windows"
                     style={{ color: "rgb(0 100 150)" }}
                   ></i>
-                </div>
+                </a>
                 <div
                   className="item-icon ms-3"
                   onClick={() => navigate("/smartwinresult")}
@@ -55,18 +57,20 @@ function Home() {
               </div>
               <p className="brand-name">JackPot</p>
               <div className="brand-links">
-                <div
+                <a
                   className="item-icon"
-                  onClick={() =>
-                    (window.location.href =
-                      "https://drive.google.com/file/d/1tImJnV8mUo04d6ANcqlxblM3Hvk5iP6V/view?usp=sharing")
-                  }
+                  href="/JackPot-2.0.3-Setup.exe"
+                  target="_blank"
+                // onClick={() =>
+                // (window.location.href =
+                //   "https://drive.google.com/file/d/1tImJnV8mUo04d6ANcqlxblM3Hvk5iP6V/view?usp=sharing")
+                // }
                 >
                   <i
                     class="fa-brands fa-windows"
                     style={{ color: "rgb(0 100 150)" }}
                   ></i>
-                </div>
+                </a>
                 <div
                   className="item-icon ms-3"
                   onClick={() => navigate("/jackpotresult")}
@@ -84,18 +88,20 @@ function Home() {
               </div>
               <p className="brand-name">MG Deluxe</p>
               <div className="brand-links">
-                <div
+                <a
                   className="item-icon"
-                  onClick={() =>
-                    (window.location.href =
-                      "https://drive.google.com/uc?export=download&id=1sM3lAV_Y8KwbzGxpwF451bAtf2ACiMRF")
-                  }
+                  href="/mgdeluxe.zip"
+                  target="_blank"
+                // onClick={() =>
+                // (window.location.href =
+                //   "https://drive.google.com/uc?export=download&id=1sM3lAV_Y8KwbzGxpwF451bAtf2ACiMRF")
+                // }
                 >
                   <i
                     class="fa-brands fa-windows"
                     style={{ color: "rgb(0 100 150)" }}
                   ></i>
-                </div>
+                </a>
               </div>
             </div>
           </div>
@@ -112,8 +118,8 @@ function Home() {
               className="clickable name"
               data-type="download"
               onClick={() =>
-                (window.location.href =
-                  "https://drive.google.com/uc?export=download&id=1ENZMsZDp16JCfEW8lKlclEN5rYqetVAL")
+              (window.location.href =
+                "https://drive.google.com/uc?export=download&id=1ENZMsZDp16JCfEW8lKlclEN5rYqetVAL")
               }
             >
               Printer Driver
@@ -128,8 +134,8 @@ function Home() {
               className="clickable name"
               data-type="download"
               onClick={() =>
-                (window.location.href =
-                  "https://drive.google.com/uc?export=download&id=1RgWOSP09h1jP8sBulJmLquDkt_6MNTWG")
+              (window.location.href =
+                "https://drive.google.com/uc?export=download&id=1RgWOSP09h1jP8sBulJmLquDkt_6MNTWG")
               }
             >
               .Net 2.0 SP2
@@ -144,8 +150,8 @@ function Home() {
               className="clickable name"
               data-type="download"
               onClick={() =>
-                (window.location.href =
-                  "https://anydesk.com/en/downloads/windows")
+              (window.location.href =
+                "https://anydesk.com/en/downloads/windows")
               }
             >
               AnyDesk
@@ -160,8 +166,8 @@ function Home() {
               className="clickable name"
               data-type="download"
               onClick={() =>
-                (window.location.href =
-                  "https://www.win-rar.com/predownload.html?&L=0&Version=32bit")
+              (window.location.href =
+                "https://www.win-rar.com/predownload.html?&L=0&Version=32bit")
               }
             >
               WinRAR
