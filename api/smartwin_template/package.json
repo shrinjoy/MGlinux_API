@@ -1,6 +1,6 @@
 {
-  "name": "JackPot",
-  "productName": "JackPot",
+  "name": "JackPotKing",
+  "productName": "JackPotKing",
   "version": "2.0.1",
   "description": "My Electron application description",
   "main": ".webpack/main",
