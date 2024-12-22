@@ -146,10 +146,10 @@ function Login() {
       if (data) {
         setUsername(data.username);
         // setPassword(data.password);
-        setUserStore(true)
+        setUserStore(true);
       }
     }
-    fetchCredentials()
+    fetchCredentials();
   }, []);
 
   // Handle Login
@@ -175,7 +175,7 @@ function Login() {
         if (brand === "JackPot") {
           window.location.href = "http://77.37.47.190:8084/#/games/2digit2";
         } else {
-          window.location.href = "http://77.37.47.190:8086/#/lobby";
+          window.location.href = "http://103.162.120.117:8086/#/lobby";
         }
       } else {
         setError("Network Error");
@@ -280,7 +280,14 @@ function Login() {
       `}
       </style>
       <main className="loginWrapper">
-        <img src={require(`../Assets/images/smnartwinlogin${brand === "JackPot" ? "JACK" : ""}.png`).default} className="loginImage" />
+        <img
+          src={
+            require(`../Assets/images/smnartwinlogin${
+              brand === "JackPot" ? "JACK" : ""
+            }.png`).default
+          }
+          className="loginImage"
+        />
         <div
           className="position-absolute col-11 d-flex justify-content-between px-2"
           style={{ top: "0px", left: "50%", transform: "translate(-50%)" }}
