@@ -175,7 +175,7 @@ function Login() {
         if (brand === "JackPot") {
           window.location.href = "http://77.37.47.190:8084/#/games/2digit2";
         } else {
-          window.location.href = "http://103.162.120.117:8086/#/lobby";
+          window.location.href = "http://77.37.47.190:8086/#/lobby";
         }
       } else {
         setError("Network Error");
