@@ -1,7 +1,25 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const [latestFile, setLatestFile] = useState(null);
+  async function handleDownload(category) {
+    fetch('/files.json')
+      .then((res) => res.json())
+      .then((files) => {
+        const filteredFiles = files.filter((file) => file.category === category)
+
+        if (filteredFiles.length > 0) {
+          const latestFile = filteredFiles.reduce((latest, file) => {
+            return new Date(file.uploadDate) > new Date(latest.uploadDate) ? file : latest
+          });
+          window.open(`/setup/${latestFile.fileName}`, '_blank');
+        }
+      })
+  }
+
   const navigate = useNavigate();
   return (
     <>
@@ -26,9 +44,10 @@ function Home() {
               </div>
               <p className="brand-name">SmartWin</p>
               <div className="brand-links">
-                <a
+                <div
                   className="item-icon"
                   href="/SmartWin-2.1.0-Setup.exe"
+                  onClick={() => handleDownload('SmartWin')}
                   target="_blank"
                 // onClick={() =>
                 //   (window.location.href =
@@ -39,7 +58,7 @@ function Home() {
                     class="fa-brands fa-windows"
                     style={{ color: "rgb(0 100 150)" }}
                   ></i>
-                </a>
+                </div>
                 <div
                   className="item-icon ms-3"
                   onClick={() => navigate("/smartwinresult")}
@@ -57,9 +76,10 @@ function Home() {
               </div>
               <p className="brand-name">JackPot</p>
               <div className="brand-links">
-                <a
+                <div
                   className="item-icon"
-                  href="/JackPot-2.0.3-Setup.exe"
+                  // href="/JackPot-2.0.3-Setup.exe"
+                  onClick={() => handleDownload('JackPot')}
                   target="_blank"
                 // onClick={() =>
                 // (window.location.href =
@@ -70,7 +90,7 @@ function Home() {
                     class="fa-brands fa-windows"
                     style={{ color: "rgb(0 100 150)" }}
                   ></i>
-                </a>
+                </div>
                 <div
                   className="item-icon ms-3"
                   onClick={() => navigate("/jackpotresult")}
