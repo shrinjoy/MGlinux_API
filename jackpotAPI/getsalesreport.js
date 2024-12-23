@@ -12,7 +12,14 @@ module.exports = {
                 WHERE TICKET99.TARMINALID = '${req["userid"]}'
                   AND TICKET99.GAMEDATE BETWEEN '${req["startdate"]}' AND '${req["enddate"]}'
             `);
-    
+            const salesData1 = await db.query(`
+                SELECT 
+                    ISNULL(SUM(CASE WHEN TICKET12CARD.TARMINALCLS <> '' THEN TICKETTOTALRS ELSE 0 END), 0) AS playpoint,
+                    ISNULL(SUM(CASE WHEN TICKET12CARD.TARMINALCLS = 'CANCEL' THEN TICKETTOTALRS ELSE 0 END), 0) AS cancelpoint
+                FROM TICKET12CARD
+                WHERE TICKET12CARD.TARMINALID = '${req["userid"]}'
+                  AND TICKET12CARD.GAMEDATE BETWEEN '${req["startdate"]}' AND '${req["enddate"]}'
+            `);
             console.log(salesData);
     
             const clientData = await db.query(`
@@ -26,20 +33,25 @@ module.exports = {
                 WHERE TARMINALID = '${req['userid']}'
                   AND claimdate BETWEEN '${req["startdate"]}' AND '${req["enddate"]} '
             `);
-    
-            const claimpoints = claimData.recordset[0]["claimpoint"] || 0;
+            const claimData1 = await db.query(`
+                SELECT ISNULL(SUM(WINRS), 0) AS claimpoint
+                FROM TICKET12CARD
+                WHERE TARMINALID = '${req['userid']}'
+                  AND claimdate BETWEEN '${req["startdate"]}' AND '${req["enddate"]} '
+            `);
+            const claimpoints = (claimData.recordset[0]["claimpoint"] || 0)+(claimData1.recordset[0]["claimpoint"] || 0);
             var percetange =(clientData.recordset[0]["CLIENTPARSENT"] / 100);
             // Calculate discountpoints, netplay, and prepare finaldata object
         
-            const discountpoints = ((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) ) * percetange;
-            const netplay = ((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) - claimpoints) - discountpoints;
+            const discountpoints = (((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) ) * percetange)+(((salesData1.recordset[0]["playpoint"] - salesData1.recordset[0]["cancelpoint"]) ) * percetange);
+            const netplay =(((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]))+((salesData1.recordset[0]["playpoint"] - salesData1.recordset[0]["cancelpoint"]) )- claimpoints) - discountpoints;
     
             const finaldata = {
-                "playpoint": salesData.recordset[0]["playpoint"],
-                "cancelpoint": salesData.recordset[0]["cancelpoint"],
-                "netpoint": salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"],
+                "playpoint": salesData.recordset[0]["playpoint"]+salesData1.recordset[0]["playpoint"],
+                "cancelpoint": salesData.recordset[0]["cancelpoint"]+salesData1.recordset[0]["cancelpoint"],
+                "netpoint": (salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"])+(salesData1.recordset[0]["playpoint"] - salesData1.recordset[0]["cancelpoint"]),
                 "claimpoints": claimpoints,
-                "optpoints": (salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"]) - claimpoints,
+                "optpoints": ((salesData.recordset[0]["playpoint"] - salesData.recordset[0]["cancelpoint"])+(salesData1.recordset[0]["playpoint"] - salesData1.recordset[0]["cancelpoint"])) - claimpoints,
                 "discountpoints": discountpoints,
                 "netplaypoints":netplay
             };

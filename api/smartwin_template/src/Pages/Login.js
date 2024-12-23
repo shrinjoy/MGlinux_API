@@ -146,10 +146,10 @@ function Login() {
       if (data) {
         setUsername(data.username);
         // setPassword(data.password);
-        setUserStore(true)
+        setUserStore(true);
       }
     }
-    fetchCredentials()
+    fetchCredentials();
   }, []);
 
   // Handle Login
@@ -280,7 +280,14 @@ function Login() {
       `}
       </style>
       <main className="loginWrapper">
-        <img src={require(`../Assets/images/smnartwinlogin${brand === "JackPot" ? "JACK" : ""}.png`).default} className="loginImage" />
+        <img
+          src={
+            require(`../Assets/images/smnartwinlogin${
+              brand === "JackPot" ? "JACK" : ""
+            }.png`).default
+          }
+          className="loginImage"
+        />
         <div
           className="position-absolute col-11 d-flex justify-content-between px-2"
           style={{ top: "0px", left: "50%", transform: "translate(-50%)" }}
