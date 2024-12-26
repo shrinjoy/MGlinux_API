@@ -23,7 +23,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getMacAddress: () => ipcRenderer.invoke('get-mac-address'),
     printFocusWindow: () => ipcRenderer.invoke('print-focus-window'),
     checkInternet: () => ipcRenderer.invoke('check-internet'),
-    backToHome: () => ipcRenderer.invoke('back-home'),
+    backToHome: () => ipcRenderer.send('navigate-back-to-app'),
     getCurrentURL: () => ipcRenderer.invoke('get-current-url'),
     checkHardMac: () => ipcRenderer.invoke('check-mac'),
     saveCredentials: (username, password) => ipcRenderer.invoke('save-credentials', { username, password }),

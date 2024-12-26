@@ -101,6 +101,10 @@ const createWindow = () => {
       console.warn("Main window is not available.");
     }
   });
+
+  ipcMain.on('navigate-back-to-app', () => {
+    mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  });
 };
 
 // This method will be called when Electron has finished
