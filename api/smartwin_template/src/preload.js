@@ -26,7 +26,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     backToHome: () => ipcRenderer.send('navigate-back-to-app'),
     getCurrentURL: () => ipcRenderer.invoke('get-current-url'),
     checkHardMac: () => ipcRenderer.invoke('check-mac'),
-    saveCredentials: (username, password) => ipcRenderer.invoke('save-credentials', { username, password }),
+    saveCredentials: (username, password, usermacid) => ipcRenderer.invoke('save-credentials', { username, password, usermacid }),
     fetchCredentials: () => ipcRenderer.invoke('fetch-credentials'),
     deleteCredentials: () => ipcRenderer.invoke('delete-credentials'),
 });
