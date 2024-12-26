@@ -325,22 +325,25 @@ function setFirstStartupFlag() {
 
 ipcMain.handle("check-mac", isFirstStartup);
 
-ipcMain.handle("save-credentials", (event, { username, password }) => {
+ipcMain.handle("save-credentials", (event, { username, password, usermacid }) => {
   store.set("username", username);
   store.set("password", password);
+  store.set("usermacid", usermacid);
 });
 
 ipcMain.handle("fetch-credentials", () => {
   const username = store.get("username");
   const password = store.get("password");
+  const usermacid = store.get("usermacid");
   if (!username || !password) {
     return false;
   } else {
-    return { username, password };
+    return { username, password, usermacid };
   }
 });
 
 ipcMain.handle("delete-credentials", () => {
   store.delete("username");
   store.delete("password");
+  store.delete("usermacid");
 });

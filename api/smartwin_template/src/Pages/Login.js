@@ -170,7 +170,7 @@ function Login() {
       } else if (data) {
         // localStorage.setItem("username", username);
         // localStorage.setItem("password", password);
-        window.electronAPI.saveCredentials(username, password);
+        window.electronAPI.saveCredentials(username, password, userMacId.toString());
         // setUserId(userIdForm)
         if (brand === "JackPot") {
           window.location.href = "http://game.matrixgaming.in:8084/#/games/2digit2";
