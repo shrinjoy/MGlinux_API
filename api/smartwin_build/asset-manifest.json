@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.543d2933.css",
-    "main.js": "/static/js/main.3de0cd57.js",
+    "main.css": "/static/css/main.4d694fff.css",
+    "main.js": "/static/js/main.e528d077.js",
     "static/js/453.02fe8033.chunk.js": "/static/js/453.02fe8033.chunk.js",
     "static/media/81300911_Playing Card Original-01.eps": "/static/media/81300911_Playing Card Original-01.1fbe7b6e526f96cf81b0.eps",
     "static/media/smnartwinlogin.png": "/static/media/smnartwinlogin.4a9ac67bd01f705d55d4.png",
@@ -11,11 +11,9 @@
     "static/media/coinrain.gif": "/static/media/coinrain.a757bc6e9541e919b4ef.gif",
     "static/media/Untitled.png": "/static/media/Untitled.e23976c30507ad6d1f02.png",
     "static/media/resul.webp": "/static/media/resul.2a280c6565a387560ab5.webp",
-    "static/media/12cardlobby.png": "/static/media/12cardlobby.4d488e6bbf2fdf6b739f.png",
     "static/media/testlogo2.webp": "/static/media/testlogo2.bdd1632cf0338e94446b.webp",
     "static/media/skint.png": "/static/media/skint.7dcab5de4bd1284409bf.png",
     "static/media/testlogo.webp": "/static/media/testlogo.5226cedf8e3b18eaf3cf.webp",
-    "static/media/lobbyWrapper.png": "/static/media/lobbyWrapper.51c7b5073ca6df447a38.png",
     "static/media/rectangle.png": "/static/media/rectangle.0cb4046893266abf16c2.png",
     "static/media/potofgold.png": "/static/media/potofgold.bc635a6ebfc18d90c0c0.png",
     "static/media/JH.webp": "/static/media/JH.dea50abeb21a98be9393.webp",
@@ -31,12 +29,14 @@
     "static/media/KH.webp": "/static/media/KH.2975a425265c604ee80c.webp",
     "static/media/KC.webp": "/static/media/KC.3974b6e0ee4c841c6c61.webp",
     "static/media/gamelogologin.png": "/static/media/gamelogologin.10e7ea8acfa0fb90bd63.png",
-    "static/media/2digit2thumbnail.png": "/static/media/2digit2thumbnail.c9c88c5fa4aaae483d86.png",
     "static/media/bigLogo.webp": "/static/media/bigLogo.d71b84a68cd8507ab591.webp",
     "static/media/bigLogoJACK.webp": "/static/media/bigLogoJACK.b7cbc2ed6498b194c8e0.webp",
-    "static/media/2digit1thumbnail.png": "/static/media/2digit1thumbnail.a0e06bbebe2d02b91371.png",
+    "static/media/12cardlobby.webp": "/static/media/12cardlobby.7b9e7cfdb983830e434c.webp",
     "static/media/back_image.png": "/static/media/back_image.f0fe9777a77f08f668a5.png",
+    "static/media/2digit2thumbnail.webp": "/static/media/2digit2thumbnail.242eda398fc9e69ebfb8.webp",
     "static/media/bigWin.webp": "/static/media/bigWin.9cca7a785600a0c59feb.webp",
+    "static/media/2digit1thumbnail.webp": "/static/media/2digit1thumbnail.9735f79405d3a76c7b5a.webp",
+    "static/media/lobbyWrapper.webp": "/static/media/lobbyWrapper.b04e0e721d6a39a4b0b8.webp",
     "static/media/bigLogoJACK-old.webp": "/static/media/bigLogoJACK-old.ee3013f29ca67719eec7.webp",
     "static/media/lightbulbGreen.png": "/static/media/lightbulbGreen.53258b821e35ea1040d3.png",
     "static/media/bigLogo-old.webp": "/static/media/bigLogo-old.a9efb96b9018b8a8ce1e.webp",
@@ -50,12 +50,12 @@
     "static/media/offline.webp": "/static/media/offline.7e229611c0daf9cdf172.webp",
     "static/media/online.webp": "/static/media/online.a8ff3831ed39cc0e8084.webp",
     "index.html": "/index.html",
-    "main.543d2933.css.map": "/static/css/main.543d2933.css.map",
-    "main.3de0cd57.js.map": "/static/js/main.3de0cd57.js.map",
+    "main.4d694fff.css.map": "/static/css/main.4d694fff.css.map",
+    "main.e528d077.js.map": "/static/js/main.e528d077.js.map",
     "453.02fe8033.chunk.js.map": "/static/js/453.02fe8033.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.543d2933.css",
-    "static/js/main.3de0cd57.js"
+    "static/css/main.4d694fff.css",
+    "static/js/main.e528d077.js"
   ]
 }
