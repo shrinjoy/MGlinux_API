@@ -1,5 +1,5 @@
 export const gameName = "Magic Deluxe";
-export const verNo = "v2.1.1";
+export const verNo = "v2.1.2";
 export const brand = "JackPot";
 
 // Toast Config
