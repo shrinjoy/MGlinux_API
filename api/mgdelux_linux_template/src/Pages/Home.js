@@ -101,7 +101,7 @@ function Home() {
     <main className="homeWrapper">
       <div className="wrapper p-5">
         <div className='position-absolute' style={{ top: 10, right: 10 }}>
-          <label>Ver 1.2</label>
+          <label>Ver 2.1</label>
         </div>
         <div className="unlockForm">
           {error ? <div className="status">PLEASE CONNECT FIRST</div> : ""}
