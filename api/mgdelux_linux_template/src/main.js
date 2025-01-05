@@ -132,9 +132,9 @@ ipcMain.on("system-settings", () => {
 });
 
 // Deriving User Mac ID
-ipcMain.handle("get-mac-address", fetchMacAddress);
+ipcMain.handle("get-mac-address-new", fetchMacAddressNEW);
 
-async function fetchMacAddress() {
+async function fetchMacAddressNEW() {
   // const macAddress = await getmac.default();
   const macAddress = await getSerialNumber();
   if (macAddress) {
@@ -142,9 +142,9 @@ async function fetchMacAddress() {
   }
 }
 
-ipcMain.handle("get-mac-address-old", fetchMacAddressOLD);
+ipcMain.handle("get-mac-address", fetchMacAddressOLD);
 
-async function fetchMacAddressOLD() {
+async function fetchMacAddress() {
   const macAddress = await getmac.default();
   if (macAddress) {
     return macAddress;
