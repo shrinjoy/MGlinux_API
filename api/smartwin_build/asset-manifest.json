@@ -1,16 +1,13 @@
 {
   "files": {
     "main.css": "/static/css/main.52cb23ed.css",
-    "main.js": "/static/js/main.f09dce4e.js",
+    "main.js": "/static/js/main.470d8771.js",
     "static/js/453.02fe8033.chunk.js": "/static/js/453.02fe8033.chunk.js",
     "static/media/81300911_Playing Card Original-01.eps": "/static/media/81300911_Playing Card Original-01.1fbe7b6e526f96cf81b0.eps",
     "static/media/smnartwinlogin.png": "/static/media/smnartwinlogin.4a9ac67bd01f705d55d4.png",
-    "static/media/2024-12-04 22-55-20.mkv": "/static/media/2024-12-04 22-55-20.08c56125a35b11ad175f.mkv",
     "static/media/smnartwinloginJACK.png": "/static/media/smnartwinloginJACK.7efee5245ecdb0720182.png",
     "static/media/81300911_Playing Card Original-01-ai.png": "/static/media/81300911_Playing Card Original-01-ai.316e74ced4a0b836d7c2.png",
     "static/media/coinrain.gif": "/static/media/coinrain.a757bc6e9541e919b4ef.gif",
-    "static/media/Untitled.png": "/static/media/Untitled.e23976c30507ad6d1f02.png",
-    "static/media/resul.webp": "/static/media/resul.2a280c6565a387560ab5.webp",
     "static/media/testlogo2.webp": "/static/media/testlogo2.bdd1632cf0338e94446b.webp",
     "static/media/skint.png": "/static/media/skint.7dcab5de4bd1284409bf.png",
     "static/media/testlogo.webp": "/static/media/testlogo.5226cedf8e3b18eaf3cf.webp",
@@ -51,11 +48,11 @@
     "static/media/online.webp": "/static/media/online.a8ff3831ed39cc0e8084.webp",
     "index.html": "/index.html",
     "main.52cb23ed.css.map": "/static/css/main.52cb23ed.css.map",
-    "main.f09dce4e.js.map": "/static/js/main.f09dce4e.js.map",
+    "main.470d8771.js.map": "/static/js/main.470d8771.js.map",
     "453.02fe8033.chunk.js.map": "/static/js/453.02fe8033.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.52cb23ed.css",
-    "static/js/main.f09dce4e.js"
+    "static/js/main.470d8771.js"
   ]
 }
