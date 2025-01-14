@@ -7,6 +7,7 @@ const sql = require('mssql');
 var login = require('./login')
 var getallresult = require('./getalllastresults')
 var getalluserdata = require('./getalluserdata')
+var gameanal = require('./gameanal');
 var getresultbyid = require('./getgameresultbyID')
 var placebet = require('./placebet')
 var cancelticket = require('./cancelbybarcode')
@@ -329,7 +330,23 @@ FROM
     }
 })
 
+app.post('/setgamestart', async function (req, res) {
+    await gameanal.setgame_start(sql, req.body).then((data) => {
+        res.status(200).send(data);
+    })
+        .catch((err) => {
+            res.status(404).send(err);
+        })
 
+})
+app.post('/setgameend', async function (req, res) {
+    await gameanal.setgame_end(sql, req.body).then((data) => {
+        res.status(200).send(data);
+    })
+        .catch((err) => {
+            res.status(404).send(err);
+        })
+})
 app.listen({ host: "0.0.0.0", port: 3025 }, (err) => {
     if (err) {
         console.log("error occured:" + err);
