@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("node:path");
 const getmac = require("getmac");
 var internetAvailable = require("internet-available");
-var serialNumber = require('serial-number');
+var serialNumber = require("serial-number");
 serialNumber.preferUUID = true;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -132,11 +132,20 @@ ipcMain.on("system-settings", () => {
 });
 
 // Deriving User Mac ID
-ipcMain.handle("get-mac-address", fetchMacAddress);
+ipcMain.handle("get-mac-address-new", fetchMacAddressNEW);
+
+async function fetchMacAddressNEW() {
+  // const macAddress = await getmac.default();
+  const macAddress = await getSerialNumber();
+  if (macAddress) {
+    return macAddress;
+  }
+}
+
+ipcMain.handle("get-mac-address", fetchMacAddressOLD);
 
 async function fetchMacAddress() {
   const macAddress = await getmac.default();
-  // const macAddress = await getSerialNumber();
   if (macAddress) {
     return macAddress;
   }

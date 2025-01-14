@@ -146,10 +146,10 @@ function Login() {
       if (data) {
         setUsername(data.username);
         // setPassword(data.password);
-        setUserStore(true)
+        setUserStore(true);
       }
     }
-    fetchCredentials()
+    fetchCredentials();
   }, []);
 
   // Handle Login
@@ -170,12 +170,12 @@ function Login() {
       } else if (data) {
         // localStorage.setItem("username", username);
         // localStorage.setItem("password", password);
-        window.electronAPI.saveCredentials(username, password);
+        window.electronAPI.saveCredentials(username, password, userMacId.toString());
         // setUserId(userIdForm)
         if (brand === "JackPot") {
-          window.location.href = "http://77.37.47.190:8084/#/games/2digit2";
+          window.location.href = "http://game.matrixgaming.in:8084/#/games/2digit2";
         } else {
-          window.location.href = "http://77.37.47.190:8086/#/lobby";
+          window.location.href = "http://game.matrixgaming.in:8086/#/lobby";
         }
       } else {
         setError("Network Error");
@@ -280,7 +280,13 @@ function Login() {
       `}
       </style>
       <main className="loginWrapper">
-        <img src={require(`../Assets/images/smnartwinlogin${brand === "JackPot" ? "JACK" : ""}.png`).default} className="loginImage" />
+        <img
+          src={
+            require(`../Assets/images/smnartwinlogin${brand === "JackPot" ? "JACK" : ""
+              }.png`).default
+          }
+          className="loginImage"
+        />
         <div
           className="position-absolute col-11 d-flex justify-content-between px-2"
           style={{ top: "0px", left: "50%", transform: "translate(-50%)" }}

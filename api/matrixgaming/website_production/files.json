@@ -1,0 +1,32 @@
+[
+    {
+        "fileName": "SmartWin-2.1.0-Setup.exe",
+        "category": "SmartWin",
+        "uploadDate": "2023-12-01T10:00:00Z"
+    },
+    {
+        "fileName": "SmartWin-2.1.1-Setup.exe",
+        "category": "SmartWin",
+        "uploadDate": "2023-12-23T12:00:00Z"
+    },
+    {
+        "fileName": "SmartWin-2.1.2-Setup.exe",
+        "category": "SmartWin",
+        "uploadDate": "2023-12-26T12:00:00Z"
+    },
+    {
+        "fileName": "JackPot-2.0.3-Setup.exe",
+        "category": "JackPot",
+        "uploadDate": "2023-12-17T15:00:00Z"
+    },
+    {
+        "fileName": "JackPotKing-2.1.1-Setup.exe",
+        "category": "JackPot",
+        "uploadDate": "2023-12-23T12:00:00Z"
+    },
+    {
+        "fileName": "JackPotKing-2.1.2-Setup.exe",
+        "category": "JackPot",
+        "uploadDate": "2023-12-26T12:00:00Z"
+    }
+]

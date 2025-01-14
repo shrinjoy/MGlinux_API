@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseName = "http://77.37.47.190:3025/";
+const baseName = "http://api.matrixgaming.in:3025/";
 // const baseName = "https://cors-anywhere.herokuapp.com/http://77.37.47.190:3025";
 const systemBaseName = "http://127.0.0.1:3000";
 let audioInstance = null;
