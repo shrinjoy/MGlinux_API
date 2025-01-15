@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.fa825dbd.css",
+    "main.css": "/static/css/main.d634a2eb.css",
     "main.js": "/static/js/main.d48ad3a9.js",
     "static/js/453.02fe8033.chunk.js": "/static/js/453.02fe8033.chunk.js",
     "static/media/81300911_Playing Card Original-01.eps": "/static/media/81300911_Playing Card Original-01.1fbe7b6e526f96cf81b0.eps",
@@ -47,12 +47,12 @@
     "static/media/gameScreenLogo.webp": "/static/media/gameScreenLogo.3d0e95643a39d3da7d56.webp",
     "static/media/offline.webp": "/static/media/offline.7e229611c0daf9cdf172.webp",
     "static/media/online.webp": "/static/media/online.a8ff3831ed39cc0e8084.webp",
-    "main.fa825dbd.css.map": "/static/css/main.fa825dbd.css.map",
+    "main.d634a2eb.css.map": "/static/css/main.d634a2eb.css.map",
     "main.d48ad3a9.js.map": "/static/js/main.d48ad3a9.js.map",
     "453.02fe8033.chunk.js.map": "/static/js/453.02fe8033.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fa825dbd.css",
+    "static/css/main.d634a2eb.css",
     "static/js/main.d48ad3a9.js"
   ]
 }
