@@ -23,7 +23,7 @@ module.exports = {
           
            await db.query(`SELECT GAMENUM FROM RESULT99 WHERE GAMEDATE=CONVERT(varchar,GETDATE(), 23) AND GAMENUM='${req["gameid"]}';`)
                 .then(async (data) => {
-                    console.log("step 1 good");
+                   
                   
                     if (data.recordset.length < 1) {
                        
