@@ -23,7 +23,8 @@ module.exports = {
           
            await db.query(`SELECT GAMENUM FROM RESULT99 WHERE GAMEDATE=CONVERT(varchar,GETDATE(), 23) AND GAMENUM='${req["gameid"]}';`)
                 .then(async (data) => {
-                    console.log("step 1 good");
+                   
+                  
                     if (data.recordset.length < 1) {
                        
                     await    db.query(
@@ -73,6 +74,10 @@ module.exports = {
                                 reject({ message: "failed to place bet because " + err });
                             });
                     }
+                    else
+                    {
+                        reject({"message":"times up buddy lmao"});
+                    }
                 })
                 .catch((err) => {
                     console.log("times up");
@@ -103,7 +108,33 @@ module.exports = {
             }
         })
     },
-    generateDrawTime:function(gameid) {
+    generateDrawTime:function (gameid) {
+        var alphabetList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
+    
+        var alphabet = gameid[0];
+        var num = parseInt(gameid[1].toString() + gameid[2].toString(), 10);
+    
+        var totalMinutes = ((alphabetList.indexOf(alphabet) * 60) + num * 5) + 5;
+    
+        // Start time at 9:00:00 AM in minutes
+        var startTimeInMinutes = 9 * 60;
+    
+        // Calculate final time in minutes
+        var finalTimeInMinutes = startTimeInMinutes + totalMinutes;
+    
+        // Convert final time to hours and minutes
+        var hours = Math.floor(finalTimeInMinutes / 60);
+        var minutes = finalTimeInMinutes % 60;
+    
+        // Get current date in YYYY-MM-DD format
+        var currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    
+        // Format hours and minutes in 24-hour format
+        var formattedTime = currentDate + ' ' + hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':00';
+    
+        return formattedTime;
+    }
+   /* generateDrawTime:function(gameid) {
         var alphabetList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
     
         var alphabet = gameid[0];
@@ -124,7 +155,7 @@ module.exports = {
         // Format hours and minutes in 24-hour format
         var formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':00';
         return formattedTime;
-    }
+    }*/
     
 
 
