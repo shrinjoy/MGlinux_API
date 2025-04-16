@@ -142,7 +142,7 @@ async function fetchMacAddressNEW() {
   }
 }
 
-ipcMain.handle("get-mac-address", fetchMacAddressOLD);
+ipcMain.handle("get-mac-address", fetchMacAddress);
 
 async function fetchMacAddress() {
   const macAddress = await getmac.default();
