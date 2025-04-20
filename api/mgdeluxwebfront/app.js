@@ -88,6 +88,7 @@ function checklogin() {
   //   document.getElementById("uname").value.toString(),
   //   document.getElementById("pword").value.toString(),
   // );
+  alert("login");
   var name = document.getElementById("uID").value.toString();
   var pass = document.getElementById("pword").value.toString();
   var captcha = document.getElementById('catchpa').textContent;
@@ -96,7 +97,7 @@ function checklogin() {
   if (captchaInput === captcha) {
     axios({
       method: "post",
-      url: "http://193.203.163.194:3000/canlogin",
+      url: "http://127.0.0.1:3000/canlogin",
       data: {
         userid: document.getElementById("uname").value.toString(),
         username: name,
@@ -293,7 +294,7 @@ console.log(datax);
     tempids.forEach((e) => {
       axios({
         method: "post",
-        url: "http://193.203.163.194:3000/placebet",
+        url: "http://127.0.0.1:3000/placebet",
         data: {
           username: username,
           password: password,
@@ -384,7 +385,7 @@ async function loadallpossiblefuturebets() {
   startloading = false;
   await axios({
     method: "get",
-    url: "http://193.203.163.194:3000/getallresult",
+    url: "http://127.0.0.1:3000/getallresult",
   })
     .then(function (res) {
       var parsedData = res.data;
@@ -472,7 +473,7 @@ function showresultbydate() {
 
   axios({
     method: "post",
-    url: "http://193.203.163.194:3000/getallresultbydate",
+    url: "http://127.0.0.1:3000/getallresultbydate",
     data: {
       date: document.getElementById("date").value.toString(),
     },
@@ -556,7 +557,7 @@ function getAllResultsSoFar() {
 
   axios({
     method: "get",
-    url: "http://193.203.163.194:3000/getallresultsofar",
+    url: "http://127.0.0.1:3000/getallresultsofar",
   })
     .then(function (res) {
       var table = document.getElementById("res_sofar_table");
@@ -620,7 +621,7 @@ getAllResultsSoFar();
 function gettimeandgameid() {
   axios({
     method: "get",
-    url: "http://193.203.163.194:3000/timeleft",
+    url: "http://127.0.0.1:3000/timeleft",
   }).then(function (res) {
     time = res["data"]["time"];
     time = time - 12;
@@ -633,7 +634,7 @@ function gettimeandgameid() {
 function getuserdata(usernamex, passwordx) {
   axios({
     method: "post",
-    url: "http://193.203.163.194:3000/getalluserdata",
+    url: "http://127.0.0.1:3000/getalluserdata",
     data: {
       username: usernamex,
       password: passwordx,
@@ -736,7 +737,7 @@ function cancelbet() {
   // /cancelbybarcode
   axios({
     method: "post",
-    url: "http://193.203.163.194:3000/cancelbybarcode",
+    url: "http://127.0.0.1:3000/cancelbybarcode",
     data: {
       barcode: lastbetbarcode,
     },
@@ -843,7 +844,7 @@ function changePassword(event) {
     .value){
   axios({
     method: "post",
-    url: "http://193.203.163.194:3000/changepassword",
+    url: "http://127.0.0.1:3000/changepassword",
     data: {
       username: data_username,
       password: currentpass,
@@ -894,7 +895,7 @@ function getReportFromDate() {
     }
 
     axios
-      .post("http://193.203.163.194:3000/getreportfromdatetodate", {
+      .post("http://127.0.0.1:3000/getreportfromdatetodate", {
         username: username,
         start_date: startDateValue,
         end_date: endDateValue,
@@ -968,7 +969,7 @@ function getDetailReportFromDate() {
 
     if (buttonSelectorReport.value === "all") {
       axios
-        .post("http://193.203.163.194:3000/getreportbydate", {
+        .post("http://127.0.0.1:3000/getreportbydate", {
           username: username,
           date: dateValue,
         })
@@ -1070,7 +1071,7 @@ function getDetailReportFromDate() {
         });
     } else {
       axios
-        .post("http://193.203.163.194:3000/getreportbydateandid", {
+        .post("http://127.0.0.1:3000/getreportbydateandid", {
           username: username.toString(),
           date: dateValue.toString(),
           gameid: gameIDSelector.toString(),
@@ -1187,7 +1188,7 @@ function viewBarcodeByTicket(event) {
   reportPanel.style.display = "block";
 
   axios
-    .post("http://193.203.163.194:3000/getticketbybarcode", {
+    .post("http://127.0.0.1:3000/getticketbybarcode", {
       barcode: ticketNumber,
     })
     .then(function (response) {

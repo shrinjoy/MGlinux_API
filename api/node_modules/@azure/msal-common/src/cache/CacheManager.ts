@@ -11,8 +11,8 @@ import {
     AppMetadataCache,
     TokenKeys,
     TenantProfileFilter,
-} from "./utils/CacheTypes";
-import { CacheRecord } from "./entities/CacheRecord";
+} from "./utils/CacheTypes.js";
+import { CacheRecord } from "./entities/CacheRecord.js";
 import {
     CredentialType,
     APP_METADATA,
@@ -20,40 +20,39 @@ import {
     AUTHORITY_METADATA_CONSTANTS,
     AuthenticationScheme,
     Separators,
-} from "../utils/Constants";
-import { CredentialEntity } from "./entities/CredentialEntity";
-import { generateCredentialKey } from "./utils/CacheHelpers";
-import { ScopeSet } from "../request/ScopeSet";
-import { AccountEntity } from "./entities/AccountEntity";
-import { AccessTokenEntity } from "./entities/AccessTokenEntity";
-import { IdTokenEntity } from "./entities/IdTokenEntity";
-import { RefreshTokenEntity } from "./entities/RefreshTokenEntity";
-import { ICacheManager } from "./interface/ICacheManager";
+} from "../utils/Constants.js";
+import { CredentialEntity } from "./entities/CredentialEntity.js";
+import { generateCredentialKey } from "./utils/CacheHelpers.js";
+import { ScopeSet } from "../request/ScopeSet.js";
+import { AccountEntity } from "./entities/AccountEntity.js";
+import { AccessTokenEntity } from "./entities/AccessTokenEntity.js";
+import { IdTokenEntity } from "./entities/IdTokenEntity.js";
+import { RefreshTokenEntity } from "./entities/RefreshTokenEntity.js";
+import { ICacheManager } from "./interface/ICacheManager.js";
 import {
     createClientAuthError,
     ClientAuthErrorCodes,
-} from "../error/ClientAuthError";
+} from "../error/ClientAuthError.js";
 import {
     AccountInfo,
     TenantProfile,
-    tenantIdMatchesHomeTenant,
     updateAccountTenantProfileData,
-} from "../account/AccountInfo";
-import { AppMetadataEntity } from "./entities/AppMetadataEntity";
-import { ServerTelemetryEntity } from "./entities/ServerTelemetryEntity";
-import { ThrottlingEntity } from "./entities/ThrottlingEntity";
-import { extractTokenClaims } from "../account/AuthToken";
-import { ICrypto } from "../crypto/ICrypto";
-import { AuthorityMetadataEntity } from "./entities/AuthorityMetadataEntity";
-import { BaseAuthRequest } from "../request/BaseAuthRequest";
-import { Logger } from "../logger/Logger";
-import { name, version } from "../packageMetadata";
-import { StoreInCache } from "../request/StoreInCache";
-import { getTenantFromAuthorityString } from "../authority/Authority";
-import { getAliasesFromStaticSources } from "../authority/AuthorityMetadata";
-import { StaticAuthorityOptions } from "../authority/AuthorityOptions";
-import { TokenClaims } from "../account/TokenClaims";
-import { IPerformanceClient } from "../telemetry/performance/IPerformanceClient";
+} from "../account/AccountInfo.js";
+import { AppMetadataEntity } from "./entities/AppMetadataEntity.js";
+import { ServerTelemetryEntity } from "./entities/ServerTelemetryEntity.js";
+import { ThrottlingEntity } from "./entities/ThrottlingEntity.js";
+import { extractTokenClaims } from "../account/AuthToken.js";
+import { ICrypto } from "../crypto/ICrypto.js";
+import { AuthorityMetadataEntity } from "./entities/AuthorityMetadataEntity.js";
+import { BaseAuthRequest } from "../request/BaseAuthRequest.js";
+import { Logger } from "../logger/Logger.js";
+import { name, version } from "../packageMetadata.js";
+import { StoreInCache } from "../request/StoreInCache.js";
+import { getAliasesFromStaticSources } from "../authority/AuthorityMetadata.js";
+import { StaticAuthorityOptions } from "../authority/AuthorityOptions.js";
+import { TokenClaims } from "../account/TokenClaims.js";
+import { IPerformanceClient } from "../telemetry/performance/IPerformanceClient.js";
+import { CacheError, CacheErrorCodes } from "../error/CacheError.js";
 
 /**
  * Interface class which implement cache storage functions used by MSAL to perform validity checks, and store tokens.
@@ -88,20 +87,14 @@ export abstract class CacheManager implements ICacheManager {
     ): AccountEntity | null;
 
     /**
-     * Returns deserialized account if found in the cache, otherwiser returns null
-     */
-    abstract getCachedAccountEntity(accountKey: string): AccountEntity | null;
-
-    /**
      * set account entity in the platform cache
      * @param account
+     * @param correlationId
      */
-    abstract setAccount(account: AccountEntity): void;
-
-    /**
-     * remove account entity from the platform cache if it's outdated
-     */
-    abstract removeOutdatedAccount(accountKey: string): void;
+    abstract setAccount(
+        account: AccountEntity,
+        correlationId: string
+    ): Promise<void>;
 
     /**
      * fetch the idToken entity from the platform cache
@@ -112,8 +105,12 @@ export abstract class CacheManager implements ICacheManager {
     /**
      * set idToken entity to the platform cache
      * @param idToken
+     * @param correlationId
      */
-    abstract setIdTokenCredential(idToken: IdTokenEntity): void;
+    abstract setIdTokenCredential(
+        idToken: IdTokenEntity,
+        correlationId: string
+    ): Promise<void>;
 
     /**
      * fetch the idToken entity from the platform cache
@@ -124,10 +121,14 @@ export abstract class CacheManager implements ICacheManager {
     ): AccessTokenEntity | null;
 
     /**
-     * set idToken entity to the platform cache
+     * set accessToken entity to the platform cache
      * @param accessToken
+     * @param correlationId
      */
-    abstract setAccessTokenCredential(accessToken: AccessTokenEntity): void;
+    abstract setAccessTokenCredential(
+        accessToken: AccessTokenEntity,
+        correlationId: string
+    ): Promise<void>;
 
     /**
      * fetch the idToken entity from the platform cache
@@ -138,10 +139,14 @@ export abstract class CacheManager implements ICacheManager {
     ): RefreshTokenEntity | null;
 
     /**
-     * set idToken entity to the platform cache
+     * set refreshToken entity to the platform cache
      * @param refreshToken
+     * @param correlationId
      */
-    abstract setRefreshTokenCredential(refreshToken: RefreshTokenEntity): void;
+    abstract setRefreshTokenCredential(
+        refreshToken: RefreshTokenEntity,
+        correlationId: string
+    ): Promise<void>;
 
     /**
      * fetch appMetadata entity from the platform cache
@@ -219,12 +224,6 @@ export abstract class CacheManager implements ICacheManager {
     abstract removeItem(key: string): void;
 
     /**
-     * Function which returns boolean whether cache contains a specific key.
-     * @param key
-     */
-    abstract containsKey(key: string, type?: string): boolean;
-
-    /**
      * Function which retrieves all current keys from the cache.
      */
     abstract getKeys(): string[];
@@ -238,19 +237,6 @@ export abstract class CacheManager implements ICacheManager {
      * Function which retrieves all token keys from the cache
      */
     abstract getTokenKeys(): TokenKeys;
-
-    /**
-     * Function which clears cache.
-     */
-    abstract clear(): Promise<void>;
-
-    /**
-     * Function which updates an outdated credential cache key
-     */
-    abstract updateCredentialCacheKey(
-        currentCacheKey: string,
-        credential: ValidCredentialType
-    ): string;
 
     /**
      * Returns all the accounts in the cache that match the optional filter. If no filter is provided, all accounts are returned.
@@ -309,22 +295,12 @@ export abstract class CacheManager implements ICacheManager {
         accountFilter?: AccountFilter
     ): AccountInfo[] {
         return cachedAccounts.flatMap((accountEntity) => {
-            return this.getAccountInfoForTenantProfiles(
+            return this.getTenantProfilesFromAccountEntity(
                 accountEntity,
+                accountFilter?.tenantId,
                 accountFilter
             );
         });
-    }
-
-    private getAccountInfoForTenantProfiles(
-        accountEntity: AccountEntity,
-        accountFilter?: AccountFilter
-    ): AccountInfo[] {
-        return this.getTenantProfilesFromAccountEntity(
-            accountEntity,
-            accountFilter?.tenantId,
-            accountFilter
-        );
     }
 
     private getTenantedAccountInfoByFilter(
@@ -374,7 +350,8 @@ export abstract class CacheManager implements ICacheManager {
         tenantedAccountInfo = updateAccountTenantProfileData(
             accountInfo,
             tenantProfile,
-            idTokenClaims
+            idTokenClaims,
+            idToken?.secret
         );
 
         return tenantedAccountInfo;
@@ -507,10 +484,13 @@ export abstract class CacheManager implements ICacheManager {
 
     /**
      * saves a cache record
-     * @param cacheRecord
+     * @param cacheRecord {CacheRecord}
+     * @param storeInCache {?StoreInCache}
+     * @param correlationId {?string} correlation id
      */
     async saveCacheRecord(
         cacheRecord: CacheRecord,
+        correlationId: string,
         storeInCache?: StoreInCache
     ): Promise<void> {
         if (!cacheRecord) {
@@ -519,27 +499,71 @@ export abstract class CacheManager implements ICacheManager {
             );
         }
 
-        if (!!cacheRecord.account) {
-            this.setAccount(cacheRecord.account);
-        }
+        try {
+            if (!!cacheRecord.account) {
+                await this.setAccount(cacheRecord.account, correlationId);
+            }
 
-        if (!!cacheRecord.idToken && storeInCache?.idToken !== false) {
-            this.setIdTokenCredential(cacheRecord.idToken);
-        }
+            if (!!cacheRecord.idToken && storeInCache?.idToken !== false) {
+                await this.setIdTokenCredential(
+                    cacheRecord.idToken,
+                    correlationId
+                );
+            }
 
-        if (!!cacheRecord.accessToken && storeInCache?.accessToken !== false) {
-            await this.saveAccessToken(cacheRecord.accessToken);
-        }
+            if (
+                !!cacheRecord.accessToken &&
+                storeInCache?.accessToken !== false
+            ) {
+                await this.saveAccessToken(
+                    cacheRecord.accessToken,
+                    correlationId
+                );
+            }
 
-        if (
-            !!cacheRecord.refreshToken &&
-            storeInCache?.refreshToken !== false
-        ) {
-            this.setRefreshTokenCredential(cacheRecord.refreshToken);
-        }
+            if (
+                !!cacheRecord.refreshToken &&
+                storeInCache?.refreshToken !== false
+            ) {
+                await this.setRefreshTokenCredential(
+                    cacheRecord.refreshToken,
+                    correlationId
+                );
+            }
 
-        if (!!cacheRecord.appMetadata) {
-            this.setAppMetadata(cacheRecord.appMetadata);
+            if (!!cacheRecord.appMetadata) {
+                this.setAppMetadata(cacheRecord.appMetadata);
+            }
+        } catch (e: unknown) {
+            this.commonLogger?.error(`CacheManager.saveCacheRecord: failed`);
+            if (e instanceof Error) {
+                this.commonLogger?.errorPii(
+                    `CacheManager.saveCacheRecord: ${e.message}`,
+                    correlationId
+                );
+
+                if (
+                    e.name === "QuotaExceededError" ||
+                    e.name === "NS_ERROR_DOM_QUOTA_REACHED" ||
+                    e.message.includes("exceeded the quota")
+                ) {
+                    this.commonLogger?.error(
+                        `CacheManager.saveCacheRecord: exceeded storage quota`,
+                        correlationId
+                    );
+                    throw new CacheError(
+                        CacheErrorCodes.cacheQuotaExceededErrorCode
+                    );
+                } else {
+                    throw new CacheError(e.name, e.message);
+                }
+            } else {
+                this.commonLogger?.errorPii(
+                    `CacheManager.saveCacheRecord: ${e}`,
+                    correlationId
+                );
+                throw new CacheError(CacheErrorCodes.cacheUnknownErrorCode);
+            }
         }
     }
 
@@ -548,7 +572,8 @@ export abstract class CacheManager implements ICacheManager {
      * @param credential
      */
     private async saveAccessToken(
-        credential: AccessTokenEntity
+        credential: AccessTokenEntity,
+        correlationId: string
     ): Promise<void> {
         const accessTokenFilter: CredentialFilter = {
             clientId: credential.clientId,
@@ -584,7 +609,7 @@ export abstract class CacheManager implements ICacheManager {
             }
         });
         await Promise.all(removedAccessTokens);
-        this.setAccessTokenCredential(credential);
+        await this.setAccessTokenCredential(credential, correlationId);
     }
 
     /**
@@ -861,21 +886,6 @@ export abstract class CacheManager implements ICacheManager {
      * @param filter
      */
     getAppMetadataFilteredBy(filter: AppMetadataFilter): AppMetadataCache {
-        return this.getAppMetadataFilteredByInternal(
-            filter.environment,
-            filter.clientId
-        );
-    }
-
-    /**
-     * Support function to help match appMetadata
-     * @param environment
-     * @param clientId
-     */
-    private getAppMetadataFilteredByInternal(
-        environment?: string,
-        clientId?: string
-    ): AppMetadataCache {
         const allCacheKeys = this.getKeys();
         const matchingAppMetadata: AppMetadataCache = {};
 
@@ -892,11 +902,17 @@ export abstract class CacheManager implements ICacheManager {
                 return;
             }
 
-            if (!!environment && !this.matchEnvironment(entity, environment)) {
+            if (
+                !!filter.environment &&
+                !this.matchEnvironment(entity, filter.environment)
+            ) {
                 return;
             }
 
-            if (!!clientId && !this.matchClientId(entity, clientId)) {
+            if (
+                !!filter.clientId &&
+                !this.matchClientId(entity, filter.clientId)
+            ) {
                 return;
             }
 
@@ -998,88 +1014,6 @@ export abstract class CacheManager implements ICacheManager {
     }
 
     /**
-     * Migrates a single-tenant account and all it's associated alternate cross-tenant account objects in the
-     * cache into a condensed multi-tenant account object with tenant profiles.
-     * @param accountKey
-     * @param accountEntity
-     * @param logger
-     * @returns
-     */
-    protected updateOutdatedCachedAccount(
-        accountKey: string,
-        accountEntity: AccountEntity | null,
-        logger?: Logger
-    ): AccountEntity | null {
-        // Only update if account entity is defined and has no tenantProfiles object (is outdated)
-        if (accountEntity && accountEntity.isSingleTenant()) {
-            this.commonLogger?.verbose(
-                "updateOutdatedCachedAccount: Found a single-tenant (outdated) account entity in the cache, migrating to multi-tenant account entity"
-            );
-
-            // Get keys of all accounts belonging to user
-            const matchingAccountKeys = this.getAccountKeys().filter(
-                (key: string) => {
-                    return key.startsWith(accountEntity.homeAccountId);
-                }
-            );
-
-            // Get all account entities belonging to user
-            const accountsToMerge: AccountEntity[] = [];
-            matchingAccountKeys.forEach((key: string) => {
-                const account = this.getCachedAccountEntity(key);
-                if (account) {
-                    accountsToMerge.push(account);
-                }
-            });
-
-            // Set base account to home account if available, any account if not
-            const baseAccount =
-                accountsToMerge.find((account) => {
-                    return tenantIdMatchesHomeTenant(
-                        account.realm,
-                        account.homeAccountId
-                    );
-                }) || accountsToMerge[0];
-
-            // Populate tenant profiles built from each account entity belonging to the user
-            baseAccount.tenantProfiles = accountsToMerge.map(
-                (account: AccountEntity) => {
-                    return {
-                        tenantId: account.realm,
-                        localAccountId: account.localAccountId,
-                        name: account.name,
-                        isHomeTenant: tenantIdMatchesHomeTenant(
-                            account.realm,
-                            account.homeAccountId
-                        ),
-                    };
-                }
-            );
-
-            const updatedAccount = CacheManager.toObject(new AccountEntity(), {
-                ...baseAccount,
-            });
-
-            const newAccountKey = updatedAccount.generateAccountKey();
-
-            // Clear cache of legacy account objects that have been collpsed into tenant profiles
-            matchingAccountKeys.forEach((key: string) => {
-                if (key !== newAccountKey) {
-                    this.removeOutdatedAccount(accountKey);
-                }
-            });
-
-            // Cache updated account object
-            this.setAccount(updatedAccount);
-            logger?.verbose("Updated an outdated account entity in the cache");
-            return updatedAccount;
-        }
-
-        // No update is necessary
-        return accountEntity;
-    }
-
-    /**
      * returns a boolean if the given credential is removed
      * @param credential
      */
@@ -1126,59 +1060,6 @@ export abstract class CacheManager implements ICacheManager {
         });
 
         return true;
-    }
-
-    /**
-     * Retrieve the cached credentials into a cacherecord
-     * @param account {AccountInfo}
-     * @param request {BaseAuthRequest}
-     * @param environment {string}
-     * @param performanceClient {?IPerformanceClient}
-     * @param correlationId {?string}
-     */
-    readCacheRecord(
-        account: AccountInfo,
-        request: BaseAuthRequest,
-        environment: string,
-        performanceClient?: IPerformanceClient,
-        correlationId?: string
-    ): CacheRecord {
-        // Use authority tenantId for cache lookup filter if it's defined, otherwise use tenantId from account passed in
-        const requestTenantId =
-            account.tenantId || getTenantFromAuthorityString(request.authority);
-        const tokenKeys = this.getTokenKeys();
-        const cachedAccount = this.readAccountFromCache(account);
-        const cachedIdToken = this.getIdToken(
-            account,
-            tokenKeys,
-            requestTenantId,
-            performanceClient,
-            correlationId
-        );
-        const cachedAccessToken = this.getAccessToken(
-            account,
-            request,
-            tokenKeys,
-            requestTenantId,
-            performanceClient,
-            correlationId
-        );
-        const cachedRefreshToken = this.getRefreshToken(
-            account,
-            false,
-            tokenKeys,
-            performanceClient,
-            correlationId
-        );
-        const cachedAppMetadata = this.readAppMetadataFromCache(environment);
-
-        return {
-            account: cachedAccount,
-            idToken: cachedIdToken,
-            accessToken: cachedAccessToken,
-            refreshToken: cachedRefreshToken,
-            appMetadata: cachedAppMetadata,
-        };
     }
 
     /**
@@ -1934,7 +1815,7 @@ export abstract class CacheManager implements ICacheManager {
     /**
      * Returns true if the credential's keyId matches the one in the request, false otherwise
      * @param entity
-     * @param tokenType
+     * @param keyId
      */
     private matchKeyId(entity: CredentialEntity, keyId: string): boolean {
         return !!(entity.keyId && entity.keyId === keyId);
@@ -1978,28 +1859,25 @@ export abstract class CacheManager implements ICacheManager {
 
 /** @internal */
 export class DefaultStorageClass extends CacheManager {
-    setAccount(): void {
+    async setAccount(): Promise<void> {
         throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
     }
     getAccount(): AccountEntity {
         throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
     }
-    getCachedAccountEntity(): AccountEntity | null {
-        throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
-    }
-    setIdTokenCredential(): void {
+    async setIdTokenCredential(): Promise<void> {
         throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
     }
     getIdTokenCredential(): IdTokenEntity {
         throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
     }
-    setAccessTokenCredential(): void {
+    async setAccessTokenCredential(): Promise<void> {
         throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
     }
     getAccessTokenCredential(): AccessTokenEntity {
         throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
     }
-    setRefreshTokenCredential(): void {
+    async setRefreshTokenCredential(): Promise<void> {
         throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
     }
     getRefreshTokenCredential(): RefreshTokenEntity {
@@ -2035,9 +1913,6 @@ export class DefaultStorageClass extends CacheManager {
     removeItem(): boolean {
         throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
     }
-    containsKey(): boolean {
-        throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
-    }
     getKeys(): string[] {
         throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
     }
@@ -2045,15 +1920,6 @@ export class DefaultStorageClass extends CacheManager {
         throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
     }
     getTokenKeys(): TokenKeys {
-        throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
-    }
-    async clear(): Promise<void> {
-        throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
-    }
-    updateCredentialCacheKey(): string {
-        throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
-    }
-    removeOutdatedAccount(): void {
         throw createClientAuthError(ClientAuthErrorCodes.methodNotImplemented);
     }
 }
