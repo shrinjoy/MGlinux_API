@@ -242,7 +242,7 @@ FROM
     }
 })
 
-app.listen({ host: "0.0.0.0", port: 3000 }, (err) => {
+app.listen({ host: "0.0.0.0", port: 3059 }, (err) => {
     if (err) {
         console.log("error occured:" + err);
     }
