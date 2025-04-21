@@ -14,6 +14,7 @@ function App() {
                 <Route path="/main_window" element={<Loader />} />
                 <Route path="/home" element={<Home />} />
                 <Route path='/login' Component={() => { window.location.href = "http://game.matrixgaming.in:8082/#/login"; return null; }} />
+                
                 {/* <Route path='/login' element={<Login />} /> */}
                 {/* <Route path="/game" element={<GameView />} /> */}
                 <Route path="*" element={<Navigate to="/main_window" />} />
